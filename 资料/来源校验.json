@@ -1,0 +1,133 @@
+{
+  "source_commits": {
+    "ARM_KWT-1_237e4097": "237e4097afd4f6851e0b82f0a8d65c2dfe8eae30",
+    "E203_Hummingbirdv2_9f3e34f": "9f3e34f337f5d0a1236a285871ffa2032491617a"
+  },
+  "files": [
+    {
+      "path": "ARM_KWT-1_237e4097/LICENSE.txt",
+      "sha": "f49a4e16e68b128803cc2dcea614603632b04eac",
+      "size": 11356
+    },
+    {
+      "path": "ARM_KWT-1_237e4097/README.md",
+      "sha": "ae2a5128273ba47ae5cc2c43fb469911855b6281",
+      "size": 5182
+    },
+    {
+      "path": "ARM_KWT-1_237e4097/eval.sh",
+      "sha": "a43026e163514710bf552f48836127fb01958d40",
+      "size": 923
+    },
+    {
+      "path": "ARM_KWT-1_237e4097/kws_streaming/data/input_data.py",
+      "sha": "98b3d34f46e7e6e40b39dce1703fc6c457b7cd82",
+      "size": 35247
+    },
+    {
+      "path": "ARM_KWT-1_237e4097/kws_streaming/layers/speech_features.py",
+      "sha": "c888a2f77e03487b399622c094fd288c43a237e4",
+      "size": 13229
+    },
+    {
+      "path": "ARM_KWT-1_237e4097/kws_streaming/models/kws_transformer.py",
+      "sha": "ff323b04786cea200bba7d62288673e1ebe48657",
+      "size": 6539
+    },
+    {
+      "path": "ARM_KWT-1_237e4097/kws_streaming/models/model_flags.py",
+      "sha": "25ec34f084a23021cb1a3955939d4c0fd6938ec0",
+      "size": 2787
+    },
+    {
+      "path": "ARM_KWT-1_237e4097/kws_streaming/models/model_params.py",
+      "sha": "4c23c75c12c03546c842e1a262b52aaa691056e3",
+      "size": 11462
+    },
+    {
+      "path": "ARM_KWT-1_237e4097/kws_streaming/models/models.py",
+      "sha": "b033ae3d48a40f9709302c7d7f071d9961ec6cca",
+      "size": 2213
+    },
+    {
+      "path": "ARM_KWT-1_237e4097/kws_streaming/models/transformer_utils.py",
+      "sha": "ff597a2d6d15d9ae61304667da62931c14338c58",
+      "size": 7589
+    },
+    {
+      "path": "ARM_KWT-1_237e4097/kws_streaming/models/utils.py",
+      "sha": "d1493302c186451b14d5bebdac18049ee010513e",
+      "size": 16962
+    },
+    {
+      "path": "ARM_KWT-1_237e4097/kws_streaming/train/model_train_eval.py",
+      "sha": "010f2392573987638847ea6266029e4ab6be43a2",
+      "size": 13378
+    },
+    {
+      "path": "ARM_KWT-1_237e4097/kws_streaming/train/test.py",
+      "sha": "e4cb03046fbb5e5b65e75fb35e651a42e56bde29",
+      "size": 28044
+    },
+    {
+      "path": "ARM_KWT-1_237e4097/models_data_v2_12_labels/kwt1/best_weights.index",
+      "sha": "900be3e4a2e3ccc0182b98de43a8fe21e72b6491",
+      "size": 34662
+    },
+    {
+      "path": "ARM_KWT-1_237e4097/models_data_v2_12_labels/kwt1/checkpoint",
+      "sha": "bf3b29288f11a172be3514bbe2f9bd3b3d213d8c",
+      "size": 81
+    },
+    {
+      "path": "ARM_KWT-1_237e4097/models_data_v2_12_labels/kwt1/flags.json",
+      "sha": "008af2047e217bdad9e84ff5e5b70e69bac423c3",
+      "size": 2097
+    },
+    {
+      "path": "ARM_KWT-1_237e4097/models_data_v2_12_labels/kwt1/labels.txt",
+      "sha": "ba416458b011a7f4b96739eb6fcb6275a6ab3bec",
+      "size": 60
+    },
+    {
+      "path": "ARM_KWT-1_237e4097/models_data_v2_12_labels/kwt1/model_summary.txt",
+      "sha": "1b9a21373897e752bdbee05309d5c3608e770169",
+      "size": 878
+    },
+    {
+      "path": "ARM_KWT-1_237e4097/requirements.txt",
+      "sha": "9310a4f8434a6997f5f105946f9b5262365e01cd",
+      "size": 89
+    },
+    {
+      "path": "E203_Hummingbirdv2_9f3e34f/README.md",
+      "sha": "93423fa1b1d1f65ac9fc602b6ec5d681dd4f01c8",
+      "size": 4690
+    },
+    {
+      "path": "E203_Hummingbirdv2_9f3e34f/doc/source/core/core.rst",
+      "sha": "db203ba69429b13d08bf4797a8f30c1f2a73d6da",
+      "size": 29133
+    },
+    {
+      "path": "E203_Hummingbirdv2_9f3e34f/rtl/e203/core/e203_exu_nice.v",
+      "sha": "b01b7c263f878b082b2061178949fb2baf4f9fb6",
+      "size": 5112
+    },
+    {
+      "path": "E203_Hummingbirdv2_9f3e34f/rtl/e203/subsys/e203_subsys_nice_core.v",
+      "sha": "f51c66cebb957340dbf1fa9705b6feb56986ff06",
+      "size": 23180
+    },
+    {
+      "path": "E203_Hummingbirdv2_9f3e34f/vsim/README.md",
+      "sha": "88aac5754c69400553482563f75f39c3a6b8d0ff",
+      "size": 729
+    },
+    {
+      "path": "ARM_KWT-1_237e4097/models_data_v2_12_labels/kwt1/best_weights.data-00000-of-00001",
+      "sha": "9c38f9653119383f7a303a94689c85a2a1c79b6b",
+      "size": 7401050
+    }
+  ]
+}
