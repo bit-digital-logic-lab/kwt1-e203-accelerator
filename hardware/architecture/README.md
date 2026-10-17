@@ -83,6 +83,10 @@ python3 hardware/architecture/run_quantized_ffn1_batch_rtl.py \
 **0.18216320%**，与软件标定结果相符。详见[精度复测记录](quantized_validation240_rtl.md)
 和[逐层摘要](quantized_validation240_12layers_rtl_summary.json)。
 
+后续可选 `--scheme A12W10 --activation-bits 12`，参数由
+`software/export_ffn1_quantized.py` 生成，精度和 RTL 逐位结果见
+`software/results/ffn1_a12w10_static_sym.md`。
+
 同一测试台用 `--rows 16 --out /tmp/kwt-quantized-rtl-row16` 运行 16 行参数化计算核，也逐位核对了同一条语音的 12 层。单层 **233,168 拍**，12 层 **2,798,016 拍**；条件性 150 MHz 换算为 **1.554 ms/层、18.653 ms/12 层**，比 8 行总任务模型快约 29%。阶段计数显示计算 117,040 拍、串行导出 108,032 拍，所以乘法并行度翻倍后导出几乎与计算一样长。逐层结果见 [`quantized_validation0_12layers_row16.json`](quantized_validation0_12layers_row16.json)。Nangate45 示例库将 16 行核的部分和存储展开成触发器后，得到计算核面积 120,434.692 库单位，对应 8 行核的 60,358.060；两者均不含 A/W 存储、DMA、输出暂存或 SRAM 宏，不能直接判断是否满足 2.25 mm²。
 
 ## 16 行 CACC 输出暂存：硬件模块与任务级复测

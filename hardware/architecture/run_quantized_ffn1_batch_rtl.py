@@ -20,6 +20,10 @@ from quantize_ffn1 import collect_activations  # noqa: E402
 from run import KWT1, PREFIX  # noqa: E402
 
 M, K, N, LAYERS = 99, 64, 256, 12
+DEFAULT_PARAMS = {
+    "A11W10": SOFTWARE / "results/ffn1_blackbox_a11w10.npz",
+    "A12W10": SOFTWARE / "results/ffn1_a12w10_static_sym.npz",
+}
 
 
 def sha256(path):
@@ -56,8 +60,10 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--samples", type=Path,
                         default=SOFTWARE / ".build/quant_samples_12labels_20.npz")
+    parser.add_argument("--scheme", choices=tuple(DEFAULT_PARAMS), default="A11W10")
+    parser.add_argument("--activation-bits", type=int, choices=(11, 12), default=11)
     parser.add_argument("--params", type=Path,
-                        default=SOFTWARE / "results/ffn1_blackbox_a11w10.npz")
+                        help="frozen parameter NPZ; defaults to the artifact for --scheme")
     parser.add_argument("--weights", type=Path,
                         default=SOFTWARE / "weights/kwt1_fp32.npz")
     parser.add_argument("--per-label", type=int, default=1,
@@ -72,6 +78,10 @@ def main():
     args = parser.parse_args()
     if args.per_label < 0:
         parser.error("--per-label must be nonnegative")
+    if int(args.scheme[1:args.scheme.index("W")]) != args.activation_bits:
+        parser.error("--activation-bits must match --scheme")
+    if args.params is None:
+        args.params = DEFAULT_PARAMS[args.scheme]
     with np.load(args.samples, allow_pickle=False) as dataset:
         chosen = select_validation(dataset, args.per_label)
         features = dataset["features"][chosen].copy()
@@ -112,7 +122,9 @@ def main():
             sample_layers = []
             for layer, (sx, sw, qw, qb, weight, bias) in enumerate(frozen, 1):
                 x = inputs[sample_no, layer-1]
-                qx = np.clip(np.rint(x.astype(np.float64) / sx), -1023, 1023).astype(np.int64)
+                qmax_a = (1 << (args.activation_bits - 1)) - 1
+                qx = np.clip(np.rint(x.astype(np.float64) / sx),
+                             -qmax_a, qmax_a).astype(np.int64)
                 expected = qx @ qw + qb
                 if expected.min() < np.iinfo(np.int32).min or expected.max() > np.iinfo(np.int32).max:
                     raise OverflowError(f"sample {index} layer {layer} signed INT32 overflow")
@@ -159,6 +171,7 @@ def main():
                                               f"first {args.per_label} validation per label"),
         "sample_records": sample_records,
         "rows": args.rows, "output_staged": args.staged,
+        "scheme": args.scheme, "activation_bits": args.activation_bits,
         "source_sha256": {"samples": sha256(args.samples), "params": sha256(args.params),
                           "weights": sha256(args.weights)},
         "metric": "per-layer pooled RMS(actual decoded - FP32) / max(RMS(FP32),1e-8); max across 12 layers",

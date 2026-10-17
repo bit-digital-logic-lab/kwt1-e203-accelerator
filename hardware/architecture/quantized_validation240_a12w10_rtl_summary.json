@@ -1,0 +1,114 @@
+{
+  "samples": 240,
+  "selection": "all validation",
+  "rows": 16,
+  "output_staged": true,
+  "scheme": "A12W10",
+  "activation_bits": 12,
+  "source_sha256": {
+    "samples": "ee04e849bc407149618e4ecd5ff99575687586d4e57c0ade6a0b3f7b66c8c149",
+    "params": "a77f60fb7c8560adbca73db3cf64dcd5501ec0108b96a1131a00aa722be1918e",
+    "weights": "8f359abf7adbe287b8f89fca98af46194f98f90f2146784731bff551a155825a"
+  },
+  "metric": "per-layer pooled RMS(actual decoded - FP32) / max(RMS(FP32),1e-8); max across 12 layers",
+  "rtl_check": "each output bit-exact against independent signed INT32 GEMM plus bias",
+  "hardware_boundary": "Verilator compute tile/output stage; A/W/bias and shared bus are timed testbench models",
+  "layers": [
+    {
+      "layer": 1,
+      "nrmse_pct": 0.11083998981221904,
+      "checked_outputs": 6082560,
+      "cycles": 37017600,
+      "max_abs_accumulator": 4861549
+    },
+    {
+      "layer": 2,
+      "nrmse_pct": 0.10505481704258153,
+      "checked_outputs": 6082560,
+      "cycles": 37017600,
+      "max_abs_accumulator": 4908779
+    },
+    {
+      "layer": 3,
+      "nrmse_pct": 0.11539548344600832,
+      "checked_outputs": 6082560,
+      "cycles": 37017600,
+      "max_abs_accumulator": 4912389
+    },
+    {
+      "layer": 4,
+      "nrmse_pct": 0.12809228845562964,
+      "checked_outputs": 6082560,
+      "cycles": 37017600,
+      "max_abs_accumulator": 4254116
+    },
+    {
+      "layer": 5,
+      "nrmse_pct": 0.1225468143459623,
+      "checked_outputs": 6082560,
+      "cycles": 37017600,
+      "max_abs_accumulator": 4588560
+    },
+    {
+      "layer": 6,
+      "nrmse_pct": 0.11800570648456385,
+      "checked_outputs": 6082560,
+      "cycles": 37017600,
+      "max_abs_accumulator": 4665796
+    },
+    {
+      "layer": 7,
+      "nrmse_pct": 0.1161886641974621,
+      "checked_outputs": 6082560,
+      "cycles": 37017600,
+      "max_abs_accumulator": 3968644
+    },
+    {
+      "layer": 8,
+      "nrmse_pct": 0.11999299248955682,
+      "checked_outputs": 6082560,
+      "cycles": 37017600,
+      "max_abs_accumulator": 3678091
+    },
+    {
+      "layer": 9,
+      "nrmse_pct": 0.117872138776513,
+      "checked_outputs": 6082560,
+      "cycles": 37017600,
+      "max_abs_accumulator": 4170260
+    },
+    {
+      "layer": 10,
+      "nrmse_pct": 0.13101322825994965,
+      "checked_outputs": 6082560,
+      "cycles": 37017600,
+      "max_abs_accumulator": 3920857
+    },
+    {
+      "layer": 11,
+      "nrmse_pct": 0.14739359680921263,
+      "checked_outputs": 6082560,
+      "cycles": 37017600,
+      "max_abs_accumulator": 3791497
+    },
+    {
+      "layer": 12,
+      "nrmse_pct": 0.14340598081452668,
+      "checked_outputs": 6082560,
+      "cycles": 37017600,
+      "max_abs_accumulator": 4733248
+    }
+  ],
+  "worst_nrmse_pct": 0.14739359680921263,
+  "checked_outputs": 72990720,
+  "total_cycles": 444211200,
+  "pass_3pct": true,
+  "weight_bits": 10,
+  "software_baseline_worst_nrmse_pct": 0.14739372060820755,
+  "rtl_minus_software_percentage_points": -1.2379899491654633e-07,
+  "conservative_accumulator_bound": 67826716,
+  "parameter_archive_sha256": "a77f60fb7c8560adbca73db3cf64dcd5501ec0108b96a1131a00aa722be1918e",
+  "packed_weights_kib": 240.0,
+  "container_weights_bytes": 393216,
+  "command": "python3 hardware/architecture/run_quantized_ffn1_batch_rtl.py --scheme A12W10 --activation-bits 12 --per-label 0 --rows 16 --staged --out /tmp/kwt-ffn1-a12w10-rtl"
+}
