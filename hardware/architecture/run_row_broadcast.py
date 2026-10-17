@@ -10,6 +10,8 @@ import subprocess
 import sys
 import tempfile
 
+import numpy as np
+
 HARDWARE = Path(__file__).resolve().parents[1]
 ARCH = HARDWARE / "architecture"
 RTL = HARDWARE / "rtl" / "pulse_array" / "kwt_row_broadcast_tile.sv"
@@ -76,14 +78,17 @@ def check_case(case):
         raise ValueError("bias length differs from N")
     if any(not -32768 <= int(v) <= 32767 for row in a+w for v in row):
         raise ValueError("int16 operand out of range")
-    reference = [[wrap32(int(bias[col]) + sum(int(a[row][kk]) * int(w[kk][col])
-                                                   for kk in range(k)))
-                  for col in range(n)] for row in range(m)]
+    # Signed INT64 is wide enough for 64 products of signed INT16 values and
+    # an INT32 bias. Vectorization keeps multi-sample RTL regressions practical.
+    reference_array = (np.asarray(a, dtype=np.int64) @
+                       np.asarray(w, dtype=np.int64) +
+                       np.asarray(bias, dtype=np.int64)) & 0xFFFFFFFF
+    reference = reference_array.tolist()
     if "expected" in case:
         if len(case["expected"]) != m or any(len(row) != n for row in case["expected"]):
             raise ValueError("expected shape differs from MxN")
-        if any(wrap32(int(given)) != want for row_g, row_w in
-               zip(case["expected"], reference) for given, want in zip(row_g, row_w)):
+        if not np.array_equal(np.asarray(case["expected"], dtype=np.int64) &
+                              0xFFFFFFFF, reference_array):
             raise ValueError("supplied expected matrix differs from independent INT32 MAC")
     case["expected"] = reference
     return m, k, n

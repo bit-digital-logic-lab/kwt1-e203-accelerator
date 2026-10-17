@@ -1,0 +1,107 @@
+{
+  "samples": 240,
+  "selection": "all validation",
+  "rows": 16,
+  "output_staged": true,
+  "source_sha256": {
+    "samples": "ee04e849bc407149618e4ecd5ff99575687586d4e57c0ade6a0b3f7b66c8c149",
+    "params": "bc7aff59fadf408245c0fe841c9753875df9af202023e3ed98a234e5d884c3aa",
+    "weights": "8f359abf7adbe287b8f89fca98af46194f98f90f2146784731bff551a155825a"
+  },
+  "metric": "per-layer pooled RMS(actual decoded - FP32) / max(RMS(FP32),1e-8); max across 12 layers",
+  "rtl_check": "each output bit-exact against independent signed INT32 GEMM plus bias",
+  "hardware_boundary": "Verilator compute tile/output stage; A/W/bias and shared bus are timed testbench models",
+  "layers": [
+    {
+      "layer": 1,
+      "nrmse_pct": 0.1353157471000366,
+      "checked_outputs": 6082560,
+      "cycles": 37017600,
+      "max_abs_accumulator": 2429806
+    },
+    {
+      "layer": 2,
+      "nrmse_pct": 0.12667438021079352,
+      "checked_outputs": 6082560,
+      "cycles": 37017600,
+      "max_abs_accumulator": 2453963
+    },
+    {
+      "layer": 3,
+      "nrmse_pct": 0.13982133749627054,
+      "checked_outputs": 6082560,
+      "cycles": 37017600,
+      "max_abs_accumulator": 2454921
+    },
+    {
+      "layer": 4,
+      "nrmse_pct": 0.15305738262802265,
+      "checked_outputs": 6082560,
+      "cycles": 37017600,
+      "max_abs_accumulator": 2126502
+    },
+    {
+      "layer": 5,
+      "nrmse_pct": 0.1512663536794592,
+      "checked_outputs": 6082560,
+      "cycles": 37017600,
+      "max_abs_accumulator": 2292835
+    },
+    {
+      "layer": 6,
+      "nrmse_pct": 0.14327050873012673,
+      "checked_outputs": 6082560,
+      "cycles": 37017600,
+      "max_abs_accumulator": 2331518
+    },
+    {
+      "layer": 7,
+      "nrmse_pct": 0.1428017367771793,
+      "checked_outputs": 6082560,
+      "cycles": 37017600,
+      "max_abs_accumulator": 1983755
+    },
+    {
+      "layer": 8,
+      "nrmse_pct": 0.14746079652209299,
+      "checked_outputs": 6082560,
+      "cycles": 37017600,
+      "max_abs_accumulator": 1837547
+    },
+    {
+      "layer": 9,
+      "nrmse_pct": 0.14724976792421354,
+      "checked_outputs": 6082560,
+      "cycles": 37017600,
+      "max_abs_accumulator": 2084439
+    },
+    {
+      "layer": 10,
+      "nrmse_pct": 0.16471184516540857,
+      "checked_outputs": 6082560,
+      "cycles": 37017600,
+      "max_abs_accumulator": 1960882
+    },
+    {
+      "layer": 11,
+      "nrmse_pct": 0.18216319877226797,
+      "checked_outputs": 6082560,
+      "cycles": 37017600,
+      "max_abs_accumulator": 1894943
+    },
+    {
+      "layer": 12,
+      "nrmse_pct": 0.17623149006538502,
+      "checked_outputs": 6082560,
+      "cycles": 37017600,
+      "max_abs_accumulator": 2365463
+    }
+  ],
+  "worst_nrmse_pct": 0.18216319877226797,
+  "checked_outputs": 72990720,
+  "total_cycles": 444211200,
+  "pass_3pct": true,
+  "software_worst_validation_nrmse_pct": 0.1821632133714382,
+  "max_abs_layer_delta_vs_software_pct_points": 2.6053227630828957e-08,
+  "command": "python3 hardware/architecture/run_quantized_ffn1_batch_rtl.py --per-label 0 --rows 16 --staged --out /tmp/kwt-ffn1-all240-rtl"
+}

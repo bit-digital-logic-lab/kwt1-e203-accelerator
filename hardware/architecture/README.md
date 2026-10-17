@@ -64,6 +64,25 @@ OPENBLAS_NUM_THREADS=4 OMP_NUM_THREADS=4 \
 
 本次第 0 条验证样本（`_unknown_`）的 **12 层、304,128 个输出全部逐位一致**；单层 327,920 拍，12 层合计 3,935,040 拍。若能闭合 150 MHz，按当前测试台调度相当于 **2.186 ms/层、26.234 ms/12 层**；最差层 NRMSE **0.17041%**。逐层结果见 [`quantized_validation0_12layers.json`](quantized_validation0_12layers.json)。它只是一条验证样本的 RTL 数值检查；240 条验证样本的 0.18216% 汇总值仍来自软件整数模型。当前 DMA、共享总线、E203 调度和缓存端口冲突均未进入这条 RTL 定时结果，因此它不是赛题正式性能或实物时钟测量。
 
+多样本 RTL 精度复测使用 `run_quantized_ffn1_batch_rtl.py`：只编译一次 Verilator，
+然后让选定的验证样本逐个经过 12 层 `99×64 × 64×256 + bias`。每个 INT32
+输出与独立整数 GEMM 逐位比对；按层汇总所有样本的平方误差和 FP32 参考
+平方和，最后取 12 层中的最大 NRMSE。默认从 12 个类别各选一条验证样本，
+`--per-label 0` 可遍历本地 240 条验证样本；输出目录保存报告和校验值，
+默认删除逐任务 hex 与输出文本，避免长时间运行占满磁盘。运行：
+
+```bash
+python3 hardware/architecture/run_quantized_ffn1_batch_rtl.py \
+  --per-label 1 --rows 16 --staged --out /tmp/kwt-ffn1-batch-rtl
+```
+
+这一路仍用测试台模拟输入/权重装载与共享总线；不能把它当作真实 E203/DMA
+全链路、正式 SRAM 宏时序或官方 600 条评测结果。
+2026-10-17 的本地全量复测覆盖 240 条验证样本和 12 层，共
+**72,990,720 个 RTL 输出逐位一致**；第 11 层最差 NRMSE 为
+**0.18216320%**，与软件标定结果相符。详见[精度复测记录](quantized_validation240_rtl.md)
+和[逐层摘要](quantized_validation240_12layers_rtl_summary.json)。
+
 同一测试台用 `--rows 16 --out /tmp/kwt-quantized-rtl-row16` 运行 16 行参数化计算核，也逐位核对了同一条语音的 12 层。单层 **233,168 拍**，12 层 **2,798,016 拍**；条件性 150 MHz 换算为 **1.554 ms/层、18.653 ms/12 层**，比 8 行总任务模型快约 29%。阶段计数显示计算 117,040 拍、串行导出 108,032 拍，所以乘法并行度翻倍后导出几乎与计算一样长。逐层结果见 [`quantized_validation0_12layers_row16.json`](quantized_validation0_12layers_row16.json)。Nangate45 示例库将 16 行核的部分和存储展开成触发器后，得到计算核面积 120,434.692 库单位，对应 8 行核的 60,358.060；两者均不含 A/W 存储、DMA、输出暂存或 SRAM 宏，不能直接判断是否满足 2.25 mm²。
 
 ## 16 行 CACC 输出暂存：硬件模块与任务级复测
