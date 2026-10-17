@@ -1,0 +1,95 @@
+{
+  "sample_path": "./four/750e3e75_nohash_0.wav",
+  "validation_index": 0,
+  "rows": 8,
+  "source": "frozen quantized parameters and real validation FFN1 input",
+  "hardware": "Verilator kwt_row_broadcast_tile; task data movement timed testbench model",
+  "layers": [
+    {
+      "layer": 1,
+      "nrmse_pct": 0.12752438272247887,
+      "cycles": 327920,
+      "shared_bytes": 147840,
+      "checked_outputs": 25344
+    },
+    {
+      "layer": 2,
+      "nrmse_pct": 0.13237404547851508,
+      "cycles": 327920,
+      "shared_bytes": 147840,
+      "checked_outputs": 25344
+    },
+    {
+      "layer": 3,
+      "nrmse_pct": 0.14356689919777443,
+      "cycles": 327920,
+      "shared_bytes": 147840,
+      "checked_outputs": 25344
+    },
+    {
+      "layer": 4,
+      "nrmse_pct": 0.14679491130608532,
+      "cycles": 327920,
+      "shared_bytes": 147840,
+      "checked_outputs": 25344
+    },
+    {
+      "layer": 5,
+      "nrmse_pct": 0.1437899743934592,
+      "cycles": 327920,
+      "shared_bytes": 147840,
+      "checked_outputs": 25344
+    },
+    {
+      "layer": 6,
+      "nrmse_pct": 0.1438353601932136,
+      "cycles": 327920,
+      "shared_bytes": 147840,
+      "checked_outputs": 25344
+    },
+    {
+      "layer": 7,
+      "nrmse_pct": 0.14365439217762305,
+      "cycles": 327920,
+      "shared_bytes": 147840,
+      "checked_outputs": 25344
+    },
+    {
+      "layer": 8,
+      "nrmse_pct": 0.147447272408349,
+      "cycles": 327920,
+      "shared_bytes": 147840,
+      "checked_outputs": 25344
+    },
+    {
+      "layer": 9,
+      "nrmse_pct": 0.15539429931189347,
+      "cycles": 327920,
+      "shared_bytes": 147840,
+      "checked_outputs": 25344
+    },
+    {
+      "layer": 10,
+      "nrmse_pct": 0.1658389509626806,
+      "cycles": 327920,
+      "shared_bytes": 147840,
+      "checked_outputs": 25344
+    },
+    {
+      "layer": 11,
+      "nrmse_pct": 0.17040916853805033,
+      "cycles": 327920,
+      "shared_bytes": 147840,
+      "checked_outputs": 25344
+    },
+    {
+      "layer": 12,
+      "nrmse_pct": 0.16021092945335766,
+      "cycles": 327920,
+      "shared_bytes": 147840,
+      "checked_outputs": 25344
+    }
+  ],
+  "worst_nrmse_pct": 0.17040916853805033,
+  "total_cycles": 3935040
+}

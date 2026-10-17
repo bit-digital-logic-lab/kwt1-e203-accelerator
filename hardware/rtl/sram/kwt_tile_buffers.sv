@@ -1,30 +1,35 @@
-// 三块独立的 16 bit × 1024 缓存，分别存放 A、B 和输出数据。
+`include "kwt_memory_defs.svh"
+// 三块独立的缓存，默认 16 bit × 1024，分别存放 A、B 和输出数据。
 // 当前为单口同步 SRAM 行为模型，后续需替换为赛题提供的存储宏。
-module kwt_tile_buffers (
+module kwt_tile_buffers #(
+    parameter int DATA_W = `KWT_SRAM_DATA_W,
+    parameter int DEPTH = `KWT_SRAM_DEPTH,
+    parameter int ADDR_W = $clog2(DEPTH)
+) (
     input  logic        clk,
 
     input  logic        a_en,
     input  logic        a_we,
-    input  logic [9:0]  a_addr,
-    input  logic [15:0] a_wdata,
-    output logic [15:0] a_rdata,
+    input  logic [ADDR_W-1:0] a_addr,
+    input  logic [DATA_W-1:0] a_wdata,
+    output logic [DATA_W-1:0] a_rdata,
 
     input  logic        b_en,
     input  logic        b_we,
-    input  logic [9:0]  b_addr,
-    input  logic [15:0] b_wdata,
-    output logic [15:0] b_rdata,
+    input  logic [ADDR_W-1:0] b_addr,
+    input  logic [DATA_W-1:0] b_wdata,
+    output logic [DATA_W-1:0] b_rdata,
 
     input  logic        out_en,
     input  logic        out_we,
-    input  logic [9:0]  out_addr,
-    input  logic [15:0] out_wdata,
-    output logic [15:0] out_rdata
+    input  logic [ADDR_W-1:0] out_addr,
+    input  logic [DATA_W-1:0] out_wdata,
+    output logic [DATA_W-1:0] out_rdata
 );
     // 三个缓存拥有各自的读写端口，互不占用访问周期。
-    logic [15:0] a_mem [0:1023];
-    logic [15:0] b_mem [0:1023];
-    logic [15:0] out_mem [0:1023];
+    logic [DATA_W-1:0] a_mem [0:DEPTH-1];
+    logic [DATA_W-1:0] b_mem [0:DEPTH-1];
+    logic [DATA_W-1:0] out_mem [0:DEPTH-1];
 
     // 在时钟上升沿访问缓存；读数据在上升沿后更新。
     always_ff @(posedge clk) begin

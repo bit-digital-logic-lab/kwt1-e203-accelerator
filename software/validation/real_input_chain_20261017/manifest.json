@@ -1,0 +1,199 @@
+{
+  "archive": "/home/yang/Desktop/ic设计竞赛/资料/数据集/speech_commands_v0.02.tar.gz",
+  "flags": "/home/yang/Desktop/ic设计竞赛/资料/ARM_KWT-1_237e4097/models_data_v2_12_labels/kwt1/flags.json",
+  "flags_sha256": "fcd480d309f96d2029a3ba764634f9e46dd73b667c0ebb84b66af02680494c58",
+  "weights": "/home/yang/Desktop/ic设计竞赛/software/weights/kwt1_fp32.npz",
+  "weights_sha256": "8f359abf7adbe287b8f89fca98af46194f98f90f2146784731bff551a155825a",
+  "metamorphic_projection_delta_max_abs_error": 2.384185791015625e-06,
+  "class_token_row_identical": true,
+  "samples": [
+    {
+      "archive_member": "four/750e3e75_nohash_0.wav",
+      "label": "_unknown_",
+      "split": "validation",
+      "wav_sha256": "2ad981ba82162e0084d3ab3dc0ae6bdb79ac908a72067a1e752ebe2318bcee9f",
+      "wav_bytes": 32044,
+      "wav_format": {
+        "channels": 1,
+        "sample_rate_hz": 16000,
+        "sample_width_bytes": 2,
+        "frames": 16000
+      },
+      "mfcc_file": "sample_00_mfcc.npy",
+      "mfcc_shape": [
+        98,
+        40
+      ],
+      "mfcc_sha256": "dcdb5a8ac2daa7bf2b1c6f18cd964d0f406d2ce6192322c2930ac632f2c962ae",
+      "mfcc_fft_max_abs_error": 6.529688835144043e-05,
+      "encoder_file": "sample_00_encoder.npy",
+      "encoder_shape": [
+        99,
+        64
+      ],
+      "encoder_sha256": "a7ffaafdd9866b3711903c67db0f3a17845662bc52356f0d1a82410496a54f61",
+      "encoder_independent_max_abs_error": 4.76837158203125e-07,
+      "encoder_tf_checkpoint_max_abs_error": 4.76837158203125e-07,
+      "mfcc_official_tf_max_abs_error": 6.917119026184082e-05,
+      "mfcc_official_tf_rmse": 9.472630678503943e-06
+    },
+    {
+      "archive_member": "go/0ba018fc_nohash_4.wav",
+      "label": "go",
+      "split": "training",
+      "wav_sha256": "27c020d1debc9ca2ab2e8c431d7bc458fdffdbefda7a1c9bdc2471898fe8e402",
+      "wav_bytes": 32044,
+      "wav_format": {
+        "channels": 1,
+        "sample_rate_hz": 16000,
+        "sample_width_bytes": 2,
+        "frames": 16000
+      },
+      "mfcc_file": "sample_01_mfcc.npy",
+      "mfcc_shape": [
+        98,
+        40
+      ],
+      "mfcc_sha256": "43b0658ed234fdb01638bcd5ce2e5d8ef4141216650ca622ed839ff2467ddf43",
+      "mfcc_fft_max_abs_error": 2.288818359375e-05,
+      "encoder_file": "sample_01_encoder.npy",
+      "encoder_shape": [
+        99,
+        64
+      ],
+      "encoder_sha256": "8a6a9e49a38c073b1808de7b62ff295cd372af1399e12cb7d037975fec6963f8",
+      "encoder_independent_max_abs_error": 9.5367431640625e-07,
+      "metamorphic_projection_delta_max_abs_error": 1.7285346984863281e-06,
+      "encoder_tf_checkpoint_max_abs_error": 7.152557373046875e-07,
+      "mfcc_official_tf_max_abs_error": 2.765655517578125e-05,
+      "mfcc_official_tf_rmse": 4.129611344968657e-06
+    },
+    {
+      "archive_member": "no/45692b02_nohash_3.wav",
+      "label": "no",
+      "split": "validation",
+      "wav_sha256": "420e490b843fb29fdbc1fc95d343df38cbdcc54cf1b43c9df306192eb6e55c5b",
+      "wav_bytes": 32044,
+      "wav_format": {
+        "channels": 1,
+        "sample_rate_hz": 16000,
+        "sample_width_bytes": 2,
+        "frames": 16000
+      },
+      "mfcc_file": "sample_02_mfcc.npy",
+      "mfcc_shape": [
+        98,
+        40
+      ],
+      "mfcc_sha256": "8c98d33e2a85e39c3cef4b822571a7b7890e97665698f48330ca605872d8c133",
+      "mfcc_fft_max_abs_error": 3.032386302947998e-05,
+      "encoder_file": "sample_02_encoder.npy",
+      "encoder_shape": [
+        99,
+        64
+      ],
+      "encoder_sha256": "e1f6bff0d1bfe88a680d69a826ccb1855221e1d8ace873d67679189eca93e116",
+      "encoder_independent_max_abs_error": 9.5367431640625e-07,
+      "metamorphic_projection_delta_max_abs_error": 2.1457672119140625e-06,
+      "encoder_tf_checkpoint_max_abs_error": 9.5367431640625e-07,
+      "mfcc_official_tf_max_abs_error": 3.078579902648926e-05,
+      "mfcc_official_tf_rmse": 3.683515488268976e-06
+    },
+    {
+      "archive_member": "no/7e7ca854_nohash_1.wav",
+      "label": "no",
+      "split": "training",
+      "wav_sha256": "1bb2d25d2982cfd75866b61f31da9f02abc1baef565986235685efa940450aa8",
+      "wav_bytes": 32044,
+      "wav_format": {
+        "channels": 1,
+        "sample_rate_hz": 16000,
+        "sample_width_bytes": 2,
+        "frames": 16000
+      },
+      "mfcc_file": "sample_03_mfcc.npy",
+      "mfcc_shape": [
+        98,
+        40
+      ],
+      "mfcc_sha256": "9fdb644252b9f5cfccb76da538033de38abaf1d63c2a0816ab7f3d722b7d3822",
+      "mfcc_fft_max_abs_error": 2.288818359375e-05,
+      "encoder_file": "sample_03_encoder.npy",
+      "encoder_shape": [
+        99,
+        64
+      ],
+      "encoder_sha256": "ef29708b932b24554ea754872eece24b7412e20ea8d3ef88ced9b6a34a6cc7d9",
+      "encoder_independent_max_abs_error": 9.5367431640625e-07,
+      "metamorphic_projection_delta_max_abs_error": 1.7285346984863281e-06,
+      "encoder_tf_checkpoint_max_abs_error": 1.430511474609375e-06,
+      "mfcc_official_tf_max_abs_error": 1.9073486328125e-05,
+      "mfcc_official_tf_rmse": 2.168282953437051e-06
+    },
+    {
+      "archive_member": "yes/676f8138_nohash_0.wav",
+      "label": "yes",
+      "split": "training",
+      "wav_sha256": "b71582f69fa339b7972df3fc0b31c6d7482b98630a10cccf329dcda6fb0e8b45",
+      "wav_bytes": 32044,
+      "wav_format": {
+        "channels": 1,
+        "sample_rate_hz": 16000,
+        "sample_width_bytes": 2,
+        "frames": 16000
+      },
+      "mfcc_file": "sample_04_mfcc.npy",
+      "mfcc_shape": [
+        98,
+        40
+      ],
+      "mfcc_sha256": "7bc86a41062ee0e8c66ed8fef401c4586b98775245bb878275acb151bc4ac354",
+      "mfcc_fft_max_abs_error": 3.081560134887695e-05,
+      "encoder_file": "sample_04_encoder.npy",
+      "encoder_shape": [
+        99,
+        64
+      ],
+      "encoder_sha256": "3bf5f7851fa305bfedb0f1e9c5ddfee1e01e47c758d7727d7a3398304e8062e2",
+      "encoder_independent_max_abs_error": 7.152557373046875e-07,
+      "metamorphic_projection_delta_max_abs_error": 1.430511474609375e-06,
+      "encoder_tf_checkpoint_max_abs_error": 9.5367431640625e-07,
+      "mfcc_official_tf_max_abs_error": 3.0517578125e-05,
+      "mfcc_official_tf_rmse": 3.4679283200224575e-06
+    },
+    {
+      "archive_member": "yes/ec21c46b_nohash_1.wav",
+      "label": "yes",
+      "split": "validation",
+      "wav_sha256": "1ce323d7fa4db2cef1c7eecf85eb9277cae6c0670f79f69bc5cbbd03b8226c45",
+      "wav_bytes": 32044,
+      "wav_format": {
+        "channels": 1,
+        "sample_rate_hz": 16000,
+        "sample_width_bytes": 2,
+        "frames": 16000
+      },
+      "mfcc_file": "sample_05_mfcc.npy",
+      "mfcc_shape": [
+        98,
+        40
+      ],
+      "mfcc_sha256": "a45db272da20c36c1fa0e841d1f71a79e445fa2516e72b097828f9d12f60e897",
+      "mfcc_fft_max_abs_error": 3.3855438232421875e-05,
+      "encoder_file": "sample_05_encoder.npy",
+      "encoder_shape": [
+        99,
+        64
+      ],
+      "encoder_sha256": "16bf24f4bd5e5b0e056c43507fdb2e7061194d3ea2792d174c1afd9f22200e90",
+      "encoder_independent_max_abs_error": 7.152557373046875e-07,
+      "metamorphic_projection_delta_max_abs_error": 2.384185791015625e-06,
+      "encoder_tf_checkpoint_max_abs_error": 7.152557373046875e-07,
+      "mfcc_official_tf_max_abs_error": 5.054473876953125e-05,
+      "mfcc_official_tf_rmse": 3.4047294625498516e-06
+    }
+  ],
+  "tensorflow_version": "2.19.1",
+  "mfcc_official_tf_max_abs_error": 6.917119026184082e-05,
+  "official_source_commit": "237e4097afd4f6851e0b82f0a8d65c2dfe8eae30"
+}

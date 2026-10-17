@@ -1,6 +1,9 @@
 # 本地语音数据集体积约 2.3 GB，按资料脚本下载，不放入 Git。
 /资料/数据集/speech_commands_v0.02.tar.gz
 
+# 蜂鸟完整上游仓库独立管理，避免把嵌套 Git 仓库加入本项目。
+/资料/e203_hbirdv2_full/
+
 # 编辑器会话与系统临时文件。
 /.obsidian/workspace.json
 .DS_Store
