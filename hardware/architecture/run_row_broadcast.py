@@ -102,11 +102,15 @@ def write_hex(path, values, count, width):
     path.write_text("".join(f"{int(value) & mask:0{width//4}x}\n" for value in words))
 
 
-def build(workdir, trace, rows=8, staged=False):
+def build(workdir, trace, rows=8, staged=False, data_width=16):
+    if data_width != 16 and not staged:
+        raise ValueError("narrow data width is supported by the staged testbench only")
     top = "tb_kwt_row_broadcast_staged_task" if staged else "tb_kwt_row_broadcast_task"
     cmd = ["verilator", "--binary", "--timing", "--assert", "-Wno-fatal",
            "-j", "4", "--top-module", top,
            "--Mdir", str(workdir / "obj"), f"-GROWS={rows}"]
+    if staged:
+        cmd.append(f"-GDATA_W={data_width}")
     if trace:
         cmd.append("--trace")
     cmd += [str(RTL), str(STAGE_RTL), str(STAGE_TB)] if staged else [str(RTL), str(TB)]

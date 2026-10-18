@@ -89,3 +89,7 @@ OPENBLAS_NUM_THREADS=4 OMP_NUM_THREADS=4 \
 ## 多方案无梯度尺度标定重跑
 
 [`compare_ffn1_calibration.py`](compare_ffn1_calibration.py) 在相同训练/验证缓存上重跑 A8W8、A11W10、A12W9、A12W10 的逐层最大值基线，并仅用分层选出的 60 条训练样本为每层比较七组静态尺度倍率。结果和规则边界见 [重跑报告](results/多方案无梯度尺度标定重跑.md)。
+
+随后扩大到每类训练和验证各 40 条（共 480+480），每类取 10 条训练样本选择七组倍率，并导出可供现有 INT16/INT32 RTL 测试台读取的 A11W10、A12W10 最大值基线参数。12 层结果、容量和硬件取舍见 [扩大样本报告](results/FFN1扩大样本静态量化取舍.md)。
+
+同一 40/类缓存还实测 A10W8、A12W8、A10W9，加 A8W8 对照。W8 中 A12W8 最差层 NRMSE 最低，为 0.518930%；已导出 `ffn1_a12w8_static_sym_12labels_40.npz` 标准参数包，容量前提与 RTL 接口边界见 [低位权重报告](results/FFN1低位权重候选实测.md)。
