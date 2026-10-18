@@ -1,0 +1,22 @@
+# 16-row adapter regression logs
+tool: PATH=/home/yang/yosys-sta/oss-cad-suite/bin ($(iverilog -V | head -1))
+
+## iverilog(v14 oss-cad-suite) layer01
+Running 16-row tile (row_tile=0, col_tile=0)
+Running 16-row tail tile (row_tile=6, col_tile=15, mask=0x0007)
+PASS 16-row adapter real A12W10 tiles: outputs=304 padding=208 total_cycles=9084
+/home/yang/kwt-worktrees/row16-e203/hardware/rtl/row16_integration/tb/tb_kwt_row16_adapter.sv:184: $finish called at 90890 (1s)
+exit=0
+
+## iverilog(v14 oss-cad-suite) layer12
+Running 16-row tile (row_tile=0, col_tile=0)
+Running 16-row tail tile (row_tile=6, col_tile=15, mask=0x0007)
+PASS 16-row adapter real A12W10 tiles: outputs=304 padding=208 total_cycles=9084
+/home/yang/kwt-worktrees/row16-e203/hardware/rtl/row16_integration/tb/tb_kwt_row16_adapter.sv:184: $finish called at 90890 (1s)
+exit=0
+
+## /usr/bin/iverilog(v11) layer01
+Running 16-row tile (row_tile=0, col_tile=0)
+Running 16-row tail tile (row_tile=6, col_tile=15, mask=0x0007)
+PASS 16-row adapter real A12W10 tiles: outputs=304 padding=208 total_cycles=9084
+exit=0

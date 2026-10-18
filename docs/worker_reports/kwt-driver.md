@@ -41,3 +41,55 @@
 - 无综合、无 150 MHz 时序、无面积/功耗/吞吐/能耗结论。
 - 本次未复测 NRMSE；manifest 中 layer01 `nrmse_pct≈0.1017%` 属**软件向量生成阶段**证据，未在本次 RTL 回归中复核。
 - GELU、第二线性层、注意力、完整编码器未做。
+
+---
+
+# WORKER_REPORT（16 行核接入 NICE-like E203/DMA 系统模型）
+
+## 任务与边界
+把 16 行计算核（`kwt_row_broadcast_tile`）接入与旧 8×16 路径**同一**的 NICE-like 命令/
+`128-bit` 仿真总线/16-bit SRAM/DMA 系统模型，闭合“高性能核只在 L1 测试台”的差距。
+只改本 worktree `kwt-worktrees/row16-e203`；未改旧 8×16 核、未改 `run_e203.sh`、未 push/merge/rebase。
+
+## 结论与证据层级
+- **M1 完成**：`hardware/optimization/ROW16_E203_INTEGRATION.md` 冻结 16 行核端口、
+  `cmd_row_mask` 由 8→16 位、A/W/bias/输出地址图、`208→112` tile 控制变化，并列 G1–G6 接口缺口。
+- **M2 完成并上机通过**：新适配器 `hardware/rtl/row16_integration/kwt_row16_tile_adapter.sv`
+  + 测试台 `hardware/rtl/row16_integration/tb/tb_kwt_row16_adapter.sv`。冻结 A12W10 **同一真实向量**
+  （与旧 E203 路径同一 `layerNN_a16/w16/bias32/expected32.hex`），跑 **tile0** 与 **尾 tile
+  （rt=6,ct=15,row_mask=16'h0007，行 96..98）**，对软件独立生成的 `expected32` **逐位一致**：
+  `outputs=304 padding=208`（tile0 256 + 尾 tile 48 有效 + 208 填充行）。
+- **证据层级**：**NICE-like E203/DMA 行为仿真**（Icarus 11 与 14、Verilator 5.047），
+  **不是**组委会正式 SoC/System Bus/NICE 平台，**不是**综合网表，**不是** 150 MHz 时序/面积/功耗结论。
+- A/W/bias 由 `kwt_dma` 经共享总线真实搬运；输出经 `kwt_dma` 写回；DUT 用 16 行核真实算 MAC。
+  **未**在测试台预计算 `XW+b`，**未**用 golden 当 DUT 输出。
+
+## 改动（全部新增，未改旧文件）
+- `hardware/optimization/ROW16_E203_INTEGRATION.md`（M1 设计/接口缺口）
+- `hardware/rtl/row16_integration/kwt_row16_tile_adapter.sv`（16 行单 tile 适配器）
+- `hardware/rtl/row16_integration/tb/tb_kwt_row16_adapter.sv`（半上机测试台）
+- `hardware/rtl/row16_integration/tb/run_row16.sh`（独立 runner；ASCII 临时目录暂存 hex）
+- `hardware/optimization/row16_integration_logs/iverilog_regression.log`（运行记录）
+
+## 实际执行的命令与退出结果
+工具链：`/home/yang/yosys-sta/oss-cad-suite/bin` 的 `iverilog`/`vvp`；另用 `/usr/bin/iverilog`(v11)
+与 `verilator` 5.047 复核。向量目录 `VECTORS=/home/yang/Desktop/ic设计竞赛/hardware/architecture/results/real_e203_validation0_vectors`。
+
+| # | 命令 | 退出码 | 结果 |
+| --- | --- | --- | --- |
+| 1 | `run_row16.sh $VECTORS 01`（iverilog v14） | **0** | `PASS ... outputs=304 padding=208 total_cycles=9084` |
+| 2 | `run_row16.sh $VECTORS 12`（iverilog v14） | **0** | 同上（layer12） |
+| 3 | `run_row16.sh $VECTORS 01`（/usr/bin iverilog v11） | **0** | 同上 |
+| 4 | `run_row16.sh $VECTORS 01 --verilator` | **0** | 同上（Verilator 5.047，build+run） |
+| 5 | 修复前中间版本（a_words 范围 3584，实为 6656） | **1** | `$readmemh ... Too many words` + 尾 tile `got=xxxxxxxx` 的**可复现失败用例**，据此定位 8 行 tiling 索引越界 |
+
+`total_cycles=9084` 为两 tile 的仿真观察值，不能当吞吐/能耗/频率结论。
+
+## 未证事项（诚实边界）
+- 只跑 **单 tile**（tile0 + 尾 tile），**未**跑全层 112 tile、**未**跑 12 层（M3 未做）。
+- **未**把 16 行适配器接进真正由 E203 CPU 发 NICE 指令的路径；本适配器只暴露等价命令口，
+  描述符 `row_mask` 16 位重排（G1）、控制模型硬编码（G2/G3）、A 16 路并行读 vs 1R1W 宏（G4）、
+  relu（G5）均为待改造缺口，详见 M1 文档。
+- **未**改 `run_e203.sh` 与旧 8×16 核；**未**在组委会正式平台/总线/NICE 上联调。
+- **无**综合、**无** 150 MHz STA、**无**面积/功耗/能耗结论（需目标库与指定 16-bit 宏）。
+- 未复测 NRMSE；`expected32` 逐位一致不等于官方评测集 NRMSE。
