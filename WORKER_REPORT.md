@@ -1,44 +1,47 @@
-# WORKER_REPORT — design-integration（本科组整体设计决策与证据核对）
+# WORKER_REPORT — review-corrections（审查纠错与评分证据）
 
-- 分支：`codex/kwt-design-integration`（worktree `/home/yang/kwt-worktrees/design-integration`）
-- 任务：围绕 KWT-1 本科必做 1-3 项，独立核对源代码与真实产物（不照抄报告），产出整体设计决策与分阶段整合方案；新增并实跑证据校验脚本。未改核心 RTL/量化代码，未调用子智能体，未 push/merge/rebase，只写 `docs/`、本报告。
+- 分支：`codex/kwt-review-corrections`（worktree `/home/yang/kwt-worktrees/review-corrections`）
+- 模型：`opencode-go/deepseek-v4.1-flash`
+- 任务：清理误导性项目口径，逐条给出"原说法→事实→证据→可执行命令/缺口"；对附件断言独立事实核查；
+  新增只读一致性检查脚本并实跑。未改 RTL / 数值核心 / 旧审查文件，未改主目录未跟踪用户文档，
+  未开子智能体，未 push。
 
-## 改动
+## 改动（仅新增本分支 `docs/` 与本报告）
 
-新增：
+- `docs/KWT1_审查纠错与评分证据_20261018.md`：7 条逐项纠错（C1–C7）+ 附件断言核查表 + 关键数字对照 +
+  可复现命令 + 缺口。不含完成率百分比 / 工期概率 / 估分。
+- `docs/check_review_consistency.py`：只读一致性检查（GELU 口径、0/12 vs 12/12、16 行/8×16 边界、
+  网表/SDC/违例 STA、0 翻转功耗、提交模型未冻结、准入分值）。
+- 本文件 `WORKER_REPORT.md`（替换上一分支遗留的快照报告）。
 
-- `docs/KWT1_整体设计决策_20261018.md`：① PC/E203/DMA/PE/软件数值模型的职责、格式、地址与所有权、接口假设；② 保守可交付 vs 性能优化两路径（布局、SRAM、带宽、周期公式、量化格式、INT32 边界、需改的 RTL/驱动）并区分已测/模型推算/正式平台未知；③ Claude 审查的**正确/过期/未证**逐项裁定；④ 按验收门槛排序的剩余工作、可复现命令、缺失资源与停止条件；⑤ 6 个分支的分阶段整合顺序、冲突点、验收门槛（本次不实际 merge）。
-- `docs/check_design_evidence.py`：只读证据核对脚本，`--results-dir` 指定主目录结果路径，不修改共享数据。
-- 本文件 `WORKER_REPORT.md`。
-
-未改动：任何 RTL、量化、驱动源码；主目录、其他 worktree、官方资料只读。
+未改动：任何 RTL、量化、驱动源码；主目录、其他 worktree、官方资料与共享数据（仅只读引用）；
+主目录未跟踪的用户文档（6 份审查文档、`PROGRESS_UPDATE.md`、附件）一字未动。
 
 ## 实际执行的命令与退出结果
 
 | 命令 | 退出码 | 结果 |
 | --- | ---: | --- |
-| `python3 docs/check_design_evidence.py --results-dir "/home/yang/Desktop/ic设计竞赛/hardware/architecture/results"` | **0** | `SUMMARY: PASS=72 WARN=0 FAIL=0`；含 12 层 exit/PASS/SHA、摘要计数、向量格式边界、INT32 边界、关键文件存在性，并对照旧 0/12 失败运行 |
-| `python3 - <<PY`（独立核算 12 层日志 SHA-256 与 summary.json） | 0 | 12/12 逐字一致（见下） |
-| `python3 - <<PY`（读 manifest 字段/形状/边界/int32） | 0 | 形状 X[99,64]/W[64,256]/bias[256]/Y[99,256]；最大保守界 67,780,536 |
+| `python3 docs/check_design_evidence.py --results-dir "…/ic设计竞赛/hardware/architecture/results"` | **0** | `SUMMARY: PASS=72 WARN=0 FAIL=0` |
+| `python3 docs/check_review_consistency.py` | **0** | `SUMMARY: 项数=18 需关注=0` |
 
-## 关键实测（本次独立核验，非转述）
+## 逐项纠错结论（详见 docs 文件）
 
-- 修正运行 `real_e203_validation0_ascii_*`：`finalizer.status`=`SUMMARIZE_EXIT 0`；12 个 `layerNN.exit` 全 `0`；每层恰好一条全层 `PASS`（`start=0 count=208 outputs=25344 padding=1280 task_cycles=838028 total_cycles=838041`）；无 `FATAL/mismatch/error/xxxx`。
-- 12 份日志 SHA-256 与 `*_ascii_summary.json` 的 `log_sha256` **逐字一致**；摘要合计 `checked_outputs=304128`、`checked_padding=15360`、`total_task_cycles=10056336`（=12×838028）。
-- 向量 manifest：hex 行数精确为 a16=6656、w16=16384、bias32=256、expected32=25344，且 SHA-256 全部匹配；A12W10 保守上界 `max=67,780,536`（INT32 的 3.16%），实测最大 `|expected INT32|`=4,593,325。
-- 旧运行 `real_e203_validation0_*`：12 个 `.exit` 全 `1`、日志含 `got=xxxxxxxx`、`SUMMARIZE_EXIT 1` —— 属**过期**状态（中文路径 `$readmemh`），不是当前状态。
+1. **GELU 非本科必做**：原题明写"GELU、第二线性层和注意力不是本科必做"；6 份初审文档的 GELU=P0 口径应作废。
+2. **旧 0/12 vs 当前 12/12**：旧中文路径运行 0/12（`$readmemh` 非 ASCII）属**过期**；ASCII 重跑当前 **12/12 通过**（304,128 输出逐位一致，L2）。
+3. **16 行 / 8×16 不可混用**：`154,240`（16 行 L1 测试台）≠ `838,028`（8×16 L2 E203），不得相减当加速比；`1.63×` 是 8行L1/L1 模型比值；E203 通过路径用的是 8×16 老引擎。
+4. **"无网表/无 SDC/无 STA" 绝对化不准确**：已有示例库网表（`systolic_*.v`）、探索性 SDC（`ffn1_8x16_150mhz.sdc`），`codex/kwt-sta-followup` 已跑通一次 iSTA（EXIT=0）并产出 `.rpt/.pwr`，但**时序严重违例**（最差 setup slack −12.298 ns ≈ 52.7 MHz）→ **无达标签核**。
+5. **功耗未测 ≠ 0**：无 SAIF/VCD；示例库 `.pwr` 是 `Net Switch Power=0` 的无效模型，既不能当 0 也不能当有效数；原题明确未建模部分不得按零。
+6. **提交软件数值模型未冻结**：逐位一致对的是内部参考，未声明/哈希冻结"提交模型"。
+7. **准入分值纠正**：受 gate 的"效率+创新"＝吞吐 8 + 功耗 8 + 面积 4 + 创新 20 = **40 分**（附件写作 36，有误）。
 
-## 结论要点
+## 附件断言核查（不照单全收）
 
-- 当前通过范围：**一条真实验证样本的 A12W10 冻结向量在 E203 + 仿真 NICE-like 系统 + 8×16 老引擎**上，12 层各 25,344（合计 304,128）输出逐位一致。Claude 把旧 0/12 当成当前失败属**过期**。
-- `154,240`（16 行，L1 测试台）与 `838,028`（8×16，L2 E203）**不可相减当加速比**；`1.63×` 是 8 行/16 行同为 L1 的模型比值。
-- A14W12/A12W12/A16W10 **仅软件证据**（无 RTL 逐位、无综合）；A14W12 保守上界已占 INT32 的 50.59%。
-- 样本数不得混用：480 软件、240 RTL、1 条 E203、官方 600（未测）为四个不同统计。
+成立：GELU 非必做、16 行≠E203 核、面积仅示例库、功耗空缺、154,240 非正式吞吐、240≠600、模型未冻结、
+E203 命令不存在。需限定：0/12（过期）、"无网表/无 SDC"（有雏形、无达标签核）。有误：门槛 36 分（应为 40）。
+"85%/95%+ 概率"类进度口径不采信。
 
-## 未证事项
+## 边界与停止
 
-- 正式组委会 SoC/System Bus/NICE 规范、PDK、SRAM 宏、SDC 全部缺失；无 150 MHz、≤2.25 mm²、功耗/能耗的正式签核。
-- C 驱动未在 E203 仿真中执行（仅宿主测试 + RV32 交叉编译）。
-- 官方 600 条评测集未发布，官方 NRMSE/分类准确率未测。
-- 本次未重跑 E203 仿真与 240 样本 RTL（`docs/check_design_evidence.py` 只核验既有真实产物与哈希）；E203 通过路径是 8×16 老引擎，不是 16 行核。
-- 本次未实际执行任何 merge；§5 的整合顺序与验收门槛为方案，须由人工在受控分支执行并复核。
+- 通过范围仅：一条真实样本的 A12W10 冻结向量在 E203 + 仿真 NICE-like 系统 + 8×16 老引擎上 12 层逐位一致。
+- 未证：正式 SoC/PDK/宏/SDC、150 MHz、≤2.25 mm²、功耗/能耗、C 驱动上 E203、官方 600 条、冻结提交模型。
+- 本报告结论全部来自真实日志与退出码，未重跑 E203 与 240 样本（脚本仅核验既有产物与哈希）。
