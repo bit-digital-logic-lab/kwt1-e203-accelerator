@@ -1,63 +1,86 @@
-# WORKER_REPORT — codex/kwt-integration（KWT-1 整合分支）
+# WORKER_REPORT — codex/kwt-grad-golden（研究生组第 4–6 项 FP32 Golden）
 
-- 分支：`codex/kwt-integration`（worktree `/home/yang/kwt-worktrees/integration`）
-- 基线：`main@1494597`
-- 范围：把源文件快照 `d94fb6f` 与 8 个已完成工作分支整合为一个可审查的 Git 分支；
-  归档 9 份 `WORKER_REPORT.md`；实跑快速验收并如实记录退出码；补 `docs/INTEGRATION_STATUS.md`。
-- 边界：只在本 worktree 内操作；未 `checkout`/清理主目录；未 push / 未碰 `origin`；未开子智能体；
-  未改核心数值 RTL；未重跑 12 层整层 E203；未做大面积综合。
+- 分支：`codex/kwt-grad-golden`（worktree `/home/yang/kwt-worktrees/grad-golden`）
+- 范围：研究生必做**第 4–6 项**（单头注意力 / 单层 PostNorm 编码器 / 十二层编码器 + 分类头）的
+  **独立纯 NumPy FP32 golden** 与**中间张量逐阶段捕获**；只在 `graduate/reference/` 增加脚本、
+  小结果与测试，并在根 `WORKER_REPORT.md` 记录命令、退出码、样本数与误差。
+- 边界：只在本 worktree 内操作；未开子智能体；未 `checkout`/改主目录或他人分支；
+  未 `merge`/`rebase`/`cherry-pick`/`push`；未改 `software/` 既有实现；未落大张量/缓存；
+  **未**把 PC 端 MFCC 计入加速器（golden 输入边界 = 官方首层编码器输入 `X[99,64]`）。
+- 前情：本 worktree 根 `WORKER_REPORT.md` 原为 `codex/kwt-integration` 的报告，依任务要求改写为
+  本报告；原内容不作删除，可从 Git 历史（`main`/`3d9ae98`）取回。
 
-详细冲突、来源 commit、逐项测试与缺口见 **[`docs/INTEGRATION_STATUS.md`](docs/INTEGRATION_STATUS.md)**。
+## 交付物
 
-## 提交
+`graduate/reference/`：
 
-| 提交 | 内容 |
+| 文件 | 说明 |
 | --- | --- |
-| `dc4fd2a` | 合入 `d94fb6f` 源文件快照（3 处冲突取 main@1494597 的已测钩子实现与 ascii finalizer；其余取快照；删除旧版钩子残留 plugin/assets） |
-| `3ba1412` | 归档 hook-fix 报告（`c89095c` 逻辑已由 main 引入，不重复合入） |
-| `fb71ede` | 整合 `codex/kwt-verification`（`1a3aa75`） |
-| `282017e` | 整合 `codex/kwt-preprocess`（`747d5fa`） |
-| `932db77` | 整合 `codex/kwt-quant`（`7afe9ff`） |
-| `3e82ea9` | 整合 `codex/kwt-architecture`（`df93c87`） |
-| `e1aa166` | 整合 `codex/kwt-driver`（`fcb4b72`，保留 `run_e203.sh` ASCII 路径修复） |
-| `d758eeb` | 整合 `codex/kwt-synth`（`cb23d04`） |
-| `8f6ca75` | 整合 `codex/kwt-design-integration`（`56b8a39`） |
-| `29d0b00` | 整合 `codex/kwt-packaging`（`0731cf3`） |
-| 本提交 | `docs/INTEGRATION_STATUS.md` + 本报告 |
+| `kwt1_fp32_golden.py` | 纯 NumPy FP32 golden（第 4–6 项），含中间张量捕获接口；无 TF/scipy 依赖 |
+| `capture_intermediates.py` | 真实验证划分样本逐层捕获形状/范围/SHA-256 → 小 JSON |
+| `compare_official_tf.py` | 与官方 Arm KWT-1 `transformer_utils.py` 原文代码（TF）逐阶段独立比对 |
+| `compare_torch_reference.py` | 与既有独立 PyTorch 实现 `software/run.py` 二次独立比对 |
+| `test_kwt1_fp32_golden.py` | 可运行单元测试（仅需 NumPy） |
+| `results/golden_intermediates.json` | 3 样本 ×12 层逐阶段统计+SHA（148 KB，无张量） |
+| `results/official_tf_comparison.json` / `results/torch_reference_comparison.json` | 独立比对误差 |
+| `README.md` | 语义核对表、命令、已证/未证 |
 
-9 份来源报告归档于 `docs/worker_reports/kwt-*.md`（verification / preprocess / quant /
-architecture / driver / synth / design-integration / packaging / hook-fix）；合并过程中根
-`WORKER_REPORT.md` 始终被移除并归档，**未发生后一份覆盖前一份**。
+## 官方语义核对结论
 
-## 实跑验收（实际退出码）
+`flags.json`：`num_layers=12, d_model=64, mlp_dim=256, heads=1, attention_type=time,
+spectrogram_length=98, dct_num_features=40, label_count=12`；`prenorm`/`approximate_gelu`
+未在 flags.json 中，取 `model_parameters` 默认 → **PostNorm + 精确 GELU**（`eval.sh` 亦未覆盖）。
+逐项核对：Q/K/V `Dense(64)` **无 bias**；分数 `99×99`；`/√64`；逐行 Softmax（行和 =1）；
+`softmax@V`；`combine_heads` 输出投影带 bias；`out1=LN1(x+attn)`、`out=LN2(out1+ffn)`
+两次残差/两次 LayerNorm（eps=1e-6，总体方差）；FFN `64→256→64` 精确 GELU
+`0.5x(1+erf(x/√2))`；类别 token `x[:,0]` → `Dense(12)`；12 层权值 SHA-256 互异。
+
+## 实跑（实际退出码）
 
 | 命令 | 退出码 |
 | --- | ---: |
-| `git diff --check 1494597 HEAD` | **2**（仅 quant CSV 的 CRLF 与 packaging 报告末尾空行，既有产物；为保 provenance 未改，详见 STATUS §5#1） |
-| `python3 -m unittest discover -s .opencode/skills/quarter-hour-check/tests` | **0**（20 tests OK） |
-| `python3 docs/check_design_evidence.py --results-dir /home/yang/Desktop/ic设计竞赛/hardware/architecture/results` | **0**（`PASS=72 WARN=0 FAIL=0`） |
-| 宿主 C 驱动测试（`cc ... test_kwt_nice_driver.c`） | **0**（`PASS provisional NICE FFN1 descriptor layout and bounds`） |
-| RV32 交叉编译（`riscv64-linux-gnu-gcc ... -march=rv32imac -mabi=ilp32 -c`） | **0** |
-| `negative_injection_check.py`（oss-cad-suite） | **0**（fp32/int16 污染均被检出 exit=1） |
-| `run_tile_edges.sh`（oss-cad-suite） | **0**（正向 21 cases PASS；负向 MISMATCH 被检出） |
-| （附加）`run_e203.sh --real-layers <中文 CASE_ROOT> 0 1` | **0**（12 层各 tile 0 单块 PASS，验证 ASCII 路径修复） |
+| `python3 graduate/reference/test_kwt1_fp32_golden.py` | **0**（`Ran 12 tests ... OK`） |
+| `python3 graduate/reference/capture_intermediates.py` | **0** |
+| `.venv/bin/python graduate/reference/compare_official_tf.py` | **0** |
+| `.venv/bin/python graduate/reference/compare_torch_reference.py` | **0** |
 
-## 关键口径裁定
+（TF/torch 解释器：`/home/yang/Desktop/ic设计竞赛/software/.venv/bin/python`，TF 2.19.1 / torch 2.5.1，
+只读工具链，未改动该目录。）
 
-- **E203 12 层状态以 `real_e203_validation0_ascii_*` 为准 = 单样本 12/12 PASS**；
-  `real_e203_validation0_*` 的 `0/12 FAIL` 是**过期**的中文路径运行。packaging 报告中的
-  “0/12” 不得当作当前结论。
-- 保留 `codex/kwt-driver` 的 `run_e203.sh` ASCII 路径修复。
-- `codex/kwt-synth` 已合入（含被修正的综合脚本），补上早前审查文档 §5 的遗漏。
+## 样本数
 
-## 未证事项
+真实验证划分（Speech Commands V2 官方 SHA-1 说话人划分的 **validation**，跨类别 **3** 条）：
+`four/750e3e75_nohash_0.wav`(`_unknown_`)、`no/45692b02_nohash_3.wav`(`no`)、
+`yes/ec21c46b_nohash_1.wav`(`yes`)。每条 `X[99,64]` 的 SHA-256 与
+`software/validation/real_input_chain_20261017/manifest.json` 一致后使用；
+`sample_count=3`、`12 层 × 8 中间阶段`。验证划分**仅用于评估**，未用于调参。
 
-1. 官方 SoC / System Bus / NICE、PDK、SRAM 宏、SDC 缺失 → 无 150 MHz / ≤2.25 mm² / 功耗签核；
-   iSTA 仍 abort（exit 134），无时序结论。
-2. C 驱动**未**在 E203 指令流中执行（仅宿主 + RV32 编译）。
-3. 官方 600 条评测集未发布 → 官方 NRMSE / 准确率未测；480 软件 / 240 RTL / 1 条 E203 / 官方 600
-   是四个不同统计，不可混用。
-4. `154,240`（L1）与 `838,028`（L2 E203）不可相减当加速比/吞吐；16 行核未接入 E203。
-5. A14W12/A12W12/A16W10 只有软件证据。
-6. `git diff --check` 非 0（纯格式/CRLF，见上）。
-7. 本次未实际 merge 进 `main`、未 push；`main` 的既有未提交改动保持原样。
+## 误差
+
+| 比对 | 3 样本最大绝对误差 | 阈值 | 退出码 |
+| --- | ---: | ---: | ---: |
+| golden vs 官方 TF 原文代码（全 12 层逐阶段） | `9.298e-06` | `1e-4` | 0 |
+| golden vs PyTorch `run.py`（逐层 LN1/末层/logits） | `4.768e-06` | `1e-4` | 0 |
+
+官方 TF 单阶段最差：`softmax 8.8e-07`、`attended_v 1.8e-06`、`attn_projected 2.1e-06`、
+`ln1 4.1e-06`、`ffn_hidden 4.4e-06`、`gelu 4.4e-06`、`ffn_out 3.9e-06`、
+`layer_output 9.3e-06`、`logits 9.5e-07`。golden 首次运行即被测试发现 GELU 漏乘 `1/√2`
+（误差 8.4e-02），修正后通过；该 bug 已修复，非结果粉饰。
+
+## 已证
+
+- 第 4–6 项操作顺序与官方源码一致，并在 3 条**真实验证划分**样本上，与**官方 TF 原文代码**
+  全 12 层逐阶段一致（≤`9.3e-06`），另与独立 PyTorch 实现一致（≤`4.8e-06`）。
+- 12 层逐层换参：参数 SHA-256 12 组互异；`num_layers=k` 输出与全量前 k 层一致。
+- 中间张量（`99×99` 注意力、`99×256` FFN、两次 LayerNorm 等）形状/范围/SHA 已记录，未落张量。
+
+## 未证（证明边界）
+
+1. 官方层代码写于 TF 2.4 + `tensorflow_addons`；本机 TF 2.19 缺 `tensorflow_addons` 与
+   `keras.layers.experimental.preprocessing`，比对时装了**两个仅 import 用的 shim**
+   （`GELU→tf.nn.gelu(exact)`、`Rescaling→Rescaling`），均不在被执行路径上。这是**框架版本差异**，
+   不是官方 TF 2.4 位级运行。
+2. golden 输入取既有真实数据管线缓存的 `X[99,64]`（该管线此前对 TF checkpoint 投影误差 ≤`1.4e-06`）；
+   本目录**未**重跑官方 `speech_features` MFCC，MFCC 不属加速器范围。
+3. 未测官方 600 条评测集准确率 / NRMSE；未做量化（A12W10 等）或 RTL/E203 对照；本目录只给 FP32 golden。
+4. 3 条样本的 top-1 命中仅作 sanity check，**不是**精度结论。
