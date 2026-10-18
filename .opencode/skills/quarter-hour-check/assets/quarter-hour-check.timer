@@ -1,0 +1,11 @@
+[Unit]
+Description=Check IC contest agent tasks every 15 minutes
+
+[Timer]
+OnCalendar=*-*-* *:0/15:00
+AccuracySec=1s
+Persistent=true
+Unit=quarter-hour-check.service
+
+[Install]
+WantedBy=timers.target
