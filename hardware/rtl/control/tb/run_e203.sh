@@ -3,7 +3,14 @@ set -euo pipefail
 tb_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 rtl_dir="$(dirname -- "$tb_dir")"
 upstream="$(cd -- "$tb_dir/../../../../资料/e203_hbirdv2_full" && pwd)"
-build_dir="$(mktemp -d)"
+# Icarus `$readmemh` rejects path bytes outside printable ASCII (it warns about
+# non-printable characters and loads X). The project path is Chinese, so force
+# an ASCII-only temp root instead of asking the user to prepare a /tmp alias.
+tmp_base="${KWT_E203_TMP_BASE:-${TMPDIR:-/tmp}}"
+if [[ "$tmp_base" != /* || "$tmp_base" == *[!\ -~]* ]]; then
+    tmp_base=/tmp
+fi
+build_dir="$(mktemp -d "$tmp_base/kwt_e203.XXXXXX")"
 trap 'rm -rf -- "$build_dir"' EXIT
 
 tb_top=tb_kwt_real_e203
@@ -91,6 +98,8 @@ iverilog -g2012 -gno-assertions "${define_args[@]}" \
     2>"$build_dir/compile.log" || { cat "$build_dir/compile.log" >&2; exit 1; }
 if [[ -n "$real_cases_root" ]]; then
     shopt -s nullglob
+    ascii_cases_dir="$build_dir/real_cases"
+    mkdir -p "$ascii_cases_dir"
     real_cases=("$real_cases_root"/layer??_a16.hex)
     if (( ${#real_cases[@]} == 0 )); then
         echo "No layer??_a16.hex cases in $real_cases_root" >&2
@@ -113,10 +122,17 @@ if [[ -n "$real_cases_root" ]]; then
                 exit 2
             fi
         done
+        # Stage ASCII copies before handing paths to Icarus: CASE_ROOT may sit
+        # under a Chinese project path, and `$readmemh` would otherwise load X.
+        stage_stem="$ascii_cases_dir/$(basename "$case_stem")"
+        cp -f -- "$a_file" "${stage_stem}_a16.hex"
+        cp -f -- "${case_stem}_w16.hex" "${stage_stem}_w16.hex"
+        cp -f -- "${case_stem}_bias32.hex" "${stage_stem}_bias32.hex"
+        cp -f -- "${case_stem}_expected32.hex" "${stage_stem}_expected32.hex"
         echo "Running E203 $(basename "$case_stem")"
         vvp "$build_dir/e203" "+PROGRAM=$build_dir/program.hex" \
-            "+A=$a_file" "+W=${case_stem}_w16.hex" \
-            "+BIAS=${case_stem}_bias32.hex" "+EXPECTED=${case_stem}_expected32.hex" \
+            "+A=${stage_stem}_a16.hex" "+W=${stage_stem}_w16.hex" \
+            "+BIAS=${stage_stem}_bias32.hex" "+EXPECTED=${stage_stem}_expected32.hex" \
             "${run_args[@]}"
     done
 else
