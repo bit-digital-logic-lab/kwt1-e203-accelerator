@@ -1,0 +1,1072 @@
+{
+  "schema": "kwt-repro/1",
+  "generated_at": "2026-10-18T07:41:50.912370+00:00",
+  "level": "full",
+  "run_id": "full",
+  "git": {
+    "commit": "56b8a39a58e1fbd60d58ab94f0cf4acf752251a8",
+    "branch": "codex/kwt-repro-infra",
+    "dirty": true
+  },
+  "environment": {
+    "tools": {
+      "python3": "Python 3.10.12",
+      "iverilog": "Icarus Verilog version 11.0 (stable) ()",
+      "verilator": "Verilator 5.030 2024-10-27 rev v5.030",
+      "yosys": "yosys: invalid option -- '-'",
+      "riskv_gcc": "riscv64-linux-gnu-gcc (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0"
+    },
+    "host": {
+      "hostname": "yang-Precision-5550",
+      "platform": "Linux-5.15.0-164-generic-x86_64-with-glibc2.35",
+      "cpu_count": 12
+    }
+  },
+  "counts": {
+    "PASS": 6,
+    "FAIL": 4,
+    "TIMEOUT": 1,
+    "SKIP": 1,
+    "ERROR": 0
+  },
+  "gate_ok": true,
+  "gate_ids": [
+    "env.versions",
+    "sw.offline_encoder_contract",
+    "rtl.dma_iverilog",
+    "rtl.dma_2d_verilator",
+    "rtl.control_verilator",
+    "rtl.pingpong_cacc_verilator"
+  ],
+  "checks": [
+    {
+      "id": "env.versions",
+      "level": "smoke",
+      "gate": true,
+      "desc": "record interpreter and simulator versions",
+      "command": [
+        "python3",
+        "tools/repro/checks/env_versions.py"
+      ],
+      "cwd": "/home/yang/kwt-worktrees/repro-infra",
+      "started_at": "2026-10-18T07:40:35.167698+00:00",
+      "prereq_missing": [],
+      "prereq_tools_missing": [],
+      "status": "PASS",
+      "exit_code": 0,
+      "expected_exit": 0,
+      "timed_out": false,
+      "duration_s": 0.114,
+      "timeout_s": 60,
+      "inputs": [],
+      "stdout_log": "tools/repro/results/full/env.versions.stdout.log",
+      "stderr_log": "tools/repro/results/full/env.versions.stderr.log",
+      "stdout_tail": [
+        "RESULT_JSON:{\"python\": \"3.10.12\", \"platform\": \"Linux-5.15.0-164-generic-x86_64-with-glibc2.35\", \"iverilog\": \"Icarus Verilog version 11.0 (stable) ()\", \"vvp\": \"Icarus Verilog runtime version 11.0 (stable) ()\", \"verilator\": \"Verilator 5.030 2024-10-27 rev v5.030\", \"yosys\": \"yosys: invalid option -- '-'\"}"
+      ],
+      "stderr_tail": [],
+      "parsed_result": {
+        "python": "3.10.12",
+        "platform": "Linux-5.15.0-164-generic-x86_64-with-glibc2.35",
+        "iverilog": "Icarus Verilog version 11.0 (stable) ()",
+        "vvp": "Icarus Verilog runtime version 11.0 (stable) ()",
+        "verilator": "Verilator 5.030 2024-10-27 rev v5.030",
+        "yosys": "yosys: invalid option -- '-'"
+      }
+    },
+    {
+      "id": "sw.offline_encoder_contract",
+      "level": "smoke",
+      "gate": true,
+      "desc": "numpy-only replay of offline_encoder_input.convert against frozen artifacts",
+      "command": [
+        "python3",
+        "tools/repro/checks/offline_encoder_contract.py"
+      ],
+      "cwd": "/home/yang/kwt-worktrees/repro-infra",
+      "started_at": "2026-10-18T07:40:35.282062+00:00",
+      "prereq_missing": [],
+      "prereq_tools_missing": [],
+      "status": "PASS",
+      "exit_code": 0,
+      "expected_exit": 0,
+      "timed_out": false,
+      "duration_s": 0.164,
+      "timeout_s": 120,
+      "inputs": [
+        {
+          "path": "software/offline_encoder_input.py",
+          "sha256": "5f68e3b576e7f9bd539143b129bd607a005c159048d46f4adb1f16f53b683659",
+          "bytes": 2820
+        },
+        {
+          "path": "software/weights/kwt1_fp32.npz",
+          "sha256": "8f359abf7adbe287b8f89fca98af46194f98f90f2146784731bff551a155825a",
+          "bytes": 2484958
+        },
+        {
+          "path": "software/validation/real_input_chain_20261017/sample_00_encoder.npy",
+          "sha256": "489dc7c28b2816cdb7cfc35e3f98c2dd674112f71d9357f746db57de4a27c058",
+          "bytes": 25472
+        },
+        {
+          "path": "software/validation/real_input_chain_20261017/sample_00_mfcc.npy",
+          "sha256": "a8a85e2878283a0d3cd40f157243b10aa5034c2544bbfb21d292da9c422aad15",
+          "bytes": 15808
+        },
+        {
+          "path": "software/validation/real_input_chain_20261017/sample_01_encoder.npy",
+          "sha256": "d91c92dabc3fcd94e05920731e0acfb4596e30989e5d8a1906dbcd6aa697b1a5",
+          "bytes": 25472
+        },
+        {
+          "path": "software/validation/real_input_chain_20261017/sample_01_mfcc.npy",
+          "sha256": "1e24a66c86e777e6882181b832fdd545f511cd2c6e93747a929b94b77a7588c0",
+          "bytes": 15808
+        },
+        {
+          "path": "software/validation/real_input_chain_20261017/sample_02_encoder.npy",
+          "sha256": "092ad2de82d56dc0a737dd8655dab1e32fcdc31da4f02b384e2eae67aa6e5e43",
+          "bytes": 25472
+        },
+        {
+          "path": "software/validation/real_input_chain_20261017/sample_02_mfcc.npy",
+          "sha256": "d4bac7237bb83bde50a4cfdf35018105bd888925890ea79cca55d1592e92416c",
+          "bytes": 15808
+        },
+        {
+          "path": "software/validation/real_input_chain_20261017/sample_03_encoder.npy",
+          "sha256": "c2c56f43971060054e0234c82d6551a3a8f2165bb020d1e564e31c37eb01dd9c",
+          "bytes": 25472
+        },
+        {
+          "path": "software/validation/real_input_chain_20261017/sample_03_mfcc.npy",
+          "sha256": "0bc09b6b4970d261ee0bc0711ebea2098475ed43681f931edbeb307589c5df4e",
+          "bytes": 15808
+        },
+        {
+          "path": "software/validation/real_input_chain_20261017/sample_04_encoder.npy",
+          "sha256": "6edf03322ddfd789bb9ec40fa86fbb18a3e3e036fe4fc774ef1e1bf45f85435f",
+          "bytes": 25472
+        },
+        {
+          "path": "software/validation/real_input_chain_20261017/sample_04_mfcc.npy",
+          "sha256": "9eaa886c83ef7b98f8c065f72e5a95213db27990f51dd85f37a693b60d89e121",
+          "bytes": 15808
+        },
+        {
+          "path": "software/validation/real_input_chain_20261017/sample_05_encoder.npy",
+          "sha256": "ead66dd353c7012b1837db0d14b99f1914e53ca9a3dab20d2a7a26fce61934c4",
+          "bytes": 25472
+        },
+        {
+          "path": "software/validation/real_input_chain_20261017/sample_05_mfcc.npy",
+          "sha256": "bf50f5b5c59c855251236bd0f968bf306b9fad59d9abee024190984746bb6833",
+          "bytes": 15808
+        },
+        {
+          "path": "software/validation/real_input_chain_20261017/manifest.json",
+          "sha256": "d6f33945d3f416e48da5135ba73acfd2db90dbe5f630770b0babccb2186e268f",
+          "bytes": 7472
+        }
+      ],
+      "stdout_log": "tools/repro/results/full/sw.offline_encoder_contract.stdout.log",
+      "stderr_log": "tools/repro/results/full/sw.offline_encoder_contract.stderr.log",
+      "stdout_tail": [
+        "checked_samples=6 worst_max_abs_error=9.5367431640625e-07 tolerance=1e-05",
+        "manifest_hash_mismatches=12 (informational)",
+        "RESULT_JSON:{\"checked_samples\": 6, \"worst_max_abs_error\": 9.5367431640625e-07, \"tolerance\": 1e-05, \"failures\": [], \"manifest_hash_mismatches\": [\"sample_00_mfcc.npy: a8a85e2878283a0d3cd40f157243b10aa5034c2544bbfb21d292da9c422aad15 != manifest dcdb5a8ac2daa7bf2b1c6f18cd964d0f406d2ce6192322c2930ac632f2c962ae\", \"sample_00_encoder.npy: 489dc7c28b2816cdb7cfc35e3f98c2dd674112f71d9357f746db57de4a27c058 != manifest a7ffaafdd9866b3711903c67db0f3a17845662bc52356f0d1a82410496a54f61\", \"sample_01_mfcc.npy: 1e24a66c86e777e6882181b832fdd545f511cd2c6e93747a929b94b77a7588c0 != manifest 43b0658ed234fdb01638bcd5ce2e5d8ef4141216650ca622ed839ff2467ddf43\", \"sample_01_encoder.npy: d91c92dabc3fcd94e05920731e0acfb4596e30989e5d8a1906dbcd6aa697b1a5 != manifest 8a6a9e49a38c073b1808de7b62ff295cd372af1399e12cb7d037975fec6963f8\", \"sample_02_mfcc.npy: d4bac7237bb83bde50a4cfdf35018105bd888925890ea79cca55d1592e92416c != manifest 8c98d33e2a85e39c3cef4b822571a7b7890e97665698f48330ca605872d8c133\", \"sample_02_encoder.npy: 092ad2de82d56dc0a737dd8655dab1e32fcdc31da4f02b384e2eae67aa6e5e43 != manifest e1f6bff0d1bfe88a680d69a826ccb1855221e1d8ace873d67679189eca93e116\", \"sample_03_mfcc.npy: 0bc09b6b4970d261ee0bc0711ebea2098475ed43681f931edbeb307589c5df4e != manifest 9fdb644252b9f5cfccb76da538033de38abaf1d63c2a0816ab7f3d722b7d3822\", \"sample_03_encoder.npy: c2c56f43971060054e0234c82d6551a3a8f2165bb020d1e564e31c37eb01dd9c != manifest ef29708b932b24554ea754872eece24b7412e20ea8d3ef88ced9b6a34a6cc7d9\", \"sample_04_mfcc.npy: 9eaa886c83ef7b98f8c065f72e5a95213db27990f51dd85f37a693b60d89e121 != manifest 7bc86a41062ee0e8c66ed8fef401c4586b98775245bb878275acb151bc4ac354\", \"sample_04_encoder.npy: 6edf03322ddfd789bb9ec40fa86fbb18a3e3e036fe4fc774ef1e1bf45f85435f != manifest 3bf5f7851fa305bfedb0f1e9c5ddfee1e01e47c758d7727d7a3398304e8062e2\", \"sample_05_mfcc.npy: bf50f5b5c59c855251236bd0f968bf306b9fad59d9abee024190984746bb6833 != manifest a45db272da20c36c1fa0e841d1f71a79e445fa2516e72b097828f9d12f60e897\", \"sample_05_encoder.npy: ead66dd353c7012b1837db0d14b99f1914e53ca9a3dab20d2a7a26fce61934c4 != manifest 16bf24f4bd5e5b0e056c43507fdb2e7061194d3ea2792d174c1afd9f22200e90\"], \"samples\": [{\"encoder_file\": \"sample_00_encoder.npy\", \"max_abs_error\": 4.76837158203125e-07, \"shape\": [99, 64]}, {\"encoder_file\": \"sample_01_encoder.npy\", \"max_abs_error\": 9.5367431640625e-07, \"shape\": [99, 64]}, {\"encoder_file\": \"sample_02_encoder.npy\", \"max_abs_error\": 9.5367431640625e-07, \"shape\": [99, 64]}, {\"encoder_file\": \"sample_03_encoder.npy\", \"max_abs_error\": 9.5367431640625e-07, \"shape\": [99, 64]}, {\"encoder_file\": \"sample_04_encoder.npy\", \"max_abs_error\": 7.152557373046875e-07, \"shape\": [99, 64]}, {\"encoder_file\": \"sample_05_encoder.npy\", \"max_abs_error\": 7.152557373046875e-07, \"shape\": [99, 64]}]}"
+      ],
+      "stderr_tail": [],
+      "parsed_result": {
+        "checked_samples": 6,
+        "worst_max_abs_error": 9.5367431640625e-07,
+        "tolerance": 1e-05,
+        "failures": [],
+        "manifest_hash_mismatches": [
+          "sample_00_mfcc.npy: a8a85e2878283a0d3cd40f157243b10aa5034c2544bbfb21d292da9c422aad15 != manifest dcdb5a8ac2daa7bf2b1c6f18cd964d0f406d2ce6192322c2930ac632f2c962ae",
+          "sample_00_encoder.npy: 489dc7c28b2816cdb7cfc35e3f98c2dd674112f71d9357f746db57de4a27c058 != manifest a7ffaafdd9866b3711903c67db0f3a17845662bc52356f0d1a82410496a54f61",
+          "sample_01_mfcc.npy: 1e24a66c86e777e6882181b832fdd545f511cd2c6e93747a929b94b77a7588c0 != manifest 43b0658ed234fdb01638bcd5ce2e5d8ef4141216650ca622ed839ff2467ddf43",
+          "sample_01_encoder.npy: d91c92dabc3fcd94e05920731e0acfb4596e30989e5d8a1906dbcd6aa697b1a5 != manifest 8a6a9e49a38c073b1808de7b62ff295cd372af1399e12cb7d037975fec6963f8",
+          "sample_02_mfcc.npy: d4bac7237bb83bde50a4cfdf35018105bd888925890ea79cca55d1592e92416c != manifest 8c98d33e2a85e39c3cef4b822571a7b7890e97665698f48330ca605872d8c133",
+          "sample_02_encoder.npy: 092ad2de82d56dc0a737dd8655dab1e32fcdc31da4f02b384e2eae67aa6e5e43 != manifest e1f6bff0d1bfe88a680d69a826ccb1855221e1d8ace873d67679189eca93e116",
+          "sample_03_mfcc.npy: 0bc09b6b4970d261ee0bc0711ebea2098475ed43681f931edbeb307589c5df4e != manifest 9fdb644252b9f5cfccb76da538033de38abaf1d63c2a0816ab7f3d722b7d3822",
+          "sample_03_encoder.npy: c2c56f43971060054e0234c82d6551a3a8f2165bb020d1e564e31c37eb01dd9c != manifest ef29708b932b24554ea754872eece24b7412e20ea8d3ef88ced9b6a34a6cc7d9",
+          "sample_04_mfcc.npy: 9eaa886c83ef7b98f8c065f72e5a95213db27990f51dd85f37a693b60d89e121 != manifest 7bc86a41062ee0e8c66ed8fef401c4586b98775245bb878275acb151bc4ac354",
+          "sample_04_encoder.npy: 6edf03322ddfd789bb9ec40fa86fbb18a3e3e036fe4fc774ef1e1bf45f85435f != manifest 3bf5f7851fa305bfedb0f1e9c5ddfee1e01e47c758d7727d7a3398304e8062e2",
+          "sample_05_mfcc.npy: bf50f5b5c59c855251236bd0f968bf306b9fad59d9abee024190984746bb6833 != manifest a45db272da20c36c1fa0e841d1f71a79e445fa2516e72b097828f9d12f60e897",
+          "sample_05_encoder.npy: ead66dd353c7012b1837db0d14b99f1914e53ca9a3dab20d2a7a26fce61934c4 != manifest 16bf24f4bd5e5b0e056c43507fdb2e7061194d3ea2792d174c1afd9f22200e90"
+        ],
+        "samples": [
+          {
+            "encoder_file": "sample_00_encoder.npy",
+            "max_abs_error": 4.76837158203125e-07,
+            "shape": [
+              99,
+              64
+            ]
+          },
+          {
+            "encoder_file": "sample_01_encoder.npy",
+            "max_abs_error": 9.5367431640625e-07,
+            "shape": [
+              99,
+              64
+            ]
+          },
+          {
+            "encoder_file": "sample_02_encoder.npy",
+            "max_abs_error": 9.5367431640625e-07,
+            "shape": [
+              99,
+              64
+            ]
+          },
+          {
+            "encoder_file": "sample_03_encoder.npy",
+            "max_abs_error": 9.5367431640625e-07,
+            "shape": [
+              99,
+              64
+            ]
+          },
+          {
+            "encoder_file": "sample_04_encoder.npy",
+            "max_abs_error": 7.152557373046875e-07,
+            "shape": [
+              99,
+              64
+            ]
+          },
+          {
+            "encoder_file": "sample_05_encoder.npy",
+            "max_abs_error": 7.152557373046875e-07,
+            "shape": [
+              99,
+              64
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "rtl.dma_iverilog",
+      "level": "smoke",
+      "gate": true,
+      "desc": "DMA load/writeback, tails, bounds, invalid descriptors (Icarus)",
+      "command": [
+        "bash",
+        "hardware/rtl/dma/tb/run.sh"
+      ],
+      "cwd": "/home/yang/kwt-worktrees/repro-infra",
+      "started_at": "2026-10-18T07:40:35.455072+00:00",
+      "prereq_missing": [],
+      "prereq_tools_missing": [],
+      "status": "PASS",
+      "exit_code": 0,
+      "expected_exit": 0,
+      "timed_out": false,
+      "duration_s": 0.032,
+      "timeout_s": 120,
+      "inputs": [
+        {
+          "path": "hardware/rtl/dma/tb/run.sh",
+          "sha256": "3f8ba50bf96ffe742807c4d474221c3f0779792f913ab8d5a4af3cfbfc64ab6a",
+          "bytes": 367
+        },
+        {
+          "path": "hardware/rtl/dma/tb/tb_kwt_dma.sv",
+          "sha256": "b20b35abe2d764b5a27890779f077b650d5e44c4537b38f936976afeae359a6a",
+          "bytes": 4648
+        },
+        {
+          "path": "hardware/rtl/dma/kwt_dma.sv",
+          "sha256": "7cf402411b3c6bca012a40fb49a4afb9dffa3ce609b94d573ae69555404794b5",
+          "bytes": 7703
+        },
+        {
+          "path": "hardware/rtl/dma/kwt_ext_memory_model.sv",
+          "sha256": "2a37abe9a7bbb30955f44161678cea447bbf24555c17eea84119dd464d6f3070",
+          "bytes": 1372
+        },
+        {
+          "path": "hardware/rtl/sram/kwt_tile_buffers.sv",
+          "sha256": "39ecb144227488b077e8938ad83798c3ed42a24e8a8fe2f7ad6a83171ad27d2d",
+          "bytes": 1889
+        }
+      ],
+      "stdout_log": "tools/repro/results/full/rtl.dma_iverilog.stdout.log",
+      "stderr_log": "tools/repro/results/full/rtl.dma_iverilog.stderr.log",
+      "stdout_tail": [
+        "DMA_CYCLES dir=1 bank=0 words=1 cycles=0 error=1",
+        "DMA_CYCLES dir=0 bank=1 words=2 cycles=0 error=1",
+        "DMA_CYCLES dir=0 bank=1 words=9 cycles=0 error=1",
+        "DMA_CYCLES dir=0 bank=1 words=0 cycles=0 error=1",
+        "PASS: DMA load/writeback, tails, bounds and invalid descriptors"
+      ],
+      "stderr_tail": [],
+      "parsed_result": null
+    },
+    {
+      "id": "rtl.dma_2d_verilator",
+      "level": "smoke",
+      "gate": true,
+      "desc": "2D stride DMA prototype (Verilator)",
+      "command": [
+        "bash",
+        "hardware/rtl/dma/tb/run_2d_verilator.sh"
+      ],
+      "cwd": "/home/yang/kwt-worktrees/repro-infra",
+      "started_at": "2026-10-18T07:40:35.487761+00:00",
+      "prereq_missing": [],
+      "prereq_tools_missing": [],
+      "status": "PASS",
+      "exit_code": 0,
+      "expected_exit": 0,
+      "timed_out": false,
+      "duration_s": 0.415,
+      "timeout_s": 180,
+      "inputs": [
+        {
+          "path": "hardware/rtl/dma/tb/run_2d_verilator.sh",
+          "sha256": "c7f1adf4b1c15b3db8650b3190a9c0fccaa1d33b25cb7c90b31a812bca5ad284",
+          "bytes": 625
+        },
+        {
+          "path": "hardware/rtl/dma/tb/tb_kwt_dma_2d.sv",
+          "sha256": "d1c3df19ea92eef7a9e901021ca00591a00fa1ed96f7fe885191ae5d535bca01",
+          "bytes": 4757
+        },
+        {
+          "path": "hardware/rtl/dma/kwt_dma.sv",
+          "sha256": "7cf402411b3c6bca012a40fb49a4afb9dffa3ce609b94d573ae69555404794b5",
+          "bytes": 7703
+        },
+        {
+          "path": "hardware/rtl/dma/kwt_dma_2d.sv",
+          "sha256": "8f1b2954912735bd2eccb3360fc28a9b1c2d6ceec962eb5b2c33d81d6abb47d0",
+          "bytes": 6383
+        },
+        {
+          "path": "hardware/rtl/dma/kwt_ext_memory_model.sv",
+          "sha256": "2a37abe9a7bbb30955f44161678cea447bbf24555c17eea84119dd464d6f3070",
+          "bytes": 1372
+        },
+        {
+          "path": "hardware/rtl/sram/kwt_tile_buffers.sv",
+          "sha256": "39ecb144227488b077e8938ad83798c3ed42a24e8a8fe2f7ad6a83171ad27d2d",
+          "bytes": 1889
+        }
+      ],
+      "stdout_log": "tools/repro/results/full/rtl.dma_2d_verilator.stdout.log",
+      "stderr_log": "tools/repro/results/full/rtl.dma_2d_verilator.stderr.log",
+      "stdout_tail": [
+        "PASS: 2D DMA B-column load, C-strided writeback, throttle, tails, bounds",
+        "- hardware/rtl/dma/tb/tb_kwt_dma_2d.sv:112: Verilog $finish",
+        "- S i m u l a t i o n   R e p o r t: Verilator 5.030 2024-10-27",
+        "- Verilator: $finish at 15ns; walltime 0.001 s; speed 12.055 us/s",
+        "- Verilator: cpu 0.001 s on 1 threads; alloced 89 MB"
+      ],
+      "stderr_tail": [],
+      "parsed_result": null
+    },
+    {
+      "id": "rtl.control_verilator",
+      "level": "smoke",
+      "gate": true,
+      "desc": "single-tile system model incl. ping-pong CACC (Verilator)",
+      "command": [
+        "bash",
+        "hardware/rtl/control/tb/run_verilator.sh"
+      ],
+      "cwd": "/home/yang/kwt-worktrees/repro-infra",
+      "started_at": "2026-10-18T07:40:35.903418+00:00",
+      "prereq_missing": [],
+      "prereq_tools_missing": [],
+      "status": "PASS",
+      "exit_code": 0,
+      "expected_exit": 0,
+      "timed_out": false,
+      "duration_s": 2.419,
+      "timeout_s": 240,
+      "inputs": [
+        {
+          "path": "hardware/rtl/control/tb/run_verilator.sh",
+          "sha256": "94d31907496ffe5403c5c15a99ff01eeb9775af3722056a31622e9415fc3bc47",
+          "bytes": 1022
+        },
+        {
+          "path": "hardware/rtl/control/tb/tb_kwt_tile_system_model.sv",
+          "sha256": "6194bfb666cfb59c5aa978cb48d03efd1701c28eebc503994a06175585ee0180",
+          "bytes": 3753
+        },
+        {
+          "path": "hardware/rtl/control/kwt_tile_system_model.sv",
+          "sha256": "92a61ee8fb0d5b5734d4a20e242aee331a083bb12b968b59a444434a8a1a4a1a",
+          "bytes": 7574
+        },
+        {
+          "path": "hardware/rtl/pulse_array/kwt_cacc.sv",
+          "sha256": "0febfb08aa977856867bbfb3760830b4292a8138a365194e69a0b088c9ca9da8",
+          "bytes": 4683
+        },
+        {
+          "path": "hardware/rtl/pulse_array/kwt_pe.sv",
+          "sha256": "17794b9f88bcdbc90e83d64a2634de80b60d400f1a8cf371ee3de6f04dc528fa",
+          "bytes": 19187
+        },
+        {
+          "path": "hardware/rtl/pulse_array/kwt_pingpong_cacc_engine.sv",
+          "sha256": "d9b62436537f0fce5730b939521c39e9a083f766ea2b7e00b84d38495ed930e5",
+          "bytes": 9509
+        },
+        {
+          "path": "hardware/rtl/pulse_array/kwt_postprocess.sv",
+          "sha256": "93c89bdecdcab5678a042ba81ccb6ff47c3992691535e5460487c580a63be05b",
+          "bytes": 595
+        },
+        {
+          "path": "hardware/rtl/pulse_array/kwt_product_array.sv",
+          "sha256": "f3f1b91c1bd962c5fbc39dff700135ae7f1d2e1f9198b7a44091ea28c9e78fa3",
+          "bytes": 3854
+        },
+        {
+          "path": "hardware/rtl/pulse_array/kwt_pulse_array.sv",
+          "sha256": "d2aaf5c1e7a59e805b164406a08678fab2439255db2067ddad3f6879ea1ae30d",
+          "bytes": 4180
+        },
+        {
+          "path": "hardware/rtl/pulse_array/kwt_row_broadcast_tile.sv",
+          "sha256": "6e1dbac38b1988972b0358aea626eebf5f989527262449ad1d8adf4d902ac117",
+          "bytes": 4928
+        },
+        {
+          "path": "hardware/rtl/pulse_array/kwt_row_broadcast_tile_pipe3.sv",
+          "sha256": "cb970c0be3eb20edec251c10a073505bd5cdb782ad11697830469eafb3a5156f",
+          "bytes": 6095
+        },
+        {
+          "path": "hardware/rtl/pulse_array/kwt_systolic_cacc_tile.sv",
+          "sha256": "9828ce080d8dca57066f229644bc0069cc450f8c07af614a26e50958e3e62ad4",
+          "bytes": 1890
+        },
+        {
+          "path": "hardware/rtl/pulse_array/kwt_tile_engine.sv",
+          "sha256": "8c70be6a9b44bff6dfabb7d43fd434d9a5aa10fd55be082c80e29d49c290c47e",
+          "bytes": 6642
+        },
+        {
+          "path": "hardware/rtl/pulse_array/kwt_tile_output_stage.sv",
+          "sha256": "baa1a794f12708028c69ca353c862b566a3b95ec01f3512558b3f7ee47ffdc60",
+          "bytes": 6190
+        },
+        {
+          "path": "hardware/rtl/sram/kwt_operand_pingpong.sv",
+          "sha256": "da7bd8b45bba923d589cf065658e3a56ab70867ba5f66a0bcba5ce41db2d3036",
+          "bytes": 1405
+        },
+        {
+          "path": "hardware/rtl/sram/kwt_tile_buffers.sv",
+          "sha256": "39ecb144227488b077e8938ad83798c3ed42a24e8a8fe2f7ad6a83171ad27d2d",
+          "bytes": 1889
+        },
+        {
+          "path": "hardware/rtl/dma/kwt_dma.sv",
+          "sha256": "7cf402411b3c6bca012a40fb49a4afb9dffa3ce609b94d573ae69555404794b5",
+          "bytes": 7703
+        },
+        {
+          "path": "hardware/rtl/dma/kwt_dma_2d.sv",
+          "sha256": "8f1b2954912735bd2eccb3360fc28a9b1c2d6ceec962eb5b2c33d81d6abb47d0",
+          "bytes": 6383
+        },
+        {
+          "path": "hardware/rtl/dma/kwt_ext_memory_model.sv",
+          "sha256": "2a37abe9a7bbb30955f44161678cea447bbf24555c17eea84119dd464d6f3070",
+          "bytes": 1372
+        }
+      ],
+      "stdout_log": "tools/repro/results/full/rtl.control_verilator.stdout.log",
+      "stderr_log": "tools/repro/results/full/rtl.control_verilator.stderr.log",
+      "stdout_tail": [
+        "PASS tile system model: 128 results, command and DMA errors",
+        "- /home/yang/kwt-worktrees/repro-infra/hardware/rtl/control/tb/tb_kwt_tile_system_model.sv:99: Verilog $finish",
+        "- S i m u l a t i o n   R e p o r t: Verilator 5.030 2024-10-27",
+        "- Verilator: $finish at 18ns; walltime 0.004 s; speed 4.281 us/s",
+        "- Verilator: cpu 0.004 s on 1 threads; alloced 89 MB"
+      ],
+      "stderr_tail": [],
+      "parsed_result": null
+    },
+    {
+      "id": "vectors.int16",
+      "level": "full",
+      "gate": false,
+      "desc": "independent INT16 vector; known partial mismatch under Icarus here",
+      "command": [
+        "python3",
+        "hardware/testbenchplus/common/run_vectors.py",
+        "hardware/testbenchplus/vectors/layer0_int16/case.json"
+      ],
+      "cwd": "/home/yang/kwt-worktrees/repro-infra",
+      "started_at": "2026-10-18T07:40:38.323587+00:00",
+      "prereq_missing": [],
+      "prereq_tools_missing": [],
+      "status": "FAIL",
+      "exit_code": 1,
+      "expected_exit": 0,
+      "timed_out": false,
+      "duration_s": 0.765,
+      "timeout_s": 120,
+      "inputs": [
+        {
+          "path": "hardware/testbenchplus/common/run_vectors.py",
+          "sha256": "be710e9772322ca58b75415baae80ff5baa39e20e9e09bea7159afef3cf18b1a",
+          "bytes": 6970
+        },
+        {
+          "path": "hardware/testbenchplus/common/tb_array_vector.sv",
+          "sha256": "01c181d61e6698af7ad1d8a771258fb7bc76ab539362105f7ad8e63f06e6ec1b",
+          "bytes": 3691
+        },
+        {
+          "path": "hardware/testbenchplus/vectors/layer0_int16/case.json",
+          "sha256": "7460b92a6eecd8df2a3d8264f056b00dc26e3c0a85a6a01307df693d890d1d32",
+          "bytes": 130
+        },
+        {
+          "path": "hardware/rtl/pulse_array/kwt_pe.sv",
+          "sha256": "17794b9f88bcdbc90e83d64a2634de80b60d400f1a8cf371ee3de6f04dc528fa",
+          "bytes": 19187
+        },
+        {
+          "path": "hardware/rtl/pulse_array/kwt_pulse_array.sv",
+          "sha256": "d2aaf5c1e7a59e805b164406a08678fab2439255db2067ddad3f6879ea1ae30d",
+          "bytes": 4180
+        }
+      ],
+      "stdout_log": "tools/repro/results/full/vectors.int16.stdout.log",
+      "stderr_log": "tools/repro/results/full/vectors.int16.stderr.log",
+      "stdout_tail": [
+        "layer0_int16: 2x2 * 2x3 int16",
+        "  integer exact=1/6 accuracy=16.67%",
+        "result: 0/1 passed"
+      ],
+      "stderr_tail": [
+        "FAIL hardware/testbenchplus/vectors/layer0_int16/case.json: first mismatch flat_index/got/expected=(1, 0, 12)"
+      ],
+      "parsed_result": null
+    },
+    {
+      "id": "rtl.pingpong_cacc_verilator",
+      "level": "full",
+      "gate": true,
+      "desc": "256 INT32 results of the ping-pong CACC engine (Verilator)",
+      "command": [
+        "bash",
+        "hardware/rtl/pulse_array/tb/run_pingpong_cacc_verilator.sh"
+      ],
+      "cwd": "/home/yang/kwt-worktrees/repro-infra",
+      "started_at": "2026-10-18T07:40:39.089754+00:00",
+      "prereq_missing": [],
+      "prereq_tools_missing": [],
+      "status": "PASS",
+      "exit_code": 0,
+      "expected_exit": 0,
+      "timed_out": false,
+      "duration_s": 8.681,
+      "timeout_s": 300,
+      "inputs": [
+        {
+          "path": "hardware/rtl/pulse_array/tb/run_pingpong_cacc_verilator.sh",
+          "sha256": "a0c0afda03ae330d3798ffaadb041074c1a8cb773891b459fb5e0b7b91251b72",
+          "bytes": 668
+        },
+        {
+          "path": "hardware/rtl/pulse_array/tb/tb_kwt_pingpong_cacc_engine.sv",
+          "sha256": "051272446adf869804fe10693cc51cd35f27ebbf5088e804da1f13e84fddfc7c",
+          "bytes": 5094
+        },
+        {
+          "path": "hardware/rtl/pulse_array/kwt_cacc.sv",
+          "sha256": "0febfb08aa977856867bbfb3760830b4292a8138a365194e69a0b088c9ca9da8",
+          "bytes": 4683
+        },
+        {
+          "path": "hardware/rtl/pulse_array/kwt_pe.sv",
+          "sha256": "17794b9f88bcdbc90e83d64a2634de80b60d400f1a8cf371ee3de6f04dc528fa",
+          "bytes": 19187
+        },
+        {
+          "path": "hardware/rtl/pulse_array/kwt_pingpong_cacc_engine.sv",
+          "sha256": "d9b62436537f0fce5730b939521c39e9a083f766ea2b7e00b84d38495ed930e5",
+          "bytes": 9509
+        },
+        {
+          "path": "hardware/rtl/pulse_array/kwt_postprocess.sv",
+          "sha256": "93c89bdecdcab5678a042ba81ccb6ff47c3992691535e5460487c580a63be05b",
+          "bytes": 595
+        },
+        {
+          "path": "hardware/rtl/pulse_array/kwt_product_array.sv",
+          "sha256": "f3f1b91c1bd962c5fbc39dff700135ae7f1d2e1f9198b7a44091ea28c9e78fa3",
+          "bytes": 3854
+        },
+        {
+          "path": "hardware/rtl/pulse_array/kwt_pulse_array.sv",
+          "sha256": "d2aaf5c1e7a59e805b164406a08678fab2439255db2067ddad3f6879ea1ae30d",
+          "bytes": 4180
+        },
+        {
+          "path": "hardware/rtl/pulse_array/kwt_row_broadcast_tile.sv",
+          "sha256": "6e1dbac38b1988972b0358aea626eebf5f989527262449ad1d8adf4d902ac117",
+          "bytes": 4928
+        },
+        {
+          "path": "hardware/rtl/pulse_array/kwt_row_broadcast_tile_pipe3.sv",
+          "sha256": "cb970c0be3eb20edec251c10a073505bd5cdb782ad11697830469eafb3a5156f",
+          "bytes": 6095
+        },
+        {
+          "path": "hardware/rtl/pulse_array/kwt_systolic_cacc_tile.sv",
+          "sha256": "9828ce080d8dca57066f229644bc0069cc450f8c07af614a26e50958e3e62ad4",
+          "bytes": 1890
+        },
+        {
+          "path": "hardware/rtl/pulse_array/kwt_tile_engine.sv",
+          "sha256": "8c70be6a9b44bff6dfabb7d43fd434d9a5aa10fd55be082c80e29d49c290c47e",
+          "bytes": 6642
+        },
+        {
+          "path": "hardware/rtl/pulse_array/kwt_tile_output_stage.sv",
+          "sha256": "baa1a794f12708028c69ca353c862b566a3b95ec01f3512558b3f7ee47ffdc60",
+          "bytes": 6190
+        },
+        {
+          "path": "hardware/rtl/sram/kwt_operand_pingpong.sv",
+          "sha256": "da7bd8b45bba923d589cf065658e3a56ab70867ba5f66a0bcba5ce41db2d3036",
+          "bytes": 1405
+        }
+      ],
+      "stdout_log": "tools/repro/results/full/rtl.pingpong_cacc_verilator.stdout.log",
+      "stderr_log": "tools/repro/results/full/rtl.pingpong_cacc_verilator.stderr.log",
+      "stdout_tail": [
+        "PASS pingpong+CACC: 256 outputs, inactive-page preload, active-page protection, K accumulation, drain",
+        "- /home/yang/kwt-worktrees/repro-infra/hardware/rtl/pulse_array/tb/tb_kwt_pingpong_cacc_engine.sv:161: Verilog $finish",
+        "- S i m u l a t i o n   R e p o r t: Verilator 5.030 2024-10-27",
+        "- Verilator: $finish at 20ns; walltime 0.005 s; speed 4.006 us/s",
+        "- Verilator: cpu 0.005 s on 1 threads; alloced 89 MB"
+      ],
+      "stderr_tail": [
+        "      |                      ^~~~~",
+        "%Warning-BLKSEQ: /home/yang/kwt-worktrees/repro-infra/hardware/rtl/pulse_array/tb/tb_kwt_pingpong_cacc_engine.sv:27:19: Blocking assignment '=' in sequential logic process",
+        "                                                                                                                      : ... Suggest using delayed assignment '<='",
+        "   27 |     always #5 clk = ~clk;",
+        "      |                   ^"
+      ],
+      "parsed_result": null
+    },
+    {
+      "id": "vectors.all",
+      "level": "full",
+      "gate": false,
+      "desc": "all testbenchplus vectors; FP32 case currently does not terminate",
+      "command": [
+        "python3",
+        "hardware/testbenchplus/common/run_vectors.py"
+      ],
+      "cwd": "/home/yang/kwt-worktrees/repro-infra",
+      "started_at": "2026-10-18T07:40:47.771602+00:00",
+      "prereq_missing": [],
+      "prereq_tools_missing": [],
+      "status": "TIMEOUT",
+      "exit_code": null,
+      "expected_exit": 0,
+      "timed_out": true,
+      "duration_s": 60.004,
+      "timeout_s": 60,
+      "inputs": [
+        {
+          "path": "hardware/testbenchplus/common/run_vectors.py",
+          "sha256": "be710e9772322ca58b75415baae80ff5baa39e20e9e09bea7159afef3cf18b1a",
+          "bytes": 6970
+        },
+        {
+          "path": "hardware/testbenchplus/common/tb_array_vector.sv",
+          "sha256": "01c181d61e6698af7ad1d8a771258fb7bc76ab539362105f7ad8e63f06e6ec1b",
+          "bytes": 3691
+        },
+        {
+          "path": "hardware/testbenchplus/vectors/layer0_fp32/case.json",
+          "sha256": "12f395698b873fd7e59436d49dd2e4e1b58cc7d9231fdfd3f705d5c476efe90e",
+          "bytes": 179
+        },
+        {
+          "path": "hardware/testbenchplus/vectors/layer0_int16/case.json",
+          "sha256": "7460b92a6eecd8df2a3d8264f056b00dc26e3c0a85a6a01307df693d890d1d32",
+          "bytes": 130
+        },
+        {
+          "path": "hardware/rtl/pulse_array/kwt_pe.sv",
+          "sha256": "17794b9f88bcdbc90e83d64a2634de80b60d400f1a8cf371ee3de6f04dc528fa",
+          "bytes": 19187
+        },
+        {
+          "path": "hardware/rtl/pulse_array/kwt_pulse_array.sv",
+          "sha256": "d2aaf5c1e7a59e805b164406a08678fab2439255db2067ddad3f6879ea1ae30d",
+          "bytes": 4180
+        }
+      ],
+      "stdout_log": "tools/repro/results/full/vectors.all.stdout.log",
+      "stderr_log": "tools/repro/results/full/vectors.all.stderr.log",
+      "stdout_tail": [],
+      "stderr_tail": [],
+      "parsed_result": null
+    },
+    {
+      "id": "rtl.pulse_array_iverilog",
+      "level": "full",
+      "gate": false,
+      "desc": "array timing/integration regression (Icarus); known TIMING FAIL here",
+      "command": [
+        "bash",
+        "hardware/rtl/pulse_array/tb/run.sh"
+      ],
+      "cwd": "/home/yang/kwt-worktrees/repro-infra",
+      "started_at": "2026-10-18T07:41:47.780383+00:00",
+      "prereq_missing": [],
+      "prereq_tools_missing": [],
+      "status": "FAIL",
+      "exit_code": 1,
+      "expected_exit": 0,
+      "timed_out": false,
+      "duration_s": 1.874,
+      "timeout_s": 180,
+      "inputs": [
+        {
+          "path": "hardware/rtl/pulse_array/tb/run.sh",
+          "sha256": "502321cd4e78b4a93c5538efb54ac0a9bc078b80106a24ca7689c5b54e581dbb",
+          "bytes": 1341
+        },
+        {
+          "path": "hardware/rtl/pulse_array/tb/tb_kwt_pulse_array.sv",
+          "sha256": "3f017bcd345ffdf310e03cf14779e4961f33b3b508b2aa77682f18796f1c2e7f",
+          "bytes": 8170
+        },
+        {
+          "path": "hardware/rtl/pulse_array/kwt_cacc.sv",
+          "sha256": "0febfb08aa977856867bbfb3760830b4292a8138a365194e69a0b088c9ca9da8",
+          "bytes": 4683
+        },
+        {
+          "path": "hardware/rtl/pulse_array/kwt_pe.sv",
+          "sha256": "17794b9f88bcdbc90e83d64a2634de80b60d400f1a8cf371ee3de6f04dc528fa",
+          "bytes": 19187
+        },
+        {
+          "path": "hardware/rtl/pulse_array/kwt_pingpong_cacc_engine.sv",
+          "sha256": "d9b62436537f0fce5730b939521c39e9a083f766ea2b7e00b84d38495ed930e5",
+          "bytes": 9509
+        },
+        {
+          "path": "hardware/rtl/pulse_array/kwt_postprocess.sv",
+          "sha256": "93c89bdecdcab5678a042ba81ccb6ff47c3992691535e5460487c580a63be05b",
+          "bytes": 595
+        },
+        {
+          "path": "hardware/rtl/pulse_array/kwt_product_array.sv",
+          "sha256": "f3f1b91c1bd962c5fbc39dff700135ae7f1d2e1f9198b7a44091ea28c9e78fa3",
+          "bytes": 3854
+        },
+        {
+          "path": "hardware/rtl/pulse_array/kwt_pulse_array.sv",
+          "sha256": "d2aaf5c1e7a59e805b164406a08678fab2439255db2067ddad3f6879ea1ae30d",
+          "bytes": 4180
+        },
+        {
+          "path": "hardware/rtl/pulse_array/kwt_row_broadcast_tile.sv",
+          "sha256": "6e1dbac38b1988972b0358aea626eebf5f989527262449ad1d8adf4d902ac117",
+          "bytes": 4928
+        },
+        {
+          "path": "hardware/rtl/pulse_array/kwt_row_broadcast_tile_pipe3.sv",
+          "sha256": "cb970c0be3eb20edec251c10a073505bd5cdb782ad11697830469eafb3a5156f",
+          "bytes": 6095
+        },
+        {
+          "path": "hardware/rtl/pulse_array/kwt_systolic_cacc_tile.sv",
+          "sha256": "9828ce080d8dca57066f229644bc0069cc450f8c07af614a26e50958e3e62ad4",
+          "bytes": 1890
+        },
+        {
+          "path": "hardware/rtl/pulse_array/kwt_tile_engine.sv",
+          "sha256": "8c70be6a9b44bff6dfabb7d43fd434d9a5aa10fd55be082c80e29d49c290c47e",
+          "bytes": 6642
+        },
+        {
+          "path": "hardware/rtl/pulse_array/kwt_tile_output_stage.sv",
+          "sha256": "baa1a794f12708028c69ca353c862b566a3b95ec01f3512558b3f7ee47ffdc60",
+          "bytes": 6190
+        }
+      ],
+      "stdout_log": "tools/repro/results/full/rtl.pulse_array_iverilog.stdout.log",
+      "stderr_log": "tools/repro/results/full/rtl.pulse_array_iverilog.stderr.log",
+      "stdout_tail": [
+        "FATAL: /home/yang/kwt-worktrees/repro-infra/hardware/rtl/pulse_array/tb/tb_kwt_pulse_array.sv:113: TIMING FAIL format=0 width=8 wave=0 step=2 PE=(1,1) got=x expected=0",
+        "       Time: 60 Scope: tb_kwt_pulse_array.issue_wave"
+      ],
+      "stderr_tail": [],
+      "parsed_result": null
+    },
+    {
+      "id": "rtl.control_iverilog",
+      "level": "full",
+      "gate": false,
+      "desc": "system model under Icarus; known elaboration failure here",
+      "command": [
+        "bash",
+        "hardware/rtl/control/tb/run.sh"
+      ],
+      "cwd": "/home/yang/kwt-worktrees/repro-infra",
+      "started_at": "2026-10-18T07:41:49.660182+00:00",
+      "prereq_missing": [],
+      "prereq_tools_missing": [],
+      "status": "FAIL",
+      "exit_code": 1,
+      "expected_exit": 0,
+      "timed_out": false,
+      "duration_s": 0.217,
+      "timeout_s": 180,
+      "inputs": [
+        {
+          "path": "hardware/rtl/control/tb/run.sh",
+          "sha256": "f74341eb9739701e5e4029719f276421fb762c748ca796d9943577a8a48f1742",
+          "bytes": 1007
+        },
+        {
+          "path": "hardware/rtl/control/tb/tb_kwt_tile_system_model.sv",
+          "sha256": "6194bfb666cfb59c5aa978cb48d03efd1701c28eebc503994a06175585ee0180",
+          "bytes": 3753
+        },
+        {
+          "path": "hardware/rtl/control/kwt_tile_system_model.sv",
+          "sha256": "92a61ee8fb0d5b5734d4a20e242aee331a083bb12b968b59a444434a8a1a4a1a",
+          "bytes": 7574
+        },
+        {
+          "path": "hardware/rtl/pulse_array/kwt_cacc.sv",
+          "sha256": "0febfb08aa977856867bbfb3760830b4292a8138a365194e69a0b088c9ca9da8",
+          "bytes": 4683
+        },
+        {
+          "path": "hardware/rtl/pulse_array/kwt_pe.sv",
+          "sha256": "17794b9f88bcdbc90e83d64a2634de80b60d400f1a8cf371ee3de6f04dc528fa",
+          "bytes": 19187
+        },
+        {
+          "path": "hardware/rtl/pulse_array/kwt_pingpong_cacc_engine.sv",
+          "sha256": "d9b62436537f0fce5730b939521c39e9a083f766ea2b7e00b84d38495ed930e5",
+          "bytes": 9509
+        },
+        {
+          "path": "hardware/rtl/pulse_array/kwt_postprocess.sv",
+          "sha256": "93c89bdecdcab5678a042ba81ccb6ff47c3992691535e5460487c580a63be05b",
+          "bytes": 595
+        },
+        {
+          "path": "hardware/rtl/pulse_array/kwt_product_array.sv",
+          "sha256": "f3f1b91c1bd962c5fbc39dff700135ae7f1d2e1f9198b7a44091ea28c9e78fa3",
+          "bytes": 3854
+        },
+        {
+          "path": "hardware/rtl/pulse_array/kwt_pulse_array.sv",
+          "sha256": "d2aaf5c1e7a59e805b164406a08678fab2439255db2067ddad3f6879ea1ae30d",
+          "bytes": 4180
+        },
+        {
+          "path": "hardware/rtl/pulse_array/kwt_row_broadcast_tile.sv",
+          "sha256": "6e1dbac38b1988972b0358aea626eebf5f989527262449ad1d8adf4d902ac117",
+          "bytes": 4928
+        },
+        {
+          "path": "hardware/rtl/pulse_array/kwt_row_broadcast_tile_pipe3.sv",
+          "sha256": "cb970c0be3eb20edec251c10a073505bd5cdb782ad11697830469eafb3a5156f",
+          "bytes": 6095
+        },
+        {
+          "path": "hardware/rtl/pulse_array/kwt_systolic_cacc_tile.sv",
+          "sha256": "9828ce080d8dca57066f229644bc0069cc450f8c07af614a26e50958e3e62ad4",
+          "bytes": 1890
+        },
+        {
+          "path": "hardware/rtl/pulse_array/kwt_tile_engine.sv",
+          "sha256": "8c70be6a9b44bff6dfabb7d43fd434d9a5aa10fd55be082c80e29d49c290c47e",
+          "bytes": 6642
+        },
+        {
+          "path": "hardware/rtl/pulse_array/kwt_tile_output_stage.sv",
+          "sha256": "baa1a794f12708028c69ca353c862b566a3b95ec01f3512558b3f7ee47ffdc60",
+          "bytes": 6190
+        },
+        {
+          "path": "hardware/rtl/sram/kwt_operand_pingpong.sv",
+          "sha256": "da7bd8b45bba923d589cf065658e3a56ab70867ba5f66a0bcba5ce41db2d3036",
+          "bytes": 1405
+        },
+        {
+          "path": "hardware/rtl/sram/kwt_tile_buffers.sv",
+          "sha256": "39ecb144227488b077e8938ad83798c3ed42a24e8a8fe2f7ad6a83171ad27d2d",
+          "bytes": 1889
+        },
+        {
+          "path": "hardware/rtl/dma/kwt_dma.sv",
+          "sha256": "7cf402411b3c6bca012a40fb49a4afb9dffa3ce609b94d573ae69555404794b5",
+          "bytes": 7703
+        },
+        {
+          "path": "hardware/rtl/dma/kwt_dma_2d.sv",
+          "sha256": "8f1b2954912735bd2eccb3360fc28a9b1c2d6ceec962eb5b2c33d81d6abb47d0",
+          "bytes": 6383
+        },
+        {
+          "path": "hardware/rtl/dma/kwt_ext_memory_model.sv",
+          "sha256": "2a37abe9a7bbb30955f44161678cea447bbf24555c17eea84119dd464d6f3070",
+          "bytes": 1372
+        }
+      ],
+      "stdout_log": "tools/repro/results/full/rtl.control_iverilog.stdout.log",
+      "stderr_log": "tools/repro/results/full/rtl.control_iverilog.stderr.log",
+      "stdout_tail": [],
+      "stderr_tail": [
+        "/home/yang/kwt-worktrees/repro-infra/hardware/rtl/control/../pulse_array/kwt_product_array.sv:87: error: Unable to assign words of unresolved wire array.",
+        "/home/yang/kwt-worktrees/repro-infra/hardware/rtl/control/../pulse_array/kwt_product_array.sv:88: error: Unable to assign words of unresolved wire array.",
+        "/home/yang/kwt-worktrees/repro-infra/hardware/rtl/control/../pulse_array/kwt_product_array.sv:89: error: Unable to assign words of unresolved wire array.",
+        "/home/yang/kwt-worktrees/repro-infra/hardware/rtl/control/../pulse_array/kwt_product_array.sv:90: error: Unable to assign words of unresolved wire array.",
+        "1025 error(s) during elaboration."
+      ],
+      "parsed_result": null
+    },
+    {
+      "id": "rtl.engine_iverilog",
+      "level": "full",
+      "gate": false,
+      "desc": "legacy single-tile engine (Icarus); known compile failure here",
+      "command": [
+        "bash",
+        "hardware/rtl/pulse_array/tb/run_engine.sh"
+      ],
+      "cwd": "/home/yang/kwt-worktrees/repro-infra",
+      "started_at": "2026-10-18T07:41:49.886936+00:00",
+      "prereq_missing": [],
+      "prereq_tools_missing": [],
+      "status": "FAIL",
+      "exit_code": 1,
+      "expected_exit": 0,
+      "timed_out": false,
+      "duration_s": 1.02,
+      "timeout_s": 180,
+      "inputs": [
+        {
+          "path": "hardware/rtl/pulse_array/tb/run_engine.sh",
+          "sha256": "5e1329a854db3636830742ed1a1a526e2f59f013eb6256a46437d90132b71ded",
+          "bytes": 1003
+        },
+        {
+          "path": "hardware/rtl/pulse_array/tb/tb_kwt_tile_engine.sv",
+          "sha256": "9ce78fe952342e1d7c7f8b1ef0909c1309161a516825257c742d2bc991dd8377",
+          "bytes": 4748
+        },
+        {
+          "path": "hardware/rtl/pulse_array/kwt_cacc.sv",
+          "sha256": "0febfb08aa977856867bbfb3760830b4292a8138a365194e69a0b088c9ca9da8",
+          "bytes": 4683
+        },
+        {
+          "path": "hardware/rtl/pulse_array/kwt_pe.sv",
+          "sha256": "17794b9f88bcdbc90e83d64a2634de80b60d400f1a8cf371ee3de6f04dc528fa",
+          "bytes": 19187
+        },
+        {
+          "path": "hardware/rtl/pulse_array/kwt_pingpong_cacc_engine.sv",
+          "sha256": "d9b62436537f0fce5730b939521c39e9a083f766ea2b7e00b84d38495ed930e5",
+          "bytes": 9509
+        },
+        {
+          "path": "hardware/rtl/pulse_array/kwt_postprocess.sv",
+          "sha256": "93c89bdecdcab5678a042ba81ccb6ff47c3992691535e5460487c580a63be05b",
+          "bytes": 595
+        },
+        {
+          "path": "hardware/rtl/pulse_array/kwt_product_array.sv",
+          "sha256": "f3f1b91c1bd962c5fbc39dff700135ae7f1d2e1f9198b7a44091ea28c9e78fa3",
+          "bytes": 3854
+        },
+        {
+          "path": "hardware/rtl/pulse_array/kwt_pulse_array.sv",
+          "sha256": "d2aaf5c1e7a59e805b164406a08678fab2439255db2067ddad3f6879ea1ae30d",
+          "bytes": 4180
+        },
+        {
+          "path": "hardware/rtl/pulse_array/kwt_row_broadcast_tile.sv",
+          "sha256": "6e1dbac38b1988972b0358aea626eebf5f989527262449ad1d8adf4d902ac117",
+          "bytes": 4928
+        },
+        {
+          "path": "hardware/rtl/pulse_array/kwt_row_broadcast_tile_pipe3.sv",
+          "sha256": "cb970c0be3eb20edec251c10a073505bd5cdb782ad11697830469eafb3a5156f",
+          "bytes": 6095
+        },
+        {
+          "path": "hardware/rtl/pulse_array/kwt_systolic_cacc_tile.sv",
+          "sha256": "9828ce080d8dca57066f229644bc0069cc450f8c07af614a26e50958e3e62ad4",
+          "bytes": 1890
+        },
+        {
+          "path": "hardware/rtl/pulse_array/kwt_tile_engine.sv",
+          "sha256": "8c70be6a9b44bff6dfabb7d43fd434d9a5aa10fd55be082c80e29d49c290c47e",
+          "bytes": 6642
+        },
+        {
+          "path": "hardware/rtl/pulse_array/kwt_tile_output_stage.sv",
+          "sha256": "baa1a794f12708028c69ca353c862b566a3b95ec01f3512558b3f7ee47ffdc60",
+          "bytes": 6190
+        },
+        {
+          "path": "hardware/rtl/sram/kwt_tile_buffers.sv",
+          "sha256": "39ecb144227488b077e8938ad83798c3ed42a24e8a8fe2f7ad6a83171ad27d2d",
+          "bytes": 1889
+        }
+      ],
+      "stdout_log": "tools/repro/results/full/rtl.engine_iverilog.stdout.log",
+      "stderr_log": "tools/repro/results/full/rtl.engine_iverilog.stderr.log",
+      "stdout_tail": [],
+      "stderr_tail": [
+        "/home/yang/kwt-worktrees/repro-infra/hardware/rtl/pulse_array/tb/tb_kwt_tile_engine.sv:91: error: Cannot \"return\" from tasks.",
+        "1 error(s) during elaboration."
+      ],
+      "parsed_result": null
+    },
+    {
+      "id": "e203.full_layer_208tile",
+      "level": "full",
+      "gate": false,
+      "desc": "208-tile FFN1 full layer on the real E203 core (resource-gated)",
+      "command": [
+        "bash",
+        "hardware/rtl/control/tb/run_e203.sh",
+        "--full-layer"
+      ],
+      "cwd": "/home/yang/kwt-worktrees/repro-infra",
+      "started_at": "2026-10-18T07:41:50.911669+00:00",
+      "prereq_missing": [
+        "资料/e203_hbirdv2_full"
+      ],
+      "prereq_tools_missing": [],
+      "status": "SKIP",
+      "exit_code": null,
+      "timed_out": false,
+      "duration_s": 0.001,
+      "reason": "missing prerequisite path(s): 资料/e203_hbirdv2_full"
+    }
+  ]
+}

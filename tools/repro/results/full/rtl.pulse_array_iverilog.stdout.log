@@ -1,0 +1,2 @@
+FATAL: /home/yang/kwt-worktrees/repro-infra/hardware/rtl/pulse_array/tb/tb_kwt_pulse_array.sv:113: TIMING FAIL format=0 width=8 wave=0 step=2 PE=(1,1) got=x expected=0
+       Time: 60 Scope: tb_kwt_pulse_array.issue_wave

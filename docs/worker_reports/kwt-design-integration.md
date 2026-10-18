@@ -1,44 +1,62 @@
-# WORKER_REPORT — design-integration（本科组整体设计决策与证据核对）
+# WORKER_REPORT — repro-infra（项目复现入口 tools/repro）
 
-- 分支：`codex/kwt-design-integration`（worktree `/home/yang/kwt-worktrees/design-integration`）
-- 任务：围绕 KWT-1 本科必做 1-3 项，独立核对源代码与真实产物（不照抄报告），产出整体设计决策与分阶段整合方案；新增并实跑证据校验脚本。未改核心 RTL/量化代码，未调用子智能体，未 push/merge/rebase，只写 `docs/`、本报告。
+- 分支：`codex/kwt-repro-infra`（worktree `/home/yang/kwt-worktrees/repro-infra`，基线 `56b8a39`）
+- 任务：只在新目录 `tools/repro/` 实现项目复现入口，两级真实运行（默认 `smoke`、显式 `--level full`），逐项保存版本、命令、退出码、耗时、输入哈希与结果 JSON；超时显式失败；文件存在不等于 PASS；smoke 不跑 208 块整层全仿真与大批量模型采样。
+- 约束遵守：未开启子智能体；未改核心 RTL、主测试脚本、钩子或其他代理目录；未 push/merge/rebase；未改主目录与其他分支。仅新增 `tools/repro/**` 与本报告。
 
-## 改动
+## 改动（全部新增）
 
-新增：
-
-- `docs/KWT1_整体设计决策_20261018.md`：① PC/E203/DMA/PE/软件数值模型的职责、格式、地址与所有权、接口假设；② 保守可交付 vs 性能优化两路径（布局、SRAM、带宽、周期公式、量化格式、INT32 边界、需改的 RTL/驱动）并区分已测/模型推算/正式平台未知；③ Claude 审查的**正确/过期/未证**逐项裁定；④ 按验收门槛排序的剩余工作、可复现命令、缺失资源与停止条件；⑤ 6 个分支的分阶段整合顺序、冲突点、验收门槛（本次不实际 merge）。
-- `docs/check_design_evidence.py`：只读证据核对脚本，`--results-dir` 指定主目录结果路径，不修改共享数据。
+- `tools/repro/run.py`：运行器与检查清单（level / gate / 超时 / 前置条件 / 输入哈希 / 真实退出码判定 / `RESULT_JSON` 解析 / `summary.json`）。
+- `tools/repro/checks/env_versions.py`：记录工具版本。
+- `tools/repro/checks/offline_encoder_contract.py`：纯 numpy 回放冻结的 `offline_encoder_input.convert`，逐值比较。
+- `tools/repro/README.md`：用法、结果 schema、依赖与覆盖边界。
+- `tools/repro/results/{smoke,full,fault-exit7,fault-timeout,e203-skip}/`：本报告对应的真实运行证据。
 - 本文件 `WORKER_REPORT.md`。
 
-未改动：任何 RTL、量化、驱动源码；主目录、其他 worktree、官方资料只读。
+未改动任何 RTL（`hardware/**`）、主测试脚本（`hardware/testbenchplus/run_all_tests.sh`、`hardware/rtl/**/tb/run*.sh`）、`software/**` 源码、`.opencode` 钩子或其他 worktree。
 
-## 实际执行的命令与退出结果
+## 实际执行的命令与退出码
 
 | 命令 | 退出码 | 结果 |
 | --- | ---: | --- |
-| `python3 docs/check_design_evidence.py --results-dir "/home/yang/Desktop/ic设计竞赛/hardware/architecture/results"` | **0** | `SUMMARY: PASS=72 WARN=0 FAIL=0`；含 12 层 exit/PASS/SHA、摘要计数、向量格式边界、INT32 边界、关键文件存在性，并对照旧 0/12 失败运行 |
-| `python3 - <<PY`（独立核算 12 层日志 SHA-256 与 summary.json） | 0 | 12/12 逐字一致（见下） |
-| `python3 - <<PY`（读 manifest 字段/形状/边界/int32） | 0 | 形状 X[99,64]/W[64,256]/bias[256]/Y[99,256]；最大保守界 67,780,536 |
+| `python3 tools/repro/run.py`（= `--level smoke`，--out results/smoke） | **0** | `counts={PASS:5,FAIL:0,TIMEOUT:0,SKIP:0,ERROR:0} gate_ok=True` |
+| `python3 tools/repro/run.py --level full`（--out results/full） | 0 | `counts={PASS:6,FAIL:4,TIMEOUT:1,SKIP:1} gate_ok=True`；gate 全 PASS，非 gate 失败如实记录 |
+| `python3 tools/repro/run.py --only fault.probe_exit7` | **1** | 受控故障：`FAIL exit_code=7`，`gate_ok=False` |
+| `python3 tools/repro/run.py --only fault.probe_timeout` | **1** | 受控故障：`TIMEOUT exit_code=None timed_out=True`，`gate_ok=False` |
+| `python3 tools/repro/run.py --only e203.full_layer_208tile` | 0 | `SKIP`，原因 `missing prerequisite path(s): 资料/e203_hbirdv2_full` |
 
-## 关键实测（本次独立核验，非转述）
+## smoke 逐项真实结果（results/smoke/summary.json）
 
-- 修正运行 `real_e203_validation0_ascii_*`：`finalizer.status`=`SUMMARIZE_EXIT 0`；12 个 `layerNN.exit` 全 `0`；每层恰好一条全层 `PASS`（`start=0 count=208 outputs=25344 padding=1280 task_cycles=838028 total_cycles=838041`）；无 `FATAL/mismatch/error/xxxx`。
-- 12 份日志 SHA-256 与 `*_ascii_summary.json` 的 `log_sha256` **逐字一致**；摘要合计 `checked_outputs=304128`、`checked_padding=15360`、`total_task_cycles=10056336`（=12×838028）。
-- 向量 manifest：hex 行数精确为 a16=6656、w16=16384、bias32=256、expected32=25344，且 SHA-256 全部匹配；A12W10 保守上界 `max=67,780,536`（INT32 的 3.16%），实测最大 `|expected INT32|`=4,593,325。
-- 旧运行 `real_e203_validation0_*`：12 个 `.exit` 全 `1`、日志含 `got=xxxxxxxx`、`SUMMARIZE_EXIT 1` —— 属**过期**状态（中文路径 `$readmemh`），不是当前状态。
+| 检查 | 状态 | 退出码 | 耗时(s) | 输入文件数(含 sha256) |
+| --- | --- | ---: | ---: | ---: |
+| env.versions | PASS | 0 | 0.11 | 0 |
+| sw.offline_encoder_contract | PASS | 0 | 0.17 | 15 |
+| rtl.dma_iverilog | PASS | 0 | 0.03 | 5 |
+| rtl.dma_2d_verilator | PASS | 0 | 0.42 | 6 |
+| rtl.control_verilator | PASS | 0 | 2.48 | 19 |
 
-## 结论要点
+软件检查的真实指标（非文件存在性）：6 条冻结样本，`worst_max_abs_error=9.54e-7`，容差 `1e-5`，`failures=[]`。
+环境：Python 3.10.12 / Icarus Verilog 11.0 / Verilator 5.030 / Yosys 0.9；git `56b8a39`。
 
-- 当前通过范围：**一条真实验证样本的 A12W10 冻结向量在 E203 + 仿真 NICE-like 系统 + 8×16 老引擎**上，12 层各 25,344（合计 304,128）输出逐位一致。Claude 把旧 0/12 当成当前失败属**过期**。
-- `154,240`（16 行，L1 测试台）与 `838,028`（8×16，L2 E203）**不可相减当加速比**；`1.63×` 是 8 行/16 行同为 L1 的模型比值。
-- A14W12/A12W12/A16W10 **仅软件证据**（无 RTL 逐位、无综合）；A14W12 保守上界已占 INT32 的 50.59%。
-- 样本数不得混用：480 软件、240 RTL、1 条 E203、官方 600（未测）为四个不同统计。
+## 失败传播与机器可读性验证（受控故障）
 
-## 未证事项
+- `fault.probe_exit7` 用 `python3 -c "...SystemExit(7)"` 制造受控非零退出：运行器记 `status=FAIL`、`exit_code=7`、整体退出 1。
+- `fault.probe_timeout` 用 `sleep 30` 配 2 秒硬超时：记 `status=TIMEOUT`、`exit_code=None`、`timed_out=True`、整体退出 1。
+- 两者默认 `enabled=false`，只在 `--only` 下启用，不污染 smoke。
+- 全部证据写入 `summary.json`，可用 `json.load` 直接读取字段 `status/exit_code/timed_out/duration_s/inputs[].sha256/gate_ok`。
 
-- 正式组委会 SoC/System Bus/NICE 规范、PDK、SRAM 宏、SDC 全部缺失；无 150 MHz、≤2.25 mm²、功耗/能耗的正式签核。
-- C 驱动未在 E203 仿真中执行（仅宿主测试 + RV32 交叉编译）。
-- 官方 600 条评测集未发布，官方 NRMSE/分类准确率未测。
-- 本次未重跑 E203 仿真与 240 样本 RTL（`docs/check_design_evidence.py` 只核验既有真实产物与哈希）；E203 通过路径是 8×16 老引擎，不是 16 行核。
-- 本次未实际执行任何 merge；§5 的整合顺序与验收门槛为方案，须由人工在受控分支执行并复核。
+## 发现的现存问题（如实记录，不在本任务范围内修复）
+
+- `hardware/testbenchplus` FP32 向量用例在本环境不终止：`vectors.all` 60 秒硬超时记 TIMEOUT。
+- `vectors.int16` 在 Icarus 下值不匹配（`got/expected=(0,12)`）。
+- Icarus 路径失败：`rtl.pulse_array_iverilog`（TIMING FAIL）、`rtl.control_iverilog`（无法展开 `kwt_product_array` 的线网数组）、`rtl.engine_iverilog`（`Cannot return from tasks`）；Verilator 路径为当前可复现路径。
+- `software/validation/real_input_chain_20261017/manifest.json` 的内容哈希与提交的 `.npy` 文件不一致，但数值与 `convert` 一致；本检查记为 `manifest_hash_mismatches`（信息项，不 gate）。
+- 208 块整层 E203 仿真因缺 `资料/e203_hbirdv2_full` 而 SKIP；`riscv64-linux-gnu-gcc` 实际存在。
+
+## 覆盖边界（重要）
+
+`smoke` 只证明上述小检查在当前工作树可复现，**不是比赛验收**：不覆盖本科必做的 12 层 FFN1 数值门槛（3% NRMSE）、RTL 逐位一致、SoC 正式总线/NICE 接入、150 MHz 时序、面积/功耗，也不覆盖官方 600 条评测集。smoke 不运行 208 块整层全仿真，也不做大批量模型采样。依赖：`python3+numpy`、`iverilog/vvp`、`verilator`；full 的 E203 项另需组委会/上游资料与 RISC-V 工具链。
+
+## 工作树状态
+
+只新增 `tools/repro/**` 与本报告，随后提交；提交后 `git status --short` 为空。
