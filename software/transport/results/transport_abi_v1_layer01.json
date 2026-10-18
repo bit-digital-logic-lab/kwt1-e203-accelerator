@@ -1,0 +1,189 @@
+{
+  "format": "KWT-1 PC->RCL transport ABI check v1",
+  "layer": 1,
+  "real_input": {
+    "path": "software/validation/real_input_chain_20261017/sample_00_encoder.npy",
+    "shape": [
+      99,
+      64
+    ],
+    "sha256": "489dc7c28b2816cdb7cfc35e3f98c2dd674112f71d9357f746db57de4a27c058"
+  },
+  "parameters": {
+    "path": "software/results/ffn1_a12w10_static_sym.npz",
+    "sha256": "a77f60fb7c8560adbca73db3cf64dcd5501ec0108b96a1131a00aa722be1918e",
+    "scheme": "A12W10"
+  },
+  "fp32_weights_sha256": "8f359abf7adbe287b8f89fca98af46194f98f90f2146784731bff551a155825a",
+  "quantization": {
+    "activation_scale": 0.0024374177762223966,
+    "clipped_activations": 0,
+    "a_qmax": 2047,
+    "w_qmax": 511
+  },
+  "sizes": {
+    "A": 13312,
+    "W": 32768,
+    "BIAS": 1024,
+    "Y": 106496,
+    "descriptor": 32
+  },
+  "hashes_sha256": {
+    "A": "b24dcabaf4b7dc9da6dbfaf728b8c9e85568698822814b456ebb0eb40ca5b538",
+    "W": "2ad48c26383036c1f6f6f320057f7faeda98e3007ab8d7b3aaf016b759d1faa4",
+    "BIAS": "a4c7207e952872926640de8f0b038f1ca80999d2b2ff7e504411a8c5e4333497",
+    "Y": "3a443acf58d87eaf7cc0a5de0629786ef335428f43072a298b41374dc6063154",
+    "V2": "9d324a9265210163244c63c2e9f9a627a4cee7b909a888ef7f32855daa4b859b"
+  },
+  "nrmse_pct": 0.1199334789646608,
+  "conservative_abs_bound": 67389605,
+  "boundary": "real input is the committed 99x64 encoder input; the true post-attention FFN1 activation needs the full FP32 forward and is not recomputed here",
+  "checks": [
+    {
+      "check": "frozen_scheme",
+      "ok": true,
+      "detail": "scheme=A12W10"
+    },
+    {
+      "check": "parameter_sha256_matches_metadata",
+      "ok": true,
+      "detail": "npz sha256=a77f60fb7c8560adbca73db3cf64dcd5501ec0108b96a1131a00aa722be1918e"
+    },
+    {
+      "check": "weight_sha256_matches_metadata",
+      "ok": true,
+      "detail": "fp32 sha256=8f359abf7adbe287b8f89fca98af46194f98f90f2146784731bff551a155825a"
+    },
+    {
+      "check": "frozen_weight_range",
+      "ok": true,
+      "detail": "W range=(-511,511) within +-511"
+    },
+    {
+      "check": "A_size",
+      "ok": true,
+      "detail": "13312 bytes = 13x64x8x2"
+    },
+    {
+      "check": "W_size",
+      "ok": true,
+      "detail": "32768 bytes = 16x64x16x2"
+    },
+    {
+      "check": "bias_size",
+      "ok": true,
+      "detail": "1024 bytes = 256x4"
+    },
+    {
+      "check": "A_little_endian_first_element",
+      "ok": true,
+      "detail": "blob[0:2]=3dff le(int16 -195)=3dff"
+    },
+    {
+      "check": "A_roundtrip",
+      "ok": true,
+      "detail": "max|diff|=0"
+    },
+    {
+      "check": "W_roundtrip",
+      "ok": true,
+      "detail": "bit-identical"
+    },
+    {
+      "check": "bias_roundtrip",
+      "ok": true,
+      "detail": "bit-identical"
+    },
+    {
+      "check": "A_repack_stable",
+      "ok": true,
+      "detail": "repack == original"
+    },
+    {
+      "check": "conservative_bound_fits_int32",
+      "ok": true,
+      "detail": "bound=67389605 (metadata=67389605)"
+    },
+    {
+      "check": "tiled_int32_equals_independent_int64",
+      "ok": true,
+      "detail": "max|diff|=0"
+    },
+    {
+      "check": "Y_size",
+      "ok": true,
+      "detail": "106496 bytes = 208x8x16x4"
+    },
+    {
+      "check": "Y_roundtrip",
+      "ok": true,
+      "detail": "bit-identical"
+    },
+    {
+      "check": "decode_nrmse_below_3pct",
+      "ok": true,
+      "detail": "nrmse=0.119933%  clipped_activations=0"
+    },
+    {
+      "check": "descriptor_208_roundtrip",
+      "ok": true,
+      "detail": "tiles=208 size=32"
+    },
+    {
+      "check": "descriptor_first_matches_driver_contract",
+      "ok": true,
+      "detail": "control=0x40 rowmask=0xff colmask=0xffff"
+    },
+    {
+      "check": "last_row_tile_mask_is_7",
+      "ok": true,
+      "detail": "rt=12 row_mask=7"
+    },
+    {
+      "check": "layout_inside_512KiB",
+      "ok": true,
+      "detail": "out end=0x2a000 <= 0x80000"
+    },
+    {
+      "check": "out_overflow_rejected",
+      "ok": true,
+      "detail": "out base past 512 KiB raises"
+    },
+    {
+      "check": "misaligned_descriptor_rejected",
+      "ok": true,
+      "detail": "a_addr=0x3001 raises"
+    },
+    {
+      "check": "transport_is_twos_complement_not_saturating",
+      "ok": true,
+      "detail": "INT32_MAX+1 wraps to -2147483648; container preserves it"
+    },
+    {
+      "check": "byte_flip_changes_sha_and_value",
+      "ok": true,
+      "detail": "differing elements=1 sha changed=True"
+    },
+    {
+      "check": "truncation_rejected",
+      "ok": true,
+      "detail": "A blob with one byte removed raises ValueError"
+    },
+    {
+      "check": "v2_roundtrip_payload_and_scales",
+      "ok": true,
+      "detail": "v2 bytes=69992 (header 64/section 48)"
+    },
+    {
+      "check": "v2_packed_w10_exact",
+      "ok": true,
+      "detail": "packed W10 bytes=20480 vs int16 32768"
+    },
+    {
+      "check": "v2_crc_detects_corruption",
+      "ok": true,
+      "detail": "last payload byte flip raises CRC mismatch"
+    }
+  ],
+  "failures": []
+}
