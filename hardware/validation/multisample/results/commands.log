@@ -1,0 +1,74 @@
+# Commands actually executed (2026-10-18, worktree codex/kwt-multisample)
+
+Shared inputs are read-only. Generated vectors and logs live under
+/tmp/opencode/multisample_validation (ASCII path); only summaries and logs are
+copied into this directory.
+
+## Vector generation (3 primary samples x 12 layers, plus 1 extra sample x layer01)
+
+    /home/yang/Desktop/ic设计竞赛/software/.venv/bin/python \
+      hardware/rtl/control/tb/prepare_real_e203_vectors.py \
+      --samples /home/yang/Desktop/ic设计竞赛/software/.build/quant_samples_12labels_40.npz \
+      --params /home/yang/Desktop/ic设计竞赛/software/results/ffn1_a12w10_static_sym_12labels_40.npz \
+      --weights /home/yang/Desktop/ic设计竞赛/software/weights/kwt1_fp32.npz \
+      --validation-index {0,40,440} --device cpu \
+      --out /tmp/opencode/multisample_validation/vectors/sample_idx{000,040,440}
+
+    # extra optional sample, only layer01
+    ... --validation-index 80 --layers 1 --device cpu \
+      --out /tmp/opencode/multisample_validation/vectors/sample_idx080
+
+Exit status: 0 for all generation steps (orchestrator aborts otherwise).
+
+## Independent vector check
+
+    /home/yang/Desktop/ic设计竞赛/software/.venv/bin/python \
+      hardware/validation/multisample/check_vectors.py \
+      --vector-root /tmp/opencode/multisample_validation/vectors \
+      --samples .../quant_samples_12labels_40.npz \
+      --params .../ffn1_a12w10_static_sym_12labels_40.npz \
+      --weights .../kwt1_fp32.npz \
+      --indices 0 40 440 \
+      --out /tmp/opencode/multisample_validation/runs/vector_checks.json
+
+Exit status: 0. All 36 layer manifests, 144 hex files, hashes, shapes,
+line counts and independently recomputed INT32 GEMM+bias matched.
+
+## E203 NICE-like sampled runs
+
+Orchestrator (final evidence run, includes the optional 4th-sample full layer):
+
+    /home/yang/Desktop/ic设计竞赛/software/.venv/bin/python \
+      hardware/validation/multisample/run_multisample_e203.py \
+      --skip-generate --extra-full-layer
+
+Exit status: 0; wall time 1003.24 s. The same orchestrator without
+--extra-full-layer took 97.38 s and exited 0.
+
+Each E203 invocation was:
+
+    PATH=/home/yang/yosys-sta/oss-cad-suite/bin:$PATH \
+      bash hardware/rtl/control/tb/run_e203.sh \
+      --real-layers /tmp/opencode/multisample_validation/sampling/sample_idx{000,040,440} \
+      {0,207} 1
+
+Observed exit codes and PASS counts:
+
+| sample | tile | exit | PASS lines | outputs | padding |
+| ---: | ---: | ---: | ---: | ---: | ---: |
+| 0 | 0 | 0 | 6 | 768 | 0 |
+| 0 | 207 | 0 | 6 | 288 | 480 |
+| 40 | 0 | 0 | 7 | 896 | 0 |
+| 40 | 207 | 0 | 7 | 336 | 560 |
+| 440 | 0 | 0 | 5 | 640 | 0 |
+| 440 | 207 | 0 | 5 | 240 | 400 |
+| 80 (extra, layer01, 208 tiles) | 0..207 | 0 | 1 | 25344 | 1280 |
+
+Totals: 36 sampled layer-tile PASS records (3168 valid outputs, 1440 padding)
+plus one full-layer run (25344 outputs, 1280 padding) = 244 sample-layer-tile
+PASS records, 28512 valid outputs, 2720 padding.
+
+Note: an earlier scheduler invocation exited 1 because the log parser lacked
+re.MULTILINE and saw 0/6 PASS lines while the E203 processes themselves exited
+0. The parser was fixed; the runs above are the final evidence. No DUT numeric
+failure occurred.

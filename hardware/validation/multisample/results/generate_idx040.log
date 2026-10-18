@@ -1,0 +1,13 @@
+layer=01 nrmse=0.103312% A=6656 W=16384 bias=256 expected=25344
+layer=02 nrmse=0.105899% A=6656 W=16384 bias=256 expected=25344
+layer=03 nrmse=0.119572% A=6656 W=16384 bias=256 expected=25344
+layer=04 nrmse=0.117003% A=6656 W=16384 bias=256 expected=25344
+layer=05 nrmse=0.116547% A=6656 W=16384 bias=256 expected=25344
+layer=06 nrmse=0.114026% A=6656 W=16384 bias=256 expected=25344
+layer=07 nrmse=0.108707% A=6656 W=16384 bias=256 expected=25344
+layer=08 nrmse=0.126539% A=6656 W=16384 bias=256 expected=25344
+layer=09 nrmse=0.127157% A=6656 W=16384 bias=256 expected=25344
+layer=10 nrmse=0.125653% A=6656 W=16384 bias=256 expected=25344
+layer=11 nrmse=0.144953% A=6656 W=16384 bias=256 expected=25344
+layer=12 nrmse=0.146047% A=6656 W=16384 bias=256 expected=25344
+saved /tmp/opencode/multisample_validation/vectors/sample_idx040/manifest.json worst=0.146047%
