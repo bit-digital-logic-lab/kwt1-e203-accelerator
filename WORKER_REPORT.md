@@ -1,42 +1,50 @@
-# WORKER_REPORT — 硬件/量化性能存储取舍（本科 FFN1 第一线性层）
+# WORKER_REPORT — 数据搬运 / 容量 / 周期模型修正
 
-分支：`codex/kwt-architecture`（worktree：`/home/yang/kwt-worktrees/architecture`）
+分支：`codex/kwt-bus-budget`（worktree：`/home/yang/kwt-worktrees/bus-budget`，基点 = `codex/kwt-architecture`）
+本提交只新增文件，未改任何 RTL、驱动或既有架构报告（仅按任务要求更新本 WORKER_REPORT）。
 
-## 目标与范围
-- 限定本科必做第一线性层 `Y[99,256]=X[99,64]@W[64,256]+b[256]`；GELU/第二线性层/注意力/12 层编码器不在内。
-- 用已有实测（8×16 E203 208-tile、16 行 staged、量化候选）建可运行可校验的流量/容量/周期脚本，比较三种配置。
-- 严格区分四层证据：L0 算术理想、L1 RTL 核+测试台、L2 E203 NICE-like SoC、L3 目标库综合。
+## 任务与结论
 
-## 改动（仅新增，未改任何 RTL）
-- 新增 `hardware/optimization/ffn1_perf_storage_tradeoff.py`：自检 + 三配置流量/容量/周期/参数装载对照，输出 JSON/Markdown。
-- 新增 `hardware/optimization/ffn1_perf_storage_tradeoff.md`：结论、证据层级、未证事项。
+修正整个 FFN1 数据搬运核算的口径错误：既有报告写 `147,840 B`，把**未补零 A** 与
+**补零 tile 的物理读/写**混在一起。物理一致的两种口径为
+**有效 `148,480 B` / 填充 `153,600 B`**（`147,840 = 148,480 − 640`，缺 A 的 640 B 补零读）。
+
+## 改动（仅新增）
+
+- 新增 `hardware/optimization/kwt_bus_capacity_model.py`：可运行算术/容量/周期检查脚本。
+- 新增 `hardware/optimization/kwt_bus_capacity_model.md`：修正口径、RTL 证据、容量与端口分析、同口径公式、证据边界。
 
 ## 实际执行的命令与退出结果
-```bash
-python3 hardware/optimization/ffn1_perf_storage_tradeoff.py \
-  --json /tmp/kwt-ffn1-tradeoff.json --markdown /tmp/kwt-ffn1-tradeoff.md
-# 退出码 0；自检 PASS：60 次整数 GEMM 精确比较 + 4 项流量恒等式 + INT32 上界
 
-python3 hardware/optimization/run_hook.py ffn1_tradeoff --timeout 60 -- \
-  python3 hardware/optimization/ffn1_perf_storage_tradeoff.py \
-  --json /tmp/kwt-ffn1-tradeoff.json --markdown /tmp/kwt-ffn1-tradeoff.md
-# PASS ffn1_tradeoff rc=0 elapsed=0.183s
-# 状态文件 /tmp/kwt-optimization-hooks/ffn1_tradeoff.json：exit_code=0, timed_out=false
+```bash
+python3 hardware/optimization/kwt_bus_capacity_model.py \
+  --json /tmp/kwt-bus-capacity.json --markdown /tmp/kwt-bus-capacity.md
+# 退出码 0；自检 PASS，11 项断言
+
+python3 hardware/optimization/run_hook.py bus_capacity_model --timeout 60 -- \
+  python3 hardware/optimization/kwt_bus_capacity_model.py \
+  --json /tmp/kwt-bus-capacity.json --markdown /tmp/kwt-bus-capacity.md
+# PASS bus_capacity_model rc=0 elapsed=0.064s
+# 状态文件 /tmp/kwt-optimization-hooks/bus_capacity_model.json：exit_code=0, timed_out=false
 ```
 
-## 主要结论（均带证据层级）
-- 流量：8×16 保留 B 列块把输入从 326,144 降到 **123,392** 字（16-bit 字，L0 计数）。
-- 周期：16 行 staged **154,240 拍/层**（L1），比 8 行 **251,328**（L1）少 38.6%；8×16 E203 208-tile 整层 **838,028 拍**（L2，另一边界）。
-- 精度：A8W8 480 条最差 **1.121379%**、A12W10 **0.147048%**（软件整数模型），均过 3% 门槛；A12W10 240 条 RTL **0.147394%**。
-- 存储：单层操作数 144.375 KiB；12 层 W 容器 384 KiB；12 层 W+A+bias+输出 644.875 KiB **> 512 KiB**，故必须逐层换参。
-- 参数装载：每层 **73,920 字**（单字/拍 73,920 拍；理想 128-bit/拍 9,240 拍），须计入任务计时。
-- INT32 累加：A12W10 保守上界 67,826,716 < 2^31−1，实测最大绝对值 4,733,248。
-- 16-bit 宏：B 列块恰一个 1024 字宏；psum/输出为逻辑 32-bit，需拼宽或寄存器读改写，容量够≠带宽成立。
+## 关键数值（均带证据层）
 
-## 未证事项
-1. 无平台吞吐：L1 与 L2 边界不同，不可相减当加速比或当组委会平台耗时。
-2. 无 150 MHz / STA / 功耗；L3 面积仅为 Nangate45 同库相对值，不能换算 2.25 mm²。
-3. 位宽无实测收益：现有 16-bit 路径下 A8W8/A12W9/A12W10 搬运与拍数相同。
-4. 复用方案（123,392 / 23,232 字）未实现，依赖二维 stride、缓存标签与有效尾行写回。
-5. 480 条软件与 240/12 条 RTL 是不同统计；官方 600 条隐藏集未知。
-6. 208-tile E203 模型只覆盖 8×16；16×16 无对应 SoC 模型周期。
+- 唯一数据量：有效 `148,480 B`、填充 `153,600 B`（L0；A padded 13,312、W 32,768、bias 1,024、
+  有效 Y 101,376、补零 Y 106,496）。
+- 逐 tile 重装：`3,648 B/tile × 208 = 758,784 B`（L1，来自 `kwt_tile_system_model.sv:70-72` 的
+  A 512 + W 1024 + bias 32 + out 256 字）；16 行候选 `5,184 × 112 = 580,608 B`。
+- 512 KiB 共享 SRAM：12×W16 + padded A + bias + 有效 Y + desc = `515,584 B ≤ 524,288 B`（余 8,704）；
+  再加 12 层 bias 则超出 2,560 B。**能放下，但不能简单说“绝对放不下”**。
+- 端口瓶颈：乒乓操作数存储每拍 2 字（1A+1B）、`compute_page=load_page=0` 致装载/计算串行；
+  8×16 引擎 `7.11` 乘积/拍、16×16 `14.22` 乘积/拍。
+- 同口径周期（8×16 / 16×16）：compute 212,992 / 114,688；dump 26,624 / 28,672；
+  load@128-bit 47,424 / 36,288；测试台 staged 实测 251,328 / 154,240（L1）。
+
+## 证据边界（本提交未证）
+
+1. `758,784 B` 是 RTL 在**仿真 128-bit 总线**上的 payload（L1），不是赛题总线实测活动，字节数 ≠ 周期数。
+2. 仅描述符取指另有 `6,656 B`（208×2 beat）未计入。
+3. 当前 RTL 写回补零 Y 行，故现状是填充口径；有效口径依赖尚未实现的尾行屏蔽。
+4. 官方 16-bit 宏的延迟/端口语义/字节使能/面积/功耗、赛题 System Bus 参数、150 MHz SDC 全部缺失，无法签核。
+5. L1/L2 周期（251,328 / 154,240 / 838,028）来自测试台计时模型，不是平台吞吐。
