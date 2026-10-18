@@ -1,63 +1,45 @@
-# WORKER_REPORT — codex/kwt-integration（KWT-1 整合分支）
+# WORKER_REPORT — codex/kwt-grad-attention（研究生必做第 4 项：单头注意力独立 RTL 原型）
 
-- 分支：`codex/kwt-integration`（worktree `/home/yang/kwt-worktrees/integration`）
-- 基线：`main@1494597`
-- 范围：把源文件快照 `d94fb6f` 与 8 个已完成工作分支整合为一个可审查的 Git 分支；
-  归档 9 份 `WORKER_REPORT.md`；实跑快速验收并如实记录退出码；补 `docs/INTEGRATION_STATUS.md`。
-- 边界：只在本 worktree 内操作；未 `checkout`/清理主目录；未 push / 未碰 `origin`；未开子智能体；
-  未改核心数值 RTL；未重跑 12 层整层 E203；未做大面积综合。
+- 分支 / worktree：`codex/kwt-grad-attention` @ `/home/yang/kwt-worktrees/grad-attention`
+- 范围：题目[`640.jpg 9`](题目/640.jpg%209) 第 4 项**单头注意力**独立可综合 RTL 原型：
+  `Q/K/V 64→64` 投影、`99×99` 的 `QKᵀ/√64`、逐行 Softmax、概率加权 V、输出投影。
+- 新增（仅此目录）：`graduate/rtl/attention/{README.md, rtl/, model/, tb/, vectors/}`。
+  **未改动现有核心 RTL / 主目录 / 他人分支**；未 `merge`/`rebase`/`cherry-pick`/`push`；未开子智能体。
+- 真实数据：官方权重 `software/weights/kwt1_fp32.npz`（`enc_layers/0/att/*`）+
+  真实输入 `software/validation/real_input_chain_20261017/sample_00_encoder.npy`（99×64，
+  第 0 层注意力输入）。张量顺序核对自官方 `transformer_utils.py`。
 
-详细冲突、来源 commit、逐项测试与缺口见 **[`docs/INTEGRATION_STATUS.md`](docs/INTEGRATION_STATUS.md)**。
+## 运行命令与退出码（本次实跑）
 
-## 提交
+| 命令（在 `graduate/rtl/attention/` 下） | 退出码 | 结果 |
+| --- | ---: | --- |
+| `python3 model/attn_int_model.py` | **0** | 生成 `rtl/attn_params.svh`、`vectors/*` |
+| `verilator --cc --exe --build ... tb_attn.cpp` | **0** | 仅警告（WIDTH*），无错误 |
+| `./obj_dir/tb_attn vectors` | **0** | `41481/41481` 逐位一致；NRMSE 0.15886% |
+| `yosys 0.63 read_verilog -sv -Irtl rtl/attn_single_head.sv; hierarchy -check; proc; check` | **0** | 前端可综合性检查通过 |
 
-| 提交 | 内容 |
-| --- | --- |
-| `dc4fd2a` | 合入 `d94fb6f` 源文件快照（3 处冲突取 main@1494597 的已测钩子实现与 ascii finalizer；其余取快照；删除旧版钩子残留 plugin/assets） |
-| `3ba1412` | 归档 hook-fix 报告（`c89095c` 逻辑已由 main 引入，不重复合入） |
-| `fb71ede` | 整合 `codex/kwt-verification`（`1a3aa75`） |
-| `282017e` | 整合 `codex/kwt-preprocess`（`747d5fa`） |
-| `932db77` | 整合 `codex/kwt-quant`（`7afe9ff`） |
-| `3e82ea9` | 整合 `codex/kwt-architecture`（`df93c87`） |
-| `e1aa166` | 整合 `codex/kwt-driver`（`fcb4b72`，保留 `run_e203.sh` ASCII 路径修复） |
-| `d758eeb` | 整合 `codex/kwt-synth`（`cb23d04`） |
-| `8f6ca75` | 整合 `codex/kwt-design-integration`（`56b8a39`） |
-| `29d0b00` | 整合 `codex/kwt-packaging`（`0731cf3`） |
-| 本提交 | `docs/INTEGRATION_STATUS.md` + 本报告 |
+一键复现：`bash graduate/rtl/attention/tb/run.sh`。
 
-9 份来源报告归档于 `docs/worker_reports/kwt-*.md`（verification / preprocess / quant /
-architecture / driver / synth / design-integration / packaging / hook-fix）；合并过程中根
-`WORKER_REPORT.md` 始终被移除并归档，**未发生后一份覆盖前一份**。
+## 关键结果
 
-## 实跑验收（实际退出码）
+- **逐位对照独立整数模型**：`q,k,v,c,o` 各 6336/6336，`p`（Softmax，全 99×99）9801/9801，
+  合计 **41481/41481，0 失配**。乘法/Softmax 全在 RTL，TB 只做装载、读回与比较。
+- **FP32 误差（单列）**：NRMSE 0.15886%（< 3% 门槛）；首行 0.15766%、末行 0.15077%；
+  max abs err 0.00124016。
+- **周期**：实测 `2,957,728` 拍（串行 P=1，每拍 1 次乘加）；150 MHz 推算 ≈19.7 ms（模型推算，非平台实测）。
+- **存储**：≈128.7 KB（int16 容器，含验证用 `P`；去掉 `P` 可省 19.6 KB）。
 
-| 命令 | 退出码 |
-| --- | ---: |
-| `git diff --check 1494597 HEAD` | **2**（仅 quant CSV 的 CRLF 与 packaging 报告末尾空行，既有产物；为保 provenance 未改，详见 STATUS §5#1） |
-| `python3 -m unittest discover -s .opencode/skills/quarter-hour-check/tests` | **0**（20 tests OK） |
-| `python3 docs/check_design_evidence.py --results-dir /home/yang/Desktop/ic设计竞赛/hardware/architecture/results` | **0**（`PASS=72 WARN=0 FAIL=0`） |
-| 宿主 C 驱动测试（`cc ... test_kwt_nice_driver.c`） | **0**（`PASS provisional NICE FFN1 descriptor layout and bounds`） |
-| RV32 交叉编译（`riscv64-linux-gnu-gcc ... -march=rv32imac -mabi=ilp32 -c`） | **0** |
-| `negative_injection_check.py`（oss-cad-suite） | **0**（fp32/int16 污染均被检出 exit=1） |
-| `run_tile_edges.sh`（oss-cad-suite） | **0**（正向 21 cases PASS；负向 MISMATCH 被检出） |
-| （附加）`run_e203.sh --real-layers <中文 CASE_ROOT> 0 1` | **0**（12 层各 tile 0 单块 PASS，验证 ASCII 路径修复） |
+## 未证事项（不得宣称整项通过）
 
-## 关键口径裁定
+1. 未接入 E203 / NICE / System Bus，无 SoC 集成、驱动、系统级复位/连续任务覆盖。
+2. 未做目标 PDK 综合与 150 MHz STA；组合除法器/64b 乘法器/组合读端口未做时序优化，
+   面积与功耗未测。
+3. 大型数组与组合读端口未映射到题目规定的 SRAM 宏。
+4. 仅 1 个真实样本（第 0 层 attention）；未做 12 层、多样本、量化标定泛化。
+5. Softmax/量化误差仅本样本统计；换层/换样本需重新标定并重跑。
 
-- **E203 12 层状态以 `real_e203_validation0_ascii_*` 为准 = 单样本 12/12 PASS**；
-  `real_e203_validation0_*` 的 `0/12 FAIL` 是**过期**的中文路径运行。packaging 报告中的
-  “0/12” 不得当作当前结论。
-- 保留 `codex/kwt-driver` 的 `run_e203.sh` ASCII 路径修复。
-- `codex/kwt-synth` 已合入（含被修正的综合脚本），补上早前审查文档 §5 的遗漏。
+## 边界声明
 
-## 未证事项
-
-1. 官方 SoC / System Bus / NICE、PDK、SRAM 宏、SDC 缺失 → 无 150 MHz / ≤2.25 mm² / 功耗签核；
-   iSTA 仍 abort（exit 134），无时序结论。
-2. C 驱动**未**在 E203 指令流中执行（仅宿主 + RV32 编译）。
-3. 官方 600 条评测集未发布 → 官方 NRMSE / 准确率未测；480 软件 / 240 RTL / 1 条 E203 / 官方 600
-   是四个不同统计，不可混用。
-4. `154,240`（L1）与 `838,028`（L2 E203）不可相减当加速比/吞吐；16 行核未接入 E203。
-5. A14W12/A12W12/A16W10 只有软件证据。
-6. `git diff --check` 非 0（纯格式/CRLF，见上）。
-7. 本次未实际 merge 进 `main`、未 push；`main` 的既有未提交改动保持原样。
+- 只在本 worktree 内操作；`git status` 仅新增 `graduate/` 与改本文件。
+- 未修改 `hardware/`、`software/`、`docs/` 等既有核心内容。
+- 一切结论基于本次真实运行的退出码与日志，未凭进程存在推断通过。
