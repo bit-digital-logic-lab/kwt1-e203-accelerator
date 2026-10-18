@@ -1,63 +1,92 @@
-# WORKER_REPORT — codex/kwt-integration（KWT-1 整合分支）
+# WORKER_REPORT — codex/kwt-grad-test-infra（研究生组分阶段验证基础设施）
 
-- 分支：`codex/kwt-integration`（worktree `/home/yang/kwt-worktrees/integration`）
-- 基线：`main@1494597`
-- 范围：把源文件快照 `d94fb6f` 与 8 个已完成工作分支整合为一个可审查的 Git 分支；
-  归档 9 份 `WORKER_REPORT.md`；实跑快速验收并如实记录退出码；补 `docs/INTEGRATION_STATUS.md`。
-- 边界：只在本 worktree 内操作；未 `checkout`/清理主目录；未 push / 未碰 `origin`；未开子智能体；
-  未改核心数值 RTL；未重跑 12 层整层 E203；未做大面积综合。
+- 分支：`codex/kwt-grad-test-infra`（worktree `/home/yang/kwt-worktrees/grad-test-infra`）
+- 基线：`3d9ae98`（继承 `codex/kwt-integration`；`main@1494597` 的整合结果）
+- 范围：研究生组任务 4–7 的**可复现分阶段验证 runner**，位于 `graduate/verification/`；
+  支持 `--design-root` 指向其它独立分支/worktree；每项保留实际命令、退出码、耗时、
+  输入 SHA-256、样本身份、比较方式与 golden 来源；显式 PASS/SKIP/FAIL，**不以文件存在判 PASS**。
+- 边界：只改 `graduate/verification/` 与根 `WORKER_REPORT.md`；未开子智能体；未碰主目录或
+  他人分支；未 `merge`/`rebase`/`cherry-pick`/`push`；未改任何 RTL/数值模型。
 
-详细冲突、来源 commit、逐项测试与缺口见 **[`docs/INTEGRATION_STATUS.md`](docs/INTEGRATION_STATUS.md)**。
+## 交付
 
-## 提交
-
-| 提交 | 内容 |
+| 文件 | 作用 |
 | --- | --- |
-| `dc4fd2a` | 合入 `d94fb6f` 源文件快照（3 处冲突取 main@1494597 的已测钩子实现与 ascii finalizer；其余取快照；删除旧版钩子残留 plugin/assets） |
-| `3ba1412` | 归档 hook-fix 报告（`c89095c` 逻辑已由 main 引入，不重复合入） |
-| `fb71ede` | 整合 `codex/kwt-verification`（`1a3aa75`） |
-| `282017e` | 整合 `codex/kwt-preprocess`（`747d5fa`） |
-| `932db77` | 整合 `codex/kwt-quant`（`7afe9ff`） |
-| `3e82ea9` | 整合 `codex/kwt-architecture`（`df93c87`） |
-| `e1aa166` | 整合 `codex/kwt-driver`（`fcb4b72`，保留 `run_e203.sh` ASCII 路径修复） |
-| `d758eeb` | 整合 `codex/kwt-synth`（`cb23d04`） |
-| `8f6ca75` | 整合 `codex/kwt-design-integration`（`56b8a39`） |
-| `29d0b00` | 整合 `codex/kwt-packaging`（`0731cf3`） |
-| 本提交 | `docs/INTEGRATION_STATUS.md` + 本报告 |
+| `graduate/verification/run_stages.py` | 分阶段 runner：`--design-root` / `--stage` / `--out` / `--list` / `--strict` |
+| `graduate/verification/run_tests.sh` | 先跑 17 个单元+故障注入测试，再跑全部 stage |
+| `graduate/verification/golden/ffn1_reference.py` | 独立整数 GEMM（纯 Python 与 NumPy int64 两实现）+ NRMSE |
+| `graduate/verification/golden/check_encoder_input.py` | 软件 golden：design convert vs 独立 numpy vs 存储 TF golden |
+| `graduate/verification/synth/yosys_evidence.py` | 综合证据：elaboration + `check -assert` + 结构计数 + 可选示例库面积 |
+| `graduate/verification/faults/test_harness_faults.py` | 判定逻辑故障注入（10 例） |
+| `graduate/verification/faults/test_golden_faults.py` | golden 与写盘故障注入（7 例） |
+| `graduate/verification/README.md` | 用法、stage 契约、证据分级、SKIP 语义 |
+| `graduate/verification/results/latest/` | 本次真实运行证据：`summary.json` / `summary.md` / 各 stage `.log` |
 
-9 份来源报告归档于 `docs/worker_reports/kwt-*.md`（verification / preprocess / quant /
-architecture / driver / synth / design-integration / packaging / hook-fix）；合并过程中根
-`WORKER_REPORT.md` 始终被移除并归档，**未发生后一份覆盖前一份**。
+## 判定口径
 
-## 实跑验收（实际退出码）
+- **PASS 的必要条件**：证据命令真实执行、退出码 0，且输出含有真正的比较结果
+  （分支 harness 的 `KWT-GRAD-VERIFY <stage> checked=N failed=0` 契约行，或带计数的通过标记），
+  并保证 `checked ≥ 1`。退出 0 但无比较输出 → FAIL。
+- **SKIP**：设计模块缺失（列出缺失路径），或环境缺工具（Icarus ≥12 / Yosys ≥0.20 /
+  `riscv64-linux-gnu-gcc` / `资料/e203_hbirdv2_full`）。
+- **FAIL**：模块存在但缺 harness；或证据命令非 0 / 出现 `FAIL`、`MISMATCH` / `checked=0` / `failed>0`。
 
-| 命令 | 退出码 |
-| --- | ---: |
-| `git diff --check 1494597 HEAD` | **2**（仅 quant CSV 的 CRLF 与 packaging 报告末尾空行，既有产物；为保 provenance 未改，详见 STATUS §5#1） |
-| `python3 -m unittest discover -s .opencode/skills/quarter-hour-check/tests` | **0**（20 tests OK） |
-| `python3 docs/check_design_evidence.py --results-dir /home/yang/Desktop/ic设计竞赛/hardware/architecture/results` | **0**（`PASS=72 WARN=0 FAIL=0`） |
-| 宿主 C 驱动测试（`cc ... test_kwt_nice_driver.c`） | **0**（`PASS provisional NICE FFN1 descriptor layout and bounds`） |
-| RV32 交叉编译（`riscv64-linux-gnu-gcc ... -march=rv32imac -mabi=ilp32 -c`） | **0** |
-| `negative_injection_check.py`（oss-cad-suite） | **0**（fp32/int16 污染均被检出 exit=1） |
-| `run_tile_edges.sh`（oss-cad-suite） | **0**（正向 21 cases PASS；负向 MISMATCH 被检出） |
-| （附加）`run_e203.sh --real-layers <中文 CASE_ROOT> 0 1` | **0**（12 层各 tile 0 单块 PASS，验证 ASCII 路径修复） |
+## 实跑结果（本次，设计 commit `3d9ae98`）
 
-## 关键口径裁定
+命令：`bash graduate/verification/run_tests.sh` → 退出码 **0**，`PASS=5 SKIP=3 FAIL=0`。
 
-- **E203 12 层状态以 `real_e203_validation0_ascii_*` 为准 = 单样本 12/12 PASS**；
-  `real_e203_validation0_*` 的 `0/12 FAIL` 是**过期**的中文路径运行。packaging 报告中的
-  “0/12” 不得当作当前结论。
-- 保留 `codex/kwt-driver` 的 `run_e203.sh` ASCII 路径修复。
-- `codex/kwt-synth` 已合入（含被修正的综合脚本），补上早前审查文档 §5 的遗漏。
+| stage | 类别 | 判定 | 实际命令 | 退出码 | 耗时 s |
+| --- | --- | --- | --- | ---: | ---: |
+| attention | rtl | **SKIP** | 期望 `hardware/rtl/attention/tb/run.sh` | — | — |
+| encoder1 | rtl | **SKIP** | 期望 `hardware/rtl/encoder/tb/run_single_layer.sh` | — | — |
+| encoder12 | rtl | **SKIP** | 期望 `hardware/rtl/encoder/tb/run_twelve_layers.sh` | — | — |
+| e203 | soc | **PASS** | `bash hardware/rtl/control/tb/run_e203.sh` | 0 | 0.955 |
+| synth | synth | **PASS** | `python3 graduate/verification/synth/yosys_evidence.py --design-root …` | 0 | 9.282 |
+| smoke_rtl_vector | rtl | **PASS** | `python3 hardware/testbenchplus/common/run_vectors.py` | 0 | 1.602 |
+| smoke_golden_faults | rtl | **PASS** | `python3 hardware/testbenchplus/common/negative_injection_check.py` | 0 | 3.301 |
+| smoke_software_golden | software | **PASS** | `python3 graduate/verification/golden/check_encoder_input.py --design-root …` | 0 | 0.109 |
 
-## 未证事项
+工具（记录在 `summary.json`）：Icarus `14.0`（oss-cad-suite，**非**系统 Icarus 11）；
+Yosys `0.63+97`；`riscv64-linux-gnu-gcc`；Python `/usr/bin/python3`。
 
-1. 官方 SoC / System Bus / NICE、PDK、SRAM 宏、SDC 缺失 → 无 150 MHz / ≤2.25 mm² / 功耗签核；
-   iSTA 仍 abort（exit 134），无时序结论。
-2. C 驱动**未**在 E203 指令流中执行（仅宿主 + RV32 编译）。
-3. 官方 600 条评测集未发布 → 官方 NRMSE / 准确率未测；480 软件 / 240 RTL / 1 条 E203 / 官方 600
-   是四个不同统计，不可混用。
-4. `154,240`（L1）与 `838,028`（L2 E203）不可相减当加速比/吞吐；16 行核未接入 E203。
-5. A14W12/A12W12/A16W10 只有软件证据。
-6. `git diff --check` 非 0（纯格式/CRLF，见上）。
-7. 本次未实际 merge 进 `main`、未 push；`main` 的既有未提交改动保持原样。
+### 关键实跑数值
+
+- `e203`：`PASS real E203 NICE: requests=1 responses=1 outputs=128 cycles=1055`（简化 SoC 模型，
+  128 个输出由 TB 对照冻结 tile golden）。
+- `synth`：`$mul=8 $mem_v2=8 $add=9`，`check -assert` 0 problems；`kwt_cacc` 用 Nangate45
+  示例库映射 `Chip area=47861.114`（**仅为示例库相对面积，不是签核**）。
+- `smoke_rtl_vector`：`layer0_int16` 逐位 `6/6`，`layer0_fp32` NRMSE `0.00000000%`，`result: 2/2 passed`。
+- `smoke_software_golden`：`converted_vs_independent=0`；`converted_vs_golden=4.7684e-07`；
+  `independent_vs_golden=4.7684e-07`；NRMSE `7.84e-06%`；`checked=19008`（99×64×3 项比较）。
+
+## 独立 golden 与故障注入（真实执行）
+
+- 单元+故障注入：`python3 -m unittest discover -s graduate/verification/faults` → **17 tests OK**（退出码 0）。
+- 判定逻辑注入：退出 0 空输出、`checked=0`、`failed>0`、错误 stage 名、`1/2 passed`、出现
+  `FAIL`/`MISMATCH`、模块在但 harness 缺失 —— 均被正确判为 FAIL（真契约判 PASS）。
+- 写盘故障注入：
+  - `check_encoder_input.py --corrupt-golden`（存储 golden +1.0）→ 退出码 **1**，`FAIL`；
+  - `yosys_evidence.py --corrupt-mul-count`（要求乘法器数远超实际）→ 退出码 **1**，`FAIL`；
+  - 对应正常输入 → 退出码 0。
+- 独立整数 golden：纯 Python GEMM 与 NumPy int64 GEMM 在 25 组随机矩阵上逐位一致；
+  手算向量 `[[1,2,3],[4,5,6]]×[[1,0],[0,1],[1,1]]+[10,-10]=[[14,-5],[20,1]]` 固定。
+
+## SKIP 原因（如实）
+
+1. 本 worktree 尚无注意力/编码器 RTL：`hardware/rtl/attention/**`、`hardware/rtl/encoder/**`
+   不存在 → `attention`、`encoder1`、`encoder12` SKIP 并列出缺失路径。
+2. 这些分支应提供 `tb/run.sh` harness，并在末尾打印
+   `KWT-GRAD-VERIFY <stage> checked=N failed=0`；模块存在而 harness 缺失时 runner 判 FAIL。
+3. 环境边界：系统自带的 Icarus 11 会错误展开本 RTL 的 unpacked array（int16 向量出现假失配、
+   fp32 挂起）；runner 自动选用 oss-cad-suite 的 Icarus ≥12，否则 SKIP 并说明。
+
+## 未证事项 / 诚实说明
+
+1. `e203` 是**简化 SoC 模型**（行为级总线/存储），不是组委会专用平台；不能当 150 MHz、
+   面积或功耗证据。
+2. `synth` 是**粗粒度结构综合 + 示例库面积**，无 SDC、无目标工艺库、无 STA，不能当签核。
+3. `smoke_rtl_vector` 的向量是打通路径的小样例，**不是**真实 KWT-1 12 层数据，也不代表量化精度。
+4. `smoke_software_golden` 只是 FP32 软件误差（首层编码器输入），与 RTL 逐位一致是两回事。
+5. 注意力/单层/十二层编码器、E203 驱动的整层与 12 层换参在**本分支未被验证**（SKIP），
+   需要相应独立分支补齐模块与 harness 后再跑同一 runner。
+6. 未 push；未合并进 `main`；`main` 的既有状态未改动。

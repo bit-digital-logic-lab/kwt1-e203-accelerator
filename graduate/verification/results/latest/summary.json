@@ -1,0 +1,295 @@
+{
+  "generated_utc": "2026-10-18T07:56:49+00:00",
+  "design_root": "/home/yang/kwt-worktrees/grad-test-infra",
+  "design_commit": "3d9ae98452e8c307243e4db51c019d718f7a4c7e",
+  "runner": "/home/yang/kwt-worktrees/grad-test-infra/graduate/verification/run_stages.py",
+  "verdicts": {
+    "attention": "SKIP",
+    "encoder1": "SKIP",
+    "encoder12": "SKIP",
+    "e203": "PASS",
+    "synth": "PASS",
+    "smoke_rtl_vector": "PASS",
+    "smoke_golden_faults": "PASS",
+    "smoke_software_golden": "PASS"
+  },
+  "counts": {
+    "PASS": 5,
+    "SKIP": 3,
+    "FAIL": 0
+  },
+  "records": [
+    {
+      "stage": "attention",
+      "kind": "rtl",
+      "status": "SKIP",
+      "reason": "design module(s) absent: /home/yang/kwt-worktrees/grad-test-infra/hardware/rtl/attention/kwt_attention.sv",
+      "command": [
+        "bash",
+        "/home/yang/kwt-worktrees/grad-test-infra/hardware/rtl/attention/tb/run.sh"
+      ],
+      "command_shell": "bash /home/yang/kwt-worktrees/grad-test-infra/hardware/rtl/attention/tb/run.sh",
+      "exit_code": null,
+      "duration_s": 0.0,
+      "inputs": {},
+      "sample_identity": "KWT-1 single-head attention: Q/K/V projection, 99x99 scores, row softmax, probability-weighted values, output projection (dim 64)",
+      "comparison": "RTL vs an independent golden authored in the attention branch",
+      "golden": "independent golden required from the harness (never derived from DUT output)",
+      "tools": {
+        "python": "/usr/bin/python3",
+        "iverilog": "/home/yang/yosys-sta/oss-cad-suite/bin/iverilog",
+        "iverilog_version": "Icarus Verilog version 14.0 (devel) (s20251012-128-gc8097fb6f)",
+        "yosys": "/home/yang/yosys-sta/oss-cad-suite/bin/yosys",
+        "yosys_version": "Yosys 0.63+97 (git sha1 1111a401f, clang++ 18.1.8 -fPIC -O3)",
+        "riscv64-linux-gnu-gcc": "/usr/bin/riscv64-linux-gnu-gcc"
+      },
+      "stdout_tail": "",
+      "stderr_tail": ""
+    },
+    {
+      "stage": "encoder1",
+      "kind": "rtl",
+      "status": "SKIP",
+      "reason": "design module(s) absent: /home/yang/kwt-worktrees/grad-test-infra/hardware/rtl/encoder/kwt_encoder_layer.sv",
+      "command": [
+        "bash",
+        "/home/yang/kwt-worktrees/grad-test-infra/hardware/rtl/encoder/tb/run_single_layer.sh"
+      ],
+      "command_shell": "bash /home/yang/kwt-worktrees/grad-test-infra/hardware/rtl/encoder/tb/run_single_layer.sh",
+      "exit_code": null,
+      "duration_s": 0.0,
+      "inputs": {},
+      "sample_identity": "One PostNorm encoder layer: attention + 2 residual adds + 2 LayerNorm + 64->256->64 FFN + GELU",
+      "comparison": "RTL vs the design software numeric model, per-layer intermediate outputs",
+      "golden": "independent golden required from the harness (never derived from DUT output)",
+      "tools": {
+        "python": "/usr/bin/python3",
+        "iverilog": "/home/yang/yosys-sta/oss-cad-suite/bin/iverilog",
+        "iverilog_version": "Icarus Verilog version 14.0 (devel) (s20251012-128-gc8097fb6f)",
+        "yosys": "/home/yang/yosys-sta/oss-cad-suite/bin/yosys",
+        "yosys_version": "Yosys 0.63+97 (git sha1 1111a401f, clang++ 18.1.8 -fPIC -O3)",
+        "riscv64-linux-gnu-gcc": "/usr/bin/riscv64-linux-gnu-gcc"
+      },
+      "stdout_tail": "",
+      "stderr_tail": ""
+    },
+    {
+      "stage": "encoder12",
+      "kind": "rtl",
+      "status": "SKIP",
+      "reason": "design module(s) absent: /home/yang/kwt-worktrees/grad-test-infra/hardware/rtl/encoder/kwt_encoder_layer.sv, /home/yang/kwt-worktrees/grad-test-infra/hardware/rtl/encoder/kwt_encoder_top12.sv",
+      "command": [
+        "bash",
+        "/home/yang/kwt-worktrees/grad-test-infra/hardware/rtl/encoder/tb/run_twelve_layers.sh"
+      ],
+      "command_shell": "bash /home/yang/kwt-worktrees/grad-test-infra/hardware/rtl/encoder/tb/run_twelve_layers.sh",
+      "exit_code": null,
+      "duration_s": 0.0,
+      "inputs": {},
+      "sample_identity": "All 12 encoder layers with layer-to-layer data passing and per-layer parameter update",
+      "comparison": "RTL vs the software numeric model across all 12 layers",
+      "golden": "independent golden required from the harness (never derived from DUT output)",
+      "tools": {
+        "python": "/usr/bin/python3",
+        "iverilog": "/home/yang/yosys-sta/oss-cad-suite/bin/iverilog",
+        "iverilog_version": "Icarus Verilog version 14.0 (devel) (s20251012-128-gc8097fb6f)",
+        "yosys": "/home/yang/yosys-sta/oss-cad-suite/bin/yosys",
+        "yosys_version": "Yosys 0.63+97 (git sha1 1111a401f, clang++ 18.1.8 -fPIC -O3)",
+        "riscv64-linux-gnu-gcc": "/usr/bin/riscv64-linux-gnu-gcc"
+      },
+      "stdout_tail": "",
+      "stderr_tail": ""
+    },
+    {
+      "stage": "e203",
+      "kind": "soc",
+      "status": "PASS",
+      "reason": "checked=1",
+      "command": [
+        "bash",
+        "/home/yang/kwt-worktrees/grad-test-infra/hardware/rtl/control/tb/run_e203.sh"
+      ],
+      "command_shell": "bash /home/yang/kwt-worktrees/grad-test-infra/hardware/rtl/control/tb/run_e203.sh",
+      "exit_code": 0,
+      "duration_s": 0.946,
+      "inputs": {
+        "/home/yang/kwt-worktrees/grad-test-infra/hardware/rtl/control/tb/run_e203.sh": "f11c5be7487d14b07a49de45c6d28511bc212b9a12a6d4b2612683669684f7c4",
+        "/home/yang/kwt-worktrees/grad-test-infra/hardware/rtl/control/tb/tb_kwt_real_e203.sv": "b75179f8bab260dfc8994ac48d974beac89b1efadd6896486b259b2620136c48",
+        "/home/yang/kwt-worktrees/grad-test-infra/hardware/rtl/control/tb/e203_kwt_program.S": "588020f9f72bb90d1a7aa81b77e54c03da259b7c8a1507282b417392bca88598"
+      },
+      "sample_identity": "Real E203 CPU executes the KWT program and drives the accelerator over the NICE interface (simplified SoC model, 128 outputs)",
+      "comparison": "E203 observed NICE request/response and outputs, cross-checked by the TB against the frozen tile golden",
+      "golden": "independent tile golden compiled into tb_kwt_real_e203.sv",
+      "tools": {
+        "python": "/usr/bin/python3",
+        "iverilog": "/home/yang/yosys-sta/oss-cad-suite/bin/iverilog",
+        "iverilog_version": "Icarus Verilog version 14.0 (devel) (s20251012-128-gc8097fb6f)",
+        "yosys": "/home/yang/yosys-sta/oss-cad-suite/bin/yosys",
+        "yosys_version": "Yosys 0.63+97 (git sha1 1111a401f, clang++ 18.1.8 -fPIC -O3)",
+        "riscv64-linux-gnu-gcc": "/usr/bin/riscv64-linux-gnu-gcc"
+      },
+      "stdout_tail": "PASS real E203 NICE: requests=1 responses=1 outputs=128 cycles=1055\n/home/yang/kwt-worktrees/grad-test-infra/hardware/rtl/control/tb/tb_kwt_real_e203.sv:80: $finish called at 10740 (1s)",
+      "stderr_tail": "",
+      "gate_sha256": {
+        "/home/yang/kwt-worktrees/grad-test-infra/hardware/rtl/control/tb/run_e203.sh": "f11c5be7487d14b07a49de45c6d28511bc212b9a12a6d4b2612683669684f7c4"
+      },
+      "log": "/home/yang/kwt-worktrees/grad-test-infra/graduate/verification/results/latest/e203.log"
+    },
+    {
+      "stage": "synth",
+      "kind": "synth",
+      "status": "PASS",
+      "reason": "checked=4",
+      "command": [
+        "/usr/bin/python3",
+        "/home/yang/kwt-worktrees/grad-test-infra/graduate/verification/synth/yosys_evidence.py",
+        "--design-root",
+        "/home/yang/kwt-worktrees/grad-test-infra",
+        "--yosys",
+        "/home/yang/yosys-sta/oss-cad-suite/bin/yosys"
+      ],
+      "command_shell": "/usr/bin/python3 /home/yang/kwt-worktrees/grad-test-infra/graduate/verification/synth/yosys_evidence.py --design-root /home/yang/kwt-worktrees/grad-test-infra --yosys /home/yang/yosys-sta/oss-cad-suite/bin/yosys",
+      "exit_code": 0,
+      "duration_s": 9.28,
+      "inputs": {
+        "/home/yang/kwt-worktrees/grad-test-infra/hardware/rtl/pulse_array/kwt_product_array.sv": "f3f1b91c1bd962c5fbc39dff700135ae7f1d2e1f9198b7a44091ea28c9e78fa3",
+        "/home/yang/kwt-worktrees/grad-test-infra/hardware/rtl/pulse_array/kwt_cacc.sv": "0febfb08aa977856867bbfb3760830b4292a8138a365194e69a0b088c9ca9da8",
+        "/home/yang/kwt-worktrees/grad-test-infra/hardware/rtl/pulse_array/kwt_row_broadcast_tile.sv": "6e1dbac38b1988972b0358aea626eebf5f989527262449ad1d8adf4d902ac117"
+      },
+      "sample_identity": "kwt_row_broadcast_tile compute core: 128 (here 8) multipliers, CACC banks, bias add; optional standard-cell mapping of kwt_cacc",
+      "comparison": "Yosys elaboration + structural cell counts; optional mapped area with an example library (NOT a timing/area signoff)",
+      "golden": "structural expectations ($mul >= 1, $mem_v2 >= 1, check -assert clean)",
+      "tools": {
+        "python": "/usr/bin/python3",
+        "iverilog": "/home/yang/yosys-sta/oss-cad-suite/bin/iverilog",
+        "iverilog_version": "Icarus Verilog version 14.0 (devel) (s20251012-128-gc8097fb6f)",
+        "yosys": "/home/yang/yosys-sta/oss-cad-suite/bin/yosys",
+        "yosys_version": "Yosys 0.63+97 (git sha1 1111a401f, clang++ 18.1.8 -fPIC -O3)",
+        "riscv64-linux-gnu-gcc": "/usr/bin/riscv64-linux-gnu-gcc"
+      },
+      "stdout_tail": "PASS elaboration + check -assert clean for top kwt_row_broadcast_tile\n  structural counts: $mul=8 $mem_v2=8 $add=9\nPASS $mul count 8 >= 1\nPASS $mem_v2 count 8 >= 1\nPASS kwt_cacc mapped with example library Nangate45_typ.lib: Chip area=47861.114000 (NOT a sign-off area)\nKWT-GRAD-VERIFY synth checked=4 failed=0",
+      "stderr_tail": "",
+      "gate_sha256": {
+        "/home/yang/kwt-worktrees/grad-test-infra/hardware/rtl/pulse_array/kwt_product_array.sv": "f3f1b91c1bd962c5fbc39dff700135ae7f1d2e1f9198b7a44091ea28c9e78fa3",
+        "/home/yang/kwt-worktrees/grad-test-infra/hardware/rtl/pulse_array/kwt_cacc.sv": "0febfb08aa977856867bbfb3760830b4292a8138a365194e69a0b088c9ca9da8",
+        "/home/yang/kwt-worktrees/grad-test-infra/hardware/rtl/pulse_array/kwt_row_broadcast_tile.sv": "6e1dbac38b1988972b0358aea626eebf5f989527262449ad1d8adf4d902ac117"
+      },
+      "log": "/home/yang/kwt-worktrees/grad-test-infra/graduate/verification/results/latest/synth.log"
+    },
+    {
+      "stage": "smoke_rtl_vector",
+      "kind": "rtl",
+      "status": "PASS",
+      "reason": "checked=2",
+      "command": [
+        "/usr/bin/python3",
+        "/home/yang/kwt-worktrees/grad-test-infra/hardware/testbenchplus/common/run_vectors.py"
+      ],
+      "command_shell": "/usr/bin/python3 /home/yang/kwt-worktrees/grad-test-infra/hardware/testbenchplus/common/run_vectors.py",
+      "exit_code": 0,
+      "duration_s": 1.659,
+      "inputs": {
+        "/home/yang/kwt-worktrees/grad-test-infra/hardware/testbenchplus/common/run_vectors.py": "be710e9772322ca58b75415baae80ff5baa39e20e9e09bea7159afef3cf18b1a",
+        "/home/yang/kwt-worktrees/grad-test-infra/hardware/testbenchplus/common/tb_array_vector.sv": "01c181d61e6698af7ad1d8a771258fb7bc76ab539362105f7ad8e63f06e6ec1b",
+        "/home/yang/kwt-worktrees/grad-test-infra/hardware/rtl/pulse_array/kwt_pe.sv": "17794b9f88bcdbc90e83d64a2634de80b60d400f1a8cf371ee3de6f04dc528fa",
+        "/home/yang/kwt-worktrees/grad-test-infra/hardware/rtl/pulse_array/kwt_pulse_array.sv": "d2aaf5c1e7a59e805b164406a08678fab2439255db2067ddad3f6879ea1ae30d",
+        "/home/yang/kwt-worktrees/grad-test-infra/hardware/testbenchplus/vectors/layer0_fp32/case.json": "12f395698b873fd7e59436d49dd2e4e1b58cc7d9231fdfd3f705d5c476efe90e",
+        "/home/yang/kwt-worktrees/grad-test-infra/hardware/testbenchplus/vectors/layer0_int16/case.json": "7460b92a6eecd8df2a3d8264f056b00dc26e3c0a85a6a01307df693d890d1d32"
+      },
+      "sample_identity": "testbenchplus example vectors (layer0_fp32, layer0_int16); explicit, author-supplied expected matrices, not real KWT-1 layer data",
+      "comparison": "integer: bit-exact; fp32: NRMSE <= 3% and max abs error, against the vector 'expected' golden",
+      "golden": "independent 'expected' matrices in vectors/*/case.json",
+      "tools": {
+        "python": "/usr/bin/python3",
+        "iverilog": "/home/yang/yosys-sta/oss-cad-suite/bin/iverilog",
+        "iverilog_version": "Icarus Verilog version 14.0 (devel) (s20251012-128-gc8097fb6f)",
+        "yosys": "/home/yang/yosys-sta/oss-cad-suite/bin/yosys",
+        "yosys_version": "Yosys 0.63+97 (git sha1 1111a401f, clang++ 18.1.8 -fPIC -O3)",
+        "riscv64-linux-gnu-gcc": "/usr/bin/riscv64-linux-gnu-gcc"
+      },
+      "stdout_tail": "layer0_fp32: 2x2 * 2x3 fp32\n  FP32 NRMSE=0.00000000% max_abs=0 limit=3.00%\n  status=2 total_cycles=84 compute_cycles=8 wait_cycles=74 dma_cycles=0\nlayer0_int16: 2x2 * 2x3 int16\n  integer exact=6/6 accuracy=100.00%\n  status=2 total_cycles=84 compute_cycles=8 wait_cycles=74 dma_cycles=0\nresult: 2/2 passed",
+      "stderr_tail": "",
+      "gate_sha256": {
+        "/home/yang/kwt-worktrees/grad-test-infra/hardware/testbenchplus/common/run_vectors.py": "be710e9772322ca58b75415baae80ff5baa39e20e9e09bea7159afef3cf18b1a"
+      },
+      "log": "/home/yang/kwt-worktrees/grad-test-infra/graduate/verification/results/latest/smoke_rtl_vector.log"
+    },
+    {
+      "stage": "smoke_golden_faults",
+      "kind": "rtl",
+      "status": "PASS",
+      "reason": "checked=1",
+      "command": [
+        "/usr/bin/python3",
+        "/home/yang/kwt-worktrees/grad-test-infra/hardware/testbenchplus/common/negative_injection_check.py"
+      ],
+      "command_shell": "/usr/bin/python3 /home/yang/kwt-worktrees/grad-test-infra/hardware/testbenchplus/common/negative_injection_check.py",
+      "exit_code": 0,
+      "duration_s": 3.291,
+      "inputs": {
+        "/home/yang/kwt-worktrees/grad-test-infra/hardware/testbenchplus/common/negative_injection_check.py": "17c4f5f81b283b78a3d9360f2e9c5ace5f448b215c9831f700584885188d30df",
+        "/home/yang/kwt-worktrees/grad-test-infra/hardware/testbenchplus/common/run_vectors.py": "be710e9772322ca58b75415baae80ff5baa39e20e9e09bea7159afef3cf18b1a",
+        "/home/yang/kwt-worktrees/grad-test-infra/hardware/testbenchplus/vectors/layer0_fp32/case.json": "12f395698b873fd7e59436d49dd2e4e1b58cc7d9231fdfd3f705d5c476efe90e",
+        "/home/yang/kwt-worktrees/grad-test-infra/hardware/testbenchplus/vectors/layer0_int16/case.json": "7460b92a6eecd8df2a3d8264f056b00dc26e3c0a85a6a01307df693d890d1d32"
+      },
+      "sample_identity": "fault injection on both testbenchplus vectors: original golden must pass, golden with one element +1 must be rejected with non-zero exit",
+      "comparison": "harness self-check: corrupted independent golden must produce FAIL",
+      "golden": "the same vectors/*/case.json goldens, deliberately corrupted",
+      "tools": {
+        "python": "/usr/bin/python3",
+        "iverilog": "/home/yang/yosys-sta/oss-cad-suite/bin/iverilog",
+        "iverilog_version": "Icarus Verilog version 14.0 (devel) (s20251012-128-gc8097fb6f)",
+        "yosys": "/home/yang/yosys-sta/oss-cad-suite/bin/yosys",
+        "yosys_version": "Yosys 0.63+97 (git sha1 1111a401f, clang++ 18.1.8 -fPIC -O3)",
+        "riscv64-linux-gnu-gcc": "/usr/bin/riscv64-linux-gnu-gcc"
+      },
+      "stdout_tail": "PASS negative injection layer0_fp32: detected with exit=1\nPASS negative injection layer0_int16: detected with exit=1\nPASS testbenchplus negative-injection self-check (2 vectors)",
+      "stderr_tail": "",
+      "gate_sha256": {
+        "/home/yang/kwt-worktrees/grad-test-infra/hardware/testbenchplus/common/negative_injection_check.py": "17c4f5f81b283b78a3d9360f2e9c5ace5f448b215c9831f700584885188d30df"
+      },
+      "log": "/home/yang/kwt-worktrees/grad-test-infra/graduate/verification/results/latest/smoke_golden_faults.log"
+    },
+    {
+      "stage": "smoke_software_golden",
+      "kind": "software",
+      "status": "PASS",
+      "reason": "checked=19008",
+      "command": [
+        "/usr/bin/python3",
+        "/home/yang/kwt-worktrees/grad-test-infra/graduate/verification/golden/check_encoder_input.py",
+        "--design-root",
+        "/home/yang/kwt-worktrees/grad-test-infra"
+      ],
+      "command_shell": "/usr/bin/python3 /home/yang/kwt-worktrees/grad-test-infra/graduate/verification/golden/check_encoder_input.py --design-root /home/yang/kwt-worktrees/grad-test-infra",
+      "exit_code": 0,
+      "duration_s": 0.107,
+      "inputs": {
+        "/home/yang/kwt-worktrees/grad-test-infra/software/offline_encoder_input.py": "5f68e3b576e7f9bd539143b129bd607a005c159048d46f4adb1f16f53b683659",
+        "/home/yang/kwt-worktrees/grad-test-infra/software/weights/kwt1_fp32.npz": "8f359abf7adbe287b8f89fca98af46194f98f90f2146784731bff551a155825a",
+        "/home/yang/kwt-worktrees/grad-test-infra/software/validation/real_input_chain_20261017/sample_00_mfcc.npy": "a8a85e2878283a0d3cd40f157243b10aa5034c2544bbfb21d292da9c422aad15",
+        "/home/yang/kwt-worktrees/grad-test-infra/software/validation/real_input_chain_20261017/sample_00_encoder.npy": "489dc7c28b2816cdb7cfc35e3f98c2dd674112f71d9357f746db57de4a27c058"
+      },
+      "sample_identity": "validation sample 00 (four/750e3e75_nohash_0.wav, label _unknown_): 98x40 MFCC -> 99x64 layer-0 encoder input",
+      "comparison": "FP32 max abs / NRMSE between the design convert() result, an independent numpy reference and the stored TF-checkpoint golden",
+      "golden": "stored sample_00_encoder.npy produced by the TensorFlow checkpoint path",
+      "tools": {
+        "python": "/usr/bin/python3",
+        "iverilog": "/home/yang/yosys-sta/oss-cad-suite/bin/iverilog",
+        "iverilog_version": "Icarus Verilog version 14.0 (devel) (s20251012-128-gc8097fb6f)",
+        "yosys": "/home/yang/yosys-sta/oss-cad-suite/bin/yosys",
+        "yosys_version": "Yosys 0.63+97 (git sha1 1111a401f, clang++ 18.1.8 -fPIC -O3)",
+        "riscv64-linux-gnu-gcc": "/usr/bin/riscv64-linux-gnu-gcc"
+      },
+      "stdout_tail": "sample=sample_00_mfcc.npy shape=(99, 64) dtype=float32\ngolden=/home/yang/kwt-worktrees/grad-test-infra/software/validation/real_input_chain_20261017/sample_00_encoder.npy corrupt=False\n  max_abs converted_vs_independent=0\n  max_abs converted_vs_golden=4.76837158e-07\n  max_abs independent_vs_golden=4.76837158e-07\n  converted_vs_golden_nrmse_pct=7.84498907e-06\n  independent_vs_golden_nrmse_pct=7.84498907e-06\n{\"checks\": {\"converted_vs_independent\": 0.0, \"converted_vs_golden\": 4.76837158203125e-07, \"independent_vs_golden\": 4.76837158203125e-07}, \"tolerance\": 1e-05}\nPASS software golden: design convert, independent numpy and stored TF golden agree within tolerance\nKWT-GRAD-VERIFY encoder_input checked=19008 failed=0",
+      "stderr_tail": "",
+      "gate_sha256": {
+        "/home/yang/kwt-worktrees/grad-test-infra/software/offline_encoder_input.py": "5f68e3b576e7f9bd539143b129bd607a005c159048d46f4adb1f16f53b683659",
+        "/home/yang/kwt-worktrees/grad-test-infra/software/weights/kwt1_fp32.npz": "8f359abf7adbe287b8f89fca98af46194f98f90f2146784731bff551a155825a",
+        "/home/yang/kwt-worktrees/grad-test-infra/software/validation/real_input_chain_20261017/sample_00_mfcc.npy": "a8a85e2878283a0d3cd40f157243b10aa5034c2544bbfb21d292da9c422aad15",
+        "/home/yang/kwt-worktrees/grad-test-infra/software/validation/real_input_chain_20261017/sample_00_encoder.npy": "489dc7c28b2816cdb7cfc35e3f98c2dd674112f71d9357f746db57de4a27c058"
+      },
+      "log": "/home/yang/kwt-worktrees/grad-test-infra/graduate/verification/results/latest/smoke_software_golden.log"
+    }
+  ]
+}

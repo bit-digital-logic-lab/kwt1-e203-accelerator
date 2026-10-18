@@ -1,0 +1,7 @@
+layer0_fp32: 2x2 * 2x3 fp32
+  FP32 NRMSE=0.00000000% max_abs=0 limit=3.00%
+  status=2 total_cycles=84 compute_cycles=8 wait_cycles=74 dma_cycles=0
+layer0_int16: 2x2 * 2x3 int16
+  integer exact=6/6 accuracy=100.00%
+  status=2 total_cycles=84 compute_cycles=8 wait_cycles=74 dma_cycles=0
+result: 2/2 passed

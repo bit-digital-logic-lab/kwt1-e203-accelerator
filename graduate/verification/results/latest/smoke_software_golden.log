@@ -1,0 +1,10 @@
+sample=sample_00_mfcc.npy shape=(99, 64) dtype=float32
+golden=/home/yang/kwt-worktrees/grad-test-infra/software/validation/real_input_chain_20261017/sample_00_encoder.npy corrupt=False
+  max_abs converted_vs_independent=0
+  max_abs converted_vs_golden=4.76837158e-07
+  max_abs independent_vs_golden=4.76837158e-07
+  converted_vs_golden_nrmse_pct=7.84498907e-06
+  independent_vs_golden_nrmse_pct=7.84498907e-06
+{"checks": {"converted_vs_independent": 0.0, "converted_vs_golden": 4.76837158203125e-07, "independent_vs_golden": 4.76837158203125e-07}, "tolerance": 1e-05}
+PASS software golden: design convert, independent numpy and stored TF golden agree within tolerance
+KWT-GRAD-VERIFY encoder_input checked=19008 failed=0

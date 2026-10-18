@@ -1,0 +1,3 @@
+PASS negative injection layer0_fp32: detected with exit=1
+PASS negative injection layer0_int16: detected with exit=1
+PASS testbenchplus negative-injection self-check (2 vectors)
