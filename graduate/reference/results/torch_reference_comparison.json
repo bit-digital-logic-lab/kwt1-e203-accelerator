@@ -1,0 +1,81 @@
+{
+ "reference": "graduate/reference/kwt1_fp32_golden.py",
+ "partner": "software/run.py (independent PyTorch KWT-1)",
+ "torch_version": "2.5.1+cu121",
+ "partition": "validation",
+ "sample_count": 3,
+ "tolerance": 0.0001,
+ "worst_max_abs_error": 4.76837158203125e-06,
+ "pass": true,
+ "samples": [
+  {
+   "archive_member": "four/750e3e75_nohash_0.wav",
+   "split": "validation",
+   "label": "_unknown_",
+   "encoder_sha256": "a7ffaafdd9866b3711903c67db0f3a17845662bc52356f0d1a82410496a54f61",
+   "max_abs_error_per_layer_ln1": [
+    7.152557373046875e-07,
+    1.1920928955078125e-06,
+    1.430511474609375e-06,
+    1.6689300537109375e-06,
+    2.1227169781923294e-06,
+    2.562999725341797e-06,
+    2.3497268557548523e-06,
+    2.294778823852539e-06,
+    2.5033950805664062e-06,
+    2.6226043701171875e-06,
+    3.2186508178710938e-06,
+    2.652406692504883e-06
+   ],
+   "max_abs_error_final_encoder": 4.76837158203125e-06,
+   "max_abs_error_logits": 5.364418029785156e-07,
+   "worst": 4.76837158203125e-06
+  },
+  {
+   "archive_member": "no/45692b02_nohash_3.wav",
+   "split": "validation",
+   "label": "no",
+   "encoder_sha256": "e1f6bff0d1bfe88a680d69a826ccb1855221e1d8ace873d67679189eca93e116",
+   "max_abs_error_per_layer_ln1": [
+    7.152557373046875e-07,
+    9.5367431640625e-07,
+    1.1920928955078125e-06,
+    1.430511474609375e-06,
+    1.6689300537109375e-06,
+    1.9073486328125e-06,
+    2.5033950805664062e-06,
+    2.384185791015625e-06,
+    2.8312206268310547e-06,
+    2.6226043701171875e-06,
+    3.5762786865234375e-06,
+    4.291534423828125e-06
+   ],
+   "max_abs_error_final_encoder": 4.291534423828125e-06,
+   "max_abs_error_logits": 2.8014183044433594e-06,
+   "worst": 4.291534423828125e-06
+  },
+  {
+   "archive_member": "yes/ec21c46b_nohash_1.wav",
+   "split": "validation",
+   "label": "yes",
+   "encoder_sha256": "16bf24f4bd5e5b0e056c43507fdb2e7061194d3ea2792d174c1afd9f22200e90",
+   "max_abs_error_per_layer_ln1": [
+    9.5367431640625e-07,
+    1.1920928955078125e-06,
+    1.5944242477416992e-06,
+    2.0265579223632812e-06,
+    2.175569534301758e-06,
+    2.384185791015625e-06,
+    2.3245811462402344e-06,
+    2.384185791015625e-06,
+    2.86102294921875e-06,
+    2.9802322387695312e-06,
+    3.5762786865234375e-06,
+    3.3974647521972656e-06
+   ],
+   "max_abs_error_final_encoder": 4.76837158203125e-06,
+   "max_abs_error_logits": 1.9073486328125e-06,
+   "worst": 4.76837158203125e-06
+  }
+ ]
+}

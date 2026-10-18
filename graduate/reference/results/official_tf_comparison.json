@@ -1,0 +1,71 @@
+{
+ "reference": "graduate/reference/kwt1_fp32_golden.py",
+ "partner": "official Arm KWT-1 transformer_utils (verbatim, TF)",
+ "tensorflow_version": "2.19.1",
+ "official_file": "/home/yang/kwt-worktrees/grad-golden/资料/ARM_KWT-1_237e4097/kws_streaming/models/transformer_utils.py",
+ "partition": "validation",
+ "sample_count": 3,
+ "tolerance": 0.0001,
+ "worst_max_abs_error": 9.298324584960938e-06,
+ "pass": true,
+ "shims": [
+  "tensorflow_addons.layers.GELU->tf.nn.gelu(exact)",
+  "experimental.preprocessing.Rescaling->keras.layers.Rescaling"
+ ],
+ "samples": [
+  {
+   "archive_member": "four/750e3e75_nohash_0.wav",
+   "split": "validation",
+   "label": "_unknown_",
+   "encoder_sha256": "a7ffaafdd9866b3711903c67db0f3a17845662bc52356f0d1a82410496a54f61",
+   "max_abs_error_per_stage": {
+    "softmax": 6.407499313354492e-07,
+    "attended_v": 1.1920928955078125e-06,
+    "attn_projected": 1.3113021850585938e-06,
+    "ln1": 3.0994415283203125e-06,
+    "ffn_hidden": 2.682209014892578e-06,
+    "gelu": 2.384185791015625e-06,
+    "ffn_out": 3.337860107421875e-06,
+    "layer_output": 4.112720489501953e-06
+   },
+   "max_abs_error_logits": 4.76837158203125e-07,
+   "worst": 4.112720489501953e-06
+  },
+  {
+   "archive_member": "no/45692b02_nohash_3.wav",
+   "split": "validation",
+   "label": "no",
+   "encoder_sha256": "e1f6bff0d1bfe88a680d69a826ccb1855221e1d8ace873d67679189eca93e116",
+   "max_abs_error_per_stage": {
+    "softmax": 8.791685104370117e-07,
+    "attended_v": 1.7881393432617188e-06,
+    "attn_projected": 2.0563602447509766e-06,
+    "ln1": 4.1425228118896484e-06,
+    "ffn_hidden": 4.410743713378906e-06,
+    "gelu": 4.351139068603516e-06,
+    "ffn_out": 3.874301910400391e-06,
+    "layer_output": 9.298324584960938e-06
+   },
+   "max_abs_error_logits": 4.76837158203125e-07,
+   "worst": 9.298324584960938e-06
+  },
+  {
+   "archive_member": "yes/ec21c46b_nohash_1.wav",
+   "split": "validation",
+   "label": "yes",
+   "encoder_sha256": "16bf24f4bd5e5b0e056c43507fdb2e7061194d3ea2792d174c1afd9f22200e90",
+   "max_abs_error_per_stage": {
+    "softmax": 6.258487701416016e-07,
+    "attended_v": 1.2442469596862793e-06,
+    "attn_projected": 1.1920928955078125e-06,
+    "ln1": 3.993511199951172e-06,
+    "ffn_hidden": 3.2186508178710938e-06,
+    "gelu": 2.7418136596679688e-06,
+    "ffn_out": 2.7418136596679688e-06,
+    "layer_output": 4.649162292480469e-06
+   },
+   "max_abs_error_logits": 9.5367431640625e-07,
+   "worst": 4.649162292480469e-06
+  }
+ ]
+}
