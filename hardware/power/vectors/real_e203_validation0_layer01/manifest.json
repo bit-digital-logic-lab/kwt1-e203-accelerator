@@ -1,0 +1,461 @@
+{
+  "format": "KWT-1 A12W10 per-layer E203 full-layer vectors v1",
+  "validation_index": 0,
+  "sample_path": "./four/750e3e75_nohash_0.wav",
+  "label": "_unknown_",
+  "training_count": 480,
+  "validation_count": 480,
+  "sample_archive_sha256": "43d639fb64ea8d907db967b071010e41e68827368532880ba8a99b92769bbae8",
+  "parameter_archive_sha256": "10c481c7a79d0ee8063ad807f8c0f685769c2c8e1dbcdb5f33079919dfeef367",
+  "parameter_metadata_sha256": "99cfe56106530814a84215f558d0cfe55b93035d83e765dd351bc6a38c2eb039",
+  "fp32_weight_archive_sha256": "8f359abf7adbe287b8f89fca98af46194f98f90f2146784731bff551a155825a",
+  "tensor_shapes": {
+    "X": [
+      99,
+      64
+    ],
+    "W": [
+      64,
+      256
+    ],
+    "bias": [
+      256
+    ],
+    "Y": [
+      99,
+      256
+    ]
+  },
+  "hex_layout": {
+    "a16": "13x64x8, flat rt,k,r; last tile rows 3..7 zero",
+    "w16": "16x64x16, flat ct,k,c; physical 128-bit word = 8 consecutive c lanes",
+    "bias32": "256 values, flat output column",
+    "expected32": "99x256, flat row-major; valid rows only",
+    "negative_values": "two's-complement hexadecimal, one element per line"
+  },
+  "numerical_protocol": "A12W10 symmetric zero-point 0, rint ties-to-even, signed INT32 GEMM+bias; FP64 final decode for NRMSE only",
+  "layers": [
+    {
+      "layer": 1,
+      "activation_scale": 0.0024374177762223966,
+      "weight_scale_min": 2.0996479722151784e-05,
+      "weight_scale_max": 0.0008222887660659223,
+      "nrmse_pct": 0.10170796295350393,
+      "max_abs_expected_int32": 4593325,
+      "conservative_abs_accumulator_bound": 67389605,
+      "files": {
+        "a16": {
+          "path": "/home/yang/Desktop/ic设计竞赛/hardware/architecture/results/real_e203_validation0_vectors/layer01_a16.hex",
+          "sha256": "2077cb910cdc338fc12f5fbd0379940873f97bdfe83efadf89d35c15531026b8",
+          "elements": 6656,
+          "element_bits": 16
+        },
+        "w16": {
+          "path": "/home/yang/Desktop/ic设计竞赛/hardware/architecture/results/real_e203_validation0_vectors/layer01_w16.hex",
+          "sha256": "0fa421247d828b5f6d97dfb359447e2af6cb4c4592587442dbb9d0fd61948ae0",
+          "elements": 16384,
+          "element_bits": 16
+        },
+        "bias32": {
+          "path": "/home/yang/Desktop/ic设计竞赛/hardware/architecture/results/real_e203_validation0_vectors/layer01_bias32.hex",
+          "sha256": "e5b6acfb7537c060891d8c8e4ba1b8bdc8adbbd0cafb1cd6b6faac8c1ce1a3df",
+          "elements": 256,
+          "element_bits": 32
+        },
+        "expected32": {
+          "path": "/home/yang/Desktop/ic设计竞赛/hardware/architecture/results/real_e203_validation0_vectors/layer01_expected32.hex",
+          "sha256": "97c14656bd26804987235c235d20ec99942959208e3bc2d622e6b906dd616e35",
+          "elements": 25344,
+          "element_bits": 32
+        }
+      }
+    },
+    {
+      "layer": 2,
+      "activation_scale": 0.002428059235513647,
+      "weight_scale_min": 1.5731346875487476e-05,
+      "weight_scale_max": 0.0006737439016539989,
+      "nrmse_pct": 0.11224507544564073,
+      "max_abs_expected_int32": 4059284,
+      "conservative_abs_accumulator_bound": 67553776,
+      "files": {
+        "a16": {
+          "path": "/home/yang/Desktop/ic设计竞赛/hardware/architecture/results/real_e203_validation0_vectors/layer02_a16.hex",
+          "sha256": "25653aefd78e48e6eb97cfdddc3f9ed03f02d7d450e29ff86b096e6430a4455e",
+          "elements": 6656,
+          "element_bits": 16
+        },
+        "w16": {
+          "path": "/home/yang/Desktop/ic设计竞赛/hardware/architecture/results/real_e203_validation0_vectors/layer02_w16.hex",
+          "sha256": "851bc076ce38bd35db125c11aa4762a01ca2851e9593109b4ff0179dea0c0073",
+          "elements": 16384,
+          "element_bits": 16
+        },
+        "bias32": {
+          "path": "/home/yang/Desktop/ic设计竞赛/hardware/architecture/results/real_e203_validation0_vectors/layer02_bias32.hex",
+          "sha256": "40dabfb5bf2680935f84470a0edab983ef3741342dc3d3f865c32853e43ed6eb",
+          "elements": 256,
+          "element_bits": 32
+        },
+        "expected32": {
+          "path": "/home/yang/Desktop/ic设计竞赛/hardware/architecture/results/real_e203_validation0_vectors/layer02_expected32.hex",
+          "sha256": "9bf006e2a4c2c28b8362c2ef97fc937c2a274e72dc9f2e8a8187a48b108e0503",
+          "elements": 25344,
+          "element_bits": 32
+        }
+      }
+    },
+    {
+      "layer": 3,
+      "activation_scale": 0.0024277743445295327,
+      "weight_scale_min": 1.2854816767509203e-05,
+      "weight_scale_max": 0.0007329803040349554,
+      "nrmse_pct": 0.12265248697453265,
+      "max_abs_expected_int32": 4359068,
+      "conservative_abs_accumulator_bound": 67774097,
+      "files": {
+        "a16": {
+          "path": "/home/yang/Desktop/ic设计竞赛/hardware/architecture/results/real_e203_validation0_vectors/layer03_a16.hex",
+          "sha256": "e0dc2f159b96eca183bef6afc7934e8bf030b822c9aae3f17ad611251f9cda15",
+          "elements": 6656,
+          "element_bits": 16
+        },
+        "w16": {
+          "path": "/home/yang/Desktop/ic设计竞赛/hardware/architecture/results/real_e203_validation0_vectors/layer03_w16.hex",
+          "sha256": "3f4eef5fa53d43b91db8a658295c5f7d53101faf566d7a86eb697adf3c7e73f5",
+          "elements": 16384,
+          "element_bits": 16
+        },
+        "bias32": {
+          "path": "/home/yang/Desktop/ic设计竞赛/hardware/architecture/results/real_e203_validation0_vectors/layer03_bias32.hex",
+          "sha256": "1d900757957f51c297354cb11520e29f2c7f61e020dcab5fa655920a2277ca9e",
+          "elements": 256,
+          "element_bits": 32
+        },
+        "expected32": {
+          "path": "/home/yang/Desktop/ic设计竞赛/hardware/architecture/results/real_e203_validation0_vectors/layer03_expected32.hex",
+          "sha256": "f929594678a46db6e9c33363c4524ab2a9658104f857678ad3c3c470e0af98e6",
+          "elements": 25344,
+          "element_bits": 32
+        }
+      }
+    },
+    {
+      "layer": 4,
+      "activation_scale": 0.0024941511484955835,
+      "weight_scale_min": 1.3547148482615234e-05,
+      "weight_scale_max": 0.0008045521267706167,
+      "nrmse_pct": 0.12376661966051151,
+      "max_abs_expected_int32": 3316310,
+      "conservative_abs_accumulator_bound": 67780536,
+      "files": {
+        "a16": {
+          "path": "/home/yang/Desktop/ic设计竞赛/hardware/architecture/results/real_e203_validation0_vectors/layer04_a16.hex",
+          "sha256": "0fa545e3299e0efb843666963a17d23ecb3680e011b43f6354e045a8535df163",
+          "elements": 6656,
+          "element_bits": 16
+        },
+        "w16": {
+          "path": "/home/yang/Desktop/ic设计竞赛/hardware/architecture/results/real_e203_validation0_vectors/layer04_w16.hex",
+          "sha256": "3c421fc5873b14d5376999719a18f7f64ec85edb47011322e5c49d0733fc4b93",
+          "elements": 16384,
+          "element_bits": 16
+        },
+        "bias32": {
+          "path": "/home/yang/Desktop/ic设计竞赛/hardware/architecture/results/real_e203_validation0_vectors/layer04_bias32.hex",
+          "sha256": "dbf22e72553b534fce2a8d279b422d49f7fd69b658d5e019d04a68074f9cf68f",
+          "elements": 256,
+          "element_bits": 32
+        },
+        "expected32": {
+          "path": "/home/yang/Desktop/ic设计竞赛/hardware/architecture/results/real_e203_validation0_vectors/layer04_expected32.hex",
+          "sha256": "a045d46b274bd66ddd5e19c08732b98c6d519b698b864e90d5f98a01e4638dc0",
+          "elements": 25344,
+          "element_bits": 32
+        }
+      }
+    },
+    {
+      "layer": 5,
+      "activation_scale": 0.0026692011674322846,
+      "weight_scale_min": 9.674468640886874e-06,
+      "weight_scale_max": 0.0006439407044427502,
+      "nrmse_pct": 0.11874929363749179,
+      "max_abs_expected_int32": 3632138,
+      "conservative_abs_accumulator_bound": 67598308,
+      "files": {
+        "a16": {
+          "path": "/home/yang/Desktop/ic设计竞赛/hardware/architecture/results/real_e203_validation0_vectors/layer05_a16.hex",
+          "sha256": "7416f35c2c366f31bf20df50a8dbec61a93ab296ccc121b0ac18dfde52a9c4b4",
+          "elements": 6656,
+          "element_bits": 16
+        },
+        "w16": {
+          "path": "/home/yang/Desktop/ic设计竞赛/hardware/architecture/results/real_e203_validation0_vectors/layer05_w16.hex",
+          "sha256": "e64b1c7c34862453f73ef4b568776212fd3eb8ce0356092a70a9b36e9bc63c5f",
+          "elements": 16384,
+          "element_bits": 16
+        },
+        "bias32": {
+          "path": "/home/yang/Desktop/ic设计竞赛/hardware/architecture/results/real_e203_validation0_vectors/layer05_bias32.hex",
+          "sha256": "e089eedb661b3aef5f7c5beafaadda9f46fbd359a2c78b16fb51cd833919e31a",
+          "elements": 256,
+          "element_bits": 32
+        },
+        "expected32": {
+          "path": "/home/yang/Desktop/ic设计竞赛/hardware/architecture/results/real_e203_validation0_vectors/layer05_expected32.hex",
+          "sha256": "b2529066f03f8b75d5492668cddc38941a718ef0fe973bae3c12a0a80e9242d2",
+          "elements": 25344,
+          "element_bits": 32
+        }
+      }
+    },
+    {
+      "layer": 6,
+      "activation_scale": 0.0025355460647262474,
+      "weight_scale_min": 1.0896454986235867e-05,
+      "weight_scale_max": 0.0006270701987869352,
+      "nrmse_pct": 0.11832549447945931,
+      "max_abs_expected_int32": 3442046,
+      "conservative_abs_accumulator_bound": 67610612,
+      "files": {
+        "a16": {
+          "path": "/home/yang/Desktop/ic设计竞赛/hardware/architecture/results/real_e203_validation0_vectors/layer06_a16.hex",
+          "sha256": "2addb05750dd6261021e14ff60439343b00318f967c533d7a6484ad2639c1175",
+          "elements": 6656,
+          "element_bits": 16
+        },
+        "w16": {
+          "path": "/home/yang/Desktop/ic设计竞赛/hardware/architecture/results/real_e203_validation0_vectors/layer06_w16.hex",
+          "sha256": "cd671c533a1ed92631385aa3258a184a9f891f9d9cced2c3bb1c450c7fbb3a4d",
+          "elements": 16384,
+          "element_bits": 16
+        },
+        "bias32": {
+          "path": "/home/yang/Desktop/ic设计竞赛/hardware/architecture/results/real_e203_validation0_vectors/layer06_bias32.hex",
+          "sha256": "310865586eb425308e84707b6d53a00e4de0a7dd2b90d5a1c61ac2da1e885ce2",
+          "elements": 256,
+          "element_bits": 32
+        },
+        "expected32": {
+          "path": "/home/yang/Desktop/ic设计竞赛/hardware/architecture/results/real_e203_validation0_vectors/layer06_expected32.hex",
+          "sha256": "b042a863202c9c17a58252c3c47a1aac2427f8c5593e74a095feffaeb24cfbb3",
+          "elements": 25344,
+          "element_bits": 32
+        }
+      }
+    },
+    {
+      "layer": 7,
+      "activation_scale": 0.0026827275490958805,
+      "weight_scale_min": 9.506144387731347e-06,
+      "weight_scale_max": 0.0006444976171168796,
+      "nrmse_pct": 0.11845274189887471,
+      "max_abs_expected_int32": 2601730,
+      "conservative_abs_accumulator_bound": 67400479,
+      "files": {
+        "a16": {
+          "path": "/home/yang/Desktop/ic设计竞赛/hardware/architecture/results/real_e203_validation0_vectors/layer07_a16.hex",
+          "sha256": "24d0e4380929553ba96da6f92c542f7764c007577d7a5a466ed89eff8e8e813a",
+          "elements": 6656,
+          "element_bits": 16
+        },
+        "w16": {
+          "path": "/home/yang/Desktop/ic设计竞赛/hardware/architecture/results/real_e203_validation0_vectors/layer07_w16.hex",
+          "sha256": "6caceb5afacacff03d9bea2e7c6d176cae98b5c7ba8aedc6cade7cb6d165aed0",
+          "elements": 16384,
+          "element_bits": 16
+        },
+        "bias32": {
+          "path": "/home/yang/Desktop/ic设计竞赛/hardware/architecture/results/real_e203_validation0_vectors/layer07_bias32.hex",
+          "sha256": "b1452b156e70c581e34b2be3adc3147f08b801a33f04b0a96adaa22ece11d4d3",
+          "elements": 256,
+          "element_bits": 32
+        },
+        "expected32": {
+          "path": "/home/yang/Desktop/ic设计竞赛/hardware/architecture/results/real_e203_validation0_vectors/layer07_expected32.hex",
+          "sha256": "58d8d569ccc3e7c4a32db8e450d38806bc52e8b7301ef2ff54cd4accd5e8685a",
+          "elements": 25344,
+          "element_bits": 32
+        }
+      }
+    },
+    {
+      "layer": 8,
+      "activation_scale": 0.0026345693255612253,
+      "weight_scale_min": 8.808638455816445e-06,
+      "weight_scale_max": 0.0007220289711849563,
+      "nrmse_pct": 0.1177752789548902,
+      "max_abs_expected_int32": 2678985,
+      "conservative_abs_accumulator_bound": 67608824,
+      "files": {
+        "a16": {
+          "path": "/home/yang/Desktop/ic设计竞赛/hardware/architecture/results/real_e203_validation0_vectors/layer08_a16.hex",
+          "sha256": "50d6320819600ce723c992631e011fb7a424e517512c6f9dcf8302d0b9e0ea1f",
+          "elements": 6656,
+          "element_bits": 16
+        },
+        "w16": {
+          "path": "/home/yang/Desktop/ic设计竞赛/hardware/architecture/results/real_e203_validation0_vectors/layer08_w16.hex",
+          "sha256": "da7b6b87a0a96c4db2030ca9f42b2c64f826fad148d854e5fe755483851e072d",
+          "elements": 16384,
+          "element_bits": 16
+        },
+        "bias32": {
+          "path": "/home/yang/Desktop/ic设计竞赛/hardware/architecture/results/real_e203_validation0_vectors/layer08_bias32.hex",
+          "sha256": "b91fae82284c9b99459d6ece45fb538e657728da9511c517789e68ab1582e71f",
+          "elements": 256,
+          "element_bits": 32
+        },
+        "expected32": {
+          "path": "/home/yang/Desktop/ic设计竞赛/hardware/architecture/results/real_e203_validation0_vectors/layer08_expected32.hex",
+          "sha256": "23334ac28502a810f3104ca3784e060d3021e102dc9a4788e445198a779c79d5",
+          "elements": 25344,
+          "element_bits": 32
+        }
+      }
+    },
+    {
+      "layer": 9,
+      "activation_scale": 0.002521506273635842,
+      "weight_scale_min": 7.47859317612508e-06,
+      "weight_scale_max": 0.0005670767241028191,
+      "nrmse_pct": 0.12300099655954458,
+      "max_abs_expected_int32": 2999785,
+      "conservative_abs_accumulator_bound": 67672658,
+      "files": {
+        "a16": {
+          "path": "/home/yang/Desktop/ic设计竞赛/hardware/architecture/results/real_e203_validation0_vectors/layer09_a16.hex",
+          "sha256": "3cc3f4d4b9cc00427df64800363960daea3ac9c5300362028256c096d3641d25",
+          "elements": 6656,
+          "element_bits": 16
+        },
+        "w16": {
+          "path": "/home/yang/Desktop/ic设计竞赛/hardware/architecture/results/real_e203_validation0_vectors/layer09_w16.hex",
+          "sha256": "349fd82f39fc370cdc0e201b1bd474465079f6763cd77399cd20b9274e5fe297",
+          "elements": 16384,
+          "element_bits": 16
+        },
+        "bias32": {
+          "path": "/home/yang/Desktop/ic设计竞赛/hardware/architecture/results/real_e203_validation0_vectors/layer09_bias32.hex",
+          "sha256": "913ee0a3c147e260a3808cee12f294c2972702bf6d902a1f6c1948674c9bafa1",
+          "elements": 256,
+          "element_bits": 32
+        },
+        "expected32": {
+          "path": "/home/yang/Desktop/ic设计竞赛/hardware/architecture/results/real_e203_validation0_vectors/layer09_expected32.hex",
+          "sha256": "664ff59273e7f4fb425eb885c89bebdf11a02befbdff703179916227aaac23b9",
+          "elements": 25344,
+          "element_bits": 32
+        }
+      }
+    },
+    {
+      "layer": 10,
+      "activation_scale": 0.00274507115396221,
+      "weight_scale_min": 9.215119752282032e-06,
+      "weight_scale_max": 0.0006669336335766338,
+      "nrmse_pct": 0.13225147607814824,
+      "max_abs_expected_int32": 3091952,
+      "conservative_abs_accumulator_bound": 67472497,
+      "files": {
+        "a16": {
+          "path": "/home/yang/Desktop/ic设计竞赛/hardware/architecture/results/real_e203_validation0_vectors/layer10_a16.hex",
+          "sha256": "6724c1d4ed6399d0699aecc2fd4a053d6b833f70c8a134532233d68aabe62040",
+          "elements": 6656,
+          "element_bits": 16
+        },
+        "w16": {
+          "path": "/home/yang/Desktop/ic设计竞赛/hardware/architecture/results/real_e203_validation0_vectors/layer10_w16.hex",
+          "sha256": "e216faba5db8504863c3243638995cd9642c3f73064ef851a6992627d53ac1ef",
+          "elements": 16384,
+          "element_bits": 16
+        },
+        "bias32": {
+          "path": "/home/yang/Desktop/ic设计竞赛/hardware/architecture/results/real_e203_validation0_vectors/layer10_bias32.hex",
+          "sha256": "e58c090667beaf08a2bf4141743bf0af4491c7cd7e3fa1ca5144c5b5648599f6",
+          "elements": 256,
+          "element_bits": 32
+        },
+        "expected32": {
+          "path": "/home/yang/Desktop/ic设计竞赛/hardware/architecture/results/real_e203_validation0_vectors/layer10_expected32.hex",
+          "sha256": "37de3c38e04cb5d8dd1d4dc8d4f0a58b83f2844607afc771713ccc413de57a94",
+          "elements": 25344,
+          "element_bits": 32
+        }
+      }
+    },
+    {
+      "layer": 11,
+      "activation_scale": 0.002767295679000161,
+      "weight_scale_min": 1.7632661048330207e-05,
+      "weight_scale_max": 0.0007102053226090224,
+      "nrmse_pct": 0.13493030006895154,
+      "max_abs_expected_int32": 3285873,
+      "conservative_abs_accumulator_bound": 67252811,
+      "files": {
+        "a16": {
+          "path": "/home/yang/Desktop/ic设计竞赛/hardware/architecture/results/real_e203_validation0_vectors/layer11_a16.hex",
+          "sha256": "dfc4da1fe92ce8a65a9325fe4d15cd478f42d5479f94ec9fc4dafd3b590d2b33",
+          "elements": 6656,
+          "element_bits": 16
+        },
+        "w16": {
+          "path": "/home/yang/Desktop/ic设计竞赛/hardware/architecture/results/real_e203_validation0_vectors/layer11_w16.hex",
+          "sha256": "436a1ebe1d03898062686ffbeecc88d0da7fa20b16525677df5c35dd4a86cf24",
+          "elements": 16384,
+          "element_bits": 16
+        },
+        "bias32": {
+          "path": "/home/yang/Desktop/ic设计竞赛/hardware/architecture/results/real_e203_validation0_vectors/layer11_bias32.hex",
+          "sha256": "a258679329c56595c954aafd13d6d7260084dbb716d469fee20d7f1f82150e4b",
+          "elements": 256,
+          "element_bits": 32
+        },
+        "expected32": {
+          "path": "/home/yang/Desktop/ic设计竞赛/hardware/architecture/results/real_e203_validation0_vectors/layer11_expected32.hex",
+          "sha256": "bcb848d489495e7641773d16c8e22d869b944d75adc0779b52e38dfaa9624d01",
+          "elements": 25344,
+          "element_bits": 32
+        }
+      }
+    },
+    {
+      "layer": 12,
+      "activation_scale": 0.0026802809342094088,
+      "weight_scale_min": 0.00017957904042563094,
+      "weight_scale_max": 0.0006952372665741206,
+      "nrmse_pct": 0.12923194816177572,
+      "max_abs_expected_int32": 3257776,
+      "conservative_abs_accumulator_bound": 67165739,
+      "files": {
+        "a16": {
+          "path": "/home/yang/Desktop/ic设计竞赛/hardware/architecture/results/real_e203_validation0_vectors/layer12_a16.hex",
+          "sha256": "7e93ded13b284b831770396b536b9efd16ceb6c61ef3b93c66d4fde84837c8d6",
+          "elements": 6656,
+          "element_bits": 16
+        },
+        "w16": {
+          "path": "/home/yang/Desktop/ic设计竞赛/hardware/architecture/results/real_e203_validation0_vectors/layer12_w16.hex",
+          "sha256": "e574a50aea99853057daca5c01ab2b8f0bb40a9a3b24a5d4e30f9c9b7d5be831",
+          "elements": 16384,
+          "element_bits": 16
+        },
+        "bias32": {
+          "path": "/home/yang/Desktop/ic设计竞赛/hardware/architecture/results/real_e203_validation0_vectors/layer12_bias32.hex",
+          "sha256": "4bcfb6fd19bfb9483162b0eeefc1b4ebeb39f7a1b9cece24a3af86b7f6eeda41",
+          "elements": 256,
+          "element_bits": 32
+        },
+        "expected32": {
+          "path": "/home/yang/Desktop/ic设计竞赛/hardware/architecture/results/real_e203_validation0_vectors/layer12_expected32.hex",
+          "sha256": "e042953f39f7cb8159d666fff4892929472adf86628a10beb693069c6900edeb",
+          "elements": 25344,
+          "element_bits": 32
+        }
+      }
+    }
+  ],
+  "worst_layer_nrmse_pct": 0.13493030006895154,
+  "generation_device": "cpu"
+}
