@@ -1,0 +1,613 @@
+{
+  "generated_at": "2026-10-18T06:22:53.375964+00:00",
+  "script": "submission/evidence_check.py",
+  "repo_root": "/home/yang/kwt-worktrees/packaging",
+  "reference_main_readonly": "/home/yang/Desktop/ic设计竞赛",
+  "levels": {
+    "L1_num_core_verilator": "已上机数值核（Verilator RTL 计算核 + 输出暂存）",
+    "L2_nice_like_e203": "NICE-like E203 / SoC 仿真（非组委会正式 SoC）",
+    "L3_driver_host": "C 驱动宿主测试 / RV32 交叉编译（非 SoC 联调）",
+    "L4_example_lib_synth": "示例库综合（Yosys + Nangate45 示例 Liberty）",
+    "GAP_official": "未获得的组委会材料 / 目标库 / 宏 / SDC / 评测集"
+  },
+  "tools": {
+    "python3": {
+      "present": true,
+      "path": "/usr/bin/python3",
+      "version": "Python 3.10.12"
+    },
+    "git": {
+      "present": true,
+      "path": "/usr/bin/git",
+      "version": "git version 2.34.1"
+    },
+    "sha256sum": {
+      "present": true,
+      "path": "/usr/bin/sha256sum",
+      "version": "sha256sum (GNU coreutils) 8.32"
+    },
+    "cc": {
+      "present": true,
+      "path": "/usr/bin/cc",
+      "version": "cc (Ubuntu 11.4.0-1ubuntu1~22.04.3) 11.4.0"
+    },
+    "gcc": {
+      "present": true,
+      "path": "/usr/bin/gcc",
+      "version": "gcc (Ubuntu 11.4.0-1ubuntu1~22.04.3) 11.4.0"
+    },
+    "verilator": {
+      "present": true,
+      "path": "/usr/local/bin/verilator",
+      "version": "Verilator 5.030 2024-10-27 rev v5.030"
+    },
+    "iverilog": {
+      "present": true,
+      "path": "/usr/bin/iverilog",
+      "version": "/usr/bin/iverilog: invalid option -- '-'"
+    },
+    "vvp": {
+      "present": true,
+      "path": "/usr/bin/vvp",
+      "version": "/usr/bin/vvp: invalid option -- '-'"
+    },
+    "yosys": {
+      "present": true,
+      "path": "/usr/bin/yosys",
+      "version": "/usr/bin/yosys: invalid option -- '-'"
+    },
+    "riscv64-linux-gnu-gcc": {
+      "present": true,
+      "path": "/usr/bin/riscv64-linux-gnu-gcc",
+      "version": "riscv64-linux-gnu-gcc (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0"
+    },
+    "riscv64-linux-gnu-objcopy": {
+      "present": true,
+      "path": "/usr/bin/riscv64-linux-gnu-objcopy",
+      "version": "GNU objcopy (GNU Binutils for Ubuntu) 2.38"
+    }
+  },
+  "git_branch": "codex/kwt-packaging",
+  "git_head": "d94fb6f",
+  "items": [
+    {
+      "id": "l1_240_a11w10",
+      "level": "L1_num_core_verilator",
+      "claim": "240 条验证样本 × 12 层、72,990,720 个 INT32 输出与独立 INT32 GEMM 逐位一致，最差层 NRMSE 0.18216320%",
+      "proof_level": "on_machine",
+      "status": "PASS",
+      "status_reason": "证据文件齐备（数值/结论层级见 note）",
+      "artifacts": [
+        {
+          "path": "hardware/architecture/quantized_validation240_12layers_rtl_summary.json",
+          "exists": true,
+          "sha256": "ee53cca1829d30757baa6c595d9f948d4919649c5e59c3e40ac5833017e78954",
+          "size": 3103
+        },
+        {
+          "path": "hardware/architecture/quantized_validation240_rtl.md",
+          "exists": true,
+          "sha256": "b1e23c1d3f1f534f0103d125725dec2ba8c58b614a50a3ba6d9bac779a93f377",
+          "size": 1526
+        }
+      ],
+      "note": "JSON 内 pass_3pct=true，checked_outputs=72990720，worst_nrmse_pct=0.1821632；但这是本地 240 条验证样本，不是组委会冻结后选取的 600 条。",
+      "gaps": [
+        "官方 600 条评测集结果",
+        "该批次运行日志未提交（只有摘要 JSON）"
+      ]
+    },
+    {
+      "id": "l1_240_a12w10",
+      "level": "L1_num_core_verilator",
+      "claim": "A12W10 同一 240×12 批次最差层 NRMSE 0.14739360%，72,990,720 输出逐位一致",
+      "proof_level": "on_machine",
+      "status": "PASS",
+      "status_reason": "证据文件齐备（数值/结论层级见 note）",
+      "artifacts": [
+        {
+          "path": "hardware/architecture/quantized_validation240_a12w10_rtl_summary.json",
+          "exists": true,
+          "sha256": "de36db2507b86ffb36b6ba53f01e91e31cc033d7d0f3df30bd539c2728c5a95e",
+          "size": 3413
+        }
+      ],
+      "note": "JSON 内 conservative_accumulator_bound=67826716，远小于 INT32 上限。",
+      "gaps": [
+        "官方 600 条评测集结果",
+        "运行日志未提交"
+      ]
+    },
+    {
+      "id": "l1_real_sample_12layers",
+      "level": "L1_num_core_verilator",
+      "claim": "一条真实验证样本 12 层、304,128 个输出逐位一致，最差层 0.17041%",
+      "proof_level": "on_machine",
+      "status": "PASS",
+      "status_reason": "证据文件齐备（数值/结论层级见 note）",
+      "artifacts": [
+        {
+          "path": "hardware/architecture/quantized_validation0_12layers.json",
+          "exists": true,
+          "sha256": "8ad0d7dca758b36187af62ea3f226f4219cfee2e7adc5483641514825d7008c0",
+          "size": 2213
+        },
+        {
+          "path": "hardware/architecture/quantized_validation0_12layers_row16.json",
+          "exists": true,
+          "sha256": "3292bfc003486987bef87681f44bcfc0ecb936f294ceeb976ff8ed5132ad19d9",
+          "size": 2214
+        }
+      ],
+      "note": "8 行核任务模型（327,920 拍/层）。",
+      "gaps": [
+        "该样本的 WAV / 样本哈希未随产物提交，复现需 software/.build 样本"
+      ]
+    },
+    {
+      "id": "l1_row16_staged_cycles",
+      "level": "L1_num_core_verilator",
+      "claim": "16 行 + 输出暂存 staged 任务模型 154,240 拍/层（A/W/bias/总线为测试台定时模型）",
+      "proof_level": "on_machine",
+      "status": "PASS",
+      "status_reason": "证据文件齐备（数值/结论层级见 note）",
+      "artifacts": [
+        {
+          "path": "hardware/architecture/staged_task_row16_summary.json",
+          "exists": true,
+          "sha256": "4551fb32712e278a975f7d563c1376d83f6e2daf529f71497e67dc400b54d633",
+          "size": 1795
+        },
+        {
+          "path": "hardware/architecture/quantized_validation0_12layers_row16_staged.json",
+          "exists": true,
+          "sha256": "7ac3f668b2ead9d5cbc857efb049e303b057c2a1ceca2a00eb6e1a3ca34bd574",
+          "size": 2266
+        }
+      ],
+      "note": "154,240 拍是测试台定时模型，不是 E203 / 组委会总线性能。",
+      "gaps": [
+        "目标库/SDC 下的真实周期"
+      ]
+    },
+    {
+      "id": "l1_quant_format_compare",
+      "level": "L1_num_core_verilator",
+      "claim": "A8W8/A12W8/A12W9/A11W10/A12W10 五方案软件 480 条 + RTL 12 条子集逐位一致（见对照文档）",
+      "proof_level": "reported_only",
+      "status": "PARTIAL",
+      "status_reason": "有产物但无该次运行的退出码/日志",
+      "artifacts": [
+        {
+          "path": "hardware/architecture/量化格式_硬件成本与周期对照_20261017.md",
+          "exists": true,
+          "sha256": "cb6c95d5a6e7f9f6140cfe9b3a074c0beb10c2cbe97e6a69ff52cde686b589c8",
+          "size": 6852
+        }
+      ],
+      "note": "文档汇总值；逐方案 RTL 报告目录 hardware/architecture/results/ 未随本分支提交（见缺口）。",
+      "gaps": [
+        "results/quant_formats_12labels_40 逐方案日志未提交",
+        "A12W9 参数包 software/results/ffn1_a12w9_static_sym_12labels_40.npz 未提交"
+      ]
+    },
+    {
+      "id": "l2_run_e203_entry",
+      "level": "L2_nice_like_e203",
+      "claim": "E203 整层/真实层仿真入口脚本",
+      "proof_level": "entry_only",
+      "status": "ENTRY",
+      "status_reason": "仅有可执行入口，未附运行结果",
+      "artifacts": [
+        {
+          "path": "hardware/rtl/control/tb/run_e203.sh",
+          "exists": true,
+          "sha256": "5fda3e15bbd37b202225a872f4ee458fac47b073fe20bdf7212af5fdd4316083",
+          "size": 5472
+        },
+        {
+          "path": "hardware/rtl/control/tb/prepare_real_e203_vectors.py",
+          "exists": true,
+          "sha256": "2d0f673001c5b7b8de427b0dcbd43b99080a0af00d75644fdfea93f1a5bd25fe",
+          "size": 10728
+        },
+        {
+          "path": "hardware/rtl/control/tb/summarize_real_e203.py",
+          "exists": true,
+          "sha256": "3d880330f30e5dd3b51e7b681275072235999fdbe5c128ce603743ffb624a90a",
+          "size": 3350
+        }
+      ],
+      "note": "脚本支持 --full-layer / --real-layers / --tiles；已核对其分支与 0..207 tile 范围检查。入口存在不代表结果通过。",
+      "gaps": [
+        "本分支未提交任何 PASS 日志"
+      ]
+    },
+    {
+      "id": "l2_nice_system_model",
+      "level": "L2_nice_like_e203",
+      "claim": "NICE-like E203 系统模型（128-bit 仿真总线 + 16-bit SRAM 行为模型）",
+      "proof_level": "on_machine",
+      "status": "PASS",
+      "status_reason": "证据文件齐备（数值/结论层级见 note）",
+      "artifacts": [
+        {
+          "path": "hardware/rtl/control/kwt_nice_system_model.sv",
+          "exists": true,
+          "sha256": "e2d523bc3be2c7867259410719c58721c5b2f8f643c389d9e3b180029cfad70f",
+          "size": 5437
+        },
+        {
+          "path": "hardware/rtl/control/tb/e203_kwt_nice_core.sv",
+          "exists": true,
+          "sha256": "12e7d328198959b239ad14fdc1a75055e992928795d5fef73e0f07b5545ef241",
+          "size": 2552
+        },
+        {
+          "path": "hardware/rtl/control/tb/e203_kwt_full_layer.S",
+          "exists": true,
+          "sha256": "fff0e12dcc68ad69245df020fd8ab857ffa3e07dbff2254d97f8c95ee6d9a042",
+          "size": 532
+        }
+      ],
+      "note": "源码自称 NICE-like，不是组委会实际 SoC 总线/完整 NICE 适配。",
+      "gaps": [
+        "组委会正式 System Bus 地址图与 NICE 编码确认"
+      ]
+    },
+    {
+      "id": "l2_synthetic_full_layer",
+      "level": "L2_nice_like_e203",
+      "claim": "--full-layer 合成整数 208 tile 整层 PASS：25,344 有效输出、838,028 拍",
+      "proof_level": "reported_only",
+      "status": "PARTIAL",
+      "status_reason": "声称已跑但无提交日志（不计 PASS）",
+      "artifacts": [],
+      "note": "结果只写在 doc/本科FFN1数据与硬件边界核对_20261017.md；本分支与主目录均未找到该次运行的提交日志或退出码。",
+      "gaps": [
+        "可核验的运行日志/退出码",
+        "真实样本而非合成整数"
+      ]
+    },
+    {
+      "id": "l2_real_layer_run",
+      "level": "L2_nice_like_e203",
+      "claim": "真实 A12W10 向量逐层跑 E203 + NICE-like 模型的现状",
+      "proof_level": "on_machine",
+      "status": "FAIL",
+      "status_reason": "由只读外部证据判定",
+      "artifacts": [
+        {
+          "path": "/home/yang/Desktop/ic设计竞赛/hardware/architecture/results/real_e203_validation0_manifest.json",
+          "exists": true,
+          "sha256": "8d62c168707945b4cf1f0f81c0088fc24770dfc29a18cf057e65025ccca95c2a",
+          "size": 17582
+        },
+        {
+          "path": "/home/yang/Desktop/ic设计竞赛/hardware/architecture/results/real_e203_validation0_report.md",
+          "exists": true,
+          "sha256": "87e233242239a3152132d114c040f46085dc32d79e3113e8e0100f6a5107eca6",
+          "size": 4429
+        }
+      ],
+      "note": "主目录只读结果：real_e203_validation0 的 12 层全部 FAIL（通过 0/12），每层在 tile 0 输出 [0,0] 读到 x，疑似中文路径导致 $readmemh 载入 X；driver 分支正在修复该问题。",
+      "gaps": [
+        "一次退出码全 0 的真实层 E203 全层 PASS"
+      ]
+    },
+    {
+      "id": "l3_driver_source",
+      "level": "L3_driver_host",
+      "claim": "208 个 32 字节描述符的 NICE-like C 驱动与宿主测试",
+      "proof_level": "on_machine",
+      "status": "PASS",
+      "status_reason": "证据文件齐备（数值/结论层级见 note）",
+      "artifacts": [
+        {
+          "path": "software/driver/kwt_nice_driver.c",
+          "exists": true,
+          "sha256": "7965e76f441761b241389eb0508061cf22e87b7bf56ae98065623ee2c14b8474",
+          "size": 2677
+        },
+        {
+          "path": "software/driver/kwt_nice_driver.h",
+          "exists": true,
+          "sha256": "aa0f4c28c16cd94fb2b1d5af4a1cd477aee47995233f3a5fdf27c90440cf33f8",
+          "size": 967
+        },
+        {
+          "path": "software/driver/test_kwt_nice_driver.c",
+          "exists": true,
+          "sha256": "fdc89d4caed08de889e7a3152e51264a396a80f83c0798f06ff03b623c4a9875",
+          "size": 2017
+        },
+        {
+          "path": "software/driver/README.md",
+          "exists": true,
+          "sha256": "6e136ff0f58df1da207e669fd078647654d086d6e6943d185e31d7b21894acfe",
+          "size": 1679
+        }
+      ],
+      "note": "README 明确：宿主描述符与编译已验证；C 版**尚未**在 E203 仿真中执行。",
+      "gaps": [
+        "C 驱动在 E203/SoC 仿真中实际执行",
+        "正式地址图"
+      ]
+    },
+    {
+      "id": "l4b_synth_entry",
+      "level": "L4_example_lib_synth",
+      "claim": "示例库综合/比较脚本入口",
+      "proof_level": "entry_only",
+      "status": "ENTRY",
+      "status_reason": "仅有可执行入口，未附运行结果",
+      "artifacts": [
+        {
+          "path": "hardware/synth/run_engine.sh",
+          "exists": true,
+          "sha256": "77215462ad2b5067e51102067adeafa55610ac89c667a80c2ef3d665b9b197d6",
+          "size": 2197
+        },
+        {
+          "path": "hardware/synth/run_dma_2d.sh",
+          "exists": true,
+          "sha256": "d0672e21f62b6f823620d44603e3705d63db957d62143011a10edb00390d7d8e",
+          "size": 487
+        },
+        {
+          "path": "hardware/architecture/run_compare_synth.sh",
+          "exists": true,
+          "sha256": "59387f10a4540f1304c74651663bfaeb4849abc666bc03e52cfc7ff0dc8a02b7",
+          "size": 2584
+        }
+      ],
+      "note": "脚本要求 Liberty 库存在；仅入口存在不代表已综合或已达时序。",
+      "gaps": [
+        "目标 SDC / STA / 150 MHz"
+      ]
+    },
+    {
+      "id": "l3_host_test_fresh",
+      "level": "L3_driver_host",
+      "claim": "本次核对实际执行 C 驱动宿主测试（描述符布局/边界）",
+      "proof_level": "on_machine",
+      "status": "PASS",
+      "status_reason": "本次运行退出码 0",
+      "artifacts": [],
+      "note": "宿主测试只证明描述符生成/边界检查；驱动尚未在 E203 仿真中执行，不代表 SoC 联调。",
+      "gaps": [
+        "C 驱动在 E203/SoC 仿真中实际执行"
+      ]
+    },
+    {
+      "id": "gap_组委会_System_Bus_正式_SoC_地址",
+      "level": "GAP_official",
+      "claim": "组委会 System Bus / 正式 SoC 地址图",
+      "proof_level": "not_obtained",
+      "status": "GAP",
+      "status_reason": "未获得组委会材料（预期缺失）",
+      "artifacts": [],
+      "note": "只有组委会发放后才能真正闭合；不得用示例库替代。",
+      "gaps": [
+        "组委会 System Bus / 正式 SoC 地址图"
+      ]
+    },
+    {
+      "id": "gap_目标_PDK_标准单元库_非示例_Nangate",
+      "level": "GAP_official",
+      "claim": "目标 PDK / 标准单元库（非示例 Nangate45）",
+      "proof_level": "not_obtained",
+      "status": "GAP",
+      "status_reason": "未获得组委会材料（预期缺失）",
+      "artifacts": [],
+      "note": "只有组委会发放后才能真正闭合；不得用示例库替代。",
+      "gaps": [
+        "目标 PDK / 标准单元库（非示例 Nangate45）"
+      ]
+    },
+    {
+      "id": "gap_指定_16bit_128_1024_4096_S",
+      "level": "GAP_official",
+      "claim": "指定 16bit×128/1024/4096 SRAM 宏（liberty/verilog 宏模型）",
+      "proof_level": "not_obtained",
+      "status": "GAP",
+      "status_reason": "未获得组委会材料（预期缺失）",
+      "artifacts": [],
+      "note": "只有组委会发放后才能真正闭合；不得用示例库替代。",
+      "gaps": [
+        "指定 16bit×128/1024/4096 SRAM 宏（liberty/verilog 宏模型）"
+      ]
+    },
+    {
+      "id": "gap_目标_SDC_约束文件",
+      "level": "GAP_official",
+      "claim": "目标 SDC 约束文件",
+      "proof_level": "not_obtained",
+      "status": "GAP",
+      "status_reason": "未获得组委会材料（预期缺失）",
+      "artifacts": [],
+      "note": "只有组委会发放后才能真正闭合；不得用示例库替代。",
+      "gaps": [
+        "目标 SDC 约束文件"
+      ]
+    },
+    {
+      "id": "gap_官方_600_条评测集_评测脚本",
+      "level": "GAP_official",
+      "claim": "官方 600 条评测集 / 评测脚本",
+      "proof_level": "not_obtained",
+      "status": "GAP",
+      "status_reason": "未获得组委会材料（预期缺失）",
+      "artifacts": [],
+      "note": "只有组委会发放后才能真正闭合；不得用示例库替代。",
+      "gaps": [
+        "官方 600 条评测集 / 评测脚本"
+      ]
+    },
+    {
+      "id": "gap_sample_archive",
+      "level": "L1_num_core_verilator",
+      "claim": "240/480 条验证样本归档 software/.build/quant_samples_12labels_20.npz",
+      "proof_level": "not_in_tree",
+      "status": "GAP",
+      "status_reason": "样本归档被 .gitignore 排除，提交树内不存在",
+      "artifacts": [
+        {
+          "path": "software/.build/quant_samples_12labels_20.npz",
+          "exists": false
+        },
+        {
+          "path": "/home/yang/Desktop/ic设计竞赛/software/.build/quant_samples_12labels_20.npz",
+          "exists": true,
+          "note": "主目录只读副本，哈希一致时才可用"
+        }
+      ],
+      "note": "仓库内 software/.build 被 .gitignore 排除，实际样本归档缺失；主目录有同哈希副本，但不在提交树中，复现依赖外部文件。",
+      "gaps": [
+        "提交树内可复现的样本归档"
+      ]
+    }
+  ],
+  "official_source_integrity": [
+    {
+      "path": "资料/ARM_KWT-1_237e4097/models_data_v2_12_labels/kwt1/labels.txt",
+      "present": true,
+      "expected_blob_sha": "ba416458b011a7f4b96739eb6fcb6275a6ab3bec",
+      "actual_blob_sha": "ba416458b011a7f4b96739eb6fcb6275a6ab3bec",
+      "match": true
+    },
+    {
+      "path": "资料/ARM_KWT-1_237e4097/models_data_v2_12_labels/kwt1/best_weights.data-00000-of-00001",
+      "present": true,
+      "expected_blob_sha": "9c38f9653119383f7a303a94689c85a2a1c79b6b",
+      "actual_blob_sha": "9c38f9653119383f7a303a94689c85a2a1c79b6b",
+      "match": true
+    },
+    {
+      "path": "资料/ARM_KWT-1_237e4097/models_data_v2_12_labels/kwt1/flags.json",
+      "present": true,
+      "expected_blob_sha": "008af2047e217bdad9e84ff5e5b70e69bac423c3",
+      "actual_blob_sha": "008af2047e217bdad9e84ff5e5b70e69bac423c3",
+      "match": true
+    },
+    {
+      "path": "资料/ARM_KWT-1_237e4097/kws_streaming/layers/speech_features.py",
+      "present": true,
+      "expected_blob_sha": "c888a2f77e03487b399622c094fd288c43a237e4",
+      "actual_blob_sha": "c888a2f77e03487b399622c094fd288c43a237e4",
+      "match": true
+    },
+    {
+      "path": "资料/E203_Hummingbirdv2_9f3e34f/rtl/e203/core/e203_exu_nice.v",
+      "present": true,
+      "expected_blob_sha": "b01b7c263f878b082b2061178949fb2baf4f9fb6",
+      "actual_blob_sha": "b01b7c263f878b082b2061178949fb2baf4f9fb6",
+      "match": true
+    }
+  ],
+  "hash_checks": [
+    {
+      "source_json": "hardware/architecture/quantized_validation240_12layers_rtl_summary.json",
+      "field": "weights",
+      "path": "software/weights/kwt1_fp32.npz",
+      "expected_sha256": "8f359abf7adbe287b8f89fca98af46194f98f90f2146784731bff551a155825a",
+      "actual_sha256": "8f359abf7adbe287b8f89fca98af46194f98f90f2146784731bff551a155825a",
+      "match": true
+    },
+    {
+      "source_json": "hardware/architecture/quantized_validation240_12layers_rtl_summary.json",
+      "field": "params",
+      "path": "software/results/ffn1_blackbox_a11w10.npz",
+      "expected_sha256": "bc7aff59fadf408245c0fe841c9753875df9af202023e3ed98a234e5d884c3aa",
+      "actual_sha256": "bc7aff59fadf408245c0fe841c9753875df9af202023e3ed98a234e5d884c3aa",
+      "match": true
+    },
+    {
+      "source_json": "hardware/architecture/quantized_validation240_a12w10_rtl_summary.json",
+      "field": "params",
+      "path": "software/results/ffn1_a12w10_static_sym.npz",
+      "expected_sha256": "a77f60fb7c8560adbca73db3cf64dcd5501ec0108b96a1131a00aa722be1918e",
+      "actual_sha256": "a77f60fb7c8560adbca73db3cf64dcd5501ec0108b96a1131a00aa722be1918e",
+      "match": true
+    },
+    {
+      "source_json": "hardware/architecture/quantized_validation240_a12w10_rtl_summary.json",
+      "field": "weights",
+      "path": "software/weights/kwt1_fp32.npz",
+      "expected_sha256": "8f359abf7adbe287b8f89fca98af46194f98f90f2146784731bff551a155825a",
+      "actual_sha256": "8f359abf7adbe287b8f89fca98af46194f98f90f2146784731bff551a155825a",
+      "match": true
+    }
+  ],
+  "sample_archive": {
+    "recorded_sha256": "ee04e849bc407149618e4ecd5ff99575687586d4e57c0ade6a0b3f7b66c8c149",
+    "software/.build/quant_samples_12labels_20.npz": {
+      "present": false,
+      "actual_sha256": null,
+      "match": false
+    },
+    "main_dir_copy": {
+      "path": "/home/yang/Desktop/ic设计竞赛/software/.build/quant_samples_12labels_20.npz",
+      "present": true,
+      "match": true
+    },
+    "status": "GAP",
+    "note": "仓库内 software/.build 被 .gitignore 排除，实际样本归档缺失；主目录有同哈希副本，但不在提交树中，复现依赖外部文件。"
+  },
+  "official_gap_scan": [
+    {
+      "missing_material": "组委会 System Bus / 正式 SoC 地址图",
+      "found": [],
+      "status": "ABSENT_AS_EXPECTED"
+    },
+    {
+      "missing_material": "目标 PDK / 标准单元库（非示例 Nangate45）",
+      "found": [],
+      "status": "ABSENT_AS_EXPECTED"
+    },
+    {
+      "missing_material": "指定 16bit×128/1024/4096 SRAM 宏（liberty/verilog 宏模型）",
+      "found": [],
+      "status": "ABSENT_AS_EXPECTED"
+    },
+    {
+      "missing_material": "目标 SDC 约束文件",
+      "found": [],
+      "status": "ABSENT_AS_EXPECTED"
+    },
+    {
+      "missing_material": "官方 600 条评测集 / 评测脚本",
+      "found": [],
+      "status": "ABSENT_AS_EXPECTED"
+    }
+  ],
+  "host_tests": [
+    {
+      "name": "c_driver_host_test",
+      "command": "cc -std=c11 -O2 -Wall -Wextra -Werror software/driver/kwt_nice_driver.c software/driver/test_kwt_nice_driver.c -o /tmp/kwt-nice-driver-evidence && /tmp/kwt-nice-driver-evidence",
+      "status": "PASS",
+      "exit_code": 0,
+      "stdout_tail": [
+        "PASS provisional NICE FFN1 descriptor layout and bounds"
+      ]
+    },
+    {
+      "name": "c_driver_rv32_compile",
+      "command": "riscv64-linux-gnu-gcc -std=c11 -O2 -Wall -Wextra -Werror -ffreestanding -march=rv32imac -mabi=ilp32 -c software/driver/kwt_nice_driver.c -o /tmp/kwt_nice_driver_evidence_rv32.o",
+      "status": "PASS",
+      "exit_code": 0,
+      "stdout_tail": []
+    }
+  ],
+  "summary": {
+    "by_status": {
+      "PASS": 7,
+      "PARTIAL": 2,
+      "ENTRY": 2,
+      "FAIL": 1,
+      "GAP": 6
+    },
+    "pass_requires_on_machine_evidence": true,
+    "note": "PASS 仅用于已上机且产物齐备的条目；ENTRY/PARTIAL/FAIL/GAP 均不得当作通过。"
+  }
+}
