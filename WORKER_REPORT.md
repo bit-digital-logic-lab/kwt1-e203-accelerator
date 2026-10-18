@@ -18,6 +18,10 @@
 - `run_tile_edges.sh`：入口脚本，`python3 -u` 调用上面的驱动。
 - `TILE_EDGE_TESTS.md`：覆盖项、判据与证据层级说明。
 
+新增（`hardware/testbenchplus/common/negative_injection_check.py`）：对两个示例
+向量各跑两次未改动的 `run_vectors.py`——原 golden 必须通过，单个 `expected`
+元素污染后必须失败——以证明 testbenchplus 的独立 golden 真的能拦住错值。
+
 覆盖：独立 golden 负向注入、末 tile（行 96..98 有效 / 99..103 填充，16 个列
 tile）、无复位连续任务、计算中注入复位并在复位后恢复核对。
 
@@ -30,6 +34,7 @@ tile）、无复位连续任务、计算中注入复位并在复位后恢复核�
 | --- | ---: | --- |
 | `PATH=/home/yang/yosys-sta/oss-cad-suite/bin:$PATH bash hardware/rtl/control/tb/run_tile_edges.sh` | 0 | 正向 `PASS`：21 个 case，末 tile 768 有效 + 1280 填充，连续 19 次，复位 1 次；负向注入 `MISMATCH case=20 row=98 col=255`，子运行退出 1，被脚本判定为“已检出” |
 | `PATH=/home/yang/yosys-sta/oss-cad-suite/bin:$PATH bash hardware/testbenchplus/run_all_tests.sh --vectors-only` | 0 | 既有 testbenchplus 向量 2/2 通过（int16 逐位、fp32 NRMSE 0） |
+| `PATH=/home/yang/yosys-sta/oss-cad-suite/bin:$PATH python3 hardware/testbenchplus/common/negative_injection_check.py` | 0 | 原 golden 通过；污染后 fp32/int16 均以 exit=1 检出 |
 | `PATH=/home/yang/yosys-sta/oss-cad-suite/bin:$PATH bash hardware/rtl/control/tb/run.sh` | 0 | 既有 tile system model 通过（128 个结果） |
 | `bash hardware/rtl/control/tb/run.sh`（默认 `/usr/bin/iverilog` 11.0） | 1 | 既有 RTL 的 `unresolved wire array`；非本次改动引入 |
 
