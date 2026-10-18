@@ -1,0 +1,2 @@
+layer=01 nrmse=0.109334% A=6656 W=16384 bias=256 expected=25344
+saved /tmp/opencode/multisample_validation/vectors/sample_idx080/manifest.json worst=0.109334%

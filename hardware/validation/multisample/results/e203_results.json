@@ -1,0 +1,800 @@
+{
+  "format": "KWT-1 A12W10 multisample E203 sample matrix v1",
+  "evidence": "Icarus NICE-like E203 + simulation bus/SRAM model",
+  "shared_inputs": {
+    "sample_archive": "/home/yang/Desktop/ic设计竞赛/software/.build/quant_samples_12labels_40.npz",
+    "sample_archive_sha256": "43d639fb64ea8d907db967b071010e41e68827368532880ba8a99b92769bbae8",
+    "parameter_archive": "/home/yang/Desktop/ic设计竞赛/software/results/ffn1_a12w10_static_sym_12labels_40.npz",
+    "parameter_archive_sha256": "10c481c7a79d0ee8063ad807f8c0f685769c2c8e1dbcdb5f33079919dfeef367",
+    "fp32_weight_archive": "/home/yang/Desktop/ic设计竞赛/software/weights/kwt1_fp32.npz",
+    "fp32_weight_archive_sha256": "8f359abf7adbe287b8f89fca98af46194f98f90f2146784731bff551a155825a"
+  },
+  "samples": [
+    {
+      "validation_index": 0,
+      "label": "_unknown_",
+      "sample_path": "./four/750e3e75_nohash_0.wav",
+      "sample_feature_sha256": "8bd524752fcc7bd99e17b4634e089361f612be06891f0eeb62434546a3dad3d1",
+      "rotation_layers": [
+        1,
+        4,
+        7,
+        10
+      ],
+      "selected_layers": [
+        1,
+        4,
+        6,
+        7,
+        10,
+        12
+      ],
+      "full_12_layer_vectors_checked": true,
+      "worst_layer_nrmse_pct": 0.13493019087552613,
+      "runs": [
+        {
+          "tile": 0,
+          "exit_code": 0,
+          "pass_count": 6,
+          "expected_pass_count": 6,
+          "running_layers": [
+            "layer01",
+            "layer04",
+            "layer06",
+            "layer07",
+            "layer10",
+            "layer12"
+          ],
+          "passes": [
+            {
+              "start": 0,
+              "count": 1,
+              "outputs": 128,
+              "padding": 0,
+              "task_cycles": 4025,
+              "total_cycles": 4038
+            },
+            {
+              "start": 0,
+              "count": 1,
+              "outputs": 128,
+              "padding": 0,
+              "task_cycles": 4025,
+              "total_cycles": 4038
+            },
+            {
+              "start": 0,
+              "count": 1,
+              "outputs": 128,
+              "padding": 0,
+              "task_cycles": 4025,
+              "total_cycles": 4038
+            },
+            {
+              "start": 0,
+              "count": 1,
+              "outputs": 128,
+              "padding": 0,
+              "task_cycles": 4025,
+              "total_cycles": 4038
+            },
+            {
+              "start": 0,
+              "count": 1,
+              "outputs": 128,
+              "padding": 0,
+              "task_cycles": 4025,
+              "total_cycles": 4038
+            },
+            {
+              "start": 0,
+              "count": 1,
+              "outputs": 128,
+              "padding": 0,
+              "task_cycles": 4025,
+              "total_cycles": 4038
+            }
+          ],
+          "ok": true,
+          "log": "/tmp/opencode/multisample_validation/runs/sample_idx000_tile000.log",
+          "log_sha256": "de9efff2946b62b6561e99c59452b5aedf62fdb69924e607a91af01009efca50"
+        },
+        {
+          "tile": 207,
+          "exit_code": 0,
+          "pass_count": 6,
+          "expected_pass_count": 6,
+          "running_layers": [
+            "layer01",
+            "layer04",
+            "layer06",
+            "layer07",
+            "layer10",
+            "layer12"
+          ],
+          "passes": [
+            {
+              "start": 207,
+              "count": 1,
+              "outputs": 48,
+              "padding": 80,
+              "task_cycles": 4025,
+              "total_cycles": 4039
+            },
+            {
+              "start": 207,
+              "count": 1,
+              "outputs": 48,
+              "padding": 80,
+              "task_cycles": 4025,
+              "total_cycles": 4039
+            },
+            {
+              "start": 207,
+              "count": 1,
+              "outputs": 48,
+              "padding": 80,
+              "task_cycles": 4025,
+              "total_cycles": 4039
+            },
+            {
+              "start": 207,
+              "count": 1,
+              "outputs": 48,
+              "padding": 80,
+              "task_cycles": 4025,
+              "total_cycles": 4039
+            },
+            {
+              "start": 207,
+              "count": 1,
+              "outputs": 48,
+              "padding": 80,
+              "task_cycles": 4025,
+              "total_cycles": 4039
+            },
+            {
+              "start": 207,
+              "count": 1,
+              "outputs": 48,
+              "padding": 80,
+              "task_cycles": 4025,
+              "total_cycles": 4039
+            }
+          ],
+          "ok": true,
+          "log": "/tmp/opencode/multisample_validation/runs/sample_idx000_tile207.log",
+          "log_sha256": "d37080b71c0578e0964d869700dbc31be7374e03850c3badb2a15a69522297d2"
+        }
+      ]
+    },
+    {
+      "validation_index": 40,
+      "label": "down",
+      "sample_path": "./down/c2d15ea5_nohash_0.wav",
+      "sample_feature_sha256": "6ae1009912d0b5892c57a51917207b86e52ba9affed759f0374871fde60dd415",
+      "rotation_layers": [
+        2,
+        5,
+        8,
+        11
+      ],
+      "selected_layers": [
+        1,
+        2,
+        5,
+        6,
+        8,
+        11,
+        12
+      ],
+      "full_12_layer_vectors_checked": true,
+      "worst_layer_nrmse_pct": 0.14604676421627302,
+      "runs": [
+        {
+          "tile": 0,
+          "exit_code": 0,
+          "pass_count": 7,
+          "expected_pass_count": 7,
+          "running_layers": [
+            "layer01",
+            "layer02",
+            "layer05",
+            "layer06",
+            "layer08",
+            "layer11",
+            "layer12"
+          ],
+          "passes": [
+            {
+              "start": 0,
+              "count": 1,
+              "outputs": 128,
+              "padding": 0,
+              "task_cycles": 4025,
+              "total_cycles": 4038
+            },
+            {
+              "start": 0,
+              "count": 1,
+              "outputs": 128,
+              "padding": 0,
+              "task_cycles": 4025,
+              "total_cycles": 4038
+            },
+            {
+              "start": 0,
+              "count": 1,
+              "outputs": 128,
+              "padding": 0,
+              "task_cycles": 4025,
+              "total_cycles": 4038
+            },
+            {
+              "start": 0,
+              "count": 1,
+              "outputs": 128,
+              "padding": 0,
+              "task_cycles": 4025,
+              "total_cycles": 4038
+            },
+            {
+              "start": 0,
+              "count": 1,
+              "outputs": 128,
+              "padding": 0,
+              "task_cycles": 4025,
+              "total_cycles": 4038
+            },
+            {
+              "start": 0,
+              "count": 1,
+              "outputs": 128,
+              "padding": 0,
+              "task_cycles": 4025,
+              "total_cycles": 4038
+            },
+            {
+              "start": 0,
+              "count": 1,
+              "outputs": 128,
+              "padding": 0,
+              "task_cycles": 4025,
+              "total_cycles": 4038
+            }
+          ],
+          "ok": true,
+          "log": "/tmp/opencode/multisample_validation/runs/sample_idx040_tile000.log",
+          "log_sha256": "25296b1b9334fde0c6ccb3c2290e8893ee91b03cd325adeba4ecdac4dc94310a"
+        },
+        {
+          "tile": 207,
+          "exit_code": 0,
+          "pass_count": 7,
+          "expected_pass_count": 7,
+          "running_layers": [
+            "layer01",
+            "layer02",
+            "layer05",
+            "layer06",
+            "layer08",
+            "layer11",
+            "layer12"
+          ],
+          "passes": [
+            {
+              "start": 207,
+              "count": 1,
+              "outputs": 48,
+              "padding": 80,
+              "task_cycles": 4025,
+              "total_cycles": 4039
+            },
+            {
+              "start": 207,
+              "count": 1,
+              "outputs": 48,
+              "padding": 80,
+              "task_cycles": 4025,
+              "total_cycles": 4039
+            },
+            {
+              "start": 207,
+              "count": 1,
+              "outputs": 48,
+              "padding": 80,
+              "task_cycles": 4025,
+              "total_cycles": 4039
+            },
+            {
+              "start": 207,
+              "count": 1,
+              "outputs": 48,
+              "padding": 80,
+              "task_cycles": 4025,
+              "total_cycles": 4039
+            },
+            {
+              "start": 207,
+              "count": 1,
+              "outputs": 48,
+              "padding": 80,
+              "task_cycles": 4025,
+              "total_cycles": 4039
+            },
+            {
+              "start": 207,
+              "count": 1,
+              "outputs": 48,
+              "padding": 80,
+              "task_cycles": 4025,
+              "total_cycles": 4039
+            },
+            {
+              "start": 207,
+              "count": 1,
+              "outputs": 48,
+              "padding": 80,
+              "task_cycles": 4025,
+              "total_cycles": 4039
+            }
+          ],
+          "ok": true,
+          "log": "/tmp/opencode/multisample_validation/runs/sample_idx040_tile207.log",
+          "log_sha256": "33a8957888e0c1b03fc5e96d439fb76e6d2195f7eba42f59df202691965d5790"
+        }
+      ]
+    },
+    {
+      "validation_index": 440,
+      "label": "_silence_",
+      "sample_path": "_silence_/validation_zero_000.wav",
+      "sample_feature_sha256": "22bbd8bea1c4bc6822f8f644494b6bda7c67f30cf5472894d7c4ce421b63b2b4",
+      "rotation_layers": [
+        3,
+        6,
+        9,
+        12
+      ],
+      "selected_layers": [
+        1,
+        3,
+        6,
+        9,
+        12
+      ],
+      "full_12_layer_vectors_checked": true,
+      "worst_layer_nrmse_pct": 0.17670282840673185,
+      "runs": [
+        {
+          "tile": 0,
+          "exit_code": 0,
+          "pass_count": 5,
+          "expected_pass_count": 5,
+          "running_layers": [
+            "layer01",
+            "layer03",
+            "layer06",
+            "layer09",
+            "layer12"
+          ],
+          "passes": [
+            {
+              "start": 0,
+              "count": 1,
+              "outputs": 128,
+              "padding": 0,
+              "task_cycles": 4025,
+              "total_cycles": 4038
+            },
+            {
+              "start": 0,
+              "count": 1,
+              "outputs": 128,
+              "padding": 0,
+              "task_cycles": 4025,
+              "total_cycles": 4038
+            },
+            {
+              "start": 0,
+              "count": 1,
+              "outputs": 128,
+              "padding": 0,
+              "task_cycles": 4025,
+              "total_cycles": 4038
+            },
+            {
+              "start": 0,
+              "count": 1,
+              "outputs": 128,
+              "padding": 0,
+              "task_cycles": 4025,
+              "total_cycles": 4038
+            },
+            {
+              "start": 0,
+              "count": 1,
+              "outputs": 128,
+              "padding": 0,
+              "task_cycles": 4025,
+              "total_cycles": 4038
+            }
+          ],
+          "ok": true,
+          "log": "/tmp/opencode/multisample_validation/runs/sample_idx440_tile000.log",
+          "log_sha256": "8e7434bc8b2cf0b534438460e7d92a589968d4acf5134c67d855472e48dddbe5"
+        },
+        {
+          "tile": 207,
+          "exit_code": 0,
+          "pass_count": 5,
+          "expected_pass_count": 5,
+          "running_layers": [
+            "layer01",
+            "layer03",
+            "layer06",
+            "layer09",
+            "layer12"
+          ],
+          "passes": [
+            {
+              "start": 207,
+              "count": 1,
+              "outputs": 48,
+              "padding": 80,
+              "task_cycles": 4025,
+              "total_cycles": 4039
+            },
+            {
+              "start": 207,
+              "count": 1,
+              "outputs": 48,
+              "padding": 80,
+              "task_cycles": 4025,
+              "total_cycles": 4039
+            },
+            {
+              "start": 207,
+              "count": 1,
+              "outputs": 48,
+              "padding": 80,
+              "task_cycles": 4025,
+              "total_cycles": 4039
+            },
+            {
+              "start": 207,
+              "count": 1,
+              "outputs": 48,
+              "padding": 80,
+              "task_cycles": 4025,
+              "total_cycles": 4039
+            },
+            {
+              "start": 207,
+              "count": 1,
+              "outputs": 48,
+              "padding": 80,
+              "task_cycles": 4025,
+              "total_cycles": 4039
+            }
+          ],
+          "ok": true,
+          "log": "/tmp/opencode/multisample_validation/runs/sample_idx440_tile207.log",
+          "log_sha256": "832ccc54d3ff9ad228f773f68a49cc2d948a7eeb0ba71271052dbf9255ff35bc"
+        }
+      ]
+    }
+  ],
+  "matrix": [
+    {
+      "validation_index": 0,
+      "label": "_unknown_",
+      "layer": 1,
+      "primary_rotation": true,
+      "tile000": "PASS",
+      "tile207": "PASS"
+    },
+    {
+      "validation_index": 0,
+      "label": "_unknown_",
+      "layer": 2,
+      "primary_rotation": false,
+      "tile000": "not_run",
+      "tile207": "not_run"
+    },
+    {
+      "validation_index": 0,
+      "label": "_unknown_",
+      "layer": 3,
+      "primary_rotation": false,
+      "tile000": "not_run",
+      "tile207": "not_run"
+    },
+    {
+      "validation_index": 0,
+      "label": "_unknown_",
+      "layer": 4,
+      "primary_rotation": true,
+      "tile000": "PASS",
+      "tile207": "PASS"
+    },
+    {
+      "validation_index": 0,
+      "label": "_unknown_",
+      "layer": 5,
+      "primary_rotation": false,
+      "tile000": "not_run",
+      "tile207": "not_run"
+    },
+    {
+      "validation_index": 0,
+      "label": "_unknown_",
+      "layer": 6,
+      "primary_rotation": false,
+      "tile000": "PASS",
+      "tile207": "PASS"
+    },
+    {
+      "validation_index": 0,
+      "label": "_unknown_",
+      "layer": 7,
+      "primary_rotation": true,
+      "tile000": "PASS",
+      "tile207": "PASS"
+    },
+    {
+      "validation_index": 0,
+      "label": "_unknown_",
+      "layer": 8,
+      "primary_rotation": false,
+      "tile000": "not_run",
+      "tile207": "not_run"
+    },
+    {
+      "validation_index": 0,
+      "label": "_unknown_",
+      "layer": 9,
+      "primary_rotation": false,
+      "tile000": "not_run",
+      "tile207": "not_run"
+    },
+    {
+      "validation_index": 0,
+      "label": "_unknown_",
+      "layer": 10,
+      "primary_rotation": true,
+      "tile000": "PASS",
+      "tile207": "PASS"
+    },
+    {
+      "validation_index": 0,
+      "label": "_unknown_",
+      "layer": 11,
+      "primary_rotation": false,
+      "tile000": "not_run",
+      "tile207": "not_run"
+    },
+    {
+      "validation_index": 0,
+      "label": "_unknown_",
+      "layer": 12,
+      "primary_rotation": false,
+      "tile000": "PASS",
+      "tile207": "PASS"
+    },
+    {
+      "validation_index": 40,
+      "label": "down",
+      "layer": 1,
+      "primary_rotation": false,
+      "tile000": "PASS",
+      "tile207": "PASS"
+    },
+    {
+      "validation_index": 40,
+      "label": "down",
+      "layer": 2,
+      "primary_rotation": true,
+      "tile000": "PASS",
+      "tile207": "PASS"
+    },
+    {
+      "validation_index": 40,
+      "label": "down",
+      "layer": 3,
+      "primary_rotation": false,
+      "tile000": "not_run",
+      "tile207": "not_run"
+    },
+    {
+      "validation_index": 40,
+      "label": "down",
+      "layer": 4,
+      "primary_rotation": false,
+      "tile000": "not_run",
+      "tile207": "not_run"
+    },
+    {
+      "validation_index": 40,
+      "label": "down",
+      "layer": 5,
+      "primary_rotation": true,
+      "tile000": "PASS",
+      "tile207": "PASS"
+    },
+    {
+      "validation_index": 40,
+      "label": "down",
+      "layer": 6,
+      "primary_rotation": false,
+      "tile000": "PASS",
+      "tile207": "PASS"
+    },
+    {
+      "validation_index": 40,
+      "label": "down",
+      "layer": 7,
+      "primary_rotation": false,
+      "tile000": "not_run",
+      "tile207": "not_run"
+    },
+    {
+      "validation_index": 40,
+      "label": "down",
+      "layer": 8,
+      "primary_rotation": true,
+      "tile000": "PASS",
+      "tile207": "PASS"
+    },
+    {
+      "validation_index": 40,
+      "label": "down",
+      "layer": 9,
+      "primary_rotation": false,
+      "tile000": "not_run",
+      "tile207": "not_run"
+    },
+    {
+      "validation_index": 40,
+      "label": "down",
+      "layer": 10,
+      "primary_rotation": false,
+      "tile000": "not_run",
+      "tile207": "not_run"
+    },
+    {
+      "validation_index": 40,
+      "label": "down",
+      "layer": 11,
+      "primary_rotation": true,
+      "tile000": "PASS",
+      "tile207": "PASS"
+    },
+    {
+      "validation_index": 40,
+      "label": "down",
+      "layer": 12,
+      "primary_rotation": false,
+      "tile000": "PASS",
+      "tile207": "PASS"
+    },
+    {
+      "validation_index": 440,
+      "label": "_silence_",
+      "layer": 1,
+      "primary_rotation": false,
+      "tile000": "PASS",
+      "tile207": "PASS"
+    },
+    {
+      "validation_index": 440,
+      "label": "_silence_",
+      "layer": 2,
+      "primary_rotation": false,
+      "tile000": "not_run",
+      "tile207": "not_run"
+    },
+    {
+      "validation_index": 440,
+      "label": "_silence_",
+      "layer": 3,
+      "primary_rotation": true,
+      "tile000": "PASS",
+      "tile207": "PASS"
+    },
+    {
+      "validation_index": 440,
+      "label": "_silence_",
+      "layer": 4,
+      "primary_rotation": false,
+      "tile000": "not_run",
+      "tile207": "not_run"
+    },
+    {
+      "validation_index": 440,
+      "label": "_silence_",
+      "layer": 5,
+      "primary_rotation": false,
+      "tile000": "not_run",
+      "tile207": "not_run"
+    },
+    {
+      "validation_index": 440,
+      "label": "_silence_",
+      "layer": 6,
+      "primary_rotation": true,
+      "tile000": "PASS",
+      "tile207": "PASS"
+    },
+    {
+      "validation_index": 440,
+      "label": "_silence_",
+      "layer": 7,
+      "primary_rotation": false,
+      "tile000": "not_run",
+      "tile207": "not_run"
+    },
+    {
+      "validation_index": 440,
+      "label": "_silence_",
+      "layer": 8,
+      "primary_rotation": false,
+      "tile000": "not_run",
+      "tile207": "not_run"
+    },
+    {
+      "validation_index": 440,
+      "label": "_silence_",
+      "layer": 9,
+      "primary_rotation": true,
+      "tile000": "PASS",
+      "tile207": "PASS"
+    },
+    {
+      "validation_index": 440,
+      "label": "_silence_",
+      "layer": 10,
+      "primary_rotation": false,
+      "tile000": "not_run",
+      "tile207": "not_run"
+    },
+    {
+      "validation_index": 440,
+      "label": "_silence_",
+      "layer": 11,
+      "primary_rotation": false,
+      "tile000": "not_run",
+      "tile207": "not_run"
+    },
+    {
+      "validation_index": 440,
+      "label": "_silence_",
+      "layer": 12,
+      "primary_rotation": true,
+      "tile000": "PASS",
+      "tile207": "PASS"
+    }
+  ],
+  "ok": true,
+  "extra_full_layer": {
+    "validation_index": 80,
+    "layer": 1,
+    "tile_start": 0,
+    "tile_count": 208,
+    "exit_code": 0,
+    "pass_count": 1,
+    "passes": [
+      {
+        "start": 0,
+        "count": 208,
+        "outputs": 25344,
+        "padding": 1280,
+        "task_cycles": 838028,
+        "total_cycles": 838041
+      }
+    ],
+    "ok": true,
+    "log": "/tmp/opencode/multisample_validation/runs/sample_idx080_layer01_full208.log",
+    "log_sha256": "e7bae60bb9d4154f3866cb240ada25d78520b5ed9f439676eb7df51778abcd82"
+  }
+}

@@ -1,0 +1,14 @@
+Running E203 layer01
+E203 full layer: first request at cycle 7
+E203 full layer: tile 0 completed at cycle 4031
+E203 full layer: tile 1 completed at cycle 8060
+E203 full layer: tile 2 completed at cycle 12089
+E203 full layer: tile 3 completed at cycle 16118
+E203 full layer: 32/208 selected tiles completed
+E203 full layer: 64/208 selected tiles completed
+E203 full layer: 96/208 selected tiles completed
+E203 full layer: 128/208 selected tiles completed
+E203 full layer: 160/208 selected tiles completed
+E203 full layer: 192/208 selected tiles completed
+PASS frozen real-sample E203 FFN1 tiles: start=0 count=208 outputs=25344 padding=1280 task_cycles=838028 total_cycles=838041
+/home/yang/kwt-worktrees/multisample/hardware/rtl/control/tb/tb_kwt_real_layer_e203.sv:163: $finish called at 8380510 (1s)
