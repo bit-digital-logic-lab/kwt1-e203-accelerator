@@ -1,0 +1,2 @@
+/home/yang/kwt-worktrees/repro-infra/hardware/rtl/pulse_array/tb/tb_kwt_tile_engine.sv:91: error: Cannot "return" from tasks.
+1 error(s) during elaboration.

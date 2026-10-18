@@ -1,0 +1,67 @@
+{
+  "schema": "kwt-repro/1",
+  "generated_at": "2026-10-18T07:42:15.773957+00:00",
+  "level": "smoke",
+  "run_id": "fault-exit7",
+  "git": {
+    "commit": "56b8a39a58e1fbd60d58ab94f0cf4acf752251a8",
+    "branch": "codex/kwt-repro-infra",
+    "dirty": true
+  },
+  "environment": {
+    "tools": {
+      "python3": "Python 3.10.12",
+      "iverilog": "Icarus Verilog version 11.0 (stable) ()",
+      "verilator": "Verilator 5.030 2024-10-27 rev v5.030",
+      "yosys": "yosys: invalid option -- '-'",
+      "riskv_gcc": "riscv64-linux-gnu-gcc (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0"
+    },
+    "host": {
+      "hostname": "yang-Precision-5550",
+      "platform": "Linux-5.15.0-164-generic-x86_64-with-glibc2.35",
+      "cpu_count": 12
+    }
+  },
+  "counts": {
+    "PASS": 0,
+    "FAIL": 1,
+    "TIMEOUT": 0,
+    "SKIP": 0,
+    "ERROR": 0
+  },
+  "gate_ok": false,
+  "gate_ids": [
+    "fault.probe_exit7"
+  ],
+  "checks": [
+    {
+      "id": "fault.probe_exit7",
+      "level": "smoke",
+      "gate": true,
+      "desc": "controlled-failure probe: exits 7 (harness failure-propagation test)",
+      "command": [
+        "python3",
+        "-c",
+        "print('probe'); raise SystemExit(7)"
+      ],
+      "cwd": "/home/yang/kwt-worktrees/repro-infra",
+      "started_at": "2026-10-18T07:42:15.757689+00:00",
+      "prereq_missing": [],
+      "prereq_tools_missing": [],
+      "status": "FAIL",
+      "exit_code": 7,
+      "expected_exit": 0,
+      "timed_out": false,
+      "duration_s": 0.016,
+      "timeout_s": 30,
+      "inputs": [],
+      "stdout_log": "tools/repro/results/fault-exit7/fault.probe_exit7.stdout.log",
+      "stderr_log": "tools/repro/results/fault-exit7/fault.probe_exit7.stderr.log",
+      "stdout_tail": [
+        "probe"
+      ],
+      "stderr_tail": [],
+      "parsed_result": null
+    }
+  ]
+}

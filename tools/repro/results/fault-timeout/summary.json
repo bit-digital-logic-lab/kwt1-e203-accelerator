@@ -1,0 +1,65 @@
+{
+  "schema": "kwt-repro/1",
+  "generated_at": "2026-10-18T07:42:17.908131+00:00",
+  "level": "smoke",
+  "run_id": "fault-timeout",
+  "git": {
+    "commit": "56b8a39a58e1fbd60d58ab94f0cf4acf752251a8",
+    "branch": "codex/kwt-repro-infra",
+    "dirty": true
+  },
+  "environment": {
+    "tools": {
+      "python3": "Python 3.10.12",
+      "iverilog": "Icarus Verilog version 11.0 (stable) ()",
+      "verilator": "Verilator 5.030 2024-10-27 rev v5.030",
+      "yosys": "yosys: invalid option -- '-'",
+      "riskv_gcc": "riscv64-linux-gnu-gcc (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0"
+    },
+    "host": {
+      "hostname": "yang-Precision-5550",
+      "platform": "Linux-5.15.0-164-generic-x86_64-with-glibc2.35",
+      "cpu_count": 12
+    }
+  },
+  "counts": {
+    "PASS": 0,
+    "FAIL": 0,
+    "TIMEOUT": 1,
+    "SKIP": 0,
+    "ERROR": 0
+  },
+  "gate_ok": false,
+  "gate_ids": [
+    "fault.probe_timeout"
+  ],
+  "checks": [
+    {
+      "id": "fault.probe_timeout",
+      "level": "smoke",
+      "gate": true,
+      "desc": "controlled-failure probe: sleeps past a 2s timeout",
+      "command": [
+        "python3",
+        "-c",
+        "import time; time.sleep(30)"
+      ],
+      "cwd": "/home/yang/kwt-worktrees/repro-infra",
+      "started_at": "2026-10-18T07:42:15.906900+00:00",
+      "prereq_missing": [],
+      "prereq_tools_missing": [],
+      "status": "TIMEOUT",
+      "exit_code": null,
+      "expected_exit": 0,
+      "timed_out": true,
+      "duration_s": 2.001,
+      "timeout_s": 2,
+      "inputs": [],
+      "stdout_log": "tools/repro/results/fault-timeout/fault.probe_timeout.stdout.log",
+      "stderr_log": "tools/repro/results/fault-timeout/fault.probe_timeout.stderr.log",
+      "stdout_tail": [],
+      "stderr_tail": [],
+      "parsed_result": null
+    }
+  ]
+}

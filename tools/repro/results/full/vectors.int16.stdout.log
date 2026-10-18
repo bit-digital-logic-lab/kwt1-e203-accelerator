@@ -1,0 +1,3 @@
+layer0_int16: 2x2 * 2x3 int16
+  integer exact=1/6 accuracy=16.67%
+result: 0/1 passed

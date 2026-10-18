@@ -1,0 +1,14 @@
+DMA_CYCLES dir=0 bank=0 words=11 cycles=16 error=0
+DMA_CYCLES dir=0 bank=1 words=8 cycles=10 error=0
+DMA_CYCLES dir=0 bank=2 words=10 cycles=15 error=0
+DMA_CYCLES dir=1 bank=2 words=10 cycles=14 error=0
+DMA_CYCLES dir=0 bank=2 words=16 cycles=20 error=0
+DMA_CYCLES dir=1 bank=2 words=16 cycles=20 error=0
+DMA_CYCLES dir=1 bank=2 words=1 cycles=3 error=0
+DMA_CYCLES dir=0 bank=0 words=1 cycles=0 error=1
+DMA_CYCLES dir=0 bank=3 words=1 cycles=0 error=1
+DMA_CYCLES dir=1 bank=0 words=1 cycles=0 error=1
+DMA_CYCLES dir=0 bank=1 words=2 cycles=0 error=1
+DMA_CYCLES dir=0 bank=1 words=9 cycles=0 error=1
+DMA_CYCLES dir=0 bank=1 words=0 cycles=0 error=1
+PASS: DMA load/writeback, tails, bounds and invalid descriptors

@@ -1,0 +1,26 @@
+%Warning-UNUSEDSIGNAL: /home/yang/kwt-worktrees/repro-infra/hardware/rtl/pulse_array/tb/tb_kwt_pingpong_cacc_engine.sv:21:18: Signal is not used: 'a_host_rdata'
+                                                                                                                            : ... note: In instance 'tb_kwt_pingpong_cacc_engine'
+   21 |     logic [15:0] a_host_rdata, b_host_rdata;
+      |                  ^~~~~~~~~~~~
+                       ... For warning description see https://verilator.org/warn/UNUSEDSIGNAL?v=5.030
+                       ... Use "/* verilator lint_off UNUSEDSIGNAL */" and lint_on around source to disable this message.
+%Warning-UNUSEDSIGNAL: /home/yang/kwt-worktrees/repro-infra/hardware/rtl/pulse_array/tb/tb_kwt_pingpong_cacc_engine.sv:21:32: Signal is not used: 'b_host_rdata'
+                                                                                                                            : ... note: In instance 'tb_kwt_pingpong_cacc_engine'
+   21 |     logic [15:0] a_host_rdata, b_host_rdata;
+      |                                ^~~~~~~~~~~~
+%Warning-UNUSEDSIGNAL: /home/yang/kwt-worktrees/repro-infra/hardware/rtl/pulse_array/tb/tb_kwt_pingpong_cacc_engine.sv:32:20: Bits of signal are not used: 'aval'[31:16]
+                                                                                                                            : ... note: In instance 'tb_kwt_pingpong_cacc_engine'
+   32 |         int signed aval, bval;
+      |                    ^~~~
+%Warning-UNUSEDSIGNAL: /home/yang/kwt-worktrees/repro-infra/hardware/rtl/pulse_array/tb/tb_kwt_pingpong_cacc_engine.sv:32:26: Bits of signal are not used: 'bval'[31:16]
+                                                                                                                            : ... note: In instance 'tb_kwt_pingpong_cacc_engine'
+   32 |         int signed aval, bval;
+      |                          ^~~~
+%Warning-UNUSEDSIGNAL: /home/yang/kwt-worktrees/repro-infra/hardware/rtl/sram/kwt_operand_pingpong.sv:8:22: Signal is not used: 'rst_n'
+                                                                                                          : ... note: In instance 'tb_kwt_pingpong_cacc_engine.dut.operands'
+    8 |     input logic clk, rst_n,
+      |                      ^~~~~
+%Warning-BLKSEQ: /home/yang/kwt-worktrees/repro-infra/hardware/rtl/pulse_array/tb/tb_kwt_pingpong_cacc_engine.sv:27:19: Blocking assignment '=' in sequential logic process
+                                                                                                                      : ... Suggest using delayed assignment '<='
+   27 |     always #5 clk = ~clk;
+      |                   ^

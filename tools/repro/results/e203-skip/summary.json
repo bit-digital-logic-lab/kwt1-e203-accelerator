@@ -1,0 +1,58 @@
+{
+  "schema": "kwt-repro/1",
+  "generated_at": "2026-10-18T07:42:18.022716+00:00",
+  "level": "smoke",
+  "run_id": "e203-skip",
+  "git": {
+    "commit": "56b8a39a58e1fbd60d58ab94f0cf4acf752251a8",
+    "branch": "codex/kwt-repro-infra",
+    "dirty": true
+  },
+  "environment": {
+    "tools": {
+      "python3": "Python 3.10.12",
+      "iverilog": "Icarus Verilog version 11.0 (stable) ()",
+      "verilator": "Verilator 5.030 2024-10-27 rev v5.030",
+      "yosys": "yosys: invalid option -- '-'",
+      "riskv_gcc": "riscv64-linux-gnu-gcc (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0"
+    },
+    "host": {
+      "hostname": "yang-Precision-5550",
+      "platform": "Linux-5.15.0-164-generic-x86_64-with-glibc2.35",
+      "cpu_count": 12
+    }
+  },
+  "counts": {
+    "PASS": 0,
+    "FAIL": 0,
+    "TIMEOUT": 0,
+    "SKIP": 1,
+    "ERROR": 0
+  },
+  "gate_ok": true,
+  "gate_ids": [],
+  "checks": [
+    {
+      "id": "e203.full_layer_208tile",
+      "level": "full",
+      "gate": false,
+      "desc": "208-tile FFN1 full layer on the real E203 core (resource-gated)",
+      "command": [
+        "bash",
+        "hardware/rtl/control/tb/run_e203.sh",
+        "--full-layer"
+      ],
+      "cwd": "/home/yang/kwt-worktrees/repro-infra",
+      "started_at": "2026-10-18T07:42:18.022553+00:00",
+      "prereq_missing": [
+        "资料/e203_hbirdv2_full"
+      ],
+      "prereq_tools_missing": [],
+      "status": "SKIP",
+      "exit_code": null,
+      "timed_out": false,
+      "duration_s": 0.0,
+      "reason": "missing prerequisite path(s): 资料/e203_hbirdv2_full"
+    }
+  ]
+}
