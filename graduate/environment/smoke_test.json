@@ -1,0 +1,143 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-10-18T07:47:02.597433+00:00",
+  "repo_root": "/home/yang/kwt-worktrees/grad-env",
+  "work_dir": "/tmp/opencode/kwt_env_smoke.m973s4bz",
+  "note": "所有状态来自真实命令退出码；缺失工具记为 skipped_missing_tool，不写 PASS。",
+  "counts": {
+    "pass": 7,
+    "fail": 0,
+    "skipped_missing_tool": 0,
+    "skipped_missing_input": 0,
+    "not_run": 0
+  },
+  "tests": [
+    {
+      "id": "verilator_sim",
+      "name": "Verilator 最小计数器编译并运行",
+      "tool": "verilator",
+      "status": "pass",
+      "commands": [
+        "verilator --binary --timing -Wno-fatal -j 0 -o sim counter.v tb.v",
+        "./obj_dir/sim"
+      ],
+      "exit_codes": [
+        0,
+        0
+      ],
+      "evidence": [
+        "- S i m u l a t i o n   R e p o r t: Verilator 5.030 2024-10-27",
+        "- Verilator: $finish at 115ps; walltime 0.000 s; speed 273.297 ns/s",
+        "- Verilator: cpu 0.000 s on 1 threads; alloced 88 MB"
+      ],
+      "detail": null
+    },
+    {
+      "id": "verilator_repo_lint",
+      "name": "Verilator 对仓库内 SRAM RTL 做 lint",
+      "tool": "verilator",
+      "status": "pass",
+      "commands": [
+        "verilator --lint-only -Wno-fatal -Ihardware/rtl/sram hardware/rtl/sram/kwt_operand_pingpong.sv"
+      ],
+      "exit_codes": [
+        0
+      ],
+      "evidence": [
+        "      |                      ^~~~~",
+        "                       ... For warning description see https://verilator.org/warn/UNUSEDSIGNAL?v=5.030",
+        "                       ... Use \"/* verilator lint_off UNUSEDSIGNAL */\" and lint_on around source to disable this message."
+      ],
+      "detail": null
+    },
+    {
+      "id": "iverilog_sim",
+      "name": "Icarus Verilog 最小计数器编译并运行",
+      "tool": "iverilog",
+      "status": "pass",
+      "commands": [
+        "iverilog -g2012 -o isim counter.v tb.v",
+        "vvp isim"
+      ],
+      "exit_codes": [
+        0,
+        0
+      ],
+      "evidence": [
+        "SMOKE_Q=10"
+      ],
+      "detail": null
+    },
+    {
+      "id": "yosys_synth",
+      "name": "Yosys 最小计数器综合并统计",
+      "tool": "yosys",
+      "status": "pass",
+      "commands": [
+        "/home/yang/yosys-sta/oss-cad-suite/bin/yosys -p 'read_verilog counter.v; synth -top counter; stat'"
+      ],
+      "exit_codes": [
+        0
+      ],
+      "evidence": [
+        "       24 cells",
+        "       24 cells"
+      ],
+      "detail": null
+    },
+    {
+      "id": "yosys_repo_read",
+      "name": "Yosys(oss-cad-suite) 读入仓库内 SRAM SystemVerilog RTL",
+      "tool": "yosys",
+      "status": "pass",
+      "commands": [
+        "/home/yang/yosys-sta/oss-cad-suite/bin/yosys -p read_verilog -sv -Ihardware/rtl/sram hardware/rtl/sram/kwt_operand_pingpong.sv; hierarchy -top kwt_operand_pingpong -check; proc"
+      ],
+      "exit_codes": [
+        0
+      ],
+      "evidence": [
+        "End of script. Logfile hash: e452c8c03a, CPU: user 0.00s system 0.00s, MEM: 13.27 MB peak",
+        "Yosys 0.63+97 (git sha1 1111a401f, clang++ 18.1.8 -fPIC -O3)",
+        "Time spent: 50% 2x read_verilog (0 sec), 15% 1x proc_dlatch (0 sec), ..."
+      ],
+      "detail": null
+    },
+    {
+      "id": "ieda_version",
+      "name": "iEDA 可执行（STA/综合流程）",
+      "tool": "iEDA",
+      "status": "pass",
+      "commands": [
+        "/home/yang/yosys-sta/bin/iEDA -version"
+      ],
+      "exit_codes": [
+        0
+      ],
+      "evidence": [
+        "exit=0",
+        "stdout/stderr=''"
+      ],
+      "detail": "可执行且退出码 0；无版本字符串输出（如实记录，不代表 STA 已跑通）"
+    },
+    {
+      "id": "rv32_compile",
+      "name": "RV32 交叉编译最小 C 并核对 ELF 架构",
+      "tool": "rv32_gcc",
+      "status": "pass",
+      "commands": [
+        "/usr/bin/riscv64-linux-gnu-gcc -march=rv32imac -mabi=ilp32 -O2 -c tiny.c -o tiny.o",
+        "/usr/bin/riscv64-linux-gnu-objdump -f tiny.o"
+      ],
+      "exit_codes": [
+        0,
+        0
+      ],
+      "evidence": [
+        "tiny.o:     file format elf32-littleriscv",
+        "architecture: riscv:rv32, flags 0x00000010:"
+      ],
+      "detail": null
+    }
+  ]
+}
