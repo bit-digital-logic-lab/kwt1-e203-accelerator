@@ -1,0 +1,4 @@
+VCD info: dumpfile /home/yang/kwt-worktrees/power-activity/hardware/power/results/layer01_tile000.vcd opened for output.
+E203 power activity: first request at cycle 7
+PASS frozen real-sample E203 power-activity tiles: start=0 count=1 outputs=128 padding=0 task_cycles=4025 total_cycles=4038 first_req_cycle=7 last_rsp_cycle=4031
+/home/yang/kwt-worktrees/power-activity/hardware/power/tb/tb_kwt_power_activity.sv:248: $finish called at 40480 (1s)

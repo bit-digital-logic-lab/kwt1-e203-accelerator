@@ -1,43 +1,87 @@
-# WORKER_REPORT（codex/kwt-driver）
+# WORKER_REPORT — 冻结 A12W10/8×16 活动与任务周期证据（非功耗）
 
-## 任务与边界
-修复 `hardware/rtl/control/tb/run_e203.sh` 在含中文的工程绝对路径下，把 real-layer 的 `+A/+W/+BIAS/+EXPECTED` 交给 Icarus `$readmemh` 而加载成 X 的问题；用脚本自动在 ASCII 临时目录做安全别名并在结束时清理，不要求用户手工建立 `/tmp` 别名。先用主目录 `hardware/architecture/results/real_e203_validation0_vectors` 的 layer01 做 tile 0、tile 207 两个上机回归，再跑 software/driver 宿主测试与 RV32 交叉编译。
+- 分支：`codex/kwt-power-activity`
+- 工作树：`/home/yang/kwt-worktrees/power-activity`
+- 基线提交（父）：`fcb4b72`
+- 范围：只新增 `hardware/power/`（runner、新 testbench、解析脚本、报告、向量副本）。
+  未改数值核、`run_e203.sh`、他人的文件；未开子智能体；未 push。
 
-范围仍按本科必做 1–3 项：`99×64 @ 64×256 + bias → 99×256`、12 套独立层参数、E203 驱动与综合。GELU/第二线性层/注意力为选做，本报告不涉及。
+## 结论（证据层级）
 
-## 结论与证据层级
-- **修复后 layer01 tile 0 与 tile 207 通过**，日志无 X。证据层级：**NICE-like E203 行为仿真**（Icarus 14.0 / oss-cad-suite + 本仓库仿真总线/SRAM 模型 vvp），**不是**组委会正式 SoC/PDK，**不是**综合网表，**不是** 150 MHz 时序或面积/功耗结论。
-- **driver 宿主测试与 RV32 交叉编译通过**。证据层级：宿主/交叉编译单元级；**C 驱动未在 E203 仿真中执行**。
-- `task_cycles=4025` 为**单 tile 仿真**记数，属仿真观察值，不能当吞吐/能耗/频率结论。
+在**同一冻结 A12W10、8×16** 的现有 E203/NICE-like 系统模型上，真实产生了
+**真实验证样本 layer01**（validation-index 0）**tile 0 与末 tile 207** 的 VCD，
+并用脚本核验了波形、时钟、关键模块翻转、窗口起止与装载/计算/写回相位、任务周期。
 
-## 改动（仅 1 个文件）
-`hardware/rtl/control/tb/run_e203.sh`
-1. 保证 `build_dir` 落在 ASCII 临时根：`tmp_base` 依次取 `KWT_E203_TMP_BASE`、`TMPDIR`，非绝对路径或含非 ASCII 字节则回退 `/tmp`；`build_dir="$(mktemp -d "$tmp_base/kwt_e203.XXXXXX")"`，仍由 `trap ... EXIT` 删除。
-2. `--real-layers` 分支：对每个 `layer??` 把 `a16/w16/bias32/expected32` 复制到 `"$build_dir/real_cases"`（ASCII 路径），再用别名路径传 `+A/+W/+BIAS/+EXPECTED`；不再把中文 `CASE_ROOT` 路径直接交给 `$readmemh`。
-   - 因此运行结束自动清理，**不需要**手工 `ln -s` 建立 `/tmp/kwt-e203-ascii-cases` 之类的别名。
+- **证据层级：NICE-like E203 行为仿真 + 128-bit 仿真总线 + 行为 SRAM 模型**，
+  **不是**组委会正式 SoC/PDK，**不是**综合网表，**不是** 150 MHz 或功耗结论。
+- **功耗/单任务能耗：`not_computable`**。无 PDK、无互连功耗模型、无 SRAM 宏功耗模型；
+  未标注电路与未建模 SRAM 不按 0 处理。
+- 任务周期为**仿真观察值**：两 tile 均 `task_cycles=4025`（首 NICE 请求 → 末 NICE 响应）。
 
-未改 C 驱动源码（宿主测试与交叉编译在改动前后均通过）。
-
-## 实际执行的命令与退出结果
-工具链：必须用 oss-cad-suite 的 `iverilog`/`vvp` 14.0（`PATH=/home/yang/yosys-sta/oss-cad-suite/bin:$PATH`）。`/usr/bin/iverilog` 11.0 无法解析 E203 的 SV 立即断言（`sirv_gnrl_dffs.v:266`），与本修复无关；主目录运行也使用 oss-cad-suite 的 vvp。
-
-回归 `CASE_ROOT=/tmp/opencode/driver_e203_回归`（路径含中文），内含指向主目录 vectors 的 `layer01_*` 符号链接（仅 layer01），以在非 ASCII 路径下复现并验证。
+## 实际执行的命令与真实退出码
 
 | # | 命令 | 退出码 | 结果 |
 | --- | --- | --- | --- |
-| 1 | 最小复现：`$readmemh` 中文路径 | — | `WARNING ... non-printable characters`，`w0=xxxx`；ASCII 拷贝后 `w0=fbf2` |
-| 2 | 修复前 runner（`git show HEAD:...`）`--real-layers <中文CASE_ROOT> 0 1` | **1** | 4 条 `non-printable characters` + `FATAL ... layer output [0,0] got=xxxxxxxx` |
-| 3 | 修复后 `--real-layers <中文CASE_ROOT> 0 1` | **0** | `PASS ... start=0 count=1 outputs=128 padding=0 task_cycles=4025` |
-| 4 | 修复后 `--real-layers <中文CASE_ROOT> 207 1` | **0** | `PASS ... start=207 count=1 outputs=48 padding=80 task_cycles=4025` |
-| 5 | `cc -std=c11 -O2 -Wall -Wextra -Werror software/driver/kwt_nice_driver.c software/driver/test_kwt_nice_driver.c -o /tmp/opencode/kwt-nice-driver-test && /tmp/opencode/kwt-nice-driver-test` | **0** | `PASS provisional NICE FFN1 descriptor layout and bounds` |
-| 6 | `riscv64-linux-gnu-gcc -std=c11 -O2 -Wall -Wextra -Werror -ffreestanding -march=rv32imac -mabi=ilp32 -c software/driver/kwt_nice_driver.c -o /tmp/opencode/kwt_nice_driver_rv32.o` | **0** | 生成 rv32 目标文件 |
+| 1 | `bash hardware/power/run_power_activity.sh` | **0** | 2 个 tile 仿真 `sim exit 0`，解析 `verdict=PASS` |
+| 2 | `python3 hardware/power/parse_vcd.py --results hardware/power/results` | **0** | 所有检查 TRUE |
 
-清理核验：运行后无残留 `/tmp/kwt_e203.*`；临时脚本与临时 CASE_ROOT 已删除；`git status` 仅剩本次有意修改。
+运行日志（`hardware/power/results/`）：
+
+```
+layer01_tile000.log: PASS ... outputs=128 padding=0 task_cycles=4025 total_cycles=4038 first_req_cycle=7 last_rsp_cycle=4031
+layer01_tile207.log: PASS ... outputs=48 padding=80 task_cycles=4025 total_cycles=4039 first_req_cycle=8 last_rsp_cycle=4032
+```
+
+## 波形核验结果（`hardware/power/results/summary.json`）
+
+| 指标 | tile 000 | tile 207 |
+| --- | ---: | ---: |
+| VCD 字节 | 822166 | 581868 |
+| 时钟翻转数 | 8097 | 8099 |
+| 时钟周期（时间单位） | 10 | 10 |
+| 任务周期（波形推导） | 4025 | 4025 |
+| 任务周期（日志） | 4025 | 4025 |
+| 所选信号覆盖率 | 100% | 100% |
+| 窗口起点/终点 | 175 / 40415 | 185 / 40425 |
+| 装载相位（u） | 19991 | 19991 |
+| 计算相位（u） | 16961 | 16961 |
+| 写回相位（u） | 3221 | 3221 |
+
+关键模块切换计数（tile 000 / tile 207）：
+E203 NICE FSM 11060/10728，tile 系统 11034/10702，计算引擎 6611/6279，
+乘积阵列 1290/1285，CACC 518/518，DMA 4349/4349。
+
+检查项（VCD 非空、时钟翻转、关键模块翻转、窗口起点对应首 NICE 请求、
+窗口终点对应末 NICE 响应、装载/计算/写回相位存在且顺序落在窗口内、周期数与日志一致、
+日志 PASS）在两 tile 上全部为 TRUE。
+
+## 改动文件
+
+| 文件 | 说明 |
+| --- | --- |
+| `hardware/power/tb/tb_kwt_power_activity.sv` | 新 testbench：同 `tb_kwt_real_layer_e203` 功能，增加受限 VCD dump 与窗口标记 |
+| `hardware/power/run_power_activity.sh` | runner：逐 tile 编译提交程序、编译 E203，跑 tile 0/207 并调用解析 |
+| `hardware/power/parse_vcd.py` | VCD 解析与核验，输出 `summary.json` |
+| `hardware/power/vectors/real_e203_validation0_layer01/` | 真实样本 A12W10 layer01 向量副本 + manifest |
+| `hardware/power/FROZEN_CONFIG.md` | 冻结配置、输入哈希、工具版本、频率假设 |
+| `hardware/power/README.md` | 口径、运行方式与边界 |
+| `hardware/power/results/` | `layer01_tile000/207.log`、`compile.log`、`summary.json`（VCD 被 `.gitignore` 排除） |
+
+## 覆盖率与未知部分（诚实边界）
+
+- `toggled_coverage_pct=100%` 只覆盖**脚本精选的控制/总线信号**；大行为 SRAM 阵列与
+  E203 数据通路内部**未 dump**，因此这不是全设计覆盖率。
+- VCD `$timescale 1s` 为 Icarus 默认（上游 E203 文件无统一 timescale，显式 1ns 会造成
+  跨 timescale 语义漂移，实测会挂起，故未设）。周期数与时间单位无关。
+- 频率假设：题目 150 MHz 目标；`4025 cycles × 6.6667 ns ≈ 26.83 µs/tile-task` 仅为
+  **算术换算**，未做 STA、无目标库/SRAM 宏/布局布线，**不是已达成频率**。
+- 无正式 System Bus/NICE 适配、无目标 SRAM 宏、无综合网表功耗、无隐藏 600 条评测。
+- 向量来自 `_12labels_40`（480/480）标定的 A12W10 参数包，与本分支 240/240 的
+  `ffn1_a12w10_static_sym.npz` 不同（两者不可混用），见 `FROZEN_CONFIG.md`。
+- VCD 含 `$date`，跨运行字节哈希会变；提交的是脚本、日志与 `summary.json`。
 
 ## 未证事项
-- 未跑 12 层全量（主目录正在跑），未验证 layer02–12 与 tile 0/207 之外的 tile。
-- 未在组委会正式 SoC、系统总线或 NICE 接口上联调；驱动地址与指令编码只与本仓库仿真模型一致。
-- C 驱动未在 E203 仿真中运行（`software/driver/README.md` 同此声明）。
-- 无综合、无 150 MHz 时序、无面积/功耗/吞吐/能耗结论。
-- 本次未复测 NRMSE；manifest 中 layer01 `nrmse_pct≈0.1017%` 属**软件向量生成阶段**证据，未在本次 RTL 回归中复核。
-- GELU、第二线性层、注意力、完整编码器未做。
+
+- 未跑 layer02–12 的活动 VCD（本次只对真实 layer01 做了 tile 0 与 tile 207）。
+- 未做示例库功耗估算；即使要做，也只能作为独立探索性口径，需明确无 SRAM/互连模型。
+- 未在组委会正式 SoC、总线或 NICE 接口上联调。

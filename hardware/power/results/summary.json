@@ -1,0 +1,138 @@
+{
+  "evidence": "E203 NICE-like 8x16 A12W10 activity VCD",
+  "power_energy": {
+    "value": "not_computable",
+    "reason": "No competition PDK, no interconnect power model, and no SRAM macro power model are available. Unannotated circuits and unmodeled SRAM cannot be counted as zero activity. This artifact is switching activity (VCD) only."
+  },
+  "entries": [
+    {
+      "vcd": "/home/yang/kwt-worktrees/power-activity/hardware/power/results/layer01_tile000.vcd",
+      "vcd_bytes": 822166,
+      "vcd_sha256": "64aa94a07adc616d972d50569742ee95f4911ac12db7d45c6fc6ec19d751f21d",
+      "log": "/home/yang/kwt-worktrees/power-activity/hardware/power/results/layer01_tile000.log",
+      "log_summary": {
+        "pass": true,
+        "text_tail": "/home/yang/kwt-worktrees/power-activity/hardware/power/tb/tb_kwt_power_activity.sv:248: $finish called at 40480 (1s)",
+        "task_cycles": 4025,
+        "total_cycles": 4038,
+        "outputs": 128,
+        "padding": 0,
+        "first_req_cycle": 7,
+        "last_rsp_cycle": 4031
+      },
+      "timescale_units_max_time": 40480,
+      "clock_half_period_time_units": 5,
+      "clock_period_time_units": 10,
+      "clock_toggles": 8097,
+      "signals_defined": 57,
+      "signals_toggled": 57,
+      "toggled_coverage_pct": 100.0,
+      "coverage_scope": "curated control/bus signals of the modeled E203 NICE path; large behavioral SRAM arrays and the unannotated CPU datapath are excluded from the dump, so this is not full-design coverage",
+      "value_changes": 48828,
+      "scope_toggles": {
+        "accelerator_nice_fsm": 11060,
+        "tile_system_load_compute_writeback": 11034,
+        "compute_engine": 6611,
+        "product_array": 1290,
+        "cacc": 518,
+        "dma": 4349
+      },
+      "phase_windows_time_units": {
+        "load": [
+          225,
+          20215
+        ],
+        "compute": [
+          20215,
+          37175
+        ],
+        "writeback": [
+          37175,
+          40395
+        ]
+      },
+      "window_start_time": 175,
+      "window_end_time": 40415,
+      "window_start_from_raw_nice_req": 166,
+      "window_end_from_raw_nice_rsp": 40405,
+      "task_cycles_from_vcd": 4025,
+      "untoggled_signals": [],
+      "checks": {
+        "waveform_non_empty": true,
+        "clock_toggles": true,
+        "key_modules_toggle": true,
+        "window_start_matches_first_nice_request": true,
+        "window_end_matches_final_nice_response": true,
+        "load_compute_writeback_phases_present": true,
+        "load_compute_writeback_in_window_order": true,
+        "task_cycles_match_log": true,
+        "log_pass": true
+      }
+    },
+    {
+      "vcd": "/home/yang/kwt-worktrees/power-activity/hardware/power/results/layer01_tile207.vcd",
+      "vcd_bytes": 581868,
+      "vcd_sha256": "56db8dcbc6a79fe98b196fa19542e1caa97862f533e6e93e26231f4818179e35",
+      "log": "/home/yang/kwt-worktrees/power-activity/hardware/power/results/layer01_tile207.log",
+      "log_summary": {
+        "pass": true,
+        "text_tail": "/home/yang/kwt-worktrees/power-activity/hardware/power/tb/tb_kwt_power_activity.sv:248: $finish called at 40490 (1s)",
+        "task_cycles": 4025,
+        "total_cycles": 4039,
+        "outputs": 48,
+        "padding": 80,
+        "first_req_cycle": 8,
+        "last_rsp_cycle": 4032
+      },
+      "timescale_units_max_time": 40490,
+      "clock_half_period_time_units": 5,
+      "clock_period_time_units": 10,
+      "clock_toggles": 8099,
+      "signals_defined": 57,
+      "signals_toggled": 57,
+      "toggled_coverage_pct": 100.0,
+      "coverage_scope": "curated control/bus signals of the modeled E203 NICE path; large behavioral SRAM arrays and the unannotated CPU datapath are excluded from the dump, so this is not full-design coverage",
+      "value_changes": 48172,
+      "scope_toggles": {
+        "accelerator_nice_fsm": 10728,
+        "tile_system_load_compute_writeback": 10702,
+        "compute_engine": 6279,
+        "product_array": 1285,
+        "cacc": 518,
+        "dma": 4349
+      },
+      "phase_windows_time_units": {
+        "load": [
+          235,
+          20225
+        ],
+        "compute": [
+          20225,
+          37185
+        ],
+        "writeback": [
+          37185,
+          40405
+        ]
+      },
+      "window_start_time": 185,
+      "window_end_time": 40425,
+      "window_start_from_raw_nice_req": 176,
+      "window_end_from_raw_nice_rsp": 40415,
+      "task_cycles_from_vcd": 4025,
+      "untoggled_signals": [],
+      "checks": {
+        "waveform_non_empty": true,
+        "clock_toggles": true,
+        "key_modules_toggle": true,
+        "window_start_matches_first_nice_request": true,
+        "window_end_matches_final_nice_response": true,
+        "load_compute_writeback_phases_present": true,
+        "load_compute_writeback_in_window_order": true,
+        "task_cycles_match_log": true,
+        "log_pass": true
+      }
+    }
+  ],
+  "verdict": "PASS"
+}
