@@ -118,17 +118,31 @@ graduate/rtl/attention/
 
 ```bash
 cd graduate/rtl/attention
-bash tb/run.sh
+bash tb/run.sh                 # 默认 --sample 0
+python3 model/attn_int_model.py --sample 3 && \
+  verilator --cc --exe --build -O2 -Wno-fatal --top-module attn_single_head \
+    -Irtl rtl/attn_single_head.sv tb/tb_attn.cpp --Mdir obj_dir -o tb_attn && \
+  ./obj_dir/tb_attn vectors    # 换真实样本（会重算每个张量的移位）
 ```
 
 退出码：模型 0 / 构建 0 / TB 0 即通过。
 
 ## 验证结果（本次实跑）
 
-- 逐位一致：`q,k,v,c,o` 各 6336/6336，`p` 9801/9801，**合计 41481/41481，0 失配**。
-- 覆盖：QKV 全部；分数/Softmax 全 99×99（`p`）；首行 `i=0` 与末行 `i=98` 的单列
-  NRMSE 单列如下。
-- FP32（float64 参考，另列）：
+在**两个真实样本**上端到端逐位对照，两个样本的量化移位不同（证明 RTL 与模型对
+移位配置一致）：
+
+| 样本 | 移位 RQ/RK/RV/RC/RO | KC/SH_KC | 逐位一致 | FP32 NRMSE |
+| --- | --- | --- | --- | ---: |
+| `sample_00`（默认） | 6/7/7/14/11 | 6680/38 | 41481/41481 | **0.15886%** |
+| `sample_03` | 6/7/**6**/**15**/11 | **4815/37** | 41481/41481 | 0.21102% |
+
+- 逐位：每样本 `q,k,v,c,o` 各 6336/6336、`p`（Softmax 全 99×99）9801/9801，
+  合计 **41481/41481，0 失配**。
+- 覆盖：QKV 全部；分数/Softmax 全 99×99（`p`）；首行/末行单列 NRMSE 单列如下
+  （sample_00）。
+
+FP32（float64 参考，另列，sample_00）：
 
 | 指标 | 值 |
 | --- | ---: |

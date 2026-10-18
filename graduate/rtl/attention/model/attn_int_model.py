@@ -23,6 +23,7 @@ Usage: python3 attn_int_model.py
 """
 
 from pathlib import Path
+import argparse
 import json
 
 import numpy as np
@@ -75,8 +76,14 @@ def clip_q15(v):
 
 
 def main():
+    ap = argparse.ArgumentParser(description=__doc__)
+    ap.add_argument("--sample", type=int, default=0,
+                    help="real encoder-input sample index (0..5)")
+    args = ap.parse_args()
+
     d = np.load(WSRC)
-    Xf = np.load(XSRC).astype(np.float64)
+    xsrc = XSRC.parent / f"sample_{args.sample:02d}_encoder.npy"
+    Xf = np.load(xsrc).astype(np.float64)
     Wqf = d[PREFIX + "query_dense/kernel"].astype(np.float64)
     Wkf = d[PREFIX + "key_dense/kernel"].astype(np.float64)
     Wvf = d[PREFIX + "value_dense/kernel"].astype(np.float64)
@@ -172,6 +179,7 @@ def main():
         "scale_q": sq, "scale_k": sk, "scale_v": sv, "scale_ct": sct, "scale_o": so,
         "RQ": int(RQ), "RK": int(RK), "RV": int(RV), "RC": int(RC), "RO": int(RO),
         "F_BITS": F_BITS, "M_LUT": M_LUT, "G_SH": G_SH, "KC": int(KC), "SH_KC": int(SH_KC),
+        "sample_index": args.sample, "input_file": xsrc.name,
         "nrmse_fp32": nrmse, "nrmse_row0_fp32": row0, "nrmse_row_last_fp32": rowL,
         "max_abs_err_fp32": float(np.abs(err).max()), "rms_ref_fp32": rms_ref,
         "P_rowsum_min": int(P.sum(axis=1).min()), "P_rowsum_max": int(P.sum(axis=1).max()),

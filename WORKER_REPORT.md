@@ -16,16 +16,19 @@
 | `python3 model/attn_int_model.py` | **0** | 生成 `rtl/attn_params.svh`、`vectors/*` |
 | `verilator --cc --exe --build ... tb_attn.cpp` | **0** | 仅警告（WIDTH*），无错误 |
 | `./obj_dir/tb_attn vectors` | **0** | `41481/41481` 逐位一致；NRMSE 0.15886% |
+| `python3 model/attn_int_model.py --sample 3` + 重建 + 跑 | **0** | 换样本/换移位后仍 `41481/41481`；NRMSE 0.21102% |
 | `yosys 0.63 read_verilog -sv -Irtl rtl/attn_single_head.sv; hierarchy -check; proc; check` | **0** | 前端可综合性检查通过 |
 
 一键复现：`bash graduate/rtl/attention/tb/run.sh`。
 
 ## 关键结果
 
-- **逐位对照独立整数模型**：`q,k,v,c,o` 各 6336/6336，`p`（Softmax，全 99×99）9801/9801，
-  合计 **41481/41481，0 失配**。乘法/Softmax 全在 RTL，TB 只做装载、读回与比较。
-- **FP32 误差（单列）**：NRMSE 0.15886%（< 3% 门槛）；首行 0.15766%、末行 0.15077%；
-  max abs err 0.00124016。
+- **逐位对照独立整数模型**：在 **2 个真实样本**上各 `q,k,v,c,o` 6336/6336、
+  `p`（Softmax，全 99×99）9801/9801，合计 **41481/41481，0 失配**。两样本量化移位
+  不同（`RQ/RK/RV/RC/RO`：6/7/7/14/11 与 6/7/6/15/11；`KC/SH_KC`：6680/38 与 4815/37），
+  证明 RTL 与模型对移位配置一致。乘法/Softmax 全在 RTL，TB 只做装载、读回与比较。
+- **FP32 误差（单列）**：样本 0 NRMSE 0.15886%（< 3%）；样本 3 0.21102%；
+  首行 0.15766%、末行 0.15077%；max abs err 0.00124016。
 - **周期**：实测 `2,957,728` 拍（串行 P=1，每拍 1 次乘加）；150 MHz 推算 ≈19.7 ms（模型推算，非平台实测）。
 - **存储**：≈128.7 KB（int16 容器，含验证用 `P`；去掉 `P` 可省 19.6 KB）。
 

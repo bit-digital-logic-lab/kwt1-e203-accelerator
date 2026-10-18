@@ -23,6 +23,8 @@
   "G_SH": 20,
   "KC": 6680,
   "SH_KC": 38,
+  "sample_index": 0,
+  "input_file": "sample_00_encoder.npy",
   "nrmse_fp32": 0.0015886401079165293,
   "nrmse_row0_fp32": 0.0015766155848123138,
   "nrmse_row_last_fp32": 0.001507706593226715,
