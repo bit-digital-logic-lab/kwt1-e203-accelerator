@@ -1,63 +1,76 @@
-# WORKER_REPORT — codex/kwt-integration（KWT-1 整合分支）
+# WORKER_REPORT — codex/kwt-grad-env（研究生组第 4-7 项：环境与接口约定）
 
-- 分支：`codex/kwt-integration`（worktree `/home/yang/kwt-worktrees/integration`）
-- 基线：`main@1494597`
-- 范围：把源文件快照 `d94fb6f` 与 8 个已完成工作分支整合为一个可审查的 Git 分支；
-  归档 9 份 `WORKER_REPORT.md`；实跑快速验收并如实记录退出码；补 `docs/INTEGRATION_STATUS.md`。
-- 边界：只在本 worktree 内操作；未 `checkout`/清理主目录；未 push / 未碰 `origin`；未开子智能体；
-  未改核心数值 RTL；未重跑 12 层整层 E203；未做大面积综合。
+- 分支：`codex/kwt-grad-env`（worktree `/home/yang/kwt-worktrees/grad-env`）
+- 范围：为研究生组第 4-7 项（单头注意力、单层编码器、十二层编码器与参数调度、编码器
+  加速器综合与性能）建立**环境与接口约定**：检测 Python/TF/PyTorch、HDL 仿真/综合/STA/RV32
+  工具、官方资料哈希、真实 E203/PDK/SRAM 宏/SDC 是否存在；输出机器可读 JSON 与简短文档；
+  实际运行 smoke test；对缺失项给可读状态。
+- 约束：只改 `graduate/environment/` 与根 `WORKER_REPORT.md`；未开子智能体；未 push /
+  未 merge/rebase/cherry-pick；未碰主目录与其他 worktree；未改核心数值 RTL。
 
-详细冲突、来源 commit、逐项测试与缺口见 **[`docs/INTEGRATION_STATUS.md`](docs/INTEGRATION_STATUS.md)**。
+## 交付物
 
-## 提交
-
-| 提交 | 内容 |
+| 文件 | 说明 |
 | --- | --- |
-| `dc4fd2a` | 合入 `d94fb6f` 源文件快照（3 处冲突取 main@1494597 的已测钩子实现与 ascii finalizer；其余取快照；删除旧版钩子残留 plugin/assets） |
-| `3ba1412` | 归档 hook-fix 报告（`c89095c` 逻辑已由 main 引入，不重复合入） |
-| `fb71ede` | 整合 `codex/kwt-verification`（`1a3aa75`） |
-| `282017e` | 整合 `codex/kwt-preprocess`（`747d5fa`） |
-| `932db77` | 整合 `codex/kwt-quant`（`7afe9ff`） |
-| `3e82ea9` | 整合 `codex/kwt-architecture`（`df93c87`） |
-| `e1aa166` | 整合 `codex/kwt-driver`（`fcb4b72`，保留 `run_e203.sh` ASCII 路径修复） |
-| `d758eeb` | 整合 `codex/kwt-synth`（`cb23d04`） |
-| `8f6ca75` | 整合 `codex/kwt-design-integration`（`56b8a39`） |
-| `29d0b00` | 整合 `codex/kwt-packaging`（`0731cf3`） |
-| 本提交 | `docs/INTEGRATION_STATUS.md` + 本报告 |
+| `graduate/environment/check_environment.py` | 只读盘点工具链/运行时/哈希/资产，写 `environment_report.json`+`.md` |
+| `graduate/environment/smoke_toolchain.py` | 真实 smoke test，写 `smoke_test.json`+`.md`+`.log` |
+| `graduate/environment/run_all.sh` | 顺序运行上面两个脚本 |
+| `graduate/environment/environment_report.json` / `.md` | 机器可读清单 + 简短文档 |
+| `graduate/environment/smoke_test.json` / `.md` / `.log` | 工具链真实退出码与原始日志 |
+| `graduate/environment/README.md` | 验证边界与第 4-7 项接口约定 |
 
-9 份来源报告归档于 `docs/worker_reports/kwt-*.md`（verification / preprocess / quant /
-architecture / driver / synth / design-integration / packaging / hook-fix）；合并过程中根
-`WORKER_REPORT.md` 始终被移除并归档，**未发生后一份覆盖前一份**。
+## 实跑命令与退出码（真实记录）
 
-## 实跑验收（实际退出码）
+| 命令 | 退出码 | 结果 |
+| --- | ---: | --- |
+| `python3 graduate/environment/check_environment.py` | **0** | 工具 9/10 present；哈希 25/25 match，0 mismatch；官方缺失 5 项 |
+| `python3 graduate/environment/smoke_toolchain.py` | **0** | pass=7 fail=0 skipped_missing_tool=0 |
+| `bash graduate/environment/run_all.sh` | **0** | 两脚本顺序通过 |
+| `python3 -m py_compile graduate/environment/*.py` | **0** | 编译通过 |
 
-| 命令 | 退出码 |
-| --- | ---: |
-| `git diff --check 1494597 HEAD` | **2**（仅 quant CSV 的 CRLF 与 packaging 报告末尾空行，既有产物；为保 provenance 未改，详见 STATUS §5#1） |
-| `python3 -m unittest discover -s .opencode/skills/quarter-hour-check/tests` | **0**（20 tests OK） |
-| `python3 docs/check_design_evidence.py --results-dir /home/yang/Desktop/ic设计竞赛/hardware/architecture/results` | **0**（`PASS=72 WARN=0 FAIL=0`） |
-| 宿主 C 驱动测试（`cc ... test_kwt_nice_driver.c`） | **0**（`PASS provisional NICE FFN1 descriptor layout and bounds`） |
-| RV32 交叉编译（`riscv64-linux-gnu-gcc ... -march=rv32imac -mabi=ilp32 -c`） | **0** |
-| `negative_injection_check.py`（oss-cad-suite） | **0**（fp32/int16 污染均被检出 exit=1） |
-| `run_tile_edges.sh`（oss-cad-suite） | **0**（正向 21 cases PASS；负向 MISMATCH 被检出） |
-| （附加）`run_e203.sh --real-layers <中文 CASE_ROOT> 0 1` | **0**（12 层各 tile 0 单块 PASS，验证 ASCII 路径修复） |
+smoke test 明细（7/7 pass，均来自真实退出码）：
 
-## 关键口径裁定
+| 用例 | 解释器 | 退出码 |
+| --- | --- | --- |
+| Verilator 最小计数器编译+仿真 | `verilator --binary --timing` | 0 / 0 |
+| Verilator 对仓库 SRAM RTL lint | `--lint-only hardware/rtl/sram/kwt_operand_pingpong.sv` | 0 |
+| Icarus 最小计数器编译+仿真 | `iverilog -g2012` + `vvp` | 0 / 0 |
+| Yosys 最小计数器综合 | oss-cad-suite `yosys -p "synth -top"` | 0 |
+| Yosys 读项目 SystemVerilog RTL | `read_verilog -sv` + `hierarchy -check; proc` | 0 |
+| iEDA 可执行 | `/home/yang/yosys-sta/bin/iEDA -version` | 0（无版本字符串，如实记录） |
+| RV32 交叉编译 + 架构核对 | `riscv64-linux-gnu-gcc -march=rv32imac -mabi=ilp32` + `objdump -f` → `riscv:rv32` | 0 / 0 |
 
-- **E203 12 层状态以 `real_e203_validation0_ascii_*` 为准 = 单样本 12/12 PASS**；
-  `real_e203_validation0_*` 的 `0/12 FAIL` 是**过期**的中文路径运行。packaging 报告中的
-  “0/12” 不得当作当前结论。
-- 保留 `codex/kwt-driver` 的 `run_e203.sh` ASCII 路径修复。
-- `codex/kwt-synth` 已合入（含被修正的综合脚本），补上早前审查文档 §5 的遗漏。
+## 环境事实
+
+- 存在：Verilator 5.030、Icarus 11.0、Yosys 0.9（系统）与 0.63+97（oss-cad-suite）、
+  iEDA、riscv64-linux-gnu-gcc 11.4、objdump 2.38、gtkwave。缺独立 `OpenSTA`（STA 由 iEDA 承担）。
+- Python：系统 3.10.12 仅 numpy；`conda_base`/`conda_rag` 有 torch 2.5.1+cu121；
+  **任何运行时都没有 TensorFlow**。
+- 官方资料哈希：`资料/来源校验.json` 25 文件 **25/25 一致**。该文件是 **Git blob 哈希**
+  （`git hash-object` 口径），不是裸 SHA-1；用裸 SHA-1 会得到 25/25 全 mismatch 的错误结论。
+- 真实资产：官方模型源码快照、KWT-1 checkpoint、FP32 npz、E203 子集与完整上游存在；
+  Speech Commands v0.02 tar 未下载；Nangate45/icsprout55 学术 PDK 与 fakeram 通用宏仅作
+  代理；仓库内**无任何 `.sdc`**。
+
+## 软硬件边界（能否宣称真实 SoC / 150 MHz）
+
+- **可做**：L1 计算核/输出级功能仿真（Verilator/Icarus，逐位对照软件整数模型）；
+  L2 模块级综合（Yosys 通用库或 iEDA+Nangate45 **代理库**）。
+- **部分**：L3 E203 RTL 仿真接入（Hummingbird 固定提交，含 NICE 仿真模型），不等于官方
+  SoC 封装仿真。
+- **阻塞**：L4 150 MHz 时序签核、L5 ≤2.25 mm² 面积与功耗签核、L6 官方 600 条评测集精度。
+- **不能宣称**：在官方 E203 SoC 平台完成 SoC 集成仿真；达到 150 MHz；满足面积/功耗签核；
+  官方评测集精度。**任何模拟模型或代理库数字都不能代表真实 SoC 或真实工艺结果。**
+
+## 阻塞项
+
+1. 官方 SoC 平台、指定 PDK、SRAM 宏（16bit×128/1024/4096）、150 MHz SDC、官方 600 条评测集
+   全部缺失 → L4/L5/L6 无法签核。
+2. 本机无 TensorFlow → 不能在本机复算官方 checkpoint；依赖既有 `kwt1_fp32.npz`。
+3. Speech Commands v0.02 数据集未下载（被 `.gitignore` 排除）。
+4. iEDA 可执行但不打印版本，且**未**跑完整 STA 流程；独立 `OpenSTA` 二进制缺失。
 
 ## 未证事项
 
-1. 官方 SoC / System Bus / NICE、PDK、SRAM 宏、SDC 缺失 → 无 150 MHz / ≤2.25 mm² / 功耗签核；
-   iSTA 仍 abort（exit 134），无时序结论。
-2. C 驱动**未**在 E203 指令流中执行（仅宿主 + RV32 编译）。
-3. 官方 600 条评测集未发布 → 官方 NRMSE / 准确率未测；480 软件 / 240 RTL / 1 条 E203 / 官方 600
-   是四个不同统计，不可混用。
-4. `154,240`（L1）与 `838,028`（L2 E203）不可相减当加速比/吞吐；16 行核未接入 E203。
-5. A14W12/A12W12/A16W10 只有软件证据。
-6. `git diff --check` 非 0（纯格式/CRLF，见上）。
-7. 本次未实际 merge 进 `main`、未 push；`main` 的既有未提交改动保持原样。
+- 本轮只证明工具链**可用**与本机资产清单，不证明研究生组第 4-7 项任何功能/性能指标。
+- L2 代理库综合结果、L3 E203 仿真行为均不得外推为官方口径。

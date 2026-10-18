@@ -1,0 +1,808 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-10-18T07:47:02.041245+00:00",
+  "repo_root": "/home/yang/kwt-worktrees/grad-env",
+  "host": {
+    "platform": "Linux-5.15.0-164-generic-x86_64-with-glibc2.35",
+    "machine": "x86_64",
+    "processor": "x86_64",
+    "python": "3.10.12",
+    "python_executable": "/usr/bin/python3",
+    "cwd": "/home/yang/kwt-worktrees/grad-env"
+  },
+  "python_runtimes": [
+    {
+      "name": "system",
+      "path": "/usr/bin/python3",
+      "version": "Python 3.10.12",
+      "modules": {
+        "tensorflow": {
+          "found": false,
+          "version": null
+        },
+        "torch": {
+          "found": false,
+          "version": null
+        },
+        "numpy": {
+          "found": true,
+          "version": "1.21.5"
+        },
+        "onnx": {
+          "found": false,
+          "version": null
+        },
+        "onnxruntime": {
+          "found": false,
+          "version": null
+        }
+      }
+    },
+    {
+      "name": "conda_base",
+      "path": "/home/yang/miniconda3/bin/python3",
+      "version": "Python 3.12.12",
+      "modules": {
+        "tensorflow": {
+          "found": false,
+          "version": null
+        },
+        "torch": {
+          "found": true,
+          "version": "2.5.1+cu121"
+        },
+        "numpy": {
+          "found": true,
+          "version": "2.5.2"
+        },
+        "onnx": {
+          "found": false,
+          "version": null
+        },
+        "onnxruntime": {
+          "found": false,
+          "version": null
+        }
+      }
+    },
+    {
+      "name": "conda_eda",
+      "path": "/home/yang/miniconda3/envs/eda/bin/python3",
+      "version": "Python 3.14.2",
+      "modules": {
+        "tensorflow": {
+          "found": false,
+          "version": null
+        },
+        "torch": {
+          "found": false,
+          "version": null
+        },
+        "numpy": {
+          "found": true,
+          "version": "2.4.1"
+        },
+        "onnx": {
+          "found": false,
+          "version": null
+        },
+        "onnxruntime": {
+          "found": false,
+          "version": null
+        }
+      }
+    },
+    {
+      "name": "conda_rag",
+      "path": "/home/yang/miniconda3/envs/rag/bin/python3",
+      "version": "Python 3.10.14",
+      "modules": {
+        "tensorflow": {
+          "found": false,
+          "version": null
+        },
+        "torch": {
+          "found": true,
+          "version": "2.5.1+cu121"
+        },
+        "numpy": {
+          "found": true,
+          "version": "1.26.4"
+        },
+        "onnx": {
+          "found": false,
+          "version": null
+        },
+        "onnxruntime": {
+          "found": false,
+          "version": null
+        }
+      }
+    },
+    {
+      "name": "conda_qpanda",
+      "path": "/home/yang/miniconda3/envs/qpanda/bin/python3",
+      "version": "Python 3.10.19",
+      "modules": {
+        "tensorflow": {
+          "found": false,
+          "version": null
+        },
+        "torch": {
+          "found": false,
+          "version": null
+        },
+        "numpy": {
+          "found": true,
+          "version": "1.26.4"
+        },
+        "onnx": {
+          "found": false,
+          "version": null
+        },
+        "onnxruntime": {
+          "found": false,
+          "version": null
+        }
+      }
+    }
+  ],
+  "tools": [
+    {
+      "id": "python3",
+      "category": "python",
+      "required": true,
+      "present": true,
+      "path": "/usr/bin/python3",
+      "version": "Python 3.10.12",
+      "version_exit": 0,
+      "version_raw": "Python 3.10.12",
+      "note": null
+    },
+    {
+      "id": "verilator",
+      "category": "hdl_sim",
+      "required": true,
+      "present": true,
+      "path": "/usr/local/bin/verilator",
+      "version": "Verilator 5.030 2024-10-27 rev v5.030",
+      "version_exit": 0,
+      "version_raw": "Verilator 5.030 2024-10-27 rev v5.030",
+      "note": null
+    },
+    {
+      "id": "iverilog",
+      "category": "hdl_sim",
+      "required": true,
+      "present": true,
+      "path": "/usr/bin/iverilog",
+      "version": "Icarus Verilog version 11.0 (stable) ()",
+      "version_exit": 0,
+      "version_raw": "Icarus Verilog version 11.0 (stable) ()",
+      "note": null
+    },
+    {
+      "id": "yosys_system",
+      "category": "synthesis",
+      "required": false,
+      "present": true,
+      "path": "/usr/bin/yosys",
+      "version": "Yosys 0.9 (git sha1 1979e0b)",
+      "version_exit": 0,
+      "version_raw": "Yosys 0.9 (git sha1 1979e0b)",
+      "note": null
+    },
+    {
+      "id": "yosys_oss_cad",
+      "category": "synthesis",
+      "required": true,
+      "present": true,
+      "path": "/home/yang/yosys-sta/oss-cad-suite/bin/yosys",
+      "version": "Yosys 0.63+97 (git sha1 1111a401f, clang++ 18.1.8 -fPIC -O3)",
+      "version_exit": 0,
+      "version_raw": "Yosys 0.63+97 (git sha1 1111a401f, clang++ 18.1.8 -fPIC -O3)",
+      "note": null
+    },
+    {
+      "id": "sta_ieda",
+      "category": "sta",
+      "required": false,
+      "present": true,
+      "path": "/home/yang/yosys-sta/bin/iEDA",
+      "version": null,
+      "version_exit": 0,
+      "version_raw": null,
+      "note": "命令退出码 0 但无版本字符串输出"
+    },
+    {
+      "id": "sta_opensta",
+      "category": "sta",
+      "required": false,
+      "present": false,
+      "path": null,
+      "version": null,
+      "version_exit": null,
+      "version_raw": null,
+      "note": "未找到可执行文件（PATH 与已知候选均无）"
+    },
+    {
+      "id": "rv32_gcc",
+      "category": "rv32",
+      "required": true,
+      "present": true,
+      "path": "/usr/bin/riscv64-linux-gnu-gcc",
+      "version": "riscv64-linux-gnu-gcc (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0",
+      "version_exit": 0,
+      "version_raw": "riscv64-linux-gnu-gcc (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0",
+      "note": null
+    },
+    {
+      "id": "objdump_rv",
+      "category": "rv32",
+      "required": false,
+      "present": true,
+      "path": "/usr/bin/riscv64-linux-gnu-objdump",
+      "version": "GNU objdump (GNU Binutils for Ubuntu) 2.38",
+      "version_exit": 0,
+      "version_raw": "GNU objdump (GNU Binutils for Ubuntu) 2.38",
+      "note": null
+    },
+    {
+      "id": "gtkwave",
+      "category": "waveform",
+      "required": false,
+      "present": true,
+      "path": "/usr/bin/gtkwave",
+      "version": "GTKWave Analyzer v3.3.104 (w)1999-2020 BSI",
+      "version_exit": 0,
+      "version_raw": "GTKWave Analyzer v3.3.104 (w)1999-2020 BSI",
+      "note": null
+    }
+  ],
+  "assets": {
+    "model_source": {
+      "path": "资料/ARM_KWT-1_237e4097",
+      "present": true,
+      "pinned_commit": "237e4097afd4f6851e0b82f0a8d65c2dfe8eae30",
+      "scope": "in-repo",
+      "note": "比赛锁定提交的源码快照（非 git 仓库），只读参考。"
+    },
+    "flags": {
+      "present": true,
+      "path": "资料/ARM_KWT-1_237e4097/models_data_v2_12_labels/kwt1/flags.json",
+      "flags": {
+        "model_name": "kws_transformer",
+        "num_layers": 12,
+        "d_model": 64,
+        "mlp_dim": 256,
+        "heads": 1,
+        "dropout1": 0.0,
+        "attention_type": "time",
+        "prenorm": null,
+        "label_count": 12,
+        "wanted_words": "yes,no,up,down,left,right,on,off,stop,go",
+        "sample_rate": 16000,
+        "clip_duration_ms": 1000,
+        "window_size_ms": 30.0,
+        "window_stride_ms": 10.0,
+        "spectrogram_length": 98,
+        "dct_num_features": 40,
+        "feature_type": "mfcc_tf",
+        "train": 1,
+        "return_softmax": 0
+      }
+    },
+    "weights": {
+      "index": {
+        "path": "资料/ARM_KWT-1_237e4097/models_data_v2_12_labels/kwt1/best_weights.index",
+        "present": true
+      },
+      "data": {
+        "path": "资料/ARM_KWT-1_237e4097/models_data_v2_12_labels/kwt1/best_weights.data-00000-of-00001",
+        "present": true
+      },
+      "labels": {
+        "path": "资料/ARM_KWT-1_237e4097/models_data_v2_12_labels/kwt1/labels.txt",
+        "present": true
+      },
+      "software_npz": {
+        "path": "software/weights/kwt1_fp32.npz",
+        "present": true,
+        "sha256": "8f359abf7adbe287b8f89fca98af46194f98f90f2146784731bff551a155825a",
+        "note": "由 TF checkpoint 导出的全 162 张量 FP32 基线，不是官方评测输入。"
+      },
+      "scope": "in-repo"
+    },
+    "dataset": {
+      "path": "资料/数据集/speech_commands_v0.02.tar.gz",
+      "present": false,
+      "md5": null,
+      "expected_md5": "6b74f3901214cb2c2934e98196829835",
+      "note": "Google Speech Commands v0.02；被 .gitignore 排除，需按资料/补全大文件.sh --dataset 下载。"
+    },
+    "e203": {
+      "subset": {
+        "path": "资料/E203_Hummingbirdv2_9f3e34f",
+        "present": true,
+        "pinned_commit": "9f3e34f337f5d0a1236a285871ffa2032491617a",
+        "scope": "in-repo",
+        "note": "官方锁定的 Hummingbird E203 关键文件子集（含 nice_core），用于对齐接口。"
+      },
+      "full_upstream": {
+        "path": "资料/e203_hbirdv2_full",
+        "present": true,
+        "resolves": true,
+        "detected_commit": "9f3e34f337f5d0a1236a285871ffa2032491617a",
+        "scope": "external-local",
+        "note": "本机独立管理的完整上游仓库（symlink 到 /home/yang/Desktop/ic设计竞赛/资料），不属于本 worktree。"
+      },
+      "official_soc_platform": {
+        "present": false,
+        "scope": "official-missing",
+        "note": "委员会打包的 E203 SoC 平台（固定地址映射、共享 512KB SRAM、总线/NICE 接线与外设）不在仓库内。"
+      }
+    },
+    "pdk": {
+      "nangate45": {
+        "path": "/home/yang/yosys-sta/pdk/nangate45",
+        "present": true,
+        "libs": [
+          "Nangate45_fast.lib",
+          "Nangate45_lvt.lib",
+          "Nangate45_slow.lib",
+          "Nangate45_typ.lib",
+          "dummy_pads.lib",
+          "fakeram45_1024x32.lib",
+          "fakeram45_2048x39.lib",
+          "fakeram45_256x34.lib",
+          "fakeram45_256x95.lib",
+          "fakeram45_256x96.lib",
+          "fakeram45_32x64.lib",
+          "fakeram45_512x64.lib",
+          "fakeram45_64x15.lib",
+          "fakeram45_64x21.lib",
+          "fakeram45_64x32.lib",
+          "fakeram45_64x7.lib",
+          "fakeram45_64x96.lib"
+        ],
+        "scope": "external-local",
+        "note": "学术 Nangate45 库，仅作通用逻辑映射/粗综合代理，不是赛题指定工艺。"
+      },
+      "icsprout55": {
+        "path": "/home/yang/yosys-sta/pdk/icsprout55",
+        "present": true,
+        "scope": "external-local",
+        "note": "iEDA 自带 55nm 练习工艺，非赛题指定。"
+      },
+      "official": {
+        "present": false,
+        "scope": "official-missing",
+        "note": "赛题指定 PDK 缺失。"
+      }
+    },
+    "sram_macros": {
+      "available_generic": {
+        "present": true,
+        "libs": [
+          "fakeram45_1024x32.lib",
+          "fakeram45_2048x39.lib",
+          "fakeram45_256x34.lib",
+          "fakeram45_256x95.lib",
+          "fakeram45_256x96.lib",
+          "fakeram45_32x64.lib",
+          "fakeram45_512x64.lib",
+          "fakeram45_64x15.lib",
+          "fakeram45_64x21.lib",
+          "fakeram45_64x32.lib",
+          "fakeram45_64x7.lib",
+          "fakeram45_64x96.lib"
+        ],
+        "path": "/home/yang/yosys-sta/pdk/nangate45/lib",
+        "scope": "external-local",
+        "note": "fakeram 通用宏（45nm 学术库），不等于题目指定的 16bit×128/1024/4096。"
+      },
+      "official_sizes": {
+        "present": false,
+        "required_sizes": [
+          "16bit x 128",
+          "16bit x 1024",
+          "16bit x 4096"
+        ],
+        "scope": "official-missing",
+        "note": "题目指定的内部 SRAM 宏缺失，无法据此核算面积/端口/冲突。"
+      },
+      "in_repo_models": {
+        "present": true,
+        "files": [
+          "hardware/rtl/sram/kwt_memory_defs.svh",
+          "hardware/rtl/sram/kwt_operand_pingpong.sv",
+          "hardware/rtl/sram/kwt_tile_buffers.sv"
+        ],
+        "scope": "in-repo",
+        "note": "RTL 级行为缓冲模型，不是可综合宏。"
+      }
+    },
+    "sdc": {
+      "in_repo": [],
+      "in_repo_present": false,
+      "external_examples": [
+        "/home/yang/yosys-sta/abc.sdc"
+      ],
+      "official_150mhz": {
+        "present": false,
+        "scope": "official-missing",
+        "note": "官方 150 MHz SDC 缺失；仓库内没有任何 .sdc。"
+      }
+    }
+  },
+  "hashes": {
+    "manifest": "资料/来源校验.json",
+    "hash_algorithm": "git blob sha1 (sha1 of 'blob <size>\\0' + content)",
+    "source_commits": {
+      "ARM_KWT-1_237e4097": "237e4097afd4f6851e0b82f0a8d65c2dfe8eae30",
+      "E203_Hummingbirdv2_9f3e34f": "9f3e34f337f5d0a1236a285871ffa2032491617a"
+    },
+    "checked": 25,
+    "match": 25,
+    "mismatch": 0,
+    "missing": 0,
+    "files": [
+      {
+        "path": "ARM_KWT-1_237e4097/LICENSE.txt",
+        "expected_sha1": "f49a4e16e68b128803cc2dcea614603632b04eac",
+        "expected_size": 11356,
+        "exists": true,
+        "actual_sha1": "f49a4e16e68b128803cc2dcea614603632b04eac",
+        "actual_size": 11356,
+        "status": "match"
+      },
+      {
+        "path": "ARM_KWT-1_237e4097/README.md",
+        "expected_sha1": "ae2a5128273ba47ae5cc2c43fb469911855b6281",
+        "expected_size": 5182,
+        "exists": true,
+        "actual_sha1": "ae2a5128273ba47ae5cc2c43fb469911855b6281",
+        "actual_size": 5182,
+        "status": "match"
+      },
+      {
+        "path": "ARM_KWT-1_237e4097/eval.sh",
+        "expected_sha1": "a43026e163514710bf552f48836127fb01958d40",
+        "expected_size": 923,
+        "exists": true,
+        "actual_sha1": "a43026e163514710bf552f48836127fb01958d40",
+        "actual_size": 923,
+        "status": "match"
+      },
+      {
+        "path": "ARM_KWT-1_237e4097/kws_streaming/data/input_data.py",
+        "expected_sha1": "98b3d34f46e7e6e40b39dce1703fc6c457b7cd82",
+        "expected_size": 35247,
+        "exists": true,
+        "actual_sha1": "98b3d34f46e7e6e40b39dce1703fc6c457b7cd82",
+        "actual_size": 35247,
+        "status": "match"
+      },
+      {
+        "path": "ARM_KWT-1_237e4097/kws_streaming/layers/speech_features.py",
+        "expected_sha1": "c888a2f77e03487b399622c094fd288c43a237e4",
+        "expected_size": 13229,
+        "exists": true,
+        "actual_sha1": "c888a2f77e03487b399622c094fd288c43a237e4",
+        "actual_size": 13229,
+        "status": "match"
+      },
+      {
+        "path": "ARM_KWT-1_237e4097/kws_streaming/models/kws_transformer.py",
+        "expected_sha1": "ff323b04786cea200bba7d62288673e1ebe48657",
+        "expected_size": 6539,
+        "exists": true,
+        "actual_sha1": "ff323b04786cea200bba7d62288673e1ebe48657",
+        "actual_size": 6539,
+        "status": "match"
+      },
+      {
+        "path": "ARM_KWT-1_237e4097/kws_streaming/models/model_flags.py",
+        "expected_sha1": "25ec34f084a23021cb1a3955939d4c0fd6938ec0",
+        "expected_size": 2787,
+        "exists": true,
+        "actual_sha1": "25ec34f084a23021cb1a3955939d4c0fd6938ec0",
+        "actual_size": 2787,
+        "status": "match"
+      },
+      {
+        "path": "ARM_KWT-1_237e4097/kws_streaming/models/model_params.py",
+        "expected_sha1": "4c23c75c12c03546c842e1a262b52aaa691056e3",
+        "expected_size": 11462,
+        "exists": true,
+        "actual_sha1": "4c23c75c12c03546c842e1a262b52aaa691056e3",
+        "actual_size": 11462,
+        "status": "match"
+      },
+      {
+        "path": "ARM_KWT-1_237e4097/kws_streaming/models/models.py",
+        "expected_sha1": "b033ae3d48a40f9709302c7d7f071d9961ec6cca",
+        "expected_size": 2213,
+        "exists": true,
+        "actual_sha1": "b033ae3d48a40f9709302c7d7f071d9961ec6cca",
+        "actual_size": 2213,
+        "status": "match"
+      },
+      {
+        "path": "ARM_KWT-1_237e4097/kws_streaming/models/transformer_utils.py",
+        "expected_sha1": "ff597a2d6d15d9ae61304667da62931c14338c58",
+        "expected_size": 7589,
+        "exists": true,
+        "actual_sha1": "ff597a2d6d15d9ae61304667da62931c14338c58",
+        "actual_size": 7589,
+        "status": "match"
+      },
+      {
+        "path": "ARM_KWT-1_237e4097/kws_streaming/models/utils.py",
+        "expected_sha1": "d1493302c186451b14d5bebdac18049ee010513e",
+        "expected_size": 16962,
+        "exists": true,
+        "actual_sha1": "d1493302c186451b14d5bebdac18049ee010513e",
+        "actual_size": 16962,
+        "status": "match"
+      },
+      {
+        "path": "ARM_KWT-1_237e4097/kws_streaming/train/model_train_eval.py",
+        "expected_sha1": "010f2392573987638847ea6266029e4ab6be43a2",
+        "expected_size": 13378,
+        "exists": true,
+        "actual_sha1": "010f2392573987638847ea6266029e4ab6be43a2",
+        "actual_size": 13378,
+        "status": "match"
+      },
+      {
+        "path": "ARM_KWT-1_237e4097/kws_streaming/train/test.py",
+        "expected_sha1": "e4cb03046fbb5e5b65e75fb35e651a42e56bde29",
+        "expected_size": 28044,
+        "exists": true,
+        "actual_sha1": "e4cb03046fbb5e5b65e75fb35e651a42e56bde29",
+        "actual_size": 28044,
+        "status": "match"
+      },
+      {
+        "path": "ARM_KWT-1_237e4097/models_data_v2_12_labels/kwt1/best_weights.index",
+        "expected_sha1": "900be3e4a2e3ccc0182b98de43a8fe21e72b6491",
+        "expected_size": 34662,
+        "exists": true,
+        "actual_sha1": "900be3e4a2e3ccc0182b98de43a8fe21e72b6491",
+        "actual_size": 34662,
+        "status": "match"
+      },
+      {
+        "path": "ARM_KWT-1_237e4097/models_data_v2_12_labels/kwt1/checkpoint",
+        "expected_sha1": "bf3b29288f11a172be3514bbe2f9bd3b3d213d8c",
+        "expected_size": 81,
+        "exists": true,
+        "actual_sha1": "bf3b29288f11a172be3514bbe2f9bd3b3d213d8c",
+        "actual_size": 81,
+        "status": "match"
+      },
+      {
+        "path": "ARM_KWT-1_237e4097/models_data_v2_12_labels/kwt1/flags.json",
+        "expected_sha1": "008af2047e217bdad9e84ff5e5b70e69bac423c3",
+        "expected_size": 2097,
+        "exists": true,
+        "actual_sha1": "008af2047e217bdad9e84ff5e5b70e69bac423c3",
+        "actual_size": 2097,
+        "status": "match"
+      },
+      {
+        "path": "ARM_KWT-1_237e4097/models_data_v2_12_labels/kwt1/labels.txt",
+        "expected_sha1": "ba416458b011a7f4b96739eb6fcb6275a6ab3bec",
+        "expected_size": 60,
+        "exists": true,
+        "actual_sha1": "ba416458b011a7f4b96739eb6fcb6275a6ab3bec",
+        "actual_size": 60,
+        "status": "match"
+      },
+      {
+        "path": "ARM_KWT-1_237e4097/models_data_v2_12_labels/kwt1/model_summary.txt",
+        "expected_sha1": "1b9a21373897e752bdbee05309d5c3608e770169",
+        "expected_size": 878,
+        "exists": true,
+        "actual_sha1": "1b9a21373897e752bdbee05309d5c3608e770169",
+        "actual_size": 878,
+        "status": "match"
+      },
+      {
+        "path": "ARM_KWT-1_237e4097/requirements.txt",
+        "expected_sha1": "9310a4f8434a6997f5f105946f9b5262365e01cd",
+        "expected_size": 89,
+        "exists": true,
+        "actual_sha1": "9310a4f8434a6997f5f105946f9b5262365e01cd",
+        "actual_size": 89,
+        "status": "match"
+      },
+      {
+        "path": "E203_Hummingbirdv2_9f3e34f/README.md",
+        "expected_sha1": "93423fa1b1d1f65ac9fc602b6ec5d681dd4f01c8",
+        "expected_size": 4690,
+        "exists": true,
+        "actual_sha1": "93423fa1b1d1f65ac9fc602b6ec5d681dd4f01c8",
+        "actual_size": 4690,
+        "status": "match"
+      },
+      {
+        "path": "E203_Hummingbirdv2_9f3e34f/doc/source/core/core.rst",
+        "expected_sha1": "db203ba69429b13d08bf4797a8f30c1f2a73d6da",
+        "expected_size": 29133,
+        "exists": true,
+        "actual_sha1": "db203ba69429b13d08bf4797a8f30c1f2a73d6da",
+        "actual_size": 29133,
+        "status": "match"
+      },
+      {
+        "path": "E203_Hummingbirdv2_9f3e34f/rtl/e203/core/e203_exu_nice.v",
+        "expected_sha1": "b01b7c263f878b082b2061178949fb2baf4f9fb6",
+        "expected_size": 5112,
+        "exists": true,
+        "actual_sha1": "b01b7c263f878b082b2061178949fb2baf4f9fb6",
+        "actual_size": 5112,
+        "status": "match"
+      },
+      {
+        "path": "E203_Hummingbirdv2_9f3e34f/rtl/e203/subsys/e203_subsys_nice_core.v",
+        "expected_sha1": "f51c66cebb957340dbf1fa9705b6feb56986ff06",
+        "expected_size": 23180,
+        "exists": true,
+        "actual_sha1": "f51c66cebb957340dbf1fa9705b6feb56986ff06",
+        "actual_size": 23180,
+        "status": "match"
+      },
+      {
+        "path": "E203_Hummingbirdv2_9f3e34f/vsim/README.md",
+        "expected_sha1": "88aac5754c69400553482563f75f39c3a6b8d0ff",
+        "expected_size": 729,
+        "exists": true,
+        "actual_sha1": "88aac5754c69400553482563f75f39c3a6b8d0ff",
+        "actual_size": 729,
+        "status": "match"
+      },
+      {
+        "path": "ARM_KWT-1_237e4097/models_data_v2_12_labels/kwt1/best_weights.data-00000-of-00001",
+        "expected_sha1": "9c38f9653119383f7a303a94689c85a2a1c79b6b",
+        "expected_size": 7401050,
+        "exists": true,
+        "actual_sha1": "9c38f9653119383f7a303a94689c85a2a1c79b6b",
+        "actual_size": 7401050,
+        "status": "match"
+      }
+    ]
+  },
+  "official_requirements": [
+    {
+      "id": "official_soc_platform",
+      "name": "组委会官方 E203 SoC 平台（System Bus / NICE 接线、地址映射、共享 512KB SRAM）",
+      "present": false,
+      "status": "missing",
+      "why_it_matters": "第 3 项 SoC 集成、第 6 项十二层调度、第 7 项综合与性能都以官方平台为验收对象。",
+      "blocking_claim": "在缺少该官方资产时，任何依赖它的性能/时序/面积/精度结论都不能宣称已达到官方口径。"
+    },
+    {
+      "id": "official_pdk",
+      "name": "组委会指定工艺 PDK 与标准单元库（用于 150 MHz / 面积签核）",
+      "present": false,
+      "status": "missing",
+      "why_it_matters": "官方给出的 150 MHz 与 ≤2.25 mm² 只有在指定工艺库下才有意义。",
+      "blocking_claim": "在缺少该官方资产时，任何依赖它的性能/时序/面积/精度结论都不能宣称已达到官方口径。"
+    },
+    {
+      "id": "official_sram_macros",
+      "name": "指定内部 SRAM 宏：16 bits × 128 / 1024 / 4096 单口或双口",
+      "present": false,
+      "status": "missing",
+      "why_it_matters": "面积、端口冲突和每拍读写能力必须按指定宏核算，不能拿通用 fakeram 代替。",
+      "blocking_claim": "在缺少该官方资产时，任何依赖它的性能/时序/面积/精度结论都不能宣称已达到官方口径。"
+    },
+    {
+      "id": "official_sdc",
+      "name": "官方 150 MHz 时序约束（SDC）与综合脚本",
+      "present": false,
+      "status": "missing",
+      "why_it_matters": "没有官方时钟/输入输出延迟定义就无法做可比的 150 MHz 时序检查。",
+      "blocking_claim": "在缺少该官方资产时，任何依赖它的性能/时序/面积/精度结论都不能宣称已达到官方口径。"
+    },
+    {
+      "id": "official_eval_set",
+      "name": "官方统一评测集（600 条样本）与官方评测脚本",
+      "present": false,
+      "status": "missing",
+      "why_it_matters": "本科/研究生数值门槛与准确率必须按官方 600 条口径复算。",
+      "blocking_claim": "在缺少该官方资产时，任何依赖它的性能/时序/面积/精度结论都不能宣称已达到官方口径。"
+    }
+  ],
+  "capability_levels": [
+    {
+      "id": "L1_kernel_functional",
+      "name": "计算核/输出级功能仿真（Verilator/Icarus，逐位对照软件整数模型）",
+      "status": "achievable",
+      "evidence": "工具链 present 且 RTL/测试平台在本仓库内；smoke test 见 smoke_test.json。",
+      "reason": "不依赖官方 SoC/PDK/SDC。"
+    },
+    {
+      "id": "L2_module_synthesis_proxy",
+      "name": "模块级逻辑综合（Yosys 通用库，或 iEDA + Nangate45 代理库）",
+      "status": "achievable",
+      "evidence": "Yosys 与 iEDA 可执行；Nangate45 lib 作为代理库存在。",
+      "reason": "结果为代理工艺下的相对参考，不是赛题指定 PDK 的签核数据。"
+    },
+    {
+      "id": "L3_e203_rtl_simulation",
+      "name": "E203 RTL 仿真接入（Hummingbird E203 固定提交，含 NICE/总线仿真模型）",
+      "status": "partial",
+      "evidence": "E203 子集与完整上游 RTL 存在，可用 Icarus 跑 CPU 级仿真。",
+      "reason": "缺少委员会官方 SoC 封装（地址映射、共享 SRAM、外设），不等于官方平台仿真。"
+    },
+    {
+      "id": "L4_official_timing_signoff",
+      "name": "150 MHz 时序签核",
+      "status": "blocked",
+      "evidence": "缺少官方 PDK、标准单元库、官方 SDC 与完整 SoC 网表。",
+      "reason": "代理库/示例 SDC 下的频率数字不能当作 150 MHz 达标。"
+    },
+    {
+      "id": "L5_area_power_signoff",
+      "name": "≤2.25 mm² 面积与功耗/能耗签核",
+      "status": "blocked",
+      "evidence": "缺少指定 SRAM 宏与官方工艺；无 SAIF/VCD 统一条件。",
+      "reason": "不能用通用 fakeram 面积或不同配置拼出面积/功耗结论。"
+    },
+    {
+      "id": "L6_official_eval_accuracy",
+      "name": "官方 600 条评测集上的 NRMSE / 准确率",
+      "status": "blocked",
+      "evidence": "官方评测集与评测脚本未发布；本地 240 条验证样本不是 600 条口径。",
+      "reason": "480 软件 / 240 RTL / 官方 600 是三个不同统计，不可混用或外推。"
+    }
+  ],
+  "claims": {
+    "can_claim": [
+      "在 Verilator/Icarus 上的模块级与计算核级功能仿真结果，以及逐位对照软件整数模型的一致性。",
+      "在 Yosys 通用库或 iEDA+Nangate45 代理库下的相对逻辑综合/面积量级，注明为代理工艺。",
+      "官方锁定提交（KWT-1 237e4097 / E203 9f3e34f）源码快照与权重的哈希一致性。",
+      "Hummingbird E203（固定上游）RTL 级 CPU 仿真中的指令流/接口行为。"
+    ],
+    "cannot_claim": [
+      "在官方 E203 SoC 平台完成 SoC 集成仿真——官方 SoC 封装缺失。",
+      "达到 150 MHz 时序——无官方 PDK/库/SDC，代理约束不成立。",
+      "满足 ≤2.25 mm² 面积与功耗签核——无指定 SRAM 宏与官方工艺。",
+      "官方 600 条评测集上的 NRMSE/准确率——评测集未发布。",
+      "任何基于模拟模型/代理库的数字代表真实 SoC 或真实工艺结果。"
+    ]
+  },
+  "summary": {
+    "tools_present": 9,
+    "tools_total": 10,
+    "tools_missing": [
+      "sta_opensta"
+    ],
+    "hash_match": 25,
+    "hash_mismatch": 0,
+    "hash_missing": 0,
+    "official_missing": [
+      "official_soc_platform",
+      "official_pdk",
+      "official_sram_macros",
+      "official_sdc",
+      "official_eval_set"
+    ],
+    "capability_achievable": [
+      "L1_kernel_functional",
+      "L2_module_synthesis_proxy"
+    ],
+    "capability_partial": [
+      "L3_e203_rtl_simulation"
+    ],
+    "capability_blocked": [
+      "L4_official_timing_signoff",
+      "L5_area_power_signoff",
+      "L6_official_eval_accuracy"
+    ],
+    "verification_ceiling": "在缺官方 SoC/PDK/SRAM 宏/SDC/评测集的前提下，本环境最高只能给出 L1 功能仿真与 L2 代理工艺粗综合证据；不得据此宣称真实 SoC 或 150 MHz。"
+  }
+}
