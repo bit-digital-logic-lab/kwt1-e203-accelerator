@@ -1,69 +1,73 @@
-# WORKER_REPORT — 本科必做验证缺口
+# WORKER_REPORT — NICE-like 协议边界验证
 
-分支：`codex/kwt-verification`
-范围：只新增验证文件，不改计算核、量化算法、主目录或共享资料。
+分支：`codex/kwt-nice-protocol`（本工作树）。范围：只在
+`hardware/verification/nice_protocol/` 新增验证文件，不改核心 RTL、驱动、
+16-row E203 集成、主目录或其他分支。未用子智能体，未 push/merge/rebase。
+
+> 本文件此前记录的是 tile 级 edge-case 验证，内容仍保留在 Git 历史
+> （`git show c12a0ea:WORKER_REPORT.md`）。此处改写为本轮任务报告。
 
 ## 改动
 
-新增（均在 `hardware/rtl/control/tb/`）：
+新增（均在 `hardware/verification/nice_protocol/`）：
 
-- `tb_kwt_tile_edge_cases.sv`：在 `kwt_tile_system_model`（DMA + 8×16 引擎 +
-  行为级外部存储/总线）上运行的 tile 级自检。按 `cases.hex` 顺序执行，逐项与
-  外部 golden（`golden.hex`）比较，填充行必须为 0。
-- `run_tile_edge_cases.py`：只读加载主目录
-  `hardware/architecture/results/real_e203_validation0_vectors/layer01_*`，校验
-  manifest 中 4 个文件的 SHA256；用整数点积**独立重算** golden 并与
-  `expected32` 交叉核对；把算子与 golden 暂存为 ASCII 文件再给 Icarus（规避中文
-  路径）；先跑正向，再复制 golden、把最后一个被检查的有效元素 +1 跑负向注入。
-- `run_tile_edges.sh`：入口脚本，`python3 -u` 调用上面的驱动。
-- `TILE_EDGE_TESTS.md`：覆盖项、判据与证据层级说明。
+- `tb_nice_protocol_boundaries.sv`：对 `kwt_nice_system_model`（含 tile 控制、
+  DMA、128-bit 外部存储模型、脉冲阵列）的自检 TB。24 个场景、25 条命令、
+  865 条断言，覆盖响应保持、请求/总线反压、复位、非法与越界描述符、
+  DMA error/done。
+- `run_nice_protocol.sh`：Icarus 入口。正向必须 exit 0 且命中 PASS 横幅；
+  两个 `-D` 故障注入负例必须 exit≠0 且命中指定断言文本，否则 `SUITE_RESULT FAIL`。
+- `run_nice_verilator.sh`：用 Verilator 复跑正向，交叉确认同一行为。
+- `NICE_PROTOCOL_TESTS.md`：覆盖项、判据、证据层级、未证事项。
 
-新增（`hardware/testbenchplus/common/negative_injection_check.py`）：对两个示例
-向量各跑两次未改动的 `run_vectors.py`——原 golden 必须通过，单个 `expected`
-元素污染后必须失败——以证明 testbenchplus 的独立 golden 真的能拦住错值。
+## 依据真实端口确定的覆盖项
 
-覆盖：独立 golden 负向注入、末 tile（行 96..98 有效 / 99..103 填充，16 个列
-tile）、无复位连续任务、计算中注入复位并在复位后恢复核对。
+按 `kwt_nice_system_model.sv` / `kwt_tile_system_model.sv` 的真实实现确定，
+不假设官方 E203 协议：
+
+- **合法路径**：合法描述符 → 两拍取指 → tile 命令 → 8×16 输出，逐项核对。
+- **响应保持**：`rsp_valid && !rsp_ready` 时 data/err 必须保持不变。
+- **请求反压**：RESPONSE 期间 `req_ready=0`；跨响应保持的请求握手后不丢失。
+- **总线反压**：`bus_valid && !bus_ready` 时 addr/wdata/wstrb/write 保持稳定。
+- **复位**：上电复位后状态；事务计算中复位 3 拍再释放并恢复。
+- **非法/越界描述符**：错 opcode/funct3/funct7、未对齐或越界 rs1（status 3）；
+  k_len=0/65、mask=0、地址未对齐（status 1）。
+- **DMA error/done**：out/A/B/bias 目标越界 → status 2，`rsp_err=1`。
 
 ## 实际执行的命令与退出结果
 
-均在当前 worktree 根目录执行；Icarus 使用 oss-cad-suite 的 14.0（Ubuntu 自带
-11.0 无法展开冻结 RTL 的未打包数组，属既有环境问题）。
-
 | 命令 | 退出码 | 结果 |
 | --- | ---: | --- |
-| `PATH=/home/yang/yosys-sta/oss-cad-suite/bin:$PATH bash hardware/rtl/control/tb/run_tile_edges.sh` | 0 | 正向 `PASS`：21 个 case，末 tile 768 有效 + 1280 填充，连续 19 次，复位 1 次；负向注入 `MISMATCH case=20 row=98 col=255`，子运行退出 1，被脚本判定为“已检出” |
-| `PATH=/home/yang/yosys-sta/oss-cad-suite/bin:$PATH bash hardware/testbenchplus/run_all_tests.sh --vectors-only` | 0 | 既有 testbenchplus 向量 2/2 通过（int16 逐位、fp32 NRMSE 0） |
-| `PATH=/home/yang/yosys-sta/oss-cad-suite/bin:$PATH python3 hardware/testbenchplus/common/negative_injection_check.py` | 0 | 原 golden 通过；污染后 fp32/int16 均以 exit=1 检出 |
-| `PATH=/home/yang/yosys-sta/oss-cad-suite/bin:$PATH bash hardware/rtl/control/tb/run.sh` | 0 | 既有 tile system model 通过（128 个结果） |
-| `bash hardware/rtl/control/tb/run.sh`（默认 `/usr/bin/iverilog` 11.0） | 1 | 既有 RTL 的 `unresolved wire array`；非本次改动引入 |
+| `bash hardware/verification/nice_protocol/run_nice_protocol.sh` | 0 | `SUITE_RESULT PASS`；正向 `scenarios=24 commands=25 assertions=865 bus_beats=450`；两个负例均被检出 |
+| `bash hardware/verification/nice_protocol/run_nice_verilator.sh` | 0 | Verilator 5.030 下同一结果 `scenarios=24 commands=25 assertions=865 bus_beats=450` |
 
-关键自检输出（正向）：
+关键输出：
 
 ```
-independent_golden: valid=1328 padding=1360 expected32_cross_checks=1328
-cases=21 reset_index=19 last_tile_valid=768 last_tile_padding=1280
-PASS tile edge cases: cases=21 checked_tiles=20 valid=1200 padding=1360
-  reset=1 continuous=19 task_cycles=82406 total_cycles=82405
+PASS nice_protocol_boundaries: scenarios=24 commands=25 assertions=865 bus_beats=450
+positive        0  zero     PASS nice_protocol_boundaries                1 1
+negative_rsp_fault 1 nonzero RSP_VALUE_MISMATCH                          1 1
+negative_bus_fault 1 nonzero BUS_STABILITY_VIOLATION                     1 1
+SUITE_RESULT PASS
 ```
 
-负向注入输出：`MISMATCH ... golden mismatch case=20 [98,255]`，
-`NEGATIVE_INJECTION_DETECTED golden_index=2607 exit=1`。
+故障注入负例的断言文本：
 
-## 证据层级
+```
+FATAL: ... RSP_VALUE_MISMATCH data=deadbeef err=0 expected_status=0   (exit=1, -DNICE_FAULT_RSP)
+FATAL: ... BUS_STABILITY_VIOLATION valid=1 addr=00000510(want 00000500) write=0 (exit=1, -DNICE_FAULT_BUS)
+```
 
-- 以上均为 **行为级/Icarus tile 级** 结果：外部存储、总线、SRAM、时序是简化
-  模型，不是组委会 SoC 或综合后网表。
-- `task_cycles/total_cycles` 只是 harness 观察值，**不构成** 150 MHz、吞吐、
-  面积或功耗结论；本套件不做综合与时序。
-- golden 独立于 DUT：由冻结 `a16/w16/bias32` 重算，且与给定 `expected32`
-  1 328 项逐项一致；SHA256 由脚本按 manifest 校验。
+## 真实缺陷
 
-## 未证事项
+在已覆盖范围内**未发现真实缺陷**：所有合法场景 status=0 且输出逐项正确，
+所有非法/越界场景返回预期的 1/2/3 且 `rsp_err` 正确，复位与反压均符合预期。
+未牵强断言官方 E203 NICE 协议已验证。
 
-- 未跑 208 块/12 层整层，未跑真实 E203 SoC 或竞赛平台，未做综合/时序/面积/
-  功耗；GELU 与第二线性层未涉及。
-- 负向注入只验证“独立 golden 被污染时测试能报错”，不是对 DUT 的故障注入。
-- 只覆盖 layer01、validation_index 0 的单个真实样本；12 层换参由既有
-  `run_e203.sh` 系列覆盖，本套件不重复。
-- Icarus 11 与既有控制类测试脚本的兼容性问题仍存在，未在本次修复。
+## 证据层级与未证事项
+
+- 全部为**行为级 / 双仿真器**结果（Icarus 14 与 Verilator 5.030）；外部存储、
+  总线、SRAM、脉冲阵列为简化模型，不含时序、面积、功耗结论。
+- `assertions`/`bus_beats` 仅为 harness 观察计数，不是覆盖闭包证明。
+- 未覆盖：官方 E203 NICE 时序握手、真实 ICB/System Bus、中断/长描述符链、
+  k_len=64 全深度搬运（会与现有数据区重叠，需重排地址后再测）。
