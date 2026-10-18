@@ -1,0 +1,6 @@
+PASS elaboration + check -assert clean for top kwt_row_broadcast_tile
+  structural counts: $mul=8 $mem_v2=8 $add=9
+PASS $mul count 8 >= 1
+PASS $mem_v2 count 8 >= 1
+PASS kwt_cacc mapped with example library Nangate45_typ.lib: Chip area=47861.114000 (NOT a sign-off area)
+KWT-GRAD-VERIFY synth checked=4 failed=0

@@ -1,0 +1,2 @@
+PASS real E203 NICE: requests=1 responses=1 outputs=128 cycles=1055
+/home/yang/kwt-worktrees/grad-test-infra/hardware/rtl/control/tb/tb_kwt_real_e203.sv:80: $finish called at 10740 (1s)
