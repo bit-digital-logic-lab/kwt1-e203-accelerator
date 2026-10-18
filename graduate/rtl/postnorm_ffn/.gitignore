@@ -1,0 +1,7 @@
+# simulation/test artifacts (any BUILD_DIR used by tb/run.sh)
+build*/
+
+# generated stimulus vectors (regenerate with `python3 model/gen_config.py`)
+model/vectors/*.hex
+model/vectors/stimulus.npz
+model/vectors/meta.json

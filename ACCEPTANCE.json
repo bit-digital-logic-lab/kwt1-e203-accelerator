@@ -1,0 +1,27 @@
+{
+  "worker": "grad-nonlinear",
+  "commands": [
+    {
+      "cmd": "SIM=verilator BUILD_DIR=graduate/rtl/postnorm_ffn/build_accept bash graduate/rtl/postnorm_ffn/tb/run.sh",
+      "cwd": ".",
+      "timeout": 900,
+      "expect_exit": 0
+    },
+    {
+      "cmd": "SYNTH_OUT=graduate/rtl/postnorm_ffn/build_accept/yosys bash graduate/rtl/postnorm_ffn/tb/run_yosys.sh",
+      "cwd": ".",
+      "timeout": 600,
+      "expect_exit": 0
+    }
+  ],
+  "artifacts": [
+    {"path": "graduate/rtl/postnorm_ffn/build_accept/r1.hex", "sha256": "55b3e37d5a0706681e7d8a5b30fe844a1a008fff95512e2dd803b33413381735"},
+    {"path": "graduate/rtl/postnorm_ffn/build_accept/o1.hex", "sha256": "dbb57dd8869f21636cc2d093233b854c42cf769dd8bb25caf371ec4fc38142a7"},
+    {"path": "graduate/rtl/postnorm_ffn/build_accept/g.hex", "sha256": "a84d38eda0fd09d7c2481a786e4a4f7588cc84c4a0566094008bb892bc165bdb"},
+    {"path": "graduate/rtl/postnorm_ffn/build_accept/f.hex", "sha256": "e93dbc674e3932dd088760061cdaf8c30082180dd60831fc5f93727263fc7385"},
+    {"path": "graduate/rtl/postnorm_ffn/build_accept/r2.hex", "sha256": "cbcb1b8798ec620c21fafd9aa9cb022bf04b67de5659736632a5f85d02d3b866"},
+    {"path": "graduate/rtl/postnorm_ffn/build_accept/y.hex", "sha256": "58fb1a90bbf58d979274175569db5a295330f9bfa57f2981dc2263dbbb2c0aec"},
+    {"path": "graduate/rtl/postnorm_ffn/build_accept/verify.log", "sha256": "b175161e060c3bd86073c08173e5d3528ac3c28f85ecf898f30edf52bb3691be"},
+    {"path": "graduate/rtl/postnorm_ffn/rtl/kwt_postnorm_cfg.svh", "sha256": "4be4e396e27721fb46e99c7b9bb89a7c11d061043f95496f55179b2efb0ac7b0"}
+  ]
+}
