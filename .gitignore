@@ -17,3 +17,4 @@ __pycache__/
 *.fst
 obj_dir/
 .build/
+/.ai-checks/

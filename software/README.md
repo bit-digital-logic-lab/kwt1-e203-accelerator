@@ -20,6 +20,15 @@ python3 software/test_offline_encoder_input.py -v
 这个文件是**首层编码器输入**。本科必做的硬件输入是 12 个编码器层各自完成注意力、残差和第一处 LayerNorm 后的 `99×64` 张量；不能直接把首层编码器输入当成各层 FFN1 输入。逐层张量须通过完整 FP32 前向提取（`run.py` 的 `forward(..., capture_ffn=True)`）。音频到 MFCC 的生成也在本脚本范围之外。
 - `verify_reference.py` 用 TensorFlow 运算交叉检查同一权重和输入的前馈输入、最终编码器输出及 logits。
 
+### 首层输入与 FFN1 输入边界的独立审计
+
+[`audit_ffn1_input_boundary.py`](audit_ffn1_input_boundary.py) 用 NumPy float64 独立重实现（自写 FFT MFCC、投影、12 层前向，参考值从不取被测输出）交叉校验 `98×40 → 99×64` 与 12 层 FFN1 捕获边界，并加入加性/齐次/class token/token 置换等变形不变量；错误边界候选（残差、注意力、层输入、LN2）用于判别捕获点。两条不同类别真实 WAV 及 60 条缓存验证样本的实测最大绝对差、哈希与边界见 [审计记录](validation/ffn1_input_boundary_audit/README.md)。运行：
+
+```bash
+python3 software/audit_ffn1_input_boundary.py --sweep 60
+python3 software/test_ffn1_input_boundary.py -v
+```
+
 ## 运行
 
 在本目录执行：
@@ -89,3 +98,7 @@ OPENBLAS_NUM_THREADS=4 OMP_NUM_THREADS=4 \
 ## 多方案无梯度尺度标定重跑
 
 [`compare_ffn1_calibration.py`](compare_ffn1_calibration.py) 在相同训练/验证缓存上重跑 A8W8、A11W10、A12W9、A12W10 的逐层最大值基线，并仅用分层选出的 60 条训练样本为每层比较七组静态尺度倍率。结果和规则边界见 [重跑报告](results/多方案无梯度尺度标定重跑.md)。
+
+随后扩大到每类训练和验证各 40 条（共 480+480），每类取 10 条训练样本选择七组倍率，并导出可供现有 INT16/INT32 RTL 测试台读取的 A11W10、A12W10 最大值基线参数。12 层结果、容量和硬件取舍见 [扩大样本报告](results/FFN1扩大样本静态量化取舍.md)。
+
+同一 40/类缓存还实测 A10W8、A12W8、A10W9，加 A8W8 对照。W8 中 A12W8 最差层 NRMSE 最低，为 0.518930%；已导出 `ffn1_a12w8_static_sym_12labels_40.npz` 标准参数包，容量前提与 RTL 接口边界见 [低位权重报告](results/FFN1低位权重候选实测.md)。

@@ -1,0 +1,462 @@
+{
+  "scope": "98x40 MFCC -> 99x64 first encoder input, and per-layer FFN1 input boundary",
+  "weights": "/home/yang/kwt-worktrees/preprocess/software/weights/kwt1_fp32.npz",
+  "weights_sha256": "8f359abf7adbe287b8f89fca98af46194f98f90f2146784731bff551a155825a",
+  "source": {
+    "kind": "wav_archive",
+    "path": "/home/yang/Desktop/ic设计竞赛/资料/数据集/speech_commands_v0.02.tar.gz",
+    "bytes": 2428923189
+  },
+  "tolerances": {
+    "mfcc": 0.001,
+    "encoder": 2e-05,
+    "ffn1": 5e-05,
+    "metamorphic": 0.001,
+    "boundary_margin": 0.01
+  },
+  "environment": {
+    "python": "3.12.12",
+    "platform": "Linux-5.15.0-164-generic-x86_64-with-glibc2.35",
+    "machine": "x86_64",
+    "numpy": "2.5.2",
+    "torch": "2.5.1+cu121",
+    "torch_cuda_available": true,
+    "device_used": "cpu",
+    "tensorflow_available": false
+  },
+  "samples": [
+    {
+      "sample": "yes/676f8138_nohash_0.wav",
+      "label": "yes",
+      "mfcc_shape": [
+        98,
+        40
+      ],
+      "mfcc_sha256": "f54b0389d459f79e0d005e2818d087d9cba7b91622271cef3e34f86ef13850d8",
+      "mfcc_independent_vs_project_max_abs_error": 2.3245811462402344e-05,
+      "encoder_shape": [
+        99,
+        64
+      ],
+      "encoder_sha256": "ba8203e8ba6180dcaaf368d618f77c8d42a0332e9e45374e8ddb0f328b15fd54",
+      "encoder_independent_max_abs_error": 1.3291450704500107e-06,
+      "ffn1_inputs_shape": [
+        [
+          99,
+          64
+        ],
+        [
+          99,
+          64
+        ],
+        [
+          99,
+          64
+        ],
+        [
+          99,
+          64
+        ],
+        [
+          99,
+          64
+        ],
+        [
+          99,
+          64
+        ],
+        [
+          99,
+          64
+        ],
+        [
+          99,
+          64
+        ],
+        [
+          99,
+          64
+        ],
+        [
+          99,
+          64
+        ],
+        [
+          99,
+          64
+        ],
+        [
+          99,
+          64
+        ]
+      ],
+      "ffn1_distinct_min_max_abs": 1.3426666259765625,
+      "layers": [
+        {
+          "layer": 0,
+          "capture_sha256": "146703631257e93c66faac82657c879b26d1b919f5a96e2f5d8ca16fc68fbff4",
+          "ffn1_max_abs_error": 1.2750901250413449e-06,
+          "wrong_boundary_max_abs_error": {
+            "residual": 2.234730377085797,
+            "combined": 4.14833332234591,
+            "layer_input": 2.69730681180954,
+            "ln2": 1.731952005728986
+          }
+        },
+        {
+          "layer": 1,
+          "capture_sha256": "feaaa59847a5fce795279579c49b3e33534395d70c076df49a87983c0a0f4305",
+          "ffn1_max_abs_error": 1.4023442489463633e-06,
+          "wrong_boundary_max_abs_error": {
+            "residual": 0.7945167174287722,
+            "combined": 3.97984062922971,
+            "layer_input": 1.3270560645622587,
+            "ln2": 1.3077001222451514
+          }
+        },
+        {
+          "layer": 2,
+          "capture_sha256": "18863e64df4b3186c524ca34fe47fb78e65bf4ef4b651662e92dd993af502779",
+          "ffn1_max_abs_error": 1.7230667025275315e-06,
+          "wrong_boundary_max_abs_error": {
+            "residual": 1.1014750239120543,
+            "combined": 4.44552274487072,
+            "layer_input": 1.754962574424174,
+            "ln2": 1.0864949934497674
+          }
+        },
+        {
+          "layer": 3,
+          "capture_sha256": "4e87d6d691dee59dbab872a0708166e553d0a3fd5ba59a6b0ff359208e8955b3",
+          "ffn1_max_abs_error": 2.2316003422950814e-06,
+          "wrong_boundary_max_abs_error": {
+            "residual": 0.49567641321185985,
+            "combined": 3.900618909776433,
+            "layer_input": 1.208556165627229,
+            "ln2": 1.6249371395961902
+          }
+        },
+        {
+          "layer": 4,
+          "capture_sha256": "34e846e1358270ae023186b8605f24f737b34afd591d940b3b045a432cd1dc22",
+          "ffn1_max_abs_error": 2.4924501500489527e-06,
+          "wrong_boundary_max_abs_error": {
+            "residual": 0.7235210998916963,
+            "combined": 4.1967360606703545,
+            "layer_input": 2.3720156701830772,
+            "ln2": 0.9922463075394208
+          }
+        },
+        {
+          "layer": 5,
+          "capture_sha256": "7715d138e1bfeac7581c85302b8c42250a400583684fbf30cfd699c05fc80686",
+          "ffn1_max_abs_error": 2.7589557953788812e-06,
+          "wrong_boundary_max_abs_error": {
+            "residual": 0.5644724451424659,
+            "combined": 4.038873265355024,
+            "layer_input": 1.4205803493555695,
+            "ln2": 1.075418938024478
+          }
+        },
+        {
+          "layer": 6,
+          "capture_sha256": "b3ec93000aa9e4840ac5500beee9dc19e90492a1414b6231a1a189b14337ed0d",
+          "ffn1_max_abs_error": 2.7924742143081716e-06,
+          "wrong_boundary_max_abs_error": {
+            "residual": 0.4698461113433492,
+            "combined": 4.284616504511717,
+            "layer_input": 1.327470252663181,
+            "ln2": 1.2843061098030888
+          }
+        },
+        {
+          "layer": 7,
+          "capture_sha256": "cd27f79e1f5b9bf893d4db0414a7b2bba7f6121a8d2ae75be56dac2d0ffdd92c",
+          "ffn1_max_abs_error": 2.7087510887646715e-06,
+          "wrong_boundary_max_abs_error": {
+            "residual": 0.4346270547881028,
+            "combined": 4.87522611292227,
+            "layer_input": 0.7956587315138992,
+            "ln2": 0.9692570117790447
+          }
+        },
+        {
+          "layer": 8,
+          "capture_sha256": "1cb1c5c9ff343a0fa492f4cf9d87a0528ff04036975d24f1aa9d2406fd8794f3",
+          "ffn1_max_abs_error": 2.9497565057212682e-06,
+          "wrong_boundary_max_abs_error": {
+            "residual": 0.332049216816225,
+            "combined": 4.87717334880969,
+            "layer_input": 1.2433136884371598,
+            "ln2": 1.2581930299012978
+          }
+        },
+        {
+          "layer": 9,
+          "capture_sha256": "e12418132f299b00be6b77562fb8a0145c8fc7c97cb1e6a1073fa32db11e2714",
+          "ffn1_max_abs_error": 2.9239180383555663e-06,
+          "wrong_boundary_max_abs_error": {
+            "residual": 0.42087617355028417,
+            "combined": 4.6816759739146585,
+            "layer_input": 0.7244744219275625,
+            "ln2": 1.5326806524796242
+          }
+        },
+        {
+          "layer": 10,
+          "capture_sha256": "3be2e2e7784de6624f76d1f52816ff083688060e835a310d182f9b516c729dbd",
+          "ffn1_max_abs_error": 3.3969582768911266e-06,
+          "wrong_boundary_max_abs_error": {
+            "residual": 0.8677975461313019,
+            "combined": 5.161022342156067,
+            "layer_input": 0.7802023591566671,
+            "ln2": 2.0904656939107706
+          }
+        },
+        {
+          "layer": 11,
+          "capture_sha256": "367a4f0f7c46920fb80f74c2d70d1ab4cb492b1d21d7371520c6bee401682e6e",
+          "ffn1_max_abs_error": 3.105052086394e-06,
+          "wrong_boundary_max_abs_error": {
+            "residual": 0.9264871599592706,
+            "combined": 4.503692933565709,
+            "layer_input": 1.616628627561838,
+            "ln2": 3.662162025195973
+          }
+        }
+      ],
+      "wav_sha256": "b71582f69fa339b7972df3fc0b31c6d7482b98630a10cccf329dcda6fb0e8b45",
+      "wav_bytes": 32044
+    },
+    {
+      "sample": "four/750e3e75_nohash_0.wav",
+      "label": "_unknown_",
+      "mfcc_shape": [
+        98,
+        40
+      ],
+      "mfcc_sha256": "05e91d75ced8810adf6b37bdf3827d147794f104d792ea9b2a1372a165f75bd0",
+      "mfcc_independent_vs_project_max_abs_error": 7.152557373046875e-05,
+      "encoder_shape": [
+        99,
+        64
+      ],
+      "encoder_sha256": "e8c0e84e6bf70d3aaf156af508536c44d773f8708f9b7f8a96a81215d99daa6e",
+      "encoder_independent_max_abs_error": 9.584249678340484e-07,
+      "ffn1_inputs_shape": [
+        [
+          99,
+          64
+        ],
+        [
+          99,
+          64
+        ],
+        [
+          99,
+          64
+        ],
+        [
+          99,
+          64
+        ],
+        [
+          99,
+          64
+        ],
+        [
+          99,
+          64
+        ],
+        [
+          99,
+          64
+        ],
+        [
+          99,
+          64
+        ],
+        [
+          99,
+          64
+        ],
+        [
+          99,
+          64
+        ],
+        [
+          99,
+          64
+        ],
+        [
+          99,
+          64
+        ]
+      ],
+      "ffn1_distinct_min_max_abs": 1.1474766731262207,
+      "layers": [
+        {
+          "layer": 0,
+          "capture_sha256": "5ba1e763742af7a0360f293860e4685d27c1b1e5a92bbdef591a7cbfb78246d9",
+          "ffn1_max_abs_error": 1.1458546920195545e-06,
+          "wrong_boundary_max_abs_error": {
+            "residual": 2.1415195476465088,
+            "combined": 3.931913034332389,
+            "layer_input": 2.3368252746060323,
+            "ln2": 1.1786488842584135
+          }
+        },
+        {
+          "layer": 1,
+          "capture_sha256": "a173317abf99eaa157e37c33205c7839dfe93ab3449dc53c0e22fc5feaf2094b",
+          "ffn1_max_abs_error": 1.4252000664072284e-06,
+          "wrong_boundary_max_abs_error": {
+            "residual": 0.9772760931159139,
+            "combined": 4.083826518187692,
+            "layer_input": 1.648967383317376,
+            "ln2": 1.2315624340106304
+          }
+        },
+        {
+          "layer": 2,
+          "capture_sha256": "9d749195b19da16a7d7648d451d24cb546c2df006d976f73f5eee72488e468ba",
+          "ffn1_max_abs_error": 1.715846988714631e-06,
+          "wrong_boundary_max_abs_error": {
+            "residual": 0.6947613271868631,
+            "combined": 3.905917763147909,
+            "layer_input": 1.303402941671638,
+            "ln2": 1.2587957638130818
+          }
+        },
+        {
+          "layer": 3,
+          "capture_sha256": "14a1aeb52f3288e44f4199963019cdd257634b40a313cde712450e3a15d86fb3",
+          "ffn1_max_abs_error": 2.1741304103706227e-06,
+          "wrong_boundary_max_abs_error": {
+            "residual": 0.9289947267247194,
+            "combined": 4.641606272741638,
+            "layer_input": 1.4936763442280023,
+            "ln2": 1.4076329683149462
+          }
+        },
+        {
+          "layer": 4,
+          "capture_sha256": "64e2386f99d64c18bacbf4031bb447d3d852c0594a5b6444be0ac532380096b3",
+          "ffn1_max_abs_error": 2.8903355109299866e-06,
+          "wrong_boundary_max_abs_error": {
+            "residual": 0.8862194017110117,
+            "combined": 4.580074251972195,
+            "layer_input": 2.033462837834512,
+            "ln2": 1.06909159398785
+          }
+        },
+        {
+          "layer": 5,
+          "capture_sha256": "7a526e70d80387adec6b36177160c5604a057843d0c08ae0372739661cde49cd",
+          "ffn1_max_abs_error": 2.8324489003139774e-06,
+          "wrong_boundary_max_abs_error": {
+            "residual": 1.013433936295888,
+            "combined": 5.566877631215385,
+            "layer_input": 1.434328971416105,
+            "ln2": 0.8742047190644242
+          }
+        },
+        {
+          "layer": 6,
+          "capture_sha256": "1e1d4c5022ee4d0c86c293d10f79423e4e8724802920cd5ffb244861f36b5a2c",
+          "ffn1_max_abs_error": 2.6161942945357453e-06,
+          "wrong_boundary_max_abs_error": {
+            "residual": 0.49068455746540174,
+            "combined": 4.697685736667475,
+            "layer_input": 0.7920935287383817,
+            "ln2": 1.0594408905425694
+          }
+        },
+        {
+          "layer": 7,
+          "capture_sha256": "c774549b314fd43299729e858ca3a74053861761402d66e75a95866d672dcc91",
+          "ffn1_max_abs_error": 2.7628002654545014e-06,
+          "wrong_boundary_max_abs_error": {
+            "residual": 0.3912877667499033,
+            "combined": 4.771885868091708,
+            "layer_input": 1.0384270087392677,
+            "ln2": 1.0217362420680076
+          }
+        },
+        {
+          "layer": 8,
+          "capture_sha256": "460ed5c6ac29ed33f4416d56271657c8cd8ed2a79ba6a0e80f4385723af6ba98",
+          "ffn1_max_abs_error": 2.760377529942293e-06,
+          "wrong_boundary_max_abs_error": {
+            "residual": 0.345462543879286,
+            "combined": 4.4986851327368536,
+            "layer_input": 1.1957133285264359,
+            "ln2": 1.2287730421271577
+          }
+        },
+        {
+          "layer": 9,
+          "capture_sha256": "b5003ee4ce122bdd2b1c5c3527d103db577742da19ad2e58e859d71eedf7a70d",
+          "ffn1_max_abs_error": 3.10831200601297e-06,
+          "wrong_boundary_max_abs_error": {
+            "residual": 0.6328411348704237,
+            "combined": 4.682159358294223,
+            "layer_input": 0.7202359703777688,
+            "ln2": 1.6470501730276983
+          }
+        },
+        {
+          "layer": 10,
+          "capture_sha256": "377c974e09260c31f0730b95d4f57fcc0e84f57f59d90ff0ed8574b48ac2ea82",
+          "ffn1_max_abs_error": 2.893086847699511e-06,
+          "wrong_boundary_max_abs_error": {
+            "residual": 0.5542279346435475,
+            "combined": 4.097699983307021,
+            "layer_input": 1.0946862745737573,
+            "ln2": 2.2265817974625786
+          }
+        },
+        {
+          "layer": 11,
+          "capture_sha256": "e18afb4cb6830892e58678e7bb4fd66a05a348e313290b8399f6e0b66a60b294",
+          "ffn1_max_abs_error": 3.1034889380610053e-06,
+          "wrong_boundary_max_abs_error": {
+            "residual": 0.7670288047103178,
+            "combined": 4.089430479075851,
+            "layer_input": 2.0586486128434647,
+            "ln2": 4.120628837873384
+          }
+        }
+      ],
+      "wav_sha256": "2ad981ba82162e0084d3ab3dc0ae6bdb79ac908a72067a1e752ebe2318bcee9f",
+      "wav_bytes": 32044
+    }
+  ],
+  "metamorphic": {
+    "projection_additivity_max_abs_error": 2.950429916381836e-06,
+    "projection_homogeneity_max_abs_error": 2.384185791015625e-07,
+    "class_token_row_identical": true,
+    "ffn1_token_permutation_max_abs_error": 3.6349520087242126e-06
+  },
+  "sweep": {
+    "samples": 60,
+    "seed": 20261018,
+    "categories": [
+      "_silence_",
+      "_unknown_",
+      "down",
+      "go",
+      "left",
+      "no",
+      "off",
+      "on",
+      "right",
+      "stop",
+      "up",
+      "yes"
+    ],
+    "encoder_independent_max_abs_error": 2.564963092588357e-06,
+    "ffn1_independent_max_abs_error": 6.906507161286157e-06,
+    "wrong_boundary_min_max_abs_error": 0.1846334341277811
+  }
+}

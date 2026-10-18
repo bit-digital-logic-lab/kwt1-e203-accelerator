@@ -46,6 +46,12 @@ def main():
     with np.load(args.samples, allow_pickle=False) as dataset:
         features, partitions = dataset["features"], dataset["partitions"]
         paths = dataset["paths"]
+    if features.dtype != np.float32 or features.ndim != 3 or features.shape[1:] != (98, 40):
+        raise ValueError("expected FP32 MFCC features [samples,98,40]")
+    if not np.isfinite(features).all():
+        raise ValueError("features contain NaN or infinity")
+    if np.any((partitions != "training") & (partitions != "validation")):
+        raise ValueError("testing/other partitions are forbidden for parameter export")
     train_ids = np.flatnonzero(partitions == "training")
     validation_ids = np.flatnonzero(partitions == "validation")
     if not len(train_ids) or not len(validation_ids):
