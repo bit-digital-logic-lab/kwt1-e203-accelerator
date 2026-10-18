@@ -4,6 +4,7 @@
 import argparse
 import hashlib
 import json
+import re
 import shutil
 import sys
 from pathlib import Path
@@ -60,8 +61,9 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--samples", type=Path,
                         default=SOFTWARE / ".build/quant_samples_12labels_20.npz")
-    parser.add_argument("--scheme", choices=tuple(DEFAULT_PARAMS), default="A11W10")
-    parser.add_argument("--activation-bits", type=int, choices=(11, 12), default=11)
+    parser.add_argument("--scheme", default="A11W10",
+                        help="signed symmetric format, for example A8W8 or A12W10")
+    parser.add_argument("--activation-bits", type=int, default=11)
     parser.add_argument("--params", type=Path,
                         help="frozen parameter NPZ; defaults to the artifact for --scheme")
     parser.add_argument("--weights", type=Path,
@@ -69,6 +71,8 @@ def main():
     parser.add_argument("--per-label", type=int, default=1,
                         help="first N validation samples per label; 0 means all")
     parser.add_argument("--rows", type=int, choices=(8, 16), default=16)
+    parser.add_argument("--rtl-data-width", type=int, choices=(8, 16), default=16,
+                        help="physical A/W operand width in the RTL compute core")
     parser.add_argument("--staged", action="store_true",
                         help="include RTL output staging")
     parser.add_argument("--keep-cases", action="store_true",
@@ -78,9 +82,19 @@ def main():
     args = parser.parse_args()
     if args.per_label < 0:
         parser.error("--per-label must be nonnegative")
-    if int(args.scheme[1:args.scheme.index("W")]) != args.activation_bits:
+    match = re.fullmatch(r"A(\d+)W(\d+)", args.scheme)
+    if match is None or not (2 <= int(match.group(1)) <= 15 and
+                            2 <= int(match.group(2)) <= 15):
+        parser.error("--scheme must be A<bits>W<bits> with bit widths in 2..15")
+    if int(match.group(1)) != args.activation_bits:
         parser.error("--activation-bits must match --scheme")
+    if max(int(match.group(1)), int(match.group(2))) > args.rtl_data_width:
+        parser.error("format bit widths exceed --rtl-data-width")
+    if args.rtl_data_width == 8 and not args.staged:
+        parser.error("8-bit physical RTL path requires --staged")
     if args.params is None:
+        if args.scheme not in DEFAULT_PARAMS:
+            parser.error("--params is required for this scheme")
         args.params = DEFAULT_PARAMS[args.scheme]
     with np.load(args.samples, allow_pickle=False) as dataset:
         chosen = select_validation(dataset, args.per_label)
@@ -98,7 +112,8 @@ def main():
     if inputs.shape != (len(chosen), LAYERS, M, K):
         raise ValueError(f"unexpected FFN1 input shape {inputs.shape}")
     args.out.mkdir(parents=True, exist_ok=True)
-    executable = build(args.out, trace=False, rows=args.rows, staged=args.staged)
+    executable = build(args.out, trace=False, rows=args.rows, staged=args.staged,
+                       data_width=args.rtl_data_width)
     totals = [{"layer": layer, "error_sq": 0.0, "reference_sq": 0.0,
                "checked_outputs": 0, "cycles": 0, "max_abs_accumulator": 0}
               for layer in range(1, LAYERS + 1)]
@@ -171,6 +186,7 @@ def main():
                                               f"first {args.per_label} validation per label"),
         "sample_records": sample_records,
         "rows": args.rows, "output_staged": args.staged,
+        "rtl_data_width": args.rtl_data_width,
         "scheme": args.scheme, "activation_bits": args.activation_bits,
         "source_sha256": {"samples": sha256(args.samples), "params": sha256(args.params),
                           "weights": sha256(args.weights)},

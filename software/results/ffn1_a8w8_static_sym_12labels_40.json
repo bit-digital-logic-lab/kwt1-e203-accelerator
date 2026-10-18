@@ -1,0 +1,139 @@
+{
+  "scheme": "A8W8",
+  "activation_quantization": "per-layer static symmetric, zero point 0, training maximum",
+  "weight_quantization": "per-output-channel symmetric, zero point 0, frozen FP32 max",
+  "bias_quantization": "signed INT32 round-to-nearest ties-to-even at activation_scale*weight_scale",
+  "training_count": 480,
+  "validation_count": 480,
+  "validation_used_for_calibration": false,
+  "rounding": "nearest, ties to even; clip to [-qmax,+qmax]",
+  "accumulator": "signed INT32, conservative bound checked for all layers",
+  "sample_sha256": "43d639fb64ea8d907db967b071010e41e68827368532880ba8a99b92769bbae8",
+  "weight_sha256": "8f359abf7adbe287b8f89fca98af46194f98f90f2146784731bff551a155825a",
+  "parameter_archive": "/home/yang/Desktop/ic设计竞赛/software/results/ffn1_a8w8_static_sym_12labels_40.npz",
+  "parameter_sha256": "c912e6ecd717acbb52cae819bb5df14cd59bd0839dfd907598cec7188bd62169",
+  "packed_weight_kib_12layers": 192.0,
+  "container_weight_bytes": 393216,
+  "layers": [
+    {
+      "layer": 1,
+      "activation_scale": 0.039286568408875955,
+      "weight_scale_min": 8.448189872456347e-05,
+      "weight_scale_max": 0.0033085792083439865,
+      "weight_qmin": -127,
+      "weight_qmax": 127,
+      "bias_abs_max": 6854,
+      "conservative_abs_accumulator_bound": 1039110
+    },
+    {
+      "layer": 2,
+      "activation_scale": 0.03913572641808217,
+      "weight_scale_min": 6.32969941210559e-05,
+      "weight_scale_max": 0.0027108908168912873,
+      "weight_qmin": -127,
+      "weight_qmax": 127,
+      "bias_abs_max": 9386,
+      "conservative_abs_accumulator_bound": 1041642
+    },
+    {
+      "layer": 3,
+      "activation_scale": 0.03913113451379491,
+      "weight_scale_min": 5.172292415903309e-05,
+      "weight_scale_max": 0.002949235711510726,
+      "weight_qmin": -127,
+      "weight_qmax": 127,
+      "bias_abs_max": 12783,
+      "conservative_abs_accumulator_bound": 1045039
+    },
+    {
+      "layer": 4,
+      "activation_scale": 0.04020100315724771,
+      "weight_scale_min": 5.450860531194004e-05,
+      "weight_scale_max": 0.0032372136754313793,
+      "weight_qmin": -127,
+      "weight_qmax": 127,
+      "bias_abs_max": 12882,
+      "conservative_abs_accumulator_bound": 1045138
+    },
+    {
+      "layer": 5,
+      "activation_scale": 0.04302247865932194,
+      "weight_scale_min": 3.892640531884404e-05,
+      "weight_scale_max": 0.002590974015513743,
+      "weight_qmin": -127,
+      "weight_qmax": 127,
+      "bias_abs_max": 10072,
+      "conservative_abs_accumulator_bound": 1042328
+    },
+    {
+      "layer": 6,
+      "activation_scale": 0.04086821098027267,
+      "weight_scale_min": 4.384321651942148e-05,
+      "weight_scale_max": 0.0025230934770088496,
+      "weight_qmin": -127,
+      "weight_qmax": 127,
+      "bias_abs_max": 10262,
+      "conservative_abs_accumulator_bound": 1042518
+    },
+    {
+      "layer": 7,
+      "activation_scale": 0.043240498370072974,
+      "weight_scale_min": 3.824913214276156e-05,
+      "weight_scale_max": 0.0025932148216277597,
+      "weight_qmin": -127,
+      "weight_qmax": 127,
+      "bias_abs_max": 7022,
+      "conservative_abs_accumulator_bound": 1039278
+    },
+    {
+      "layer": 8,
+      "activation_scale": 0.04246427881436085,
+      "weight_scale_min": 3.544263189702522e-05,
+      "weight_scale_max": 0.0029051716872087615,
+      "weight_qmin": -127,
+      "weight_qmax": 127,
+      "bias_abs_max": 10234,
+      "conservative_abs_accumulator_bound": 1042490
+    },
+    {
+      "layer": 9,
+      "activation_scale": 0.040641916079784006,
+      "weight_scale_min": 3.009103238582611e-05,
+      "weight_scale_max": 0.002281702409579059,
+      "weight_qmin": -127,
+      "weight_qmax": 127,
+      "bias_abs_max": 11219,
+      "conservative_abs_accumulator_bound": 1043475
+    },
+    {
+      "layer": 10,
+      "activation_scale": 0.04424535946583184,
+      "weight_scale_min": 3.707815900327652e-05,
+      "weight_scale_max": 0.0026834888721075584,
+      "weight_qmin": -127,
+      "weight_qmax": 127,
+      "bias_abs_max": 8132,
+      "conservative_abs_accumulator_bound": 1040388
+    },
+    {
+      "layer": 11,
+      "activation_scale": 0.04460357681034118,
+      "weight_scale_min": 7.094716374564359e-05,
+      "weight_scale_max": 0.0028575977941197673,
+      "weight_qmin": -127,
+      "weight_qmax": 127,
+      "bias_abs_max": 4745,
+      "conservative_abs_accumulator_bound": 1037001
+    },
+    {
+      "layer": 12,
+      "activation_scale": 0.04320106356162724,
+      "weight_scale_min": 0.0007225581862795071,
+      "weight_scale_max": 0.002797371993853351,
+      "weight_qmin": -127,
+      "weight_qmax": 127,
+      "bias_abs_max": 3402,
+      "conservative_abs_accumulator_bound": 1035658
+    }
+  ]
+}

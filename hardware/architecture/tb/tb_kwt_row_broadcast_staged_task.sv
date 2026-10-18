@@ -1,7 +1,8 @@
 // Task-level harness with an RTL CACC output stage. A/W/bias preload and the
 // shared bus are still timed models; this isolates the output-overlap benefit.
 module tb_kwt_row_broadcast_staged_task #(
-    parameter int ROWS = 8
+    parameter int ROWS = 8,
+    parameter int DATA_W = 16
 );
     localparam int COLS = 16, ROW_W = (ROWS <= 2) ? 1 : $clog2(ROWS);
     localparam int MAX_M = 99, MAX_K = 64, MAX_N = 256;
@@ -9,8 +10,8 @@ module tb_kwt_row_broadcast_staged_task #(
     logic clk = 0, rst_n = 0;
     logic clear = 0, in_valid = 0, dump_req;
     logic [ROWS-1:0] row_mask = '0;
-    logic [ROWS*16-1:0] a_rows = '0;
-    logic [15:0] b_word = '0;
+    logic [ROWS*DATA_W-1:0] a_rows = '0;
+    logic [DATA_W-1:0] b_word = '0;
     logic [3:0] in_col = '0, dump_col;
     logic [ROW_W-1:0] dump_row;
     logic [31:0] dump_bias;
@@ -53,7 +54,7 @@ module tb_kwt_row_broadcast_staged_task #(
         $fatal(1, "staged task watchdog expired");
     end
 
-    kwt_row_broadcast_tile #(.ROWS(ROWS)) dut (
+    kwt_row_broadcast_tile #(.ROWS(ROWS), .DATA_W(DATA_W)) dut (
         .clk(clk), .rst_n(rst_n), .clear(clear),
         .in_valid(in_valid), .row_mask(row_mask),
         .a_rows(a_rows), .b_word(b_word), .in_col(in_col),
@@ -118,6 +119,8 @@ module tb_kwt_row_broadcast_staged_task #(
             $fatal(1, "unsupported task shape");
         if (ROWS != 8 && ROWS != 16)
             $fatal(1, "task harness supports ROWS=8 or ROWS=16");
+        if (DATA_W != 8 && DATA_W != 16)
+            $fatal(1, "task harness supports DATA_W=8 or DATA_W=16");
         insert_gaps = 0;
         if ($value$plusargs("GAPS=%d", insert_gaps)) begin end
         if ($value$plusargs("VCD=%s", vcd_path)) begin
@@ -192,10 +195,10 @@ module tb_kwt_row_broadcast_staged_task #(
                         @(negedge clk);
                         in_valid = 1'b1;
                         in_col = 4'(c);
-                        b_word = w_page[active_page][k*COLS+c];
+                        b_word = w_page[active_page][k*COLS+c][DATA_W-1:0];
                         w_local_reads++;
                         for (int r = 0; r < ROWS; r++)
-                            a_rows[r*16 +: 16] = a_hold[r];
+                            a_rows[r*DATA_W +: DATA_W] = a_hold[r][DATA_W-1:0];
                         if (c < ROWS && k+1 < k_len) begin
                             if (row_mask[c]) begin
                                 a_next[c] = a_store[(rt*ROWS+c)*k_len+k+1];

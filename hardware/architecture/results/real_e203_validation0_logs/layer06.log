@@ -1,0 +1,22 @@
+Running E203 layer06
+WARNING: /home/yang/Desktop/ic设计竞赛/hardware/rtl/control $readmemh's file name argument contains non-printable characters.
+                                                                "/home/yang/Desktop/ic\377\377\377\377\377\377\377\377\377\377\377\377/hardware/architecture/results/real_e203_validation0_logs/layer06_case/layer06_a16.hex"
+WARNING: /home/yang/Desktop/ic设计竞赛/hardware/rtl/control $readmemh's file name argument contains non-printable characters.
+                                                                "/home/yang/Desktop/ic\377\377\377\377\377\377\377\377\377\377\377\377/hardware/architecture/results/real_e203_validation0_logs/layer06_case/layer06_w16.hex"
+WARNING: /home/yang/Desktop/ic设计竞赛/hardware/rtl/control $readmemh's file name argument contains non-printable characters.
+                                                                "/home/yang/Desktop/ic\377\377\377\377\377\377\377\377\377\377\377\377/hardware/architecture/results/real_e203_validation0_logs/layer06_case/layer06_bias32.hex"
+WARNING: /home/yang/Desktop/ic设计竞赛/hardware/rtl/control $readmemh's file name argument contains non-printable characters.
+                                                                "/home/yang/Desktop/ic\377\377\377\377\377\377\377\377\377\377\377\377/hardware/architecture/results/real_e203_validation0_logs/layer06_case/layer06_expected32.hex"
+E203 full layer: first request at cycle 7
+E203 full layer: tile 0 completed at cycle 4031
+E203 full layer: tile 1 completed at cycle 8060
+E203 full layer: tile 2 completed at cycle 12089
+E203 full layer: tile 3 completed at cycle 16118
+E203 full layer: 32/208 selected tiles completed
+E203 full layer: 64/208 selected tiles completed
+E203 full layer: 96/208 selected tiles completed
+E203 full layer: 128/208 selected tiles completed
+E203 full layer: 160/208 selected tiles completed
+E203 full layer: 192/208 selected tiles completed
+FATAL: /home/yang/Desktop/ic设计竞赛/hardware/rtl/control/tb/tb_kwt_real_layer_e203.sv:51: layer output [0,0] got=xxxxxxxx expected=00000000
+       Time: 8380510  Scope: tb_kwt_real_layer_e203.check_tile

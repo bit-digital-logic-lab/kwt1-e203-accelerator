@@ -1,0 +1,6 @@
+[Unit]
+Description=Check IC contest agent tasks and result files
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/python3 /home/yang/Desktop/ic设计竞赛/.opencode/skills/quarter-hour-check/scripts/check.py scan

@@ -1,0 +1,3396 @@
+{
+  "experiment": "no-gradient train-only seven-pair scale selection per layer and bit-width",
+  "metric": "per-layer RMS(error)/max(RMS(FP32),1e-8), all validation samples and 99x256 outputs, worst of 12 layers",
+  "sample_archive": "/home/yang/Desktop/ic设计竞赛/software/.build/quant_samples_12labels_40.npz",
+  "sample_sha256": "43d639fb64ea8d907db967b071010e41e68827368532880ba8a99b92769bbae8",
+  "weight_archive": "/home/yang/Desktop/ic设计竞赛/software/weights/kwt1_fp32.npz",
+  "weight_sha256": "8f359abf7adbe287b8f89fca98af46194f98f90f2146784731bff551a155825a",
+  "training_count": 480,
+  "validation_count": 480,
+  "training_selection_count": 120,
+  "training_selection_per_class": 10,
+  "training_selection_labels": [
+    "_silence_",
+    "_silence_",
+    "_silence_",
+    "_silence_",
+    "_silence_",
+    "_silence_",
+    "_silence_",
+    "_silence_",
+    "_silence_",
+    "_silence_",
+    "_unknown_",
+    "_unknown_",
+    "_unknown_",
+    "_unknown_",
+    "_unknown_",
+    "_unknown_",
+    "_unknown_",
+    "_unknown_",
+    "_unknown_",
+    "_unknown_",
+    "down",
+    "down",
+    "down",
+    "down",
+    "down",
+    "down",
+    "down",
+    "down",
+    "down",
+    "down",
+    "go",
+    "go",
+    "go",
+    "go",
+    "go",
+    "go",
+    "go",
+    "go",
+    "go",
+    "go",
+    "left",
+    "left",
+    "left",
+    "left",
+    "left",
+    "left",
+    "left",
+    "left",
+    "left",
+    "left",
+    "no",
+    "no",
+    "no",
+    "no",
+    "no",
+    "no",
+    "no",
+    "no",
+    "no",
+    "no",
+    "off",
+    "off",
+    "off",
+    "off",
+    "off",
+    "off",
+    "off",
+    "off",
+    "off",
+    "off",
+    "on",
+    "on",
+    "on",
+    "on",
+    "on",
+    "on",
+    "on",
+    "on",
+    "on",
+    "on",
+    "right",
+    "right",
+    "right",
+    "right",
+    "right",
+    "right",
+    "right",
+    "right",
+    "right",
+    "right",
+    "stop",
+    "stop",
+    "stop",
+    "stop",
+    "stop",
+    "stop",
+    "stop",
+    "stop",
+    "stop",
+    "stop",
+    "up",
+    "up",
+    "up",
+    "up",
+    "up",
+    "up",
+    "up",
+    "up",
+    "up",
+    "up",
+    "yes",
+    "yes",
+    "yes",
+    "yes",
+    "yes",
+    "yes",
+    "yes",
+    "yes",
+    "yes",
+    "yes"
+  ],
+  "training_selection_paths": [
+    "_silence_/training_zero_000.wav",
+    "_silence_/training_zero_001.wav",
+    "_silence_/training_zero_002.wav",
+    "_silence_/training_zero_003.wav",
+    "_silence_/training_zero_004.wav",
+    "_silence_/training_zero_005.wav",
+    "_silence_/training_zero_006.wav",
+    "_silence_/training_zero_007.wav",
+    "_silence_/training_zero_008.wav",
+    "_silence_/training_zero_009.wav",
+    "./two/0717b9f6_nohash_1.wav",
+    "./three/a929f9b9_nohash_0.wav",
+    "./cat/b76f6088_nohash_0.wav",
+    "./follow/62f05757_nohash_3.wav",
+    "./visual/821b64cc_nohash_0.wav",
+    "./house/9c06a3f3_nohash_1.wav",
+    "./one/fb24c826_nohash_1.wav",
+    "./seven/b414c653_nohash_2.wav",
+    "./sheila/42398aab_nohash_0.wav",
+    "./one/b91b718c_nohash_4.wav",
+    "./down/3d9bbe2d_nohash_2.wav",
+    "./down/518588b6_nohash_1.wav",
+    "./down/4995d875_nohash_2.wav",
+    "./down/dc269564_nohash_0.wav",
+    "./down/833d9f56_nohash_4.wav",
+    "./down/be7a5b2d_nohash_2.wav",
+    "./down/f19c1390_nohash_2.wav",
+    "./down/6ef407da_nohash_3.wav",
+    "./down/9ff2d2f4_nohash_0.wav",
+    "./down/a8ee11c7_nohash_0.wav",
+    "./go/0ba018fc_nohash_4.wav",
+    "./go/199da2bf_nohash_0.wav",
+    "./go/5769c5ab_nohash_4.wav",
+    "./go/ddedba85_nohash_6.wav",
+    "./go/b8874962_nohash_3.wav",
+    "./go/d0745d72_nohash_0.wav",
+    "./go/ec989d6d_nohash_2.wav",
+    "./go/ace072ba_nohash_1.wav",
+    "./go/c0c701f1_nohash_0.wav",
+    "./go/50d1c8e3_nohash_1.wav",
+    "./left/b8874962_nohash_1.wav",
+    "./left/6c429c7b_nohash_4.wav",
+    "./left/d3f22f0e_nohash_1.wav",
+    "./left/be7a5b2d_nohash_1.wav",
+    "./left/0585b66d_nohash_4.wav",
+    "./left/e269bac0_nohash_0.wav",
+    "./left/c9b653a0_nohash_2.wav",
+    "./left/67bdbf56_nohash_2.wav",
+    "./left/2dc4f05d_nohash_1.wav",
+    "./left/0bfec55f_nohash_0.wav",
+    "./no/7e7ca854_nohash_1.wav",
+    "./no/b5cf6ea8_nohash_5.wav",
+    "./no/1df483c0_nohash_1.wav",
+    "./no/953fe1ad_nohash_3.wav",
+    "./no/3824c00e_nohash_1.wav",
+    "./no/18c54a68_nohash_0.wav",
+    "./no/b1df80c0_nohash_0.wav",
+    "./no/11379f4d_nohash_1.wav",
+    "./no/c1d39ce8_nohash_2.wav",
+    "./no/6078eb0d_nohash_1.wav",
+    "./off/888a0c49_nohash_3.wav",
+    "./off/ef3367d9_nohash_5.wav",
+    "./off/cc3b5b62_nohash_1.wav",
+    "./off/9b8a7439_nohash_3.wav",
+    "./off/7fb8d703_nohash_0.wav",
+    "./off/7211390b_nohash_3.wav",
+    "./off/4c13fe25_nohash_0.wav",
+    "./off/cb72dfb6_nohash_0.wav",
+    "./off/1b63157b_nohash_0.wav",
+    "./off/3a33d3a4_nohash_0.wav",
+    "./on/c39703ec_nohash_2.wav",
+    "./on/4def68db_nohash_2.wav",
+    "./on/3c257192_nohash_0.wav",
+    "./on/96d8bb6f_nohash_2.wav",
+    "./on/1aeef15e_nohash_1.wav",
+    "./on/f19c1390_nohash_2.wav",
+    "./on/eaa83485_nohash_2.wav",
+    "./on/40738a2d_nohash_0.wav",
+    "./on/f9273a21_nohash_1.wav",
+    "./on/f3d06008_nohash_0.wav",
+    "./right/f1b35ace_nohash_0.wav",
+    "./right/89ed36ab_nohash_2.wav",
+    "./right/a583c5b0_nohash_0.wav",
+    "./right/578d3efb_nohash_1.wav",
+    "./right/6fb3d5a7_nohash_0.wav",
+    "./right/f01a0d63_nohash_1.wav",
+    "./right/2579e514_nohash_0.wav",
+    "./right/9886d8bf_nohash_1.wav",
+    "./right/c5a1e46c_nohash_1.wav",
+    "./right/365531e2_nohash_0.wav",
+    "./stop/fb8c31a9_nohash_0.wav",
+    "./stop/cc3b5b62_nohash_3.wav",
+    "./stop/3c257192_nohash_0.wav",
+    "./stop/e900b652_nohash_0.wav",
+    "./stop/d486fb84_nohash_0.wav",
+    "./stop/92a9c5e6_nohash_0.wav",
+    "./stop/b7a0754f_nohash_3.wav",
+    "./stop/cee22275_nohash_0.wav",
+    "./stop/0227998e_nohash_1.wav",
+    "./stop/735845ab_nohash_0.wav",
+    "./up/1496195a_nohash_0.wav",
+    "./up/3f45a0cf_nohash_1.wav",
+    "./up/3b852f6f_nohash_1.wav",
+    "./up/1365dd89_nohash_0.wav",
+    "./up/5db0e146_nohash_2.wav",
+    "./up/763188c4_nohash_1.wav",
+    "./up/460209ac_nohash_4.wav",
+    "./up/a04817c2_nohash_4.wav",
+    "./up/1224e4a7_nohash_0.wav",
+    "./up/211b928a_nohash_1.wav",
+    "./yes/676f8138_nohash_0.wav",
+    "./yes/fbb56351_nohash_2.wav",
+    "./yes/07089da9_nohash_3.wav",
+    "./yes/3b3d2f59_nohash_4.wav",
+    "./yes/9f4098cb_nohash_0.wav",
+    "./yes/645ed69d_nohash_1.wav",
+    "./yes/acfd5b5e_nohash_2.wav",
+    "./yes/e9bc5cc2_nohash_3.wav",
+    "./yes/ac4b3fc3_nohash_0.wav",
+    "./yes/c5a1e46c_nohash_2.wav"
+  ],
+  "schemes": [
+    "A8W8",
+    "A10W8",
+    "A12W8",
+    "A10W9"
+  ],
+  "factors": [
+    [
+      1.0,
+      1.0
+    ],
+    [
+      0.8,
+      1.0
+    ],
+    [
+      0.9,
+      1.0
+    ],
+    [
+      1.1,
+      1.0
+    ],
+    [
+      1.2,
+      1.0
+    ],
+    [
+      1.0,
+      0.9
+    ],
+    [
+      1.0,
+      1.1
+    ]
+  ],
+  "rounding": "nearest ties-to-even",
+  "arithmetic": "signed symmetric zero-point-0 integer A/W, INT32 bias and accumulator; FP64 final scale for error only",
+  "summary": [
+    {
+      "scheme": "A8W8",
+      "calibration": "baseline",
+      "worst_layer": 11,
+      "worst_nrmse_pct": 1.1213789767793543,
+      "max_observed_accumulator": 75731,
+      "max_abs_accumulator_bound": 1045138,
+      "packed_weight_kib_12layers": 192.0
+    },
+    {
+      "scheme": "A8W8",
+      "calibration": "train_selected",
+      "worst_layer": 11,
+      "worst_nrmse_pct": 1.0463240034191565,
+      "max_observed_accumulator": 91514,
+      "max_abs_accumulator_bound": 1048359,
+      "packed_weight_kib_12layers": 192.0
+    },
+    {
+      "scheme": "A10W8",
+      "calibration": "baseline",
+      "worst_layer": 12,
+      "worst_nrmse_pct": 0.5674870436196182,
+      "max_observed_accumulator": 304702,
+      "max_abs_accumulator_bound": 4205241,
+      "packed_weight_kib_12layers": 192.0
+    },
+    {
+      "scheme": "A10W8",
+      "calibration": "train_selected",
+      "worst_layer": 12,
+      "worst_nrmse_pct": 0.5690796058442146,
+      "max_observed_accumulator": 334958,
+      "max_abs_accumulator_bound": 4211000,
+      "packed_weight_kib_12layers": 192.0
+    },
+    {
+      "scheme": "A12W8",
+      "calibration": "baseline",
+      "worst_layer": 12,
+      "worst_nrmse_pct": 0.5189300697580426,
+      "max_observed_accumulator": 1220226,
+      "max_abs_accumulator_bound": 16845652,
+      "packed_weight_kib_12layers": 192.0
+    },
+    {
+      "scheme": "A12W8",
+      "calibration": "train_selected",
+      "worst_layer": 12,
+      "worst_nrmse_pct": 0.5189300697580426,
+      "max_observed_accumulator": 1309423,
+      "max_abs_accumulator_bound": 16866944,
+      "packed_weight_kib_12layers": 192.0
+    },
+    {
+      "scheme": "A10W9",
+      "calibration": "baseline",
+      "worst_layer": 11,
+      "worst_nrmse_pct": 0.3531904104602813,
+      "max_observed_accumulator": 612083,
+      "max_abs_accumulator_bound": 8443594,
+      "packed_weight_kib_12layers": 216.0
+    },
+    {
+      "scheme": "A10W9",
+      "calibration": "train_selected",
+      "worst_layer": 11,
+      "worst_nrmse_pct": 0.3531904104602813,
+      "max_observed_accumulator": 672278,
+      "max_abs_accumulator_bound": 8455158,
+      "packed_weight_kib_12layers": 216.0
+    }
+  ],
+  "candidate_trace": [
+    {
+      "layer": 1,
+      "scheme": "A8W8",
+      "candidates": [
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.8377005701833199
+        },
+        {
+          "activation_factor": 0.8,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.8336668848094102
+        },
+        {
+          "activation_factor": 0.9,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.7853874294286965
+        },
+        {
+          "activation_factor": 1.1,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.9023958671272437
+        },
+        {
+          "activation_factor": 1.2,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.9656254615146125
+        },
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 0.9,
+          "training_nrmse_pct": 2.381356175857993
+        },
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 1.1,
+          "training_nrmse_pct": 0.8501109190797989
+        }
+      ]
+    },
+    {
+      "layer": 1,
+      "scheme": "A10W8",
+      "candidates": [
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.46761251314716884
+        },
+        {
+          "activation_factor": 0.8,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.6167935334793785
+        },
+        {
+          "activation_factor": 0.9,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.47047767998913065
+        },
+        {
+          "activation_factor": 1.1,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.4752019530452208
+        },
+        {
+          "activation_factor": 1.2,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.4828113296498619
+        },
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 0.9,
+          "training_nrmse_pct": 2.2808356701486625
+        },
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 1.1,
+          "training_nrmse_pct": 0.4846534159620981
+        }
+      ]
+    },
+    {
+      "layer": 1,
+      "scheme": "A12W8",
+      "candidates": [
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.43452538308946415
+        },
+        {
+          "activation_factor": 0.8,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.6013098199709342
+        },
+        {
+          "activation_factor": 0.9,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.44348296216674643
+        },
+        {
+          "activation_factor": 1.1,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.43489364509097783
+        },
+        {
+          "activation_factor": 1.2,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.43552895517650836
+        },
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 0.9,
+          "training_nrmse_pct": 2.2740564947174904
+        },
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 1.1,
+          "training_nrmse_pct": 0.45247992869941056
+        }
+      ]
+    },
+    {
+      "layer": 1,
+      "scheme": "A10W9",
+      "candidates": [
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.2650514350769344
+        },
+        {
+          "activation_factor": 0.8,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.4738233695620869
+        },
+        {
+          "activation_factor": 0.9,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.26922569185708267
+        },
+        {
+          "activation_factor": 1.1,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.2778639540931845
+        },
+        {
+          "activation_factor": 1.2,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.2904500829690149
+        },
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 0.9,
+          "training_nrmse_pct": 2.204027826599747
+        },
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 1.1,
+          "training_nrmse_pct": 0.2814154395364128
+        }
+      ]
+    },
+    {
+      "layer": 2,
+      "scheme": "A8W8",
+      "candidates": [
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.8125146670107167
+        },
+        {
+          "activation_factor": 0.8,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.6998924660977268
+        },
+        {
+          "activation_factor": 0.9,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.7496928658615173
+        },
+        {
+          "activation_factor": 1.1,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.8738335394593206
+        },
+        {
+          "activation_factor": 1.2,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.9390052769099221
+        },
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 0.9,
+          "training_nrmse_pct": 2.504146324658352
+        },
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 1.1,
+          "training_nrmse_pct": 0.8221736088002608
+        }
+      ]
+    },
+    {
+      "layer": 2,
+      "scheme": "A10W8",
+      "candidates": [
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.43262697749222556
+        },
+        {
+          "activation_factor": 0.8,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.4338171077613978
+        },
+        {
+          "activation_factor": 0.9,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.42580793356434715
+        },
+        {
+          "activation_factor": 1.1,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.44020081687473833
+        },
+        {
+          "activation_factor": 1.2,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.44852917199932374
+        },
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 0.9,
+          "training_nrmse_pct": 2.410243142832575
+        },
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 1.1,
+          "training_nrmse_pct": 0.45197636070686437
+        }
+      ]
+    },
+    {
+      "layer": 2,
+      "scheme": "A12W8",
+      "candidates": [
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.39747118282860805
+        },
+        {
+          "activation_factor": 0.8,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.4117724063765701
+        },
+        {
+          "activation_factor": 0.9,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.3969469626998056
+        },
+        {
+          "activation_factor": 1.1,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.39798481164610156
+        },
+        {
+          "activation_factor": 1.2,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.39844697334885926
+        },
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 0.9,
+          "training_nrmse_pct": 2.4038548912864037
+        },
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 1.1,
+          "training_nrmse_pct": 0.41836227253788716
+        }
+      ]
+    },
+    {
+      "layer": 2,
+      "scheme": "A10W9",
+      "candidates": [
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.2724355760756226
+        },
+        {
+          "activation_factor": 0.8,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.2751354283570198
+        },
+        {
+          "activation_factor": 0.9,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.26125919485001287
+        },
+        {
+          "activation_factor": 1.1,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.2835874723009982
+        },
+        {
+          "activation_factor": 1.2,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.2965739770740558
+        },
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 0.9,
+          "training_nrmse_pct": 2.392680716385818
+        },
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 1.1,
+          "training_nrmse_pct": 0.2835565319750365
+        }
+      ]
+    },
+    {
+      "layer": 3,
+      "scheme": "A8W8",
+      "candidates": [
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.8738190455426108
+        },
+        {
+          "activation_factor": 0.8,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.7525317786344173
+        },
+        {
+          "activation_factor": 0.9,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.8070598732205918
+        },
+        {
+          "activation_factor": 1.1,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.9402213658232117
+        },
+        {
+          "activation_factor": 1.2,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 1.009458894968814
+        },
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 0.9,
+          "training_nrmse_pct": 2.830170236493655
+        },
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 1.1,
+          "training_nrmse_pct": 0.902576622022632
+        }
+      ]
+    },
+    {
+      "layer": 3,
+      "scheme": "A10W8",
+      "candidates": [
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.46323078359070674
+        },
+        {
+          "activation_factor": 0.8,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.46488312993752534
+        },
+        {
+          "activation_factor": 0.9,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.4562805022978857
+        },
+        {
+          "activation_factor": 1.1,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.4722929990873413
+        },
+        {
+          "activation_factor": 1.2,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.4808376436946953
+        },
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 0.9,
+          "training_nrmse_pct": 2.7341190187772835
+        },
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 1.1,
+          "training_nrmse_pct": 0.5177221942601703
+        }
+      ]
+    },
+    {
+      "layer": 3,
+      "scheme": "A12W8",
+      "candidates": [
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.4257459645096693
+        },
+        {
+          "activation_factor": 0.8,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.44142064914807644
+        },
+        {
+          "activation_factor": 0.9,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.42532808095497054
+        },
+        {
+          "activation_factor": 1.1,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.42638840701478825
+        },
+        {
+          "activation_factor": 1.2,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.42709459398100275
+        },
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 0.9,
+          "training_nrmse_pct": 2.728281487253515
+        },
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 1.1,
+          "training_nrmse_pct": 0.48440253358130797
+        }
+      ]
+    },
+    {
+      "layer": 3,
+      "scheme": "A10W9",
+      "candidates": [
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.2847934262958567
+        },
+        {
+          "activation_factor": 0.8,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.2869295596465505
+        },
+        {
+          "activation_factor": 0.9,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.2725985326283488
+        },
+        {
+          "activation_factor": 1.1,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.29821267957772674
+        },
+        {
+          "activation_factor": 1.2,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.31129214527090643
+        },
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 0.9,
+          "training_nrmse_pct": 2.6950363493176717
+        },
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 1.1,
+          "training_nrmse_pct": 0.3106862569295879
+        }
+      ]
+    },
+    {
+      "layer": 4,
+      "scheme": "A8W8",
+      "candidates": [
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.9558955919724641
+        },
+        {
+          "activation_factor": 0.8,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.8291362420454335
+        },
+        {
+          "activation_factor": 0.9,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.8854552654301323
+        },
+        {
+          "activation_factor": 1.1,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 1.025074182249436
+        },
+        {
+          "activation_factor": 1.2,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 1.0995710038363435
+        },
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 0.9,
+          "training_nrmse_pct": 2.8426873160321993
+        },
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 1.1,
+          "training_nrmse_pct": 0.9663524058467398
+        }
+      ]
+    },
+    {
+      "layer": 4,
+      "scheme": "A10W8",
+      "candidates": [
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.527879245549683
+        },
+        {
+          "activation_factor": 0.8,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.5298914963891062
+        },
+        {
+          "activation_factor": 0.9,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.520382565230062
+        },
+        {
+          "activation_factor": 1.1,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.536737257026157
+        },
+        {
+          "activation_factor": 1.2,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.5447217443306273
+        },
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 0.9,
+          "training_nrmse_pct": 2.7313026543890224
+        },
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 1.1,
+          "training_nrmse_pct": 0.5486212919728007
+        }
+      ]
+    },
+    {
+      "layer": 4,
+      "scheme": "A12W8",
+      "candidates": [
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.48925346574824674
+        },
+        {
+          "activation_factor": 0.8,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.505964096031398
+        },
+        {
+          "activation_factor": 0.9,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.489285570325204
+        },
+        {
+          "activation_factor": 1.1,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.4898761400063972
+        },
+        {
+          "activation_factor": 1.2,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.49056376756823594
+        },
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 0.9,
+          "training_nrmse_pct": 2.72377286312007
+        },
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 1.1,
+          "training_nrmse_pct": 0.511795519371991
+        }
+      ]
+    },
+    {
+      "layer": 4,
+      "scheme": "A10W9",
+      "candidates": [
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.3063783368555525
+        },
+        {
+          "activation_factor": 0.8,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.31030609234496304
+        },
+        {
+          "activation_factor": 0.9,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.2938230309313546
+        },
+        {
+          "activation_factor": 1.1,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.32108569568077283
+        },
+        {
+          "activation_factor": 1.2,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.33508015421509063
+        },
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 0.9,
+          "training_nrmse_pct": 2.716319752399074
+        },
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 1.1,
+          "training_nrmse_pct": 0.3255501658659586
+        }
+      ]
+    },
+    {
+      "layer": 5,
+      "scheme": "A8W8",
+      "candidates": [
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.9933176329954572
+        },
+        {
+          "activation_factor": 0.8,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.8430768910193395
+        },
+        {
+          "activation_factor": 0.9,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.9131350732162176
+        },
+        {
+          "activation_factor": 1.1,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 1.0723490668590694
+        },
+        {
+          "activation_factor": 1.2,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 1.1526718986279918
+        },
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 0.9,
+          "training_nrmse_pct": 2.91971191048261
+        },
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 1.1,
+          "training_nrmse_pct": 1.0239641201040308
+        }
+      ]
+    },
+    {
+      "layer": 5,
+      "scheme": "A10W8",
+      "candidates": [
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.5034316101930769
+        },
+        {
+          "activation_factor": 0.8,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.4942287587676034
+        },
+        {
+          "activation_factor": 0.9,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.4942544561533433
+        },
+        {
+          "activation_factor": 1.1,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.5132527559305098
+        },
+        {
+          "activation_factor": 1.2,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.523390871140814
+        },
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 0.9,
+          "training_nrmse_pct": 2.796160435372288
+        },
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 1.1,
+          "training_nrmse_pct": 0.5645341694244812
+        }
+      ]
+    },
+    {
+      "layer": 5,
+      "scheme": "A12W8",
+      "candidates": [
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.4564767628673345
+        },
+        {
+          "activation_factor": 0.8,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.4640353504085591
+        },
+        {
+          "activation_factor": 0.9,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.455627664038369
+        },
+        {
+          "activation_factor": 1.1,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.4570063842219347
+        },
+        {
+          "activation_factor": 1.2,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.45780745683922697
+        },
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 0.9,
+          "training_nrmse_pct": 2.7882688597048846
+        },
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 1.1,
+          "training_nrmse_pct": 0.5231460625589451
+        }
+      ]
+    },
+    {
+      "layer": 5,
+      "scheme": "A10W9",
+      "candidates": [
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.31062145325643403
+        },
+        {
+          "activation_factor": 0.8,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.2957555152280158
+        },
+        {
+          "activation_factor": 0.9,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.2957961834886448
+        },
+        {
+          "activation_factor": 1.1,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.3264423839838029
+        },
+        {
+          "activation_factor": 1.2,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.34310539699324083
+        },
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 0.9,
+          "training_nrmse_pct": 2.7931594482597353
+        },
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 1.1,
+          "training_nrmse_pct": 0.3337365335372788
+        }
+      ]
+    },
+    {
+      "layer": 6,
+      "scheme": "A8W8",
+      "candidates": [
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.8753509851093054
+        },
+        {
+          "activation_factor": 0.8,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.9111142963662825
+        },
+        {
+          "activation_factor": 0.9,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.8194222044319521
+        },
+        {
+          "activation_factor": 1.1,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.9416368667691211
+        },
+        {
+          "activation_factor": 1.2,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 1.0101601972865926
+        },
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 0.9,
+          "training_nrmse_pct": 2.8025114606449177
+        },
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 1.1,
+          "training_nrmse_pct": 0.9014186543324338
+        }
+      ]
+    },
+    {
+      "layer": 6,
+      "scheme": "A10W8",
+      "candidates": [
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.4744081107069224
+        },
+        {
+          "activation_factor": 0.8,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.6923552267817473
+        },
+        {
+          "activation_factor": 0.9,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.48590926986407257
+        },
+        {
+          "activation_factor": 1.1,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.48271835882297154
+        },
+        {
+          "activation_factor": 1.2,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.49122372771084205
+        },
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 0.9,
+          "training_nrmse_pct": 2.7075918252993287
+        },
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 1.1,
+          "training_nrmse_pct": 0.5223649609133297
+        }
+      ]
+    },
+    {
+      "layer": 6,
+      "scheme": "A12W8",
+      "candidates": [
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.43802859961914137
+        },
+        {
+          "activation_factor": 0.8,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.6765810763564772
+        },
+        {
+          "activation_factor": 0.9,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.45754406212193166
+        },
+        {
+          "activation_factor": 1.1,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.43854403918240986
+        },
+        {
+          "activation_factor": 1.2,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.4392674104959838
+        },
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 0.9,
+          "training_nrmse_pct": 2.701321335996355
+        },
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 1.1,
+          "training_nrmse_pct": 0.48895929417418144
+        }
+      ]
+    },
+    {
+      "layer": 6,
+      "scheme": "A10W9",
+      "candidates": [
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.2811981048076664
+        },
+        {
+          "activation_factor": 0.8,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.5669126764172584
+        },
+        {
+          "activation_factor": 0.9,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.29784187769715975
+        },
+        {
+          "activation_factor": 1.1,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.2952651461691278
+        },
+        {
+          "activation_factor": 1.2,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.30683647219375704
+        },
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 0.9,
+          "training_nrmse_pct": 2.7129783334532154
+        },
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 1.1,
+          "training_nrmse_pct": 0.2961489024755945
+        }
+      ]
+    },
+    {
+      "layer": 7,
+      "scheme": "A8W8",
+      "candidates": [
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.8955989241552957
+        },
+        {
+          "activation_factor": 0.8,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.7753184354767232
+        },
+        {
+          "activation_factor": 0.9,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.8260525415925144
+        },
+        {
+          "activation_factor": 1.1,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.9693969913152408
+        },
+        {
+          "activation_factor": 1.2,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 1.0430886117167233
+        },
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 0.9,
+          "training_nrmse_pct": 2.5729411931060606
+        },
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 1.1,
+          "training_nrmse_pct": 0.9027566661670637
+        }
+      ]
+    },
+    {
+      "layer": 7,
+      "scheme": "A10W8",
+      "candidates": [
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.4629704624785016
+        },
+        {
+          "activation_factor": 0.8,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.4733173483902043
+        },
+        {
+          "activation_factor": 0.9,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.45401381908673744
+        },
+        {
+          "activation_factor": 1.1,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.47116143193767024
+        },
+        {
+          "activation_factor": 1.2,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.47998831088203425
+        },
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 0.9,
+          "training_nrmse_pct": 2.455901931470727
+        },
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 1.1,
+          "training_nrmse_pct": 0.4767041600406806
+        }
+      ]
+    },
+    {
+      "layer": 7,
+      "scheme": "A12W8",
+      "candidates": [
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.42086843878326774
+        },
+        {
+          "activation_factor": 0.8,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.44807524804804066
+        },
+        {
+          "activation_factor": 0.9,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.42034367440644493
+        },
+        {
+          "activation_factor": 1.1,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.42132130222973707
+        },
+        {
+          "activation_factor": 1.2,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.4222125790511771
+        },
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 0.9,
+          "training_nrmse_pct": 2.44911991606449
+        },
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 1.1,
+          "training_nrmse_pct": 0.4363584900840827
+        }
+      ]
+    },
+    {
+      "layer": 7,
+      "scheme": "A10W9",
+      "candidates": [
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.29464772016821594
+        },
+        {
+          "activation_factor": 0.8,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.3145321818151104
+        },
+        {
+          "activation_factor": 0.9,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.2819293350155515
+        },
+        {
+          "activation_factor": 1.1,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.30955654366766855
+        },
+        {
+          "activation_factor": 1.2,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.3227266825069214
+        },
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 0.9,
+          "training_nrmse_pct": 2.4475352885599175
+        },
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 1.1,
+          "training_nrmse_pct": 0.2889328207713888
+        }
+      ]
+    },
+    {
+      "layer": 8,
+      "scheme": "A8W8",
+      "candidates": [
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.9044491560264813
+        },
+        {
+          "activation_factor": 0.8,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.9898279742091486
+        },
+        {
+          "activation_factor": 0.9,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.837812071750945
+        },
+        {
+          "activation_factor": 1.1,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.9778835602322948
+        },
+        {
+          "activation_factor": 1.2,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 1.0488167553515835
+        },
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 0.9,
+          "training_nrmse_pct": 2.563549251325253
+        },
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 1.1,
+          "training_nrmse_pct": 0.9228846907557874
+        }
+      ]
+    },
+    {
+      "layer": 8,
+      "scheme": "A10W8",
+      "candidates": [
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.467983630822426
+        },
+        {
+          "activation_factor": 0.8,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.7768899007319731
+        },
+        {
+          "activation_factor": 0.9,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.4661124488649817
+        },
+        {
+          "activation_factor": 1.1,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.4759354021892183
+        },
+        {
+          "activation_factor": 1.2,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.48567587680473867
+        },
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 0.9,
+          "training_nrmse_pct": 2.4450113979253656
+        },
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 1.1,
+          "training_nrmse_pct": 0.5005691157638754
+        }
+      ]
+    },
+    {
+      "layer": 8,
+      "scheme": "A12W8",
+      "candidates": [
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.42624741109906095
+        },
+        {
+          "activation_factor": 0.8,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.7617535422723689
+        },
+        {
+          "activation_factor": 0.9,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.43292470080644113
+        },
+        {
+          "activation_factor": 1.1,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.42673385684131027
+        },
+        {
+          "activation_factor": 1.2,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.4275995843903693
+        },
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 0.9,
+          "training_nrmse_pct": 2.4372002965297583
+        },
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 1.1,
+          "training_nrmse_pct": 0.4617641673765899
+        }
+      ]
+    },
+    {
+      "layer": 8,
+      "scheme": "A10W9",
+      "candidates": [
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.2909606419507126
+        },
+        {
+          "activation_factor": 0.8,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.7013568713625719
+        },
+        {
+          "activation_factor": 0.9,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.29061680334830975
+        },
+        {
+          "activation_factor": 1.1,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.3052887795191595
+        },
+        {
+          "activation_factor": 1.2,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.3194915159892422
+        },
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 0.9,
+          "training_nrmse_pct": 2.41174122381613
+        },
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 1.1,
+          "training_nrmse_pct": 0.3123448800309767
+        }
+      ]
+    },
+    {
+      "layer": 9,
+      "scheme": "A8W8",
+      "candidates": [
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.9245993787733559
+        },
+        {
+          "activation_factor": 0.8,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 1.0181508071778493
+        },
+        {
+          "activation_factor": 0.9,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.8606597999088885
+        },
+        {
+          "activation_factor": 1.1,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.9981332415206616
+        },
+        {
+          "activation_factor": 1.2,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 1.0680660565359679
+        },
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 0.9,
+          "training_nrmse_pct": 2.5442963492001236
+        },
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 1.1,
+          "training_nrmse_pct": 0.9589973245489243
+        }
+      ]
+    },
+    {
+      "layer": 9,
+      "scheme": "A10W8",
+      "candidates": [
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.4755028868618049
+        },
+        {
+          "activation_factor": 0.8,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.7992817056109945
+        },
+        {
+          "activation_factor": 0.9,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.48113929891258794
+        },
+        {
+          "activation_factor": 1.1,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.48395574209516595
+        },
+        {
+          "activation_factor": 1.2,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.49430554624611395
+        },
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 0.9,
+          "training_nrmse_pct": 2.4174522521287405
+        },
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 1.1,
+          "training_nrmse_pct": 0.5387128148329846
+        }
+      ]
+    },
+    {
+      "layer": 9,
+      "scheme": "A12W8",
+      "candidates": [
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.43254438188226174
+        },
+        {
+          "activation_factor": 0.8,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.7830814903263648
+        },
+        {
+          "activation_factor": 0.9,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.44744766957757753
+        },
+        {
+          "activation_factor": 1.1,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.4332084976261282
+        },
+        {
+          "activation_factor": 1.2,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.4339586808488474
+        },
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 0.9,
+          "training_nrmse_pct": 2.409853820013171
+        },
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 1.1,
+          "training_nrmse_pct": 0.5017720125488092
+        }
+      ]
+    },
+    {
+      "layer": 9,
+      "scheme": "A10W9",
+      "candidates": [
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.29909768026429195
+        },
+        {
+          "activation_factor": 0.8,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.7091571877098647
+        },
+        {
+          "activation_factor": 0.9,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.30905353875064717
+        },
+        {
+          "activation_factor": 1.1,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.31404178338435756
+        },
+        {
+          "activation_factor": 1.2,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.3282576039175673
+        },
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 0.9,
+          "training_nrmse_pct": 2.4048634330927543
+        },
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 1.1,
+          "training_nrmse_pct": 0.32634509625565916
+        }
+      ]
+    },
+    {
+      "layer": 10,
+      "scheme": "A8W8",
+      "candidates": [
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 1.0446686983355924
+        },
+        {
+          "activation_factor": 0.8,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.9826097467804958
+        },
+        {
+          "activation_factor": 0.9,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.9696423131013963
+        },
+        {
+          "activation_factor": 1.1,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 1.1282925318358519
+        },
+        {
+          "activation_factor": 1.2,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 1.2135118194183383
+        },
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 0.9,
+          "training_nrmse_pct": 3.0510697040383525
+        },
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 1.1,
+          "training_nrmse_pct": 1.0672924132420987
+        }
+      ]
+    },
+    {
+      "layer": 10,
+      "scheme": "A10W8",
+      "candidates": [
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.542083320706478
+        },
+        {
+          "activation_factor": 0.8,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.6721705944631066
+        },
+        {
+          "activation_factor": 0.9,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.5405350387043063
+        },
+        {
+          "activation_factor": 1.1,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.5517290191306833
+        },
+        {
+          "activation_factor": 1.2,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.563348519100843
+        },
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 0.9,
+          "training_nrmse_pct": 2.921162605902492
+        },
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 1.1,
+          "training_nrmse_pct": 0.5823241162918187
+        }
+      ]
+    },
+    {
+      "layer": 10,
+      "scheme": "A12W8",
+      "candidates": [
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.494626616112715
+        },
+        {
+          "activation_factor": 0.8,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.6481658490340381
+        },
+        {
+          "activation_factor": 0.9,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.5020933371665567
+        },
+        {
+          "activation_factor": 1.1,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.4951849640021816
+        },
+        {
+          "activation_factor": 1.2,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.49618274739720847
+        },
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 0.9,
+          "training_nrmse_pct": 2.9131438666327534
+        },
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 1.1,
+          "training_nrmse_pct": 0.5381444569692599
+        }
+      ]
+    },
+    {
+      "layer": 10,
+      "scheme": "A10W9",
+      "candidates": [
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.33129966044319786
+        },
+        {
+          "activation_factor": 0.8,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.5142394599154884
+        },
+        {
+          "activation_factor": 0.9,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.32807629307907726
+        },
+        {
+          "activation_factor": 1.1,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.3477021583892082
+        },
+        {
+          "activation_factor": 1.2,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.36528151089327926
+        },
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 0.9,
+          "training_nrmse_pct": 2.9065873253409777
+        },
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 1.1,
+          "training_nrmse_pct": 0.34903631552767655
+        }
+      ]
+    },
+    {
+      "layer": 11,
+      "scheme": "A8W8",
+      "candidates": [
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 1.1265453262915064
+        },
+        {
+          "activation_factor": 0.8,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 1.2431814957582112
+        },
+        {
+          "activation_factor": 0.9,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 1.0472065023776522
+        },
+        {
+          "activation_factor": 1.1,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 1.2125724646308038
+        },
+        {
+          "activation_factor": 1.2,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 1.3041792810800468
+        },
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 0.9,
+          "training_nrmse_pct": 3.252557636227392
+        },
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 1.1,
+          "training_nrmse_pct": 1.156654716267418
+        }
+      ]
+    },
+    {
+      "layer": 11,
+      "scheme": "A10W8",
+      "candidates": [
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.5692733920799069
+        },
+        {
+          "activation_factor": 0.8,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.9706331194107688
+        },
+        {
+          "activation_factor": 0.9,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.579616706005918
+        },
+        {
+          "activation_factor": 1.1,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.5810142152328576
+        },
+        {
+          "activation_factor": 1.2,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.5929235416226553
+        },
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 0.9,
+          "training_nrmse_pct": 3.1088996137086418
+        },
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 1.1,
+          "training_nrmse_pct": 0.6269413243226867
+        }
+      ]
+    },
+    {
+      "layer": 11,
+      "scheme": "A12W8",
+      "candidates": [
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.5165062396603889
+        },
+        {
+          "activation_factor": 0.8,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.951933881372376
+        },
+        {
+          "activation_factor": 0.9,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.537968191523182
+        },
+        {
+          "activation_factor": 1.1,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.5173256370176241
+        },
+        {
+          "activation_factor": 1.2,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.5182794720772973
+        },
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 0.9,
+          "training_nrmse_pct": 3.0998760718291547
+        },
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 1.1,
+          "training_nrmse_pct": 0.5791354567089388
+        }
+      ]
+    },
+    {
+      "layer": 11,
+      "scheme": "A10W9",
+      "candidates": [
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.35419617712518686
+        },
+        {
+          "activation_factor": 0.8,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.85235045697511
+        },
+        {
+          "activation_factor": 0.9,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.36903077591261624
+        },
+        {
+          "activation_factor": 1.1,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.3728418565206593
+        },
+        {
+          "activation_factor": 1.2,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.3915677012486584
+        },
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 0.9,
+          "training_nrmse_pct": 3.0993548009746656
+        },
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 1.1,
+          "training_nrmse_pct": 0.38325005163798365
+        }
+      ]
+    },
+    {
+      "layer": 12,
+      "scheme": "A8W8",
+      "candidates": [
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 1.0833529461176865
+        },
+        {
+          "activation_factor": 0.8,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 1.1151586944479088
+        },
+        {
+          "activation_factor": 0.9,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 1.0039019435327086
+        },
+        {
+          "activation_factor": 1.1,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 1.166466919505054
+        },
+        {
+          "activation_factor": 1.2,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 1.2519682732301618
+        },
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 0.9,
+          "training_nrmse_pct": 3.27555294426387
+        },
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 1.1,
+          "training_nrmse_pct": 1.1137850212709628
+        }
+      ]
+    },
+    {
+      "layer": 12,
+      "scheme": "A10W8",
+      "candidates": [
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.5667777917287724
+        },
+        {
+          "activation_factor": 0.8,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.8357209529607876
+        },
+        {
+          "activation_factor": 0.9,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.5647512629238414
+        },
+        {
+          "activation_factor": 1.1,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.5768553039400627
+        },
+        {
+          "activation_factor": 1.2,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.5880969060590159
+        },
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 0.9,
+          "training_nrmse_pct": 3.1461914498527204
+        },
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 1.1,
+          "training_nrmse_pct": 0.622498274521304
+        }
+      ]
+    },
+    {
+      "layer": 12,
+      "scheme": "A12W8",
+      "candidates": [
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.5182224961326201
+        },
+        {
+          "activation_factor": 0.8,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.8150799205493663
+        },
+        {
+          "activation_factor": 0.9,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.5256704371658009
+        },
+        {
+          "activation_factor": 1.1,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.5189541131148258
+        },
+        {
+          "activation_factor": 1.2,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.5196806606648943
+        },
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 0.9,
+          "training_nrmse_pct": 3.138228564860664
+        },
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 1.1,
+          "training_nrmse_pct": 0.5785426622023055
+        }
+      ]
+    },
+    {
+      "layer": 12,
+      "scheme": "A10W9",
+      "candidates": [
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.34735826416439114
+        },
+        {
+          "activation_factor": 0.8,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.7062876087045367
+        },
+        {
+          "activation_factor": 0.9,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.34397255504530466
+        },
+        {
+          "activation_factor": 1.1,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.36406117149629286
+        },
+        {
+          "activation_factor": 1.2,
+          "weight_factor": 1.0,
+          "training_nrmse_pct": 0.38113330352053054
+        },
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 0.9,
+          "training_nrmse_pct": 3.1313715118627354
+        },
+        {
+          "activation_factor": 1.0,
+          "weight_factor": 1.1,
+          "training_nrmse_pct": 0.3720451620144395
+        }
+      ]
+    }
+  ],
+  "layers": [
+    {
+      "scheme": "A8W8",
+      "layer": 1,
+      "calibration": "baseline",
+      "activation_factor": 1.0,
+      "weight_factor": 1.0,
+      "validation_nrmse_pct": 0.8396600098473271,
+      "observed_accumulator_peak": 75731,
+      "worst_case_abs_accumulator_bound": 1039110,
+      "packed_weight_kib_12layers": 192.0
+    },
+    {
+      "scheme": "A8W8",
+      "layer": 1,
+      "calibration": "train_selected",
+      "activation_factor": 0.9,
+      "weight_factor": 1.0,
+      "validation_nrmse_pct": 0.7871926164172183,
+      "observed_accumulator_peak": 84168,
+      "worst_case_abs_accumulator_bound": 1039872,
+      "packed_weight_kib_12layers": 192.0
+    },
+    {
+      "scheme": "A10W8",
+      "layer": 1,
+      "calibration": "baseline",
+      "activation_factor": 1.0,
+      "weight_factor": 1.0,
+      "validation_nrmse_pct": 0.4685539545094786,
+      "observed_accumulator_peak": 304702,
+      "worst_case_abs_accumulator_bound": 4180987,
+      "packed_weight_kib_12layers": 192.0
+    },
+    {
+      "scheme": "A10W8",
+      "layer": 1,
+      "calibration": "train_selected",
+      "activation_factor": 1.0,
+      "weight_factor": 1.0,
+      "validation_nrmse_pct": 0.4685539545094786,
+      "observed_accumulator_peak": 304702,
+      "worst_case_abs_accumulator_bound": 4180987,
+      "packed_weight_kib_12layers": 192.0
+    },
+    {
+      "scheme": "A12W8",
+      "layer": 1,
+      "calibration": "baseline",
+      "activation_factor": 1.0,
+      "weight_factor": 1.0,
+      "validation_nrmse_pct": 0.4351018773160456,
+      "observed_accumulator_peak": 1220226,
+      "worst_case_abs_accumulator_bound": 16748493,
+      "packed_weight_kib_12layers": 192.0
+    },
+    {
+      "scheme": "A12W8",
+      "layer": 1,
+      "calibration": "train_selected",
+      "activation_factor": 1.0,
+      "weight_factor": 1.0,
+      "validation_nrmse_pct": 0.4351018773160456,
+      "observed_accumulator_peak": 1220226,
+      "worst_case_abs_accumulator_bound": 16748493,
+      "packed_weight_kib_12layers": 192.0
+    },
+    {
+      "scheme": "A10W9",
+      "layer": 1,
+      "calibration": "baseline",
+      "activation_factor": 1.0,
+      "weight_factor": 1.0,
+      "validation_nrmse_pct": 0.26652601074076676,
+      "observed_accumulator_peak": 612083,
+      "worst_case_abs_accumulator_bound": 8394895,
+      "packed_weight_kib_12layers": 216.0
+    },
+    {
+      "scheme": "A10W9",
+      "layer": 1,
+      "calibration": "train_selected",
+      "activation_factor": 1.0,
+      "weight_factor": 1.0,
+      "validation_nrmse_pct": 0.26652601074076676,
+      "observed_accumulator_peak": 612083,
+      "worst_case_abs_accumulator_bound": 8394895,
+      "packed_weight_kib_12layers": 216.0
+    },
+    {
+      "scheme": "A8W8",
+      "layer": 2,
+      "calibration": "baseline",
+      "activation_factor": 1.0,
+      "weight_factor": 1.0,
+      "validation_nrmse_pct": 0.8129087096305387,
+      "observed_accumulator_peak": 70459,
+      "worst_case_abs_accumulator_bound": 1041642,
+      "packed_weight_kib_12layers": 192.0
+    },
+    {
+      "scheme": "A8W8",
+      "layer": 2,
+      "calibration": "train_selected",
+      "activation_factor": 0.8,
+      "weight_factor": 1.0,
+      "validation_nrmse_pct": 0.7023271170126687,
+      "observed_accumulator_peak": 88766,
+      "worst_case_abs_accumulator_bound": 1043988,
+      "packed_weight_kib_12layers": 192.0
+    },
+    {
+      "scheme": "A10W8",
+      "layer": 2,
+      "calibration": "baseline",
+      "activation_factor": 1.0,
+      "weight_factor": 1.0,
+      "validation_nrmse_pct": 0.433509821744672,
+      "observed_accumulator_peak": 284713,
+      "worst_case_abs_accumulator_bound": 4191172,
+      "packed_weight_kib_12layers": 192.0
+    },
+    {
+      "scheme": "A10W8",
+      "layer": 2,
+      "calibration": "train_selected",
+      "activation_factor": 0.9,
+      "weight_factor": 1.0,
+      "validation_nrmse_pct": 0.4267922269616854,
+      "observed_accumulator_peak": 316157,
+      "worst_case_abs_accumulator_bound": 4195368,
+      "packed_weight_kib_12layers": 192.0
+    },
+    {
+      "scheme": "A12W8",
+      "layer": 2,
+      "calibration": "baseline",
+      "activation_factor": 1.0,
+      "weight_factor": 1.0,
+      "validation_nrmse_pct": 0.39819659990366385,
+      "observed_accumulator_peak": 1140447,
+      "worst_case_abs_accumulator_bound": 16789295,
+      "packed_weight_kib_12layers": 192.0
+    },
+    {
+      "scheme": "A12W8",
+      "layer": 2,
+      "calibration": "train_selected",
+      "activation_factor": 0.9,
+      "weight_factor": 1.0,
+      "validation_nrmse_pct": 0.3979829111678033,
+      "observed_accumulator_peak": 1266922,
+      "worst_case_abs_accumulator_bound": 16806103,
+      "packed_weight_kib_12layers": 192.0
+    },
+    {
+      "scheme": "A10W9",
+      "layer": 2,
+      "calibration": "baseline",
+      "activation_factor": 1.0,
+      "weight_factor": 1.0,
+      "validation_nrmse_pct": 0.2728115588627232,
+      "observed_accumulator_peak": 571481,
+      "worst_case_abs_accumulator_bound": 8415346,
+      "packed_weight_kib_12layers": 216.0
+    },
+    {
+      "scheme": "A10W9",
+      "layer": 2,
+      "calibration": "train_selected",
+      "activation_factor": 0.9,
+      "weight_factor": 1.0,
+      "validation_nrmse_pct": 0.26204173051828356,
+      "observed_accumulator_peak": 634598,
+      "worst_case_abs_accumulator_bound": 8423771,
+      "packed_weight_kib_12layers": 216.0
+    },
+    {
+      "scheme": "A8W8",
+      "layer": 3,
+      "calibration": "baseline",
+      "activation_factor": 1.0,
+      "weight_factor": 1.0,
+      "validation_nrmse_pct": 0.8720528924318335,
+      "observed_accumulator_peak": 73091,
+      "worst_case_abs_accumulator_bound": 1045039,
+      "packed_weight_kib_12layers": 192.0
+    },
+    {
+      "scheme": "A8W8",
+      "layer": 3,
+      "calibration": "train_selected",
+      "activation_factor": 0.8,
+      "weight_factor": 1.0,
+      "validation_nrmse_pct": 0.7620006609218077,
+      "observed_accumulator_peak": 91514,
+      "worst_case_abs_accumulator_bound": 1048235,
+      "packed_weight_kib_12layers": 192.0
+    },
+    {
+      "scheme": "A10W8",
+      "layer": 3,
+      "calibration": "baseline",
+      "activation_factor": 1.0,
+      "weight_factor": 1.0,
+      "validation_nrmse_pct": 0.46326463914605337,
+      "observed_accumulator_peak": 294187,
+      "worst_case_abs_accumulator_bound": 4204841,
+      "packed_weight_kib_12layers": 192.0
+    },
+    {
+      "scheme": "A10W8",
+      "layer": 3,
+      "calibration": "train_selected",
+      "activation_factor": 0.9,
+      "weight_factor": 1.0,
+      "validation_nrmse_pct": 0.4566970433571897,
+      "observed_accumulator_peak": 326924,
+      "worst_case_abs_accumulator_bound": 4210556,
+      "packed_weight_kib_12layers": 192.0
+    },
+    {
+      "scheme": "A12W8",
+      "layer": 3,
+      "calibration": "baseline",
+      "activation_factor": 1.0,
+      "weight_factor": 1.0,
+      "validation_nrmse_pct": 0.42615229275138844,
+      "observed_accumulator_peak": 1178344,
+      "worst_case_abs_accumulator_bound": 16844052,
+      "packed_weight_kib_12layers": 192.0
+    },
+    {
+      "scheme": "A12W8",
+      "layer": 3,
+      "calibration": "train_selected",
+      "activation_factor": 0.9,
+      "weight_factor": 1.0,
+      "validation_nrmse_pct": 0.4258918823008116,
+      "observed_accumulator_peak": 1309423,
+      "worst_case_abs_accumulator_bound": 16866944,
+      "packed_weight_kib_12layers": 192.0
+    },
+    {
+      "scheme": "A10W9",
+      "layer": 3,
+      "calibration": "baseline",
+      "activation_factor": 1.0,
+      "weight_factor": 1.0,
+      "validation_nrmse_pct": 0.28491686762048757,
+      "observed_accumulator_peak": 590871,
+      "worst_case_abs_accumulator_bound": 8442792,
+      "packed_weight_kib_12layers": 216.0
+    },
+    {
+      "scheme": "A10W9",
+      "layer": 3,
+      "calibration": "train_selected",
+      "activation_factor": 0.9,
+      "weight_factor": 1.0,
+      "validation_nrmse_pct": 0.2731987047500403,
+      "observed_accumulator_peak": 656623,
+      "worst_case_abs_accumulator_bound": 8454266,
+      "packed_weight_kib_12layers": 216.0
+    },
+    {
+      "scheme": "A8W8",
+      "layer": 4,
+      "calibration": "baseline",
+      "activation_factor": 1.0,
+      "weight_factor": 1.0,
+      "validation_nrmse_pct": 0.9590449195760165,
+      "observed_accumulator_peak": 64307,
+      "worst_case_abs_accumulator_bound": 1045138,
+      "packed_weight_kib_12layers": 192.0
+    },
+    {
+      "scheme": "A8W8",
+      "layer": 4,
+      "calibration": "train_selected",
+      "activation_factor": 0.8,
+      "weight_factor": 1.0,
+      "validation_nrmse_pct": 0.834019837768169,
+      "observed_accumulator_peak": 80548,
+      "worst_case_abs_accumulator_bound": 1048359,
+      "packed_weight_kib_12layers": 192.0
+    },
+    {
+      "scheme": "A10W8",
+      "layer": 4,
+      "calibration": "baseline",
+      "activation_factor": 1.0,
+      "weight_factor": 1.0,
+      "validation_nrmse_pct": 0.528907415239146,
+      "observed_accumulator_peak": 258772,
+      "worst_case_abs_accumulator_bound": 4205241,
+      "packed_weight_kib_12layers": 192.0
+    },
+    {
+      "scheme": "A10W8",
+      "layer": 4,
+      "calibration": "train_selected",
+      "activation_factor": 0.9,
+      "weight_factor": 1.0,
+      "validation_nrmse_pct": 0.5208188871313462,
+      "observed_accumulator_peak": 287246,
+      "worst_case_abs_accumulator_bound": 4211000,
+      "packed_weight_kib_12layers": 192.0
+    },
+    {
+      "scheme": "A12W8",
+      "layer": 4,
+      "calibration": "baseline",
+      "activation_factor": 1.0,
+      "weight_factor": 1.0,
+      "validation_nrmse_pct": 0.4896812439114151,
+      "observed_accumulator_peak": 1036760,
+      "worst_case_abs_accumulator_bound": 16845652,
+      "packed_weight_kib_12layers": 192.0
+    },
+    {
+      "scheme": "A12W8",
+      "layer": 4,
+      "calibration": "train_selected",
+      "activation_factor": 1.0,
+      "weight_factor": 1.0,
+      "validation_nrmse_pct": 0.4896812439114151,
+      "observed_accumulator_peak": 1036760,
+      "worst_case_abs_accumulator_bound": 16845652,
+      "packed_weight_kib_12layers": 192.0
+    },
+    {
+      "scheme": "A10W9",
+      "layer": 4,
+      "calibration": "baseline",
+      "activation_factor": 1.0,
+      "weight_factor": 1.0,
+      "validation_nrmse_pct": 0.3079119888439552,
+      "observed_accumulator_peak": 519329,
+      "worst_case_abs_accumulator_bound": 8443594,
+      "packed_weight_kib_12layers": 216.0
+    },
+    {
+      "scheme": "A10W9",
+      "layer": 4,
+      "calibration": "train_selected",
+      "activation_factor": 0.9,
+      "weight_factor": 1.0,
+      "validation_nrmse_pct": 0.2943312254158714,
+      "observed_accumulator_peak": 576472,
+      "worst_case_abs_accumulator_bound": 8455158,
+      "packed_weight_kib_12layers": 216.0
+    },
+    {
+      "scheme": "A8W8",
+      "layer": 5,
+      "calibration": "baseline",
+      "activation_factor": 1.0,
+      "weight_factor": 1.0,
+      "validation_nrmse_pct": 0.9902120307247033,
+      "observed_accumulator_peak": 66561,
+      "worst_case_abs_accumulator_bound": 1042328,
+      "packed_weight_kib_12layers": 192.0
+    },
+    {
+      "scheme": "A8W8",
+      "layer": 5,
+      "calibration": "train_selected",
+      "activation_factor": 0.8,
+      "weight_factor": 1.0,
+      "validation_nrmse_pct": 0.8395830673743887,
+      "observed_accumulator_peak": 83026,
+      "worst_case_abs_accumulator_bound": 1044846,
+      "packed_weight_kib_12layers": 192.0
+    },
+    {
+      "scheme": "A10W8",
+      "layer": 5,
+      "calibration": "baseline",
+      "activation_factor": 1.0,
+      "weight_factor": 1.0,
+      "validation_nrmse_pct": 0.5015375468370089,
+      "observed_accumulator_peak": 268201,
+      "worst_case_abs_accumulator_bound": 4193935,
+      "packed_weight_kib_12layers": 192.0
+    },
+    {
+      "scheme": "A10W8",
+      "layer": 5,
+      "calibration": "train_selected",
+      "activation_factor": 0.8,
+      "weight_factor": 1.0,
+      "validation_nrmse_pct": 0.4893610933929092,
+      "observed_accumulator_peak": 334958,
+      "worst_case_abs_accumulator_bound": 4204067,
+      "packed_weight_kib_12layers": 192.0
+    },
+    {
+      "scheme": "A12W8",
+      "layer": 5,
+      "calibration": "baseline",
+      "activation_factor": 1.0,
+      "weight_factor": 1.0,
+      "validation_nrmse_pct": 0.4543811536350258,
+      "observed_accumulator_peak": 1073449,
+      "worst_case_abs_accumulator_bound": 16800362,
+      "packed_weight_kib_12layers": 192.0
+    },
+    {
+      "scheme": "A12W8",
+      "layer": 5,
+      "calibration": "train_selected",
+      "activation_factor": 0.9,
+      "weight_factor": 1.0,
+      "validation_nrmse_pct": 0.4536901234168116,
+      "observed_accumulator_peak": 1192517,
+      "worst_case_abs_accumulator_bound": 16818401,
+      "packed_weight_kib_12layers": 192.0
+    },
+    {
+      "scheme": "A10W9",
+      "layer": 5,
+      "calibration": "baseline",
+      "activation_factor": 1.0,
+      "weight_factor": 1.0,
+      "validation_nrmse_pct": 0.31034594551256106,
+      "observed_accumulator_peak": 538291,
+      "worst_case_abs_accumulator_bound": 8420893,
+      "packed_weight_kib_12layers": 216.0
+    },
+    {
+      "scheme": "A10W9",
+      "layer": 5,
+      "calibration": "train_selected",
+      "activation_factor": 0.8,
+      "weight_factor": 1.0,
+      "validation_nrmse_pct": 0.2905351327221059,
+      "observed_accumulator_peak": 672278,
+      "worst_case_abs_accumulator_bound": 8441237,
+      "packed_weight_kib_12layers": 216.0
+    },
+    {
+      "scheme": "A8W8",
+      "layer": 6,
+      "calibration": "baseline",
+      "activation_factor": 1.0,
+      "weight_factor": 1.0,
+      "validation_nrmse_pct": 0.8735074385055266,
+      "observed_accumulator_peak": 71648,
+      "worst_case_abs_accumulator_bound": 1042518,
+      "packed_weight_kib_12layers": 192.0
+    },
+    {
+      "scheme": "A8W8",
+      "layer": 6,
+      "calibration": "train_selected",
+      "activation_factor": 0.9,
+      "weight_factor": 1.0,
+      "validation_nrmse_pct": 0.8061429947071969,
+      "observed_accumulator_peak": 80075,
+      "worst_case_abs_accumulator_bound": 1043658,
+      "packed_weight_kib_12layers": 192.0
+    },
+    {
+      "scheme": "A10W8",
+      "layer": 6,
+      "calibration": "baseline",
+      "activation_factor": 1.0,
+      "weight_factor": 1.0,
+      "validation_nrmse_pct": 0.47072494078145777,
+      "observed_accumulator_peak": 289575,
+      "worst_case_abs_accumulator_bound": 4194698,
+      "packed_weight_kib_12layers": 192.0
+    },
+    {
+      "scheme": "A10W8",
+      "layer": 6,
+      "calibration": "train_selected",
+      "activation_factor": 1.0,
+      "weight_factor": 1.0,
+      "validation_nrmse_pct": 0.47072494078145777,
+      "observed_accumulator_peak": 289575,
+      "worst_case_abs_accumulator_bound": 4194698,
+      "packed_weight_kib_12layers": 192.0
+    },
+    {
+      "scheme": "A12W8",
+      "layer": 6,
+      "calibration": "baseline",
+      "activation_factor": 1.0,
+      "weight_factor": 1.0,
+      "validation_nrmse_pct": 0.43485419715668594,
+      "observed_accumulator_peak": 1159688,
+      "worst_case_abs_accumulator_bound": 16803420,
+      "packed_weight_kib_12layers": 192.0
+    },
+    {
+      "scheme": "A12W8",
+      "layer": 6,
+      "calibration": "train_selected",
+      "activation_factor": 1.0,
+      "weight_factor": 1.0,
+      "validation_nrmse_pct": 0.43485419715668594,
+      "observed_accumulator_peak": 1159688,
+      "worst_case_abs_accumulator_bound": 16803420,
+      "packed_weight_kib_12layers": 192.0
+    },
+    {
+      "scheme": "A10W9",
+      "layer": 6,
+      "calibration": "baseline",
+      "activation_factor": 1.0,
+      "weight_factor": 1.0,
+      "validation_nrmse_pct": 0.28023886585524105,
+      "observed_accumulator_peak": 581399,
+      "worst_case_abs_accumulator_bound": 8422426,
+      "packed_weight_kib_12layers": 216.0
+    },
+    {
+      "scheme": "A10W9",
+      "layer": 6,
+      "calibration": "train_selected",
+      "activation_factor": 1.0,
+      "weight_factor": 1.0,
+      "validation_nrmse_pct": 0.28023886585524105,
+      "observed_accumulator_peak": 581399,
+      "worst_case_abs_accumulator_bound": 8422426,
+      "packed_weight_kib_12layers": 216.0
+    },
+    {
+      "scheme": "A8W8",
+      "layer": 7,
+      "calibration": "baseline",
+      "activation_factor": 1.0,
+      "weight_factor": 1.0,
+      "validation_nrmse_pct": 0.9026466985120201,
+      "observed_accumulator_peak": 58806,
+      "worst_case_abs_accumulator_bound": 1039278,
+      "packed_weight_kib_12layers": 192.0
+    },
+    {
+      "scheme": "A8W8",
+      "layer": 7,
+      "calibration": "train_selected",
+      "activation_factor": 0.8,
+      "weight_factor": 1.0,
+      "validation_nrmse_pct": 0.7792809999963072,
+      "observed_accumulator_peak": 73734,
+      "worst_case_abs_accumulator_bound": 1041033,
+      "packed_weight_kib_12layers": 192.0
+    },
+    {
+      "scheme": "A10W8",
+      "layer": 7,
+      "calibration": "baseline",
+      "activation_factor": 1.0,
+      "weight_factor": 1.0,
+      "validation_nrmse_pct": 0.4660400351409878,
+      "observed_accumulator_peak": 237175,
+      "worst_case_abs_accumulator_bound": 4181661,
+      "packed_weight_kib_12layers": 192.0
+    },
+    {
+      "scheme": "A10W8",
+      "layer": 7,
+      "calibration": "train_selected",
+      "activation_factor": 0.9,
+      "weight_factor": 1.0,
+      "validation_nrmse_pct": 0.45803891502410626,
+      "observed_accumulator_peak": 263542,
+      "worst_case_abs_accumulator_bound": 4184801,
+      "packed_weight_kib_12layers": 192.0
+    },
+    {
+      "scheme": "A12W8",
+      "layer": 7,
+      "calibration": "baseline",
+      "activation_factor": 1.0,
+      "weight_factor": 1.0,
+      "validation_nrmse_pct": 0.4242279063783612,
+      "observed_accumulator_peak": 950558,
+      "worst_case_abs_accumulator_bound": 16751195,
+      "packed_weight_kib_12layers": 192.0
+    },
+    {
+      "scheme": "A12W8",
+      "layer": 7,
+      "calibration": "train_selected",
+      "activation_factor": 0.9,
+      "weight_factor": 1.0,
+      "validation_nrmse_pct": 0.42369570577908167,
+      "observed_accumulator_peak": 1056293,
+      "worst_case_abs_accumulator_bound": 16763771,
+      "packed_weight_kib_12layers": 192.0
+    },
+    {
+      "scheme": "A10W9",
+      "layer": 7,
+      "calibration": "baseline",
+      "activation_factor": 1.0,
+      "weight_factor": 1.0,
+      "validation_nrmse_pct": 0.29693230369893286,
+      "observed_accumulator_peak": 475915,
+      "worst_case_abs_accumulator_bound": 8396249,
+      "packed_weight_kib_12layers": 216.0
+    },
+    {
+      "scheme": "A10W9",
+      "layer": 7,
+      "calibration": "train_selected",
+      "activation_factor": 0.9,
+      "weight_factor": 1.0,
+      "validation_nrmse_pct": 0.284956771005022,
+      "observed_accumulator_peak": 528823,
+      "worst_case_abs_accumulator_bound": 8402552,
+      "packed_weight_kib_12layers": 216.0
+    },
+    {
+      "scheme": "A8W8",
+      "layer": 8,
+      "calibration": "baseline",
+      "activation_factor": 1.0,
+      "weight_factor": 1.0,
+      "validation_nrmse_pct": 0.9022782724067315,
+      "observed_accumulator_peak": 56712,
+      "worst_case_abs_accumulator_bound": 1042490,
+      "packed_weight_kib_12layers": 192.0
+    },
+    {
+      "scheme": "A8W8",
+      "layer": 8,
+      "calibration": "train_selected",
+      "activation_factor": 0.9,
+      "weight_factor": 1.0,
+      "validation_nrmse_pct": 0.8390587842471273,
+      "observed_accumulator_peak": 62971,
+      "worst_case_abs_accumulator_bound": 1043628,
+      "packed_weight_kib_12layers": 192.0
+    },
+    {
+      "scheme": "A10W8",
+      "layer": 8,
+      "calibration": "baseline",
+      "activation_factor": 1.0,
+      "weight_factor": 1.0,
+      "validation_nrmse_pct": 0.466886314700007,
+      "observed_accumulator_peak": 227961,
+      "worst_case_abs_accumulator_bound": 4194587,
+      "packed_weight_kib_12layers": 192.0
+    },
+    {
+      "scheme": "A10W8",
+      "layer": 8,
+      "calibration": "train_selected",
+      "activation_factor": 0.9,
+      "weight_factor": 1.0,
+      "validation_nrmse_pct": 0.471606240194845,
+      "observed_accumulator_peak": 253388,
+      "worst_case_abs_accumulator_bound": 4199163,
+      "packed_weight_kib_12layers": 192.0
+    },
+    {
+      "scheme": "A12W8",
+      "layer": 8,
+      "calibration": "baseline",
+      "activation_factor": 1.0,
+      "weight_factor": 1.0,
+      "validation_nrmse_pct": 0.425840534995819,
+      "observed_accumulator_peak": 913397,
+      "worst_case_abs_accumulator_bound": 16802976,
+      "packed_weight_kib_12layers": 192.0
+    },
+    {
+      "scheme": "A12W8",
+      "layer": 8,
+      "calibration": "train_selected",
+      "activation_factor": 1.0,
+      "weight_factor": 1.0,
+      "validation_nrmse_pct": 0.425840534995819,
+      "observed_accumulator_peak": 913397,
+      "worst_case_abs_accumulator_bound": 16802976,
+      "packed_weight_kib_12layers": 192.0
+    },
+    {
+      "scheme": "A10W9",
+      "layer": 8,
+      "calibration": "baseline",
+      "activation_factor": 1.0,
+      "weight_factor": 1.0,
+      "validation_nrmse_pct": 0.29055032012493903,
+      "observed_accumulator_peak": 458140,
+      "worst_case_abs_accumulator_bound": 8422203,
+      "packed_weight_kib_12layers": 216.0
+    },
+    {
+      "scheme": "A10W9",
+      "layer": 8,
+      "calibration": "train_selected",
+      "activation_factor": 0.9,
+      "weight_factor": 1.0,
+      "validation_nrmse_pct": 0.30035805549475564,
+      "observed_accumulator_peak": 509201,
+      "worst_case_abs_accumulator_bound": 8431390,
+      "packed_weight_kib_12layers": 216.0
+    },
+    {
+      "scheme": "A8W8",
+      "layer": 9,
+      "calibration": "baseline",
+      "activation_factor": 1.0,
+      "weight_factor": 1.0,
+      "validation_nrmse_pct": 0.9204699210601318,
+      "observed_accumulator_peak": 64369,
+      "worst_case_abs_accumulator_bound": 1043475,
+      "packed_weight_kib_12layers": 192.0
+    },
+    {
+      "scheme": "A8W8",
+      "layer": 9,
+      "calibration": "train_selected",
+      "activation_factor": 0.9,
+      "weight_factor": 1.0,
+      "validation_nrmse_pct": 0.8602205341634828,
+      "observed_accumulator_peak": 71295,
+      "worst_case_abs_accumulator_bound": 1044721,
+      "packed_weight_kib_12layers": 192.0
+    },
+    {
+      "scheme": "A10W8",
+      "layer": 9,
+      "calibration": "baseline",
+      "activation_factor": 1.0,
+      "weight_factor": 1.0,
+      "validation_nrmse_pct": 0.4737404713515264,
+      "observed_accumulator_peak": 258570,
+      "worst_case_abs_accumulator_bound": 4198548,
+      "packed_weight_kib_12layers": 192.0
+    },
+    {
+      "scheme": "A10W8",
+      "layer": 9,
+      "calibration": "train_selected",
+      "activation_factor": 1.0,
+      "weight_factor": 1.0,
+      "validation_nrmse_pct": 0.4737404713515264,
+      "observed_accumulator_peak": 258570,
+      "worst_case_abs_accumulator_bound": 4198548,
+      "packed_weight_kib_12layers": 192.0
+    },
+    {
+      "scheme": "A12W8",
+      "layer": 9,
+      "calibration": "baseline",
+      "activation_factor": 1.0,
+      "weight_factor": 1.0,
+      "validation_nrmse_pct": 0.43092112209121564,
+      "observed_accumulator_peak": 1036334,
+      "worst_case_abs_accumulator_bound": 16818841,
+      "packed_weight_kib_12layers": 192.0
+    },
+    {
+      "scheme": "A12W8",
+      "layer": 9,
+      "calibration": "train_selected",
+      "activation_factor": 1.0,
+      "weight_factor": 1.0,
+      "validation_nrmse_pct": 0.43092112209121564,
+      "observed_accumulator_peak": 1036334,
+      "worst_case_abs_accumulator_bound": 16818841,
+      "packed_weight_kib_12layers": 192.0
+    },
+    {
+      "scheme": "A10W9",
+      "layer": 9,
+      "calibration": "baseline",
+      "activation_factor": 1.0,
+      "weight_factor": 1.0,
+      "validation_nrmse_pct": 0.29899322375571763,
+      "observed_accumulator_peak": 519111,
+      "worst_case_abs_accumulator_bound": 8430155,
+      "packed_weight_kib_12layers": 216.0
+    },
+    {
+      "scheme": "A10W9",
+      "layer": 9,
+      "calibration": "train_selected",
+      "activation_factor": 1.0,
+      "weight_factor": 1.0,
+      "validation_nrmse_pct": 0.29899322375571763,
+      "observed_accumulator_peak": 519111,
+      "worst_case_abs_accumulator_bound": 8430155,
+      "packed_weight_kib_12layers": 216.0
+    },
+    {
+      "scheme": "A8W8",
+      "layer": 10,
+      "calibration": "baseline",
+      "activation_factor": 1.0,
+      "weight_factor": 1.0,
+      "validation_nrmse_pct": 1.046093076632461,
+      "observed_accumulator_peak": 60284,
+      "worst_case_abs_accumulator_bound": 1040388,
+      "packed_weight_kib_12layers": 192.0
+    },
+    {
+      "scheme": "A8W8",
+      "layer": 10,
+      "calibration": "train_selected",
+      "activation_factor": 0.9,
+      "weight_factor": 1.0,
+      "validation_nrmse_pct": 0.9664474488311825,
+      "observed_accumulator_peak": 67347,
+      "worst_case_abs_accumulator_bound": 1041292,
+      "packed_weight_kib_12layers": 192.0
+    },
+    {
+      "scheme": "A10W8",
+      "layer": 10,
+      "calibration": "baseline",
+      "activation_factor": 1.0,
+      "weight_factor": 1.0,
+      "validation_nrmse_pct": 0.5408787992618604,
+      "observed_accumulator_peak": 243159,
+      "worst_case_abs_accumulator_bound": 4186129,
+      "packed_weight_kib_12layers": 192.0
+    },
+    {
+      "scheme": "A10W8",
+      "layer": 10,
+      "calibration": "train_selected",
+      "activation_factor": 0.9,
+      "weight_factor": 1.0,
+      "validation_nrmse_pct": 0.5339720286832241,
+      "observed_accumulator_peak": 270178,
+      "worst_case_abs_accumulator_bound": 4189765,
+      "packed_weight_kib_12layers": 192.0
+    },
+    {
+      "scheme": "A12W8",
+      "layer": 10,
+      "calibration": "baseline",
+      "activation_factor": 1.0,
+      "weight_factor": 1.0,
+      "validation_nrmse_pct": 0.49307647571463675,
+      "observed_accumulator_peak": 974328,
+      "worst_case_abs_accumulator_bound": 16769094,
+      "packed_weight_kib_12layers": 192.0
+    },
+    {
+      "scheme": "A12W8",
+      "layer": 10,
+      "calibration": "train_selected",
+      "activation_factor": 1.0,
+      "weight_factor": 1.0,
+      "validation_nrmse_pct": 0.49307647571463675,
+      "observed_accumulator_peak": 974328,
+      "worst_case_abs_accumulator_bound": 16769094,
+      "packed_weight_kib_12layers": 192.0
+    },
+    {
+      "scheme": "A10W9",
+      "layer": 10,
+      "calibration": "baseline",
+      "activation_factor": 1.0,
+      "weight_factor": 1.0,
+      "validation_nrmse_pct": 0.33181159177204517,
+      "observed_accumulator_peak": 488490,
+      "worst_case_abs_accumulator_bound": 8405221,
+      "packed_weight_kib_12layers": 216.0
+    },
+    {
+      "scheme": "A10W9",
+      "layer": 10,
+      "calibration": "train_selected",
+      "activation_factor": 0.9,
+      "weight_factor": 1.0,
+      "validation_nrmse_pct": 0.3200067067220513,
+      "observed_accumulator_peak": 542765,
+      "worst_case_abs_accumulator_bound": 8412521,
+      "packed_weight_kib_12layers": 216.0
+    },
+    {
+      "scheme": "A8W8",
+      "layer": 11,
+      "calibration": "baseline",
+      "activation_factor": 1.0,
+      "weight_factor": 1.0,
+      "validation_nrmse_pct": 1.1213789767793543,
+      "observed_accumulator_peak": 58575,
+      "worst_case_abs_accumulator_bound": 1037001,
+      "packed_weight_kib_12layers": 192.0
+    },
+    {
+      "scheme": "A8W8",
+      "layer": 11,
+      "calibration": "train_selected",
+      "activation_factor": 0.9,
+      "weight_factor": 1.0,
+      "validation_nrmse_pct": 1.0463240034191565,
+      "observed_accumulator_peak": 64934,
+      "worst_case_abs_accumulator_bound": 1037528,
+      "packed_weight_kib_12layers": 192.0
+    },
+    {
+      "scheme": "A10W8",
+      "layer": 11,
+      "calibration": "baseline",
+      "activation_factor": 1.0,
+      "weight_factor": 1.0,
+      "validation_nrmse_pct": 0.5672536056322264,
+      "observed_accumulator_peak": 235050,
+      "worst_case_abs_accumulator_bound": 4172500,
+      "packed_weight_kib_12layers": 192.0
+    },
+    {
+      "scheme": "A10W8",
+      "layer": 11,
+      "calibration": "train_selected",
+      "activation_factor": 1.0,
+      "weight_factor": 1.0,
+      "validation_nrmse_pct": 0.5672536056322264,
+      "observed_accumulator_peak": 235050,
+      "worst_case_abs_accumulator_bound": 4172500,
+      "packed_weight_kib_12layers": 192.0
+    },
+    {
+      "scheme": "A12W8",
+      "layer": 11,
+      "calibration": "baseline",
+      "activation_factor": 1.0,
+      "weight_factor": 1.0,
+      "validation_nrmse_pct": 0.5140225584378033,
+      "observed_accumulator_peak": 942103,
+      "worst_case_abs_accumulator_bound": 16714495,
+      "packed_weight_kib_12layers": 192.0
+    },
+    {
+      "scheme": "A12W8",
+      "layer": 11,
+      "calibration": "train_selected",
+      "activation_factor": 1.0,
+      "weight_factor": 1.0,
+      "validation_nrmse_pct": 0.5140225584378033,
+      "observed_accumulator_peak": 942103,
+      "worst_case_abs_accumulator_bound": 16714495,
+      "packed_weight_kib_12layers": 192.0
+    },
+    {
+      "scheme": "A10W9",
+      "layer": 11,
+      "calibration": "baseline",
+      "activation_factor": 1.0,
+      "weight_factor": 1.0,
+      "validation_nrmse_pct": 0.3531904104602813,
+      "observed_accumulator_peak": 471645,
+      "worst_case_abs_accumulator_bound": 8377854,
+      "packed_weight_kib_12layers": 216.0
+    },
+    {
+      "scheme": "A10W9",
+      "layer": 11,
+      "calibration": "train_selected",
+      "activation_factor": 1.0,
+      "weight_factor": 1.0,
+      "validation_nrmse_pct": 0.3531904104602813,
+      "observed_accumulator_peak": 471645,
+      "worst_case_abs_accumulator_bound": 8377854,
+      "packed_weight_kib_12layers": 216.0
+    },
+    {
+      "scheme": "A8W8",
+      "layer": 12,
+      "calibration": "baseline",
+      "activation_factor": 1.0,
+      "weight_factor": 1.0,
+      "validation_nrmse_pct": 1.0852403789632403,
+      "observed_accumulator_peak": 72629,
+      "worst_case_abs_accumulator_bound": 1035658,
+      "packed_weight_kib_12layers": 192.0
+    },
+    {
+      "scheme": "A8W8",
+      "layer": 12,
+      "calibration": "train_selected",
+      "activation_factor": 0.9,
+      "weight_factor": 1.0,
+      "validation_nrmse_pct": 1.0080244291621958,
+      "observed_accumulator_peak": 80772,
+      "worst_case_abs_accumulator_bound": 1036036,
+      "packed_weight_kib_12layers": 192.0
+    },
+    {
+      "scheme": "A10W8",
+      "layer": 12,
+      "calibration": "baseline",
+      "activation_factor": 1.0,
+      "weight_factor": 1.0,
+      "validation_nrmse_pct": 0.5674870436196182,
+      "observed_accumulator_peak": 291844,
+      "worst_case_abs_accumulator_bound": 4167098,
+      "packed_weight_kib_12layers": 192.0
+    },
+    {
+      "scheme": "A10W8",
+      "layer": 12,
+      "calibration": "train_selected",
+      "activation_factor": 0.9,
+      "weight_factor": 1.0,
+      "validation_nrmse_pct": 0.5690796058442146,
+      "observed_accumulator_peak": 324392,
+      "worst_case_abs_accumulator_bound": 4168619,
+      "packed_weight_kib_12layers": 192.0
+    },
+    {
+      "scheme": "A12W8",
+      "layer": 12,
+      "calibration": "baseline",
+      "activation_factor": 1.0,
+      "weight_factor": 1.0,
+      "validation_nrmse_pct": 0.5189300697580426,
+      "observed_accumulator_peak": 1169080,
+      "worst_case_abs_accumulator_bound": 16692855,
+      "packed_weight_kib_12layers": 192.0
+    },
+    {
+      "scheme": "A12W8",
+      "layer": 12,
+      "calibration": "train_selected",
+      "activation_factor": 1.0,
+      "weight_factor": 1.0,
+      "validation_nrmse_pct": 0.5189300697580426,
+      "observed_accumulator_peak": 1169080,
+      "worst_case_abs_accumulator_bound": 16692855,
+      "packed_weight_kib_12layers": 192.0
+    },
+    {
+      "scheme": "A10W9",
+      "layer": 12,
+      "calibration": "baseline",
+      "activation_factor": 1.0,
+      "weight_factor": 1.0,
+      "validation_nrmse_pct": 0.3480231599545835,
+      "observed_accumulator_peak": 585885,
+      "worst_case_abs_accumulator_bound": 8367007,
+      "packed_weight_kib_12layers": 216.0
+    },
+    {
+      "scheme": "A10W9",
+      "layer": 12,
+      "calibration": "train_selected",
+      "activation_factor": 0.9,
+      "weight_factor": 1.0,
+      "validation_nrmse_pct": 0.35058098450077274,
+      "observed_accumulator_peak": 651226,
+      "worst_case_abs_accumulator_bound": 8370061,
+      "packed_weight_kib_12layers": 216.0
+    }
+  ]
+}

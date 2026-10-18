@@ -13,7 +13,9 @@ from quantize_ffn1 import collect_activations
 from run import KWT1, PREFIX, ROOT
 
 
-BITS = ((8, 8), (11, 10), (12, 9), (12, 10))
+DEFAULT_BITS = ((8, 8), (11, 10), (12, 9), (12, 10))
+BIT_OPTIONS = {f"A{a}W{w}": (a, w) for a, w in
+               ((8, 8), (10, 8), (12, 8), (10, 9), (11, 10), (12, 9), (12, 10))}
 FACTORS = ((1.0, 1.0), (0.8, 1.0), (0.9, 1.0), (1.1, 1.0),
            (1.2, 1.0), (1.0, 0.9), (1.0, 1.1))
 
@@ -27,10 +29,15 @@ def main():
     parser.add_argument("--output", type=Path,
                         default=ROOT / "results/ffn1_multi_scale_12labels_20")
     parser.add_argument("--train-select-per-class", type=int, default=5)
+    parser.add_argument("--schemes", nargs="+", choices=tuple(BIT_OPTIONS),
+                        default=[f"A{a}W{w}" for a, w in DEFAULT_BITS])
     parser.add_argument("--device", choices=("auto", "cpu", "cuda"), default="auto")
     args = parser.parse_args()
     if args.train_select_per_class < 1:
         parser.error("train-select-per-class must be positive")
+    if len(set(args.schemes)) != len(args.schemes):
+        parser.error("--schemes contains duplicates")
+    bits = tuple(BIT_OPTIONS[name] for name in args.schemes)
 
     with np.load(args.samples, allow_pickle=False) as data:
         features, partitions, paths, words = (data["features"], data["partitions"],
@@ -69,7 +76,7 @@ def main():
         validation_x = activations[val_ids, layer]
         select_reference = select_x @ weight + bias
         validation_reference = validation_x @ weight + bias
-        for a_bits, w_bits in BITS:
+        for a_bits, w_bits in bits:
             sx_base, sw_base = base_scales(all_train_x, weight, a_bits, w_bits)
             probes = []
             for af, wf in FACTORS:
@@ -110,7 +117,7 @@ def main():
         print(f"layer={layer + 1:02} complete", flush=True)
 
     summary = []
-    for a_bits, w_bits in BITS:
+    for a_bits, w_bits in bits:
         for name in ("baseline", "train_selected"):
             scheme = f"A{a_bits}W{w_bits}"
             subset = [r for r in records if r["scheme"] == scheme and
@@ -139,6 +146,7 @@ def main():
             "training_selection_per_class": args.train_select_per_class,
             "training_selection_labels": words[selected_train_ids].tolist(),
             "training_selection_paths": paths[selected_train_ids].tolist(),
+            "schemes": args.schemes,
             "factors": FACTORS, "rounding": "nearest ties-to-even",
             "arithmetic": "signed symmetric zero-point-0 integer A/W, INT32 bias and accumulator; FP64 final scale for error only",
             "summary": summary, "candidate_trace": candidate_trace, "layers": records}

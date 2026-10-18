@@ -1,0 +1,403 @@
+[0m
+> build · deepseek-v4.1-flash
+[0m→ [0mRead hardware/architecture/results/real_e203_validation0_finalizer.status 
+[0m$ [0mls -la /home/yang/Desktop/ic设计竞赛/hardware/architecture/results/ | head -50
+total 76
+drwxrwxr-x  5 yang yang  4096 10月 18 13:59 .
+drwxrwxr-x  5 yang yang  4096 10月 18 13:32 ..
+-rw-rw-r--  1 yang yang    97 10月 18 13:32 opencode.json
+drwxrwxr-x  2 yang yang  4096 10月 18 13:32 quant_formats_12labels_40
+-rw-rw-r--  1 yang yang   123 10月 18 14:00 real_e203_validation0_deepseek.log
+-rw-rw-r--  1 yang yang    17 10月 18 13:59 real_e203_validation0_finalizer.status
+drwxrwxr-x 14 yang yang  4096 10月 18 13:59 real_e203_validation0_logs
+-rw-rw-r--  1 yang yang 17582 10月 17 22:01 real_e203_validation0_manifest.json
+-rw-rw-r--  1 yang yang   370 10月 18 13:59 real_e203_validation0_summary_run.log
+drwxrwxr-x  2 yang yang  4096 10月 18 13:32 real_e203_validation0_vectors
+-rw-rw-r--  1 yang yang 17681 10月 17 22:01 real_e203_validation440_manifest.json
+> build · deepseek-v4.1-flash
+[0m→ [0mRead hardware/architecture/results/real_e203_validation0_summary_run.log 
+[0m→ [0mRead hardware/architecture/results/real_e203_validation0_deepseek.log 
+[0m$ [0mls -la /home/yang/Desktop/ic设计竞赛/hardware/architecture/results/real_e203_validation0_logs/; ls -la /home/yang/Desktop/ic设计竞赛/hardware/architecture/results/real_e203_validation0_vectors/
+total 156
+drwxrwxr-x 14 yang yang 4096 10月 18 13:59 .
+drwxrwxr-x  5 yang yang 4096 10月 18 13:59 ..
+drwxrwxr-x  2 yang yang 4096 10月 18 13:32 layer01_case
+-rw-rw-r--  1 yang yang    2 10月 18 13:59 layer01.exit
+-rw-rw-r--  1 yang yang 2180 10月 18 13:59 layer01.log
+drwxrwxr-x  2 yang yang 4096 10月 18 13:32 layer02_case
+-rw-rw-r--  1 yang yang    2 10月 18 13:59 layer02.exit
+-rw-rw-r--  1 yang yang 2180 10月 18 13:59 layer02.log
+drwxrwxr-x  2 yang yang 4096 10月 18 13:32 layer03_case
+-rw-rw-r--  1 yang yang    2 10月 18 13:59 layer03.exit
+-rw-rw-r--  1 yang yang 2180 10月 18 13:59 layer03.log
+drwxrwxr-x  2 yang yang 4096 10月 18 13:32 layer04_case
+-rw-rw-r--  1 yang yang    2 10月 18 13:59 layer04.exit
+-rw-rw-r--  1 yang yang 2180 10月 18 13:59 layer04.log
+drwxrwxr-x  2 yang yang 4096 10月 18 13:32 layer05_case
+-rw-rw-r--  1 yang yang    2 10月 18 13:59 layer05.exit
+-rw-rw-r--  1 yang yang 2180 10月 18 13:59 layer05.log
+drwxrwxr-x  2 yang yang 4096 10月 18 13:32 layer06_case
+-rw-rw-r--  1 yang yang    2 10月 18 13:59 layer06.exit
+-rw-rw-r--  1 yang yang 2180 10月 18 13:59 layer06.log
+drwxrwxr-x  2 yang yang 4096 10月 18 13:32 layer07_case
+-rw-rw-r--  1 yang yang    2 10月 18 13:59 layer07.exit
+-rw-rw-r--  1 yang yang 2180 10月 18 13:59 layer07.log
+drwxrwxr-x  2 yang yang 4096 10月 18 13:32 layer08_case
+-rw-rw-r--  1 yang yang    2 10月 18 13:59 layer08.exit
+-rw-rw-r--  1 yang yang 2180 10月 18 13:59 layer08.log
+drwxrwxr-x  2 yang yang 4096 10月 18 13:32 layer09_case
+-rw-rw-r--  1 yang yang    2 10月 18 13:59 layer09.exit
+-rw-rw-r--  1 yang yang 2180 10月 18 13:59 layer09.log
+drwxrwxr-x  2 yang yang 4096 10月 18 13:32 layer10_case
+-rw-rw-r--  1 yang yang    2 10月 18 13:59 layer10.exit
+-rw-rw-r--  1 yang yang 2180 10月 18 13:59 layer10.log
+drwxrwxr-x  2 yang yang 4096 10月 18 13:32 layer11_case
+-rw-rw-r--  1 yang yang    2 10月 18 13:59 layer11.exit
+-rw-rw-r--  1 yang yang 2180 10月 18 13:59 layer11.log
+drwxrwxr-x  2 yang yang 4096 10月 18 13:32 layer12_case
+-rw-rw-r--  1 yang yang    2 10月 18 13:59 layer12.exit
+-rw-rw-r--  1 yang yang 2180 10月 18 13:59 layer12.log
+-rw-rw-r--  1 yang yang   97 10月 18 13:32 opencode.json
+total 4160
+drwxrwxr-x 2 yang yang   4096 10月 18 13:32 .
+drwxrwxr-x 5 yang yang   4096 10月 18 13:59 ..
+-rw-rw-r-- 1 yang yang  33280 10月 18 12:36 layer01_a16.hex
+-rw-rw-r-- 1 yang yang   2304 10月 18 12:36 layer01_bias32.hex
+-rw-rw-r-- 1 yang yang 228096 10月 18 12:36 layer01_expected32.hex
+-rw-rw-r-- 1 yang yang  81920 10月 18 12:36 layer01_w16.hex
+-rw-rw-r-- 1 yang yang  33280 10月 18 12:36 layer02_a16.hex
+-rw-rw-r-- 1 yang yang   2304 10月 18 12:36 layer02_bias32.hex
+-rw-rw-r-- 1 yang yang 228096 10月 18 12:36 layer02_expected32.hex
+-rw-rw-r-- 1 yang yang  81920 10月 18 12:36 layer02_w16.hex
+-rw-rw-r-- 1 yang yang  33280 10月 18 12:36 layer03_a16.hex
+-rw-rw-r-- 1 yang yang   2304 10月 18 12:36 layer03_bias32.hex
+-rw-rw-r-- 1 yang yang 228096 10月 18 12:36 layer03_expected32.hex
+-rw-rw-r-- 1 yang yang  81920 10月 18 12:36 layer03_w16.hex
+-rw-rw-r-- 1 yang yang  33280 10月 18 12:36 layer04_a16.hex
+-rw-rw-r-- 1 yang yang   2304 10月 18 12:36 layer04_bias32.hex
+-rw-rw-r-- 1 yang yang 228096 10月 18 12:36 layer04_expected32.hex
+-rw-rw-r-- 1 yang yang  81920 10月 18 12:36 layer04_w16.hex
+-rw-rw-r-- 1 yang yang  33280 10月 18 12:36 layer05_a16.hex
+-rw-rw-r-- 1 yang yang   2304 10月 18 12:36 layer05_bias32.hex
+-rw-rw-r-- 1 yang yang 228096 10月 18 12:36 layer05_expected32.hex
+-rw-rw-r-- 1 yang yang  81920 10月 18 12:36 layer05_w16.hex
+-rw-rw-r-- 1 yang yang  33280 10月 18 12:36 layer06_a16.hex
+-rw-rw-r-- 1 yang yang   2304 10月 18 12:36 layer06_bias32.hex
+-rw-rw-r-- 1 yang yang 228096 10月 18 12:36 layer06_expected32.hex
+-rw-rw-r-- 1 yang yang  81920 10月 18 12:36 layer06_w16.hex
+-rw-rw-r-- 1 yang yang  33280 10月 18 12:36 layer07_a16.hex
+-rw-rw-r-- 1 yang yang   2304 10月 18 12:36 layer07_bias32.hex
+-rw-rw-r-- 1 yang yang 228096 10月 18 12:36 layer07_expected32.hex
+-rw-rw-r-- 1 yang yang  81920 10月 18 12:36 layer07_w16.hex
+-rw-rw-r-- 1 yang yang  33280 10月 18 12:36 layer08_a16.hex
+-rw-rw-r-- 1 yang yang   2304 10月 18 12:36 layer08_bias32.hex
+-rw-rw-r-- 1 yang yang 228096 10月 18 12:36 layer08_expected32.hex
+-rw-rw-r-- 1 yang yang  81920 10月 18 12:36 layer08_w16.hex
+-rw-rw-r-- 1 yang yang  33280 10月 18 12:36 layer09_a16.hex
+-rw-rw-r-- 1 yang yang   2304 10月 18 12:36 layer09_bias32.hex
+-rw-rw-r-- 1 yang yang 228096 10月 18 12:36 layer09_expected32.hex
+-rw-rw-r-- 1 yang yang  81920 10月 18 12:36 layer09_w16.hex
+-rw-rw-r-- 1 yang yang  33280 10月 18 12:36 layer10_a16.hex
+-rw-rw-r-- 1 yang yang   2304 10月 18 12:36 layer10_bias32.hex
+-rw-rw-r-- 1 yang yang 228096 10月 18 12:36 layer10_expected32.hex
+-rw-rw-r-- 1 yang yang  81920 10月 18 12:36 layer10_w16.hex
+-rw-rw-r-- 1 yang yang  33280 10月 18 12:36 layer11_a16.hex
+-rw-rw-r-- 1 yang yang   2304 10月 18 12:36 layer11_bias32.hex
+-rw-rw-r-- 1 yang yang 228096 10月 18 12:36 layer11_expected32.hex
+-rw-rw-r-- 1 yang yang  81920 10月 18 12:36 layer11_w16.hex
+-rw-rw-r-- 1 yang yang  33280 10月 18 12:36 layer12_a16.hex
+-rw-rw-r-- 1 yang yang   2304 10月 18 12:36 layer12_bias32.hex
+-rw-rw-r-- 1 yang yang 228096 10月 18 12:36 layer12_expected32.hex
+-rw-rw-r-- 1 yang yang  81920 10月 18 12:36 layer12_w16.hex
+-rw-rw-r-- 1 yang yang  20252 10月 18 13:34 manifest.json
+-rw-rw-r-- 1 yang yang     97 10月 18 13:32 opencode.json
+> build · deepseek-v4.1-flash
+[0m→ [0mRead hardware/rtl/control/tb/summarize_real_e203.py 
+[0m→ [0mRead hardware/architecture/results/real_e203_validation0_logs/layer01.log 
+[0m$ [0mcd /home/yang/Desktop/ic设计竞赛/hardware/architecture/results/real_e203_validation0_logs && for f in layer*.exit; do printf '%s: ' "$f"; cat "$f"; done
+layer01.exit: 1
+layer02.exit: 1
+layer03.exit: 1
+layer04.exit: 1
+layer05.exit: 1
+layer06.exit: 1
+layer07.exit: 1
+layer08.exit: 1
+layer09.exit: 1
+layer10.exit: 1
+layer11.exit: 1
+layer12.exit: 1
+> build · deepseek-v4.1-flash
+[0m→ [0mRead hardware/architecture/results/real_e203_validation0_vectors/manifest.json [90m[limit=80][0m
+[0m$ [0mcd /home/yang/Desktop/ic设计竞赛/hardware/architecture/results/real_e203_validation0_logs && md5sum layer*.log && grep -h "^FATAL" layer*.log | sort | uniq -c
+20dddbb33de844f027390ae5f5a524aa  layer01.log
+c9dcc83c8d1e5be208a70a297f812ba9  layer02.log
+820ebd6c8912b176a7cf4f769f7049da  layer03.log
+79f6adaae5b9b1adf188e456895372b7  layer04.log
+361444f27645855fa952075096416c74  layer05.log
+f6e16880cac23bad5dc0e0f71e84eb4a  layer06.log
+51fab932bb5c9d805170687b13474f9e  layer07.log
+dca21ad9b0d65c8053ca470fa17b271b  layer08.log
+68cd6dde1fed69a1271c2cdc6a994f08  layer09.log
+96acf90c0cb992d563f512dfd1ae4e71  layer10.log
+02de7871be5396220a0e2be3ea934901  layer11.log
+55609bb6471a906b64fd49a68b6e36b1  layer12.log
+     12 FATAL: /home/yang/Desktop/ic设计竞赛/hardware/rtl/control/tb/tb_kwt_real_layer_e203.sv:51: layer output [0,0] got=xxxxxxxx expected=00000000
+> build · deepseek-v4.1-flash
+[0m✱ [0mGrep "SUMMARIZE_EXIT|finalizer.status|summarize_real_e203" [90min hardware · 9 matches[0m
+[0m$ [0mcd /home/yang/Desktop/ic设计竞赛/hardware/architecture/results && python3 -c "
+import json
+m=json.load(open('real_e203_validation0_vectors/manifest.json'))
+print({k:v for k,v in m.items() if k not in ('layers',)})
+print('layers',len(m['layers']))
+for l in m['layers']:
+    print(l['layer'], round(l['nrmse_pct'],4), l['max_abs_expected_int32'], l['conservative_abs_accumulator_bound'], round(l['activation_scale'],6), round(l['weight_scale_min'],8), round(l['weight_scale_max'],8))
+"; ls -la | grep -i report; ls -la ../../../hardware/architecture/results/ 2>/dev/null | head
+{'format': 'KWT-1 A12W10 per-layer E203 full-layer vectors v1', 'validation_index': 0, 'sample_path': './four/750e3e75_nohash_0.wav', 'label': '_unknown_', 'training_count': 480, 'validation_count': 480, 'sample_archive_sha256': '43d639fb64ea8d907db967b071010e41e68827368532880ba8a99b92769bbae8', 'parameter_archive_sha256': '10c481c7a79d0ee8063ad807f8c0f685769c2c8e1dbcdb5f33079919dfeef367', 'parameter_metadata_sha256': '99cfe56106530814a84215f558d0cfe55b93035d83e765dd351bc6a38c2eb039', 'fp32_weight_archive_sha256': '8f359abf7adbe287b8f89fca98af46194f98f90f2146784731bff551a155825a', 'tensor_shapes': {'X': [99, 64], 'W': [64, 256], 'bias': [256], 'Y': [99, 256]}, 'hex_layout': {'a16': '13x64x8, flat rt,k,r; last tile rows 3..7 zero', 'w16': '16x64x16, flat ct,k,c; physical 128-bit word = 8 consecutive c lanes', 'bias32': '256 values, flat output column', 'expected32': '99x256, flat row-major; valid rows only', 'negative_values': "two's-complement hexadecimal, one element per line"}, 'numerical_protocol': 'A12W10 symmetric zero-point 0, rint ties-to-even, signed INT32 GEMM+bias; FP64 final decode for NRMSE only', 'worst_layer_nrmse_pct': 0.13493030006895154, 'generation_device': 'cpu'}
+layers 12
+1 0.1017 4593325 67389605 0.002437 2.1e-05 0.00082229
+2 0.1122 4059284 67553776 0.002428 1.573e-05 0.00067374
+3 0.1227 4359068 67774097 0.002428 1.285e-05 0.00073298
+4 0.1238 3316310 67780536 0.002494 1.355e-05 0.00080455
+5 0.1187 3632138 67598308 0.002669 9.67e-06 0.00064394
+6 0.1183 3442046 67610612 0.002536 1.09e-05 0.00062707
+7 0.1185 2601730 67400479 0.002683 9.51e-06 0.0006445
+8 0.1178 2678985 67608824 0.002635 8.81e-06 0.00072203
+9 0.123 2999785 67672658 0.002522 7.48e-06 0.00056708
+10 0.1323 3091952 67472497 0.002745 9.22e-06 0.00066693
+11 0.1349 3285873 67252811 0.002767 1.763e-05 0.00071021
+12 0.1292 3257776 67165739 0.00268 0.00017958 0.00069524
+total 84
+drwxrwxr-x  5 yang yang  4096 10月 18 13:59 .
+drwxrwxr-x  5 yang yang  4096 10月 18 13:32 ..
+-rw-rw-r--  1 yang yang    97 10月 18 13:32 opencode.json
+drwxrwxr-x  2 yang yang  4096 10月 18 13:32 quant_formats_12labels_40
+-rw-rw-r--  1 yang yang  8486 10月 18 14:00 real_e203_validation0_deepseek.log
+-rw-rw-r--  1 yang yang    17 10月 18 13:59 real_e203_validation0_finalizer.status
+drwxrwxr-x 14 yang yang  4096 10月 18 13:59 real_e203_validation0_logs
+-rw-rw-r--  1 yang yang 17582 10月 17 22:01 real_e203_validation0_manifest.json
+-rw-rw-r--  1 yang yang   370 10月 18 13:59 real_e203_validation0_summary_run.log
+> build · deepseek-v4.1-flash
+[0m→ [0mRead hardware/rtl/control/tb/finalize_real_e203_validation0.sh 
+[0m$ [0mls -la /home/yang/Desktop/ic设计竞赛/hardware/architecture/results/real_e203_validation0_logs/layer01_case/; cat /home/yang/Desktop/ic设计竞赛/hardware/architecture/results/real_e203_validation0_logs/opencode.json
+total 28
+drwxrwxr-x  2 yang yang 4096 10月 18 13:32 .
+drwxrwxr-x 14 yang yang 4096 10月 18 13:59 ..
+lrwxrwxrwx  1 yang yang  109 10月 18 12:36 layer01_a16.hex -> /home/yang/Desktop/ic设计竞赛/hardware/architecture/results/real_e203_validation0_vectors/layer01_a16.hex
+lrwxrwxrwx  1 yang yang  112 10月 18 12:36 layer01_bias32.hex -> /home/yang/Desktop/ic设计竞赛/hardware/architecture/results/real_e203_validation0_vectors/layer01_bias32.hex
+lrwxrwxrwx  1 yang yang  116 10月 18 12:36 layer01_expected32.hex -> /home/yang/Desktop/ic设计竞赛/hardware/architecture/results/real_e203_validation0_vectors/layer01_expected32.hex
+lrwxrwxrwx  1 yang yang  109 10月 18 12:36 layer01_w16.hex -> /home/yang/Desktop/ic设计竞赛/hardware/architecture/results/real_e203_validation0_vectors/layer01_w16.hex
+-rw-rw-r--  1 yang yang   97 10月 18 13:32 opencode.json
+{
+  "$schema": "https://opencode.ai/config.json",
+  "model": "opencode-go/deepseek-v4.1-flash"
+}
+[0m$ [0mcd /home/yang/Desktop/ic设计竞赛/hardware/architecture/results && python3 -c "
+import json
+m=json.load(open('real_e203_validation0_manifest.json'))
+print(json.dumps(m,ensure_ascii=False)[:1200])
+"
+{"format": "KWT-1 A12W10 per-layer E203 full-layer vectors v1", "validation_index": 0, "sample_path": "./four/750e3e75_nohash_0.wav", "label": "_unknown_", "training_count": 480, "validation_count": 480, "sample_archive_sha256": "43d639fb64ea8d907db967b071010e41e68827368532880ba8a99b92769bbae8", "parameter_archive_sha256": "10c481c7a79d0ee8063ad807f8c0f685769c2c8e1dbcdb5f33079919dfeef367", "parameter_metadata_sha256": "99cfe56106530814a84215f558d0cfe55b93035d83e765dd351bc6a38c2eb039", "fp32_weight_archive_sha256": "8f359abf7adbe287b8f89fca98af46194f98f90f2146784731bff551a155825a", "tensor_shapes": {"X": [99, 64], "W": [64, 256], "bias": [256], "Y": [99, 256]}, "hex_layout": {"a16": "13x64x8, flat rt,k,r; last tile rows 3..7 zero", "w16": "16x64x16, flat ct,k,c; physical 128-bit word = 8 consecutive c lanes", "bias32": "256 values, flat output column", "expected32": "99x256, flat row-major; valid rows only", "negative_values": "two's-complement hexadecimal, one element per line"}, "numerical_protocol": "A12W10 symmetric zero-point 0, rint ties-to-even, signed INT32 GEMM+bias; FP64 final decode for NRMSE only", "layers": [{"layer": 1, "activation_scale": 0.0024374177762223966, "weigh
+> build · deepseek-v4.1-flash
+[0m$ [0mcd /home/yang/Desktop/ic设计竞赛/hardware/architecture/results/real_e203_validation0_logs && tail -3 layer05.log && tail -3 layer12.log && grep -h "tile 3 completed\|selected tiles completed\|first request" layer01.log layer05.log layer12.log
+E203 full layer: 192/208 selected tiles completed
+FATAL: /home/yang/Desktop/ic设计竞赛/hardware/rtl/control/tb/tb_kwt_real_layer_e203.sv:51: layer output [0,0] got=xxxxxxxx expected=00000000
+       Time: 8380510  Scope: tb_kwt_real_layer_e203.check_tile
+E203 full layer: 192/208 selected tiles completed
+FATAL: /home/yang/Desktop/ic设计竞赛/hardware/rtl/control/tb/tb_kwt_real_layer_e203.sv:51: layer output [0,0] got=xxxxxxxx expected=00000000
+       Time: 8380510  Scope: tb_kwt_real_layer_e203.check_tile
+E203 full layer: first request at cycle 7
+E203 full layer: tile 3 completed at cycle 16118
+E203 full layer: 32/208 selected tiles completed
+E203 full layer: 64/208 selected tiles completed
+E203 full layer: 96/208 selected tiles completed
+E203 full layer: 128/208 selected tiles completed
+E203 full layer: 160/208 selected tiles completed
+E203 full layer: 192/208 selected tiles completed
+E203 full layer: first request at cycle 7
+E203 full layer: tile 3 completed at cycle 16118
+E203 full layer: 32/208 selected tiles completed
+E203 full layer: 64/208 selected tiles completed
+E203 full layer: 96/208 selected tiles completed
+E203 full layer: 128/208 selected tiles completed
+E203 full layer: 160/208 selected tiles completed
+E203 full layer: 192/208 selected tiles completed
+E203 full layer: first request at cycle 7
+E203 full layer: tile 3 completed at cycle 16118
+E203 full layer: 32/208 selected tiles completed
+E203 full layer: 64/208 selected tiles completed
+E203 full layer: 96/208 selected tiles completed
+E203 full layer: 128/208 selected tiles completed
+E203 full layer: 160/208 selected tiles completed
+E203 full layer: 192/208 selected tiles completed
+[0m$ [0mcd /home/yang/Desktop/ic设计竞赛 && grep -rl "real_e203_validation0_logs\|_logs/layer" --include=*.sh --include=*.py --include=Makefile* . 2>/dev/null | head -20
+./hardware/rtl/control/tb/finalize_real_e203_validation0.sh
+> build · deepseek-v4.1-flash
+[0m$ [0mcd /home/yang/Desktop/ic设计竞赛 && grep -rl "Running E203 layer" . 2>/dev/null | head; grep -rn "tb_kwt_real_layer_e203" --include=*.sh --include=*.py . 2>/dev/null | grep -v results/ | head -20
+./hardware/architecture/results/real_e203_validation0_logs/layer01.log
+./hardware/architecture/results/real_e203_validation0_logs/layer07.log
+./hardware/architecture/results/real_e203_validation0_logs/layer08.log
+./hardware/architecture/results/real_e203_validation0_logs/layer02.log
+./hardware/architecture/results/real_e203_validation0_logs/layer04.log
+./hardware/architecture/results/real_e203_validation0_logs/layer05.log
+./hardware/architecture/results/real_e203_validation0_logs/layer09.log
+./hardware/architecture/results/real_e203_validation0_logs/layer06.log
+./hardware/architecture/results/real_e203_validation0_logs/layer11.log
+./hardware/architecture/results/real_e203_validation0_logs/layer12.log
+./hardware/rtl/control/tb/run_e203.sh:23:    tb_top=tb_kwt_real_layer_e203
+./hardware/rtl/control/tb/run_e203.sh:90:    "$tb_dir/tb_kwt_real_layer_e203.sv" \
+> build · deepseek-v4.1-flash
+[0m→ [0mRead hardware/rtl/control/tb/run_e203.sh 
+[0m→ [0mRead hardware/rtl/control/tb/tb_kwt_real_layer_e203.sv [90m[limit=80][0m
+> build · deepseek-v4.1-flash
+[0m→ [0mRead hardware/rtl/control/tb/tb_kwt_real_layer_e203.sv [90m[offset=80][0m
+> build · deepseek-v4.1-flash
+[0m$ [0mcd /home/yang/Desktop/ic设计竞赛/hardware/architecture/results/real_e203_validation0_logs && diff layer01.log layer02.log; echo "rc=$?"; grep -c . layer01.log
+1c1
+< Running E203 layer01
+---
+> Running E203 layer02
+3c3
+<                                                                 "/home/yang/Desktop/ic\377\377\377\377\377\377\377\377\377\377\377\377/hardware/architecture/results/real_e203_validation0_logs/layer01_case/layer01_a16.hex"
+---
+>                                                                 "/home/yang/Desktop/ic\377\377\377\377\377\377\377\377\377\377\377\377/hardware/architecture/results/real_e203_validation0_logs/layer02_case/layer02_a16.hex"
+5c5
+<                                                                 "/home/yang/Desktop/ic\377\377\377\377\377\377\377\377\377\377\377\377/hardware/architecture/results/real_e203_validation0_logs/layer01_case/layer01_w16.hex"
+---
+>                                                                 "/home/yang/Desktop/ic\377\377\377\377\377\377\377\377\377\377\377\377/hardware/architecture/results/real_e203_validation0_logs/layer02_case/layer02_w16.hex"
+7c7
+<                                                                 "/home/yang/Desktop/ic\377\377\377\377\377\377\377\377\377\377\377\377/hardware/architecture/results/real_e203_validation0_logs/layer01_case/layer01_bias32.hex"
+---
+>                                                                 "/home/yang/Desktop/ic\377\377\377\377\377\377\377\377\377\377\377\377/hardware/architecture/results/real_e203_validation0_logs/layer02_case/layer02_bias32.hex"
+9c9
+<                                                                 "/home/yang/Desktop/ic\377\377\377\377\377\377\377\377\377\377\377\377/hardware/architecture/results/real_e203_validation0_logs/layer01_case/layer01_expected32.hex"
+---
+>                                                                 "/home/yang/Desktop/ic\377\377\377\377\377\377\377\377\377\377\377\377/hardware/architecture/results/real_e203_validation0_logs/layer02_case/layer02_expected32.hex"
+rc=1
+22
+[0m$ [0mcd /home/yang/Desktop/ic设计竞赛/hardware && grep -rn "OUT_BASE\|out_base\|o_base" rtl/kwt_nice_system_model.sv rtl/kwt_tile_system_model.sv 2>/dev/null | head -20; ls rtl/
+control
+dma
+opencode.json
+pulse_array
+sram
+> build · deepseek-v4.1-flash
+[0m$ [0mcd /home/yang/Desktop/ic设计竞赛/hardware && grep -rn "wr_en\|write\|wdata" rtl/kwt_tile_system_model.sv | head -40
+grep: rtl/kwt_tile_system_model.sv: No such file or directory
+[0m$ [0mcd /home/yang/Desktop/ic设计竞赛/hardware && grep -rn "out_ptr\|out_addr\|o_addr\|result" rtl/kwt_nice_system_model.sv | head -30; ls rtl/control rtl/pulse_array rtl/dma rtl/sram
+grep: rtl/kwt_nice_system_model.sv: No such file or directory
+rtl/control:
+kwt_nice_system_model.sv
+kwt_tile_system_model.sv
+opencode.json
+tb
+
+rtl/dma:
+kwt_dma_2d.sv
+kwt_dma.sv
+kwt_ext_memory_model.sv
+opencode.json
+tb
+
+rtl/pulse_array:
+kwt_cacc.sv
+kwt_pe.sv
+kwt_pingpong_cacc_engine.sv
+kwt_postprocess.sv
+kwt_product_array.sv
+kwt_pulse_array.sv
+kwt_row_broadcast_tile_pipe3.sv
+kwt_row_broadcast_tile.sv
+kwt_systolic_cacc_tile.sv
+kwt_tile_engine.sv
+kwt_tile_output_stage.sv
+opencode.json
+tb
+
+rtl/sram:
+kwt_memory_defs.svh
+kwt_operand_pingpong.sv
+kwt_tile_buffers.sv
+opencode.json
+> build · deepseek-v4.1-flash
+[0m$ [0mcd /home/yang/Desktop/ic设计竞赛/hardware/rtl && grep -n "assign\|always\|module\|output" pulse_array/kwt_tile_output_stage.sv | head -30; echo ===; grep -rn "ext_wr\|wr_valid\|wr_data\|dma_write\|out_wr" control/kwt_tile_system_model.sv | head -30
+1:// Capture one ROWS x COLS CACC tile into a single-port output SRAM, then
+5:module kwt_tile_output_stage #(
+14:    output logic start_ready,
+19:    output logic [7:0] bias_col,
+23:    output logic dump_req,
+24:    output logic [ROW_W-1:0] dump_row,
+25:    output logic [COL_W-1:0] dump_col,
+26:    output logic [31:0] dump_bias,
+29:    output logic capture_done,
+30:    output logic out_valid,
+32:    output logic [6:0] out_row,
+33:    output logic [7:0] out_col,
+34:    output logic [31:0] out_data,
+35:    output logic done
+58:    assign start_ready = (state == IDLE);
+59:    assign dump_req = (state == CAPTURE);
+60:    assign dump_row = ROW_W'(req_idx / COLS);
+61:    assign dump_col = COL_W'(req_idx % COLS);
+62:    assign bias_col = base_col_q + 8'((state == CAPTURE) ?
+64:    assign dump_bias = bias_data;
+65:    assign request_keep = ({1'b0, base_row_q} + 8'(dump_row) < {1'b0, m_len_q}) &&
+67:    assign out_valid = (state == DRAIN);
+68:    assign out_row = base_row_q + 7'(local_row);
+69:    assign out_col = base_col_q + 8'(local_col);
+70:    assign out_data = out_data_q;
+74:    always_ff @(posedge clk) begin
+84:    always_ff @(posedge clk or negedge rst_n) begin
+159:endmodule
+===
+42:    logic dma_start, dma_writeback, dma_busy, dma_done, dma_error;
+63:    assign dma_writeback = state == STORE_OUT;
+76:        .writeback(dma_writeback), .bank(dma_bank),
+> build · deepseek-v4.1-flash
+[0m$ [0mcd /home/yang/Desktop/ic设计竞赛/hardware/architecture/results && ls -la real_e203_validation0_summary.json 2>&1; grep -ci "error" real_e203_validation0_logs/layer*.log | sort -u; python3 -c "
+import json;m=json.load(open('real_e203_validation0_vectors/manifest.json'))
+for l in m['layers']:
+    f=l['files']; print(l['layer'], [f[k]['elements'] for k in ('a16','w16','bias32','expected32')])
+"
+ls: cannot access 'real_e203_validation0_summary.json': No such file or directory
+real_e203_validation0_logs/layer01.log:0
+real_e203_validation0_logs/layer02.log:0
+real_e203_validation0_logs/layer03.log:0
+real_e203_validation0_logs/layer04.log:0
+real_e203_validation0_logs/layer05.log:0
+real_e203_validation0_logs/layer06.log:0
+real_e203_validation0_logs/layer07.log:0
+real_e203_validation0_logs/layer08.log:0
+real_e203_validation0_logs/layer09.log:0
+real_e203_validation0_logs/layer10.log:0
+real_e203_validation0_logs/layer11.log:0
+real_e203_validation0_logs/layer12.log:0
+1 [6656, 16384, 256, 25344]
+2 [6656, 16384, 256, 25344]
+3 [6656, 16384, 256, 25344]
+4 [6656, 16384, 256, 25344]
+5 [6656, 16384, 256, 25344]
+6 [6656, 16384, 256, 25344]
+7 [6656, 16384, 256, 25344]
+8 [6656, 16384, 256, 25344]
+9 [6656, 16384, 256, 25344]
+10 [6656, 16384, 256, 25344]
+11 [6656, 16384, 256, 25344]
+12 [6656, 16384, 256, 25344]
+> build · deepseek-v4.1-flash
+[0m← [0mWrite hardware/architecture/results/real_e203_validation0_report.md
+Created file successfully: hardware/architecture/results/real_e203_validation0_report.md
+> build · deepseek-v4.1-flash
+报告已写入 `/home/yang/Desktop/ic设计竞赛/hardware/architecture/results/real_e203_validation0_report.md`。
+
+结论摘要（仅据实际记录）：
+
+- **失败，通过 0/12 层**。12 个 `.exit` 全为 `1`；`finalizer.status` = `SUMMARIZE_EXIT 1`；`summary_run.log` 为 `ValueError: layer01 missing log or clean exit`（`summarize_real_e203.py:40` 要求退出码为 0），因此 `real_e203_validation0_summary.json` 未生成。
+- **失败层与原因**：layer01–layer12 全部在 `tb_kwt_real_layer_e203.sv:51` 中止，首个校验点 `layer output [0,0] got=xxxxxxxx expected=00000000`（`Time: 8380510`）。即输出缓冲区（`OUT_BASE=0x10000`）读出未定义态，加速器/DMA 结果写回未有效落盘。12 份日志除层名/路径外完全一致，属系统性问题而非数据相关。
+- **有效输出/填充校验**：计划每层 25344 输出 + 1280 填充（12 层合计 304128/15360），实际完成 0 个——每层都在第一个元素处中止，无 `outputs=/padding=` 统计。
+- **周期**：首请求 cycle 7，tile 0–3 于 4031/8060/12089/16118 完成，进度到 `192/208`，约 838051 周期后中止；因无 PASS 行，`task_cycles`/`total_cycles` 未记录。
+- **数值误差**：manifest 的 NRMSE 为 0.1017%–0.1349%（最差 layer11 = 0.13493030006895154%），属 CPU 生成侧指标；DUT 输出为 `x`，无实测误差可用。
+- **CPU 向量复现范围**：`validation_index=0`，样本 `./four/750e3e75_nohash_0.wav`（label `_unknown_`），X 99×64 / W 64×256 / bias 256 / Y 99×256，12 层各 4 个 hex（6656/16384/256/25344 元素），仅有哈希与形状记录。
+- **边界**：这是 Icarus 下 E203 + 临时 NICE-like 加速器仿真模型（模拟共享 RAM、旧 8×16 引擎、仿真 DMA），不是组委会正式 SoC/PDK，无综合/时序/面积/功耗数据。
+
+报告未写 PASS；子智能体未启用。

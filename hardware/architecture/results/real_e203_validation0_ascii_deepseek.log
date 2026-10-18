@@ -1,0 +1,92 @@
+[0m
+> build · deepseek-v4.1-flash
+I'll start by reading the relevant files.
+[0m→ [0mRead hardware/architecture/results/real_e203_validation0_ascii_finalizer.status 
+[0m→ [0mRead hardware/architecture/results/real_e203_validation0_ascii_summary_run.log 
+[0m→ [0mRead hardware/architecture/results/real_e203_validation0_vectors/manifest.json 
+> build · deepseek-v4.1-flash
+[0m→ [0mRead hardware/architecture/results [90m[limit=200][0m
+[0m→ [0mRead hardware/architecture/results/real_e203_validation0_ascii_summary.json 
+> build · deepseek-v4.1-flash
+[0m→ [0mRead hardware/architecture/results/real_e203_validation0_ascii_logs 
+> build · deepseek-v4.1-flash
+[0m$ [0mcd /home/yang/Desktop/ic设计竞赛/hardware/architecture/results/real_e203_validation0_ascii_logs && wc -l *.log && grep -n -iE "pass|fail|error|mismatch|ok|cycles|padding|output" layer01.log | head -40
+14 layer01.log
+  14 layer02.log
+  14 layer03.log
+  14 layer04.log
+  14 layer05.log
+  14 layer06.log
+  14 layer07.log
+  14 layer08.log
+  14 layer09.log
+  14 layer10.log
+  14 layer11.log
+  14 layer12.log
+ 168 total
+13:PASS frozen real-sample E203 FFN1 tiles: start=0 count=208 outputs=25344 padding=1280 task_cycles=838028 total_cycles=838041
+[0m$ [0mcd /home/yang/Desktop/ic设计竞赛/hardware/architecture/results/real_e203_validation0_ascii_logs && for i in 01 02 03 04 05 06 07 08 09 10 11 12; do printf "=== layer%s exit: " "$i"; cat layer$i.exit; done
+=== layer01 exit: 0
+=== layer02 exit: 0
+=== layer03 exit: 0
+=== layer04 exit: 0
+=== layer05 exit: 0
+=== layer06 exit: 0
+=== layer07 exit: 0
+=== layer08 exit: 0
+=== layer09 exit: 0
+=== layer10 exit: 0
+=== layer11 exit: 0
+=== layer12 exit: 0
+> build · deepseek-v4.1-flash
+[0m→ [0mRead hardware/architecture/results/real_e203_validation0_ascii_logs/layer01.log 
+[0m$ [0mcd /home/yang/Desktop/ic设计竞赛/hardware/architecture/results/real_e203_validation0_ascii_logs && grep -h "PASS\|FAIL" *.log | sort | uniq -c | head -20; echo "---- per-layer summary lines ----"; grep -H "^PASS\|^FAIL" *.log
+12 PASS frozen real-sample E203 FFN1 tiles: start=0 count=208 outputs=25344 padding=1280 task_cycles=838028 total_cycles=838041
+---- per-layer summary lines ----
+layer01.log:PASS frozen real-sample E203 FFN1 tiles: start=0 count=208 outputs=25344 padding=1280 task_cycles=838028 total_cycles=838041
+layer02.log:PASS frozen real-sample E203 FFN1 tiles: start=0 count=208 outputs=25344 padding=1280 task_cycles=838028 total_cycles=838041
+layer03.log:PASS frozen real-sample E203 FFN1 tiles: start=0 count=208 outputs=25344 padding=1280 task_cycles=838028 total_cycles=838041
+layer04.log:PASS frozen real-sample E203 FFN1 tiles: start=0 count=208 outputs=25344 padding=1280 task_cycles=838028 total_cycles=838041
+layer05.log:PASS frozen real-sample E203 FFN1 tiles: start=0 count=208 outputs=25344 padding=1280 task_cycles=838028 total_cycles=838041
+layer06.log:PASS frozen real-sample E203 FFN1 tiles: start=0 count=208 outputs=25344 padding=1280 task_cycles=838028 total_cycles=838041
+layer07.log:PASS frozen real-sample E203 FFN1 tiles: start=0 count=208 outputs=25344 padding=1280 task_cycles=838028 total_cycles=838041
+layer08.log:PASS frozen real-sample E203 FFN1 tiles: start=0 count=208 outputs=25344 padding=1280 task_cycles=838028 total_cycles=838041
+layer09.log:PASS frozen real-sample E203 FFN1 tiles: start=0 count=208 outputs=25344 padding=1280 task_cycles=838028 total_cycles=838041
+layer10.log:PASS frozen real-sample E203 FFN1 tiles: start=0 count=208 outputs=25344 padding=1280 task_cycles=838028 total_cycles=838041
+layer11.log:PASS frozen real-sample E203 FFN1 tiles: start=0 count=208 outputs=25344 padding=1280 task_cycles=838028 total_cycles=838041
+layer12.log:PASS frozen real-sample E203 FFN1 tiles: start=0 count=208 outputs=25344 padding=1280 task_cycles=838028 total_cycles=838041
+> build · deepseek-v4.1-flash
+[0m→ [0mRead hardware/architecture/results/real_e203_validation0_ascii_deepseek.log 
+[0m$ [0mcd /home/yang/Desktop/ic设计竞赛/hardware/architecture/results && grep -n -iE "cpu|复现|向量|vector|gpu|cuda" real_e203_validation0_deepseek.log | head -30
+15:drwxrwxr-x  2 yang yang  4096 10月 18 13:32 real_e203_validation0_vectors
+20:[0m$ [0mls -la /home/yang/Desktop/ic设计竞赛/hardware/architecture/results/real_e203_validation0_logs/; ls -la /home/yang/Desktop/ic设计竞赛/hardware/architecture/results/real_e203_validation0_vectors/
+131:[0m→ [0mRead hardware/architecture/results/real_e203_validation0_vectors/manifest.json [90m[limit=80][0m
+150:m=json.load(open('real_e203_validation0_vectors/manifest.json'))
+156:{'format': 'KWT-1 A12W10 per-layer E203 full-layer vectors v1', 'validation_index': 0, 'sample_path': './four/750e3e75_nohash_0.wav', 'label': '_unknown_', 'training_count': 480, 'validation_count': 480, 'sample_archive_sha256': '43d639fb64ea8d907db967b071010e41e68827368532880ba8a99b92769bbae8', 'parameter_archive_sha256': '10c481c7a79d0ee8063ad807f8c0f685769c2c8e1dbcdb5f33079919dfeef367', 'parameter_metadata_sha256': '99cfe56106530814a84215f558d0cfe55b93035d83e765dd351bc6a38c2eb039', 'fp32_weight_archive_sha256': '8f359abf7adbe287b8f89fca98af46194f98f90f2146784731bff551a155825a', 'tensor_shapes': {'X': [99, 64], 'W': [64, 256], 'bias': [256], 'Y': [99, 256]}, 'hex_layout': {'a16': '13x64x8, flat rt,k,r; last tile rows 3..7 zero', 'w16': '16x64x16, flat ct,k,c; physical 128-bit word = 8 consecutive c lanes', 'bias32': '256 values, flat output column', 'expected32': '99x256, flat row-major; valid rows only', 'negative_values': "two's-complement hexadecimal, one element per line"}, 'numerical_protocol': 'A12W10 symmetric zero-point 0, rint ties-to-even, signed INT32 GEMM+bias; FP64 final decode for NRMSE only', 'worst_layer_nrmse_pct': 0.13493030006895154, 'generation_device': 'cpu'}
+186:lrwxrwxrwx  1 yang yang  109 10月 18 12:36 layer01_a16.hex -> /home/yang/Desktop/ic设计竞赛/hardware/architecture/results/real_e203_validation0_vectors/layer01_a16.hex
+187:lrwxrwxrwx  1 yang yang  112 10月 18 12:36 layer01_bias32.hex -> /home/yang/Desktop/ic设计竞赛/hardware/architecture/results/real_e203_validation0_vectors/layer01_bias32.hex
+188:lrwxrwxrwx  1 yang yang  116 10月 18 12:36 layer01_expected32.hex -> /home/yang/Desktop/ic设计竞赛/hardware/architecture/results/real_e203_validation0_vectors/layer01_expected32.hex
+189:lrwxrwxrwx  1 yang yang  109 10月 18 12:36 layer01_w16.hex -> /home/yang/Desktop/ic设计竞赛/hardware/architecture/results/real_e203_validation0_vectors/layer01_w16.hex
+200:{"format": "KWT-1 A12W10 per-layer E203 full-layer vectors v1", "validation_index": 0, "sample_path": "./four/750e3e75_nohash_0.wav", "label": "_unknown_", "training_count": 480, "validation_count": 480, "sample_archive_sha256": "43d639fb64ea8d907db967b071010e41e68827368532880ba8a99b92769bbae8", "parameter_archive_sha256": "10c481c7a79d0ee8063ad807f8c0f685769c2c8e1dbcdb5f33079919dfeef367", "parameter_metadata_sha256": "99cfe56106530814a84215f558d0cfe55b93035d83e765dd351bc6a38c2eb039", "fp32_weight_archive_sha256": "8f359abf7adbe287b8f89fca98af46194f98f90f2146784731bff551a155825a", "tensor_shapes": {"X": [99, 64], "W": [64, 256], "bias": [256], "Y": [99, 256]}, "hex_layout": {"a16": "13x64x8, flat rt,k,r; last tile rows 3..7 zero", "w16": "16x64x16, flat ct,k,c; physical 128-bit word = 8 consecutive c lanes", "bias32": "256 values, flat output column", "expected32": "99x256, flat row-major; valid rows only", "negative_values": "two's-complement hexadecimal, one element per line"}, "numerical_protocol": "A12W10 symmetric zero-point 0, rint ties-to-even, signed INT32 GEMM+bias; FP64 final decode for NRMSE only", "layers": [{"layer": 1, "activation_scale": 0.0024374177762223966, "weigh
+358:import json;m=json.load(open('real_e203_validation0_vectors/manifest.json'))
+399:- **数值误差**：manifest 的 NRMSE 为 0.1017%–0.1349%（最差 layer11 = 0.13493030006895154%），属 CPU 生成侧指标；DUT 输出为 `x`，无实测误差可用。
+400:- **CPU 向量复现范围**：`validation_index=0`，样本 `./four/750e3e75_nohash_0.wav`（label `_unknown_`），X 99×64 / W 64×256 / bias 256 / Y 99×256，12 层各 4 个 hex（6656/16384/256/25344 元素），仅有哈希与形状记录。
+> build · deepseek-v4.1-flash
+[0m→ [0mRead hardware/architecture/results/real_e203_validation0_report.md 
+> build · deepseek-v4.1-flash
+All records read. Now writing the report based strictly on the actual artifacts.
+[0m← [0mWrite hardware/architecture/results/real_e203_validation0_ascii_report.md
+Created file successfully: hardware/architecture/results/real_e203_validation0_ascii_report.md
+> build · deepseek-v4.1-flash
+Report written to `/home/yang/Desktop/ic设计竞赛/hardware/architecture/results/real_e203_validation0_ascii_report.md`.
+
+要点（全部来自实际记录）：
+
+- **通过 12/12，失败 0**。12 个 `.exit` 全为 `0`，每层恰好一条 `PASS` 行；`SUMMARIZE_EXIT 0`。
+- **有效输出/填充**：每层 25344 / 1280，合计 304128 / 15360，与 `summary.json` 一致。
+- **周期**：每层 `task_cycles=838028`、`total_cycles=838041`，12 层合计 10056336。
+- **数值误差**：DUT 逐元素精确比对全部通过（实测误差 0）；manifest 生成侧 NRMSE 0.1017%–0.1349%，最差 layer11。
+- **CPU 复现范围**：`validation_index=0`、样本 `750e3e75_nohash_0.wav`、X 99×64 / W 64×256 / bias 256 / Y 99×256，12 层每层 4 个 hex，仅逐层全层（每层 208 tile），未做多样本/端到端流水。
+- **边界**：仅为 E203 + NICE-like 仿真模型，非组委会正式 SoC/PDK。
+
+未调用子智能体，已完成，退出。

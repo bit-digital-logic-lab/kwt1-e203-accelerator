@@ -1,0 +1,337 @@
+{
+  "samples": 12,
+  "selection": "first 1 validation per label",
+  "sample_records": [
+    {
+      "validation_index": 920,
+      "label": "_silence_",
+      "path": "_silence_/validation_zero_000.wav",
+      "layers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ]
+    },
+    {
+      "validation_index": 480,
+      "label": "_unknown_",
+      "path": "./four/750e3e75_nohash_0.wav",
+      "layers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ]
+    },
+    {
+      "validation_index": 520,
+      "label": "down",
+      "path": "./down/c2d15ea5_nohash_0.wav",
+      "layers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ]
+    },
+    {
+      "validation_index": 560,
+      "label": "go",
+      "path": "./go/3de53d23_nohash_0.wav",
+      "layers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ]
+    },
+    {
+      "validation_index": 600,
+      "label": "left",
+      "path": "./left/39afb88e_nohash_3.wav",
+      "layers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ]
+    },
+    {
+      "validation_index": 640,
+      "label": "no",
+      "path": "./no/45692b02_nohash_3.wav",
+      "layers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ]
+    },
+    {
+      "validation_index": 680,
+      "label": "off",
+      "path": "./off/c50225fa_nohash_1.wav",
+      "layers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ]
+    },
+    {
+      "validation_index": 720,
+      "label": "on",
+      "path": "./on/0ea9c8ce_nohash_0.wav",
+      "layers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ]
+    },
+    {
+      "validation_index": 760,
+      "label": "right",
+      "path": "./right/66cff190_nohash_1.wav",
+      "layers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ]
+    },
+    {
+      "validation_index": 800,
+      "label": "stop",
+      "path": "./stop/97ae8b25_nohash_0.wav",
+      "layers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ]
+    },
+    {
+      "validation_index": 840,
+      "label": "up",
+      "path": "./up/dbaf8fc6_nohash_0.wav",
+      "layers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ]
+    },
+    {
+      "validation_index": 880,
+      "label": "yes",
+      "path": "./yes/ec21c46b_nohash_1.wav",
+      "layers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ]
+    }
+  ],
+  "rows": 16,
+  "output_staged": true,
+  "rtl_data_width": 16,
+  "scheme": "A12W9",
+  "activation_bits": 12,
+  "source_sha256": {
+    "samples": "43d639fb64ea8d907db967b071010e41e68827368532880ba8a99b92769bbae8",
+    "params": "c9bc00db56d0ff4099354a3eb5d62228944115431a4b467e9b6d7f60c298a666",
+    "weights": "8f359abf7adbe287b8f89fca98af46194f98f90f2146784731bff551a155825a"
+  },
+  "metric": "per-layer pooled RMS(actual decoded - FP32) / max(RMS(FP32),1e-8); max across 12 layers",
+  "rtl_check": "each output bit-exact against independent signed INT32 GEMM plus bias",
+  "hardware_boundary": "Verilator compute tile/output stage; A/W/bias and shared bus are timed testbench models",
+  "layers": [
+    {
+      "layer": 1,
+      "nrmse_pct": 0.2008363188973691,
+      "checked_outputs": 304128,
+      "cycles": 1850880,
+      "max_abs_accumulator": 2293672
+    },
+    {
+      "layer": 2,
+      "nrmse_pct": 0.2143943714417223,
+      "checked_outputs": 304128,
+      "cycles": 1850880,
+      "max_abs_accumulator": 2025921
+    },
+    {
+      "layer": 3,
+      "nrmse_pct": 0.2158752636184016,
+      "checked_outputs": 304128,
+      "cycles": 1850880,
+      "max_abs_accumulator": 2257750
+    },
+    {
+      "layer": 4,
+      "nrmse_pct": 0.2371471475069108,
+      "checked_outputs": 304128,
+      "cycles": 1850880,
+      "max_abs_accumulator": 1820758
+    },
+    {
+      "layer": 5,
+      "nrmse_pct": 0.22594568893364875,
+      "checked_outputs": 304128,
+      "cycles": 1850880,
+      "max_abs_accumulator": 2047039
+    },
+    {
+      "layer": 6,
+      "nrmse_pct": 0.21316320198263974,
+      "checked_outputs": 304128,
+      "cycles": 1850880,
+      "max_abs_accumulator": 2008993
+    },
+    {
+      "layer": 7,
+      "nrmse_pct": 0.23213662836150395,
+      "checked_outputs": 304128,
+      "cycles": 1850880,
+      "max_abs_accumulator": 1892578
+    },
+    {
+      "layer": 8,
+      "nrmse_pct": 0.21787495905825308,
+      "checked_outputs": 304128,
+      "cycles": 1850880,
+      "max_abs_accumulator": 1630559
+    },
+    {
+      "layer": 9,
+      "nrmse_pct": 0.22168154024891099,
+      "checked_outputs": 304128,
+      "cycles": 1850880,
+      "max_abs_accumulator": 1812160
+    },
+    {
+      "layer": 10,
+      "nrmse_pct": 0.24424024915566983,
+      "checked_outputs": 304128,
+      "cycles": 1850880,
+      "max_abs_accumulator": 1845090
+    },
+    {
+      "layer": 11,
+      "nrmse_pct": 0.2555501452705885,
+      "checked_outputs": 304128,
+      "cycles": 1850880,
+      "max_abs_accumulator": 1890398
+    },
+    {
+      "layer": 12,
+      "nrmse_pct": 0.25925520848068184,
+      "checked_outputs": 304128,
+      "cycles": 1850880,
+      "max_abs_accumulator": 1891911
+    }
+  ],
+  "worst_nrmse_pct": 0.25925520848068184,
+  "checked_outputs": 3649536,
+  "total_cycles": 22210560,
+  "pass_3pct": true
+}
