@@ -1,0 +1,66 @@
+{
+  "config_id": "KWT1-FFN1-A12W10-SYM-v1",
+  "checks": [
+    {
+      "name": "config_shas",
+      "passed": true,
+      "detail": {
+        "exit": 0,
+        "sha256": {
+          "params": "a77f60fb7c8560adbca73db3cf64dcd5501ec0108b96a1131a00aa722be1918e",
+          "weights": "8f359abf7adbe287b8f89fca98af46194f98f90f2146784731bff551a155825a",
+          "samples": "ee04e849bc407149618e4ecd5ff99575687586d4e57c0ade6a0b3f7b66c8c149"
+        }
+      }
+    },
+    {
+      "name": "rtl_vectors_bit_exact",
+      "passed": true,
+      "detail": {
+        "exit": 0,
+        "all_bit_exact": true,
+        "vectors_dir": "/home/yang/Desktop/ic设计竞赛/hardware/architecture/results/real_e203_validation0_vectors"
+      }
+    },
+    {
+      "name": "negative_injection_detected",
+      "passed": true,
+      "detail": {
+        "exit": 0,
+        "checks": [
+          {
+            "name": "wrong_weight_detected",
+            "passed": true
+          },
+          {
+            "name": "wrong_bias_detected",
+            "passed": true
+          },
+          {
+            "name": "wrong_rounding_detected",
+            "passed": true
+          },
+          {
+            "name": "ties_to_even_used",
+            "passed": true
+          }
+        ]
+      }
+    },
+    {
+      "name": "two_samples_12_layers",
+      "passed": true,
+      "detail": {
+        "exit": 0,
+        "worst_nrmse_pct": 0.14004218815242878,
+        "labels": [
+          "_unknown_",
+          "down"
+        ]
+      }
+    }
+  ],
+  "result": "PASS",
+  "failed": [],
+  "skipped": []
+}

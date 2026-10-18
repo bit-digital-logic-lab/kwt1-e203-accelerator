@@ -1,0 +1,31 @@
+{
+  "config_id": "KWT1-FFN1-A12W10-SYM-v1",
+  "algorithm": "signed symmetric A12W10, zero point 0, per-layer activation scale, per-output-channel weight scale, exact integer MAC + INT32 bias, round-to-nearest ties-to-even clip at encode, INT32 two's-complement wrap, FP64 decode only for NRMSE",
+  "a_bits": 12,
+  "w_bits": 10,
+  "a_qmax": 2047,
+  "w_qmax": 511,
+  "shapes": {
+    "X": [
+      99,
+      64
+    ],
+    "W": [
+      64,
+      256
+    ],
+    "b": [
+      256
+    ],
+    "Y": [
+      99,
+      256
+    ]
+  },
+  "rms_denominator_floor": 1e-08,
+  "sha256": {
+    "params": "a77f60fb7c8560adbca73db3cf64dcd5501ec0108b96a1131a00aa722be1918e",
+    "weights": "8f359abf7adbe287b8f89fca98af46194f98f90f2146784731bff551a155825a",
+    "samples": "ee04e849bc407149618e4ecd5ff99575687586d4e57c0ade6a0b3f7b66c8c149"
+  }
+}
