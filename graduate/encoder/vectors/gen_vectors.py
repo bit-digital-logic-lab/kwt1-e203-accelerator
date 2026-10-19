@@ -34,6 +34,26 @@ from pathlib import Path
 
 import numpy as np
 
+# Reporting precision for the diagnostic floats stored in meta.json.
+#
+# The FP32-reference metrics (attention NRMSE, quantisation scales taken from
+# BLAS-produced tensors) are computed with numpy matrix products whose
+# reduction order - and therefore the last ULPs - depend on the BLAS build and
+# thread count. Two interpreters on the same machine already disagree:
+#   /usr/bin/python3   (numpy 1.21.5, netlib BLAS)  -> nrmse 0.0015886401079165293
+#   project .venv      (numpy 2.1.3, OpenBLAS)       -> nrmse 0.0015886401079165228
+# Embedding those raw doubles made the meta.json sha256 non-reproducible.
+# Rounding every reported float to 9 significant decimal digits keeps ~10^6x
+# more precision than the report needs (and than the observed ULP noise) and
+# makes the file byte-identical regardless of the interpreter/BLAS. The integer
+# fields and the RTL-facing coefficients (hex files, M_A, Q_A) are untouched.
+CANON_SIGDIG = 9
+
+
+def canon_float(x):
+    """Canonicalise a diagnostic float to a fixed significant-digit count."""
+    return float(f"{float(x):.{CANON_SIGDIG}g}")
+
 HERE = Path(__file__).resolve().parent          # graduate/encoder/vectors
 ENC = HERE.parent                               # graduate/encoder
 MODEL = ENC / "model"
@@ -104,10 +124,11 @@ def main():
 
     meta = dict(
         sample="sample_00_encoder.npy", layer=0, T=T, D=D, HID=HID,
-        scale_x=att_params["scale_x"], scale_o=s_o,
-        scale_a=s_a, sx=float(cal["scales"]["sx"]), s_out=float(cal["scales"]["s_out"]),
+        scale_x=canon_float(att_params["scale_x"]), scale_o=canon_float(s_o),
+        scale_a=canon_float(s_a), sx=canon_float(cal["scales"]["sx"]),
+        s_out=canon_float(cal["scales"]["s_out"]),
         M_A=m_a, Q_A=Q_A,
-        attn_nrmse_fp32=att_params["nrmse_fp32"],
+        attn_nrmse_fp32=canon_float(att_params["nrmse_fp32"]),
     )
     (VEC / "meta.json").write_text(json.dumps(meta, indent=2))
     print(f"GEN_OK M_A={m_a} Q_A={Q_A} scale_o={s_o:.6e} scale_a={s_a:.6e}")

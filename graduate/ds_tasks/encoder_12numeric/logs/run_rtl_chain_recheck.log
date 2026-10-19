@@ -1,0 +1,28 @@
+FROZEN frozen_12layer_calib.json sha256=5f039ec745e2b4dd... frozen_12layer_int.npz sha256=5cf836e0e5108d9a...
+BUILD layer01 cached
+BUILD layer02 cached
+BUILD layer03 cached
+BUILD layer04 cached
+BUILD layer05 cached
+BUILD layer06 cached
+BUILD layer07 cached
+BUILD layer08 cached
+BUILD layer09 cached
+BUILD layer10 cached
+BUILD layer11 cached
+BUILD layer12 cached
+RUN   layer00 exit=0 68.8s pass=True
+RUN   layer01 exit=0 79.1s pass=True
+RUN   layer02 exit=0 86.1s pass=True
+RUN   layer03 exit=0 70.7s pass=True
+RUN   layer04 exit=0 66.6s pass=True
+RUN   layer05 exit=0 41.2s pass=True
+RUN   layer06 exit=0 67.6s pass=True
+RUN   layer07 exit=0 73.4s pass=True
+RUN   layer08 exit=0 73.8s pass=True
+RUN   layer09 exit=0 79.5s pass=True
+RUN   layer10 exit=0 73.2s pass=True
+RUN   layer11 exit=0 65.8s pass=True
+SAMPLE sample_00_encoder.npy bit_exact=True worst_y_nrmse=2.5163%
+RTL_DONE bit_exact_all=True runtime=852.97s
+RTL_PASS

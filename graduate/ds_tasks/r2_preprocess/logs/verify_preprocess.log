@@ -1,0 +1,18 @@
+archive=/home/yang/Desktop/ic设计竞赛/资料/数据集/speech_commands_v0.02.tar.gz exists=True
+flags sha256=fcd480d309f96d2029a3ba764634f9e46dd73b667c0ebb84b66af02680494c58
+weights sha256=8f359abf7adbe287b8f89fca98af46194f98f90f2146784731bff551a155825a
+config spectrogram_length=98 dct_num_features=40 d_model=64 num_layers=12 attention_type=time
+[PASS] frame_count_derivation: {"desired_samples": 16000, "window_size_samples": 480, "window_stride_samples": 160, "derived_mfcc_rows": 98, "class_token_rows": 1, "encoder_rows": 99, "config_spectrogram_length": 98}
+archive_members_scanned=98399 targets_found=6 extras_found=7 secs=18.3
+[PASS] archive_all_targets_found: found=['four/750e3e75_nohash_0.wav', 'go/0ba018fc_nohash_4.wav', 'no/45692b02_nohash_3.wav', 'no/7e7ca854_nohash_1.wav', 'yes/676f8138_nohash_0.wav', 'yes/ec21c46b_nohash_1.wav']
+[PASS] sample::four/750e3e75_nohash_0.wav: split=validation mfcc_err=7.15e-05 enc_same=0 enc_e2e=2.67e-05 nrmse=2.6e-06 cls=0 pos_shift=0.624
+[PASS] sample::go/0ba018fc_nohash_4.wav: split=training mfcc_err=2.29e-05 enc_same=0 enc_e2e=1.29e-05 nrmse=8.89e-07 cls=0 pos_shift=0.624
+[PASS] sample::no/45692b02_nohash_3.wav: split=validation mfcc_err=3.08e-05 enc_same=0 enc_e2e=1.19e-05 nrmse=7.19e-07 cls=0 pos_shift=0.624
+[PASS] sample::no/7e7ca854_nohash_1.wav: split=training mfcc_err=1.91e-05 enc_same=0 enc_e2e=4.89e-06 nrmse=5.09e-07 cls=0 pos_shift=0.624
+[PASS] sample::yes/676f8138_nohash_0.wav: split=training mfcc_err=3.43e-05 enc_same=0 enc_e2e=1.16e-05 nrmse=7.7e-07 cls=0 pos_shift=0.624
+[PASS] sample::yes/ec21c46b_nohash_1.wav: split=validation mfcc_err=5.91e-05 enc_same=0 enc_e2e=2.06e-05 nrmse=8.41e-07 cls=0 pos_shift=0.624
+[PASS] class_token_row_identical_across_samples: 1 distinct
+[PASS] extra_real_samples_path_cross_check: n=7 worst_mfcc=0.000127 worst_encoder=4.43e-05
+[PASS] split_discipline: {"rule": "official Speech Commands hash rule (prepare_quant_samples.split_for)", "stored_samples_training": 3, "stored_samples_validation": 3, "calibration_performed": false, "thresholds_source": "a-priori float32-rounding constants; not fitted on any split", "validation_used_for": "evaluation only; no scale/threshold derived from validation samples"}
+gates=11/11 all_pass=True
+results=/home/yang/kwt-worktrees/kwt-grad-accepted/graduate/ds_tasks/r2_preprocess/results.json

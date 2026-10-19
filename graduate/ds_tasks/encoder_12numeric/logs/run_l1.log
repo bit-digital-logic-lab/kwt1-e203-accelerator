@@ -1,0 +1,27 @@
+DATA split=/home/yang/Desktop/ic设计竞赛/software/.build/quant_samples_12labels_20.npz train=240 val=240
+DATA weights=/home/yang/kwt-worktrees/ds-grad-encoder_12numeric/software/weights/kwt1_fp32.npz sha256=8f359abf7adbe287...
+DATA real_dir=/home/yang/kwt-worktrees/ds-grad-encoder_12numeric/software/validation/real_input_chain_20261017
+DATA training encoder inputs=240 validation=240 real=6
+SELFTEST scalar-vs-vector {'layernorm': 'bit-exact', 'residual': 'bit-exact', 'gelu': 'bit-exact', 'attention': 'bit-exact', 'samples': 1}
+CALIB calibrating on the TRAINING split only ...
+CALIB frozen integer tensors -> frozen_12layer_int.npz sha256=5cf836e0e5108d9a...
+CALIB frozen -> frozen_12layer_calib.json sha256=5f039ec745e2b4dd...
+CALIB layer  0 M_A=  5247 s_x=6.737881e-03 s_a=1.536083e-03 sx=2.437418e-03 s_g=1.984457e-03 s_r1=6.694601e-03 s_r2=2.569834e-03 s_out=2.140992e-03
+CALIB layer  1 M_A=  6288 s_x=2.140992e-03 s_a=1.158472e-03 sx=2.251025e-03 s_g=2.074830e-03 s_r1=2.354695e-03 s_r2=2.588747e-03 s_out=2.060629e-03
+CALIB layer  2 M_A=  8058 s_x=2.060629e-03 s_a=1.338330e-03 sx=2.346207e-03 s_g=2.062727e-03 s_r1=2.203755e-03 s_r2=2.299597e-03 s_out=2.162864e-03
+CALIB layer  3 M_A=  4515 s_x=2.162864e-03 s_a=8.902365e-04 sx=2.363508e-03 s_g=2.067726e-03 s_r1=2.226920e-03 s_r2=2.380314e-03 s_out=2.213937e-03
+CALIB layer  4 M_A=  4490 s_x=2.213937e-03 s_a=1.302051e-03 sx=2.511130e-03 s_g=2.166831e-03 s_r1=2.435435e-03 s_r2=2.661460e-03 s_out=2.459948e-03
+CALIB layer  5 M_A=  8096 s_x=2.459948e-03 s_a=1.050316e-03 sx=2.535547e-03 s_g=1.920149e-03 s_r1=2.398192e-03 s_r2=2.600152e-03 s_out=2.408032e-03
+CALIB layer  6 M_A=  5508 s_x=2.408032e-03 s_a=9.960348e-04 sx=2.561823e-03 s_g=1.819316e-03 s_r1=2.489555e-03 s_r2=3.027260e-03 s_out=2.486694e-03
+CALIB layer  7 M_A=  6458 s_x=2.486694e-03 s_a=9.380761e-04 sx=2.634569e-03 s_g=1.557510e-03 s_r1=2.377176e-03 s_r2=2.789448e-03 s_out=2.413975e-03
+CALIB layer  8 M_A=  5543 s_x=2.413975e-03 s_a=9.545258e-04 sx=2.521506e-03 s_g=1.643499e-03 s_r1=2.579010e-03 s_r2=2.583772e-03 s_out=2.415084e-03
+CALIB layer  9 M_A=  5138 s_x=2.415084e-03 s_a=1.119925e-03 sx=2.745071e-03 s_g=1.663408e-03 s_r1=2.419268e-03 s_r2=2.777118e-03 s_out=2.602647e-03
+CALIB layer 10 M_A=  6192 s_x=2.602647e-03 s_a=1.456135e-03 sx=2.767033e-03 s_g=1.914720e-03 s_r1=2.519126e-03 s_r2=2.957023e-03 s_out=2.478333e-03
+CALIB layer 11 M_A=  6607 s_x=2.478333e-03 s_a=1.179107e-03 sx=2.662537e-03 s_g=2.169982e-03 s_r1=2.526583e-03 s_r2=3.197381e-03 s_out=2.905720e-03
+EVAL dataset_val: 240 samples evaluated
+EVAL real_val: 6 samples evaluated
+EVAL per-layer y NRMSE (dataset val): L0=0.9721% L1=1.4283% L2=1.8072% L3=2.0252% L4=2.2401% L5=2.1717% L6=2.3350% L7=2.3168% L8=2.3857% L9=2.5223% L10=2.6961% L11=3.7839%
+EVAL per-layer y NRMSE (real val):    L0=0.8115% L1=1.0325% L2=1.3039% L3=1.4682% L4=1.6646% L5=1.7961% L6=1.8108% L7=1.8467% L8=1.9653% L9=2.0753% L10=2.3068% L11=3.1279%
+EVAL worst layer=11 worst_y=3.7839% (limit 3.0%)
+EVAL worst stage overall: {'nrmse': 0.06690662527090276, 'layer': 10, 'stage': 'a', 'sample': 'dataset_val:./stop/97ae8b25_nohash_0.wav'}
+L1_DONE samples=246 runtime=98.48s

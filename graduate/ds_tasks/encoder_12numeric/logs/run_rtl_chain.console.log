@@ -1,0 +1,93 @@
+FROZEN frozen_12layer_calib.json sha256=5f039ec745e2b4dd... frozen_12layer_int.npz sha256=5cf836e0e5108d9a...
+BUILD layer01 cached
+BUILD layer02 exit=0 6.6s -> /home/yang/kwt-worktrees/ds-grad-encoder_12numeric/graduate/ds_tasks/encoder_12numeric/build/layer02/verilator.log
+BUILD layer03 exit=0 7.0s -> /home/yang/kwt-worktrees/ds-grad-encoder_12numeric/graduate/ds_tasks/encoder_12numeric/build/layer03/verilator.log
+BUILD layer04 exit=0 6.6s -> /home/yang/kwt-worktrees/ds-grad-encoder_12numeric/graduate/ds_tasks/encoder_12numeric/build/layer04/verilator.log
+BUILD layer05 exit=0 6.6s -> /home/yang/kwt-worktrees/ds-grad-encoder_12numeric/graduate/ds_tasks/encoder_12numeric/build/layer05/verilator.log
+BUILD layer06 exit=0 6.3s -> /home/yang/kwt-worktrees/ds-grad-encoder_12numeric/graduate/ds_tasks/encoder_12numeric/build/layer06/verilator.log
+BUILD layer07 exit=0 6.2s -> /home/yang/kwt-worktrees/ds-grad-encoder_12numeric/graduate/ds_tasks/encoder_12numeric/build/layer07/verilator.log
+BUILD layer08 exit=0 6.2s -> /home/yang/kwt-worktrees/ds-grad-encoder_12numeric/graduate/ds_tasks/encoder_12numeric/build/layer08/verilator.log
+BUILD layer09 exit=0 26.2s -> /home/yang/kwt-worktrees/ds-grad-encoder_12numeric/graduate/ds_tasks/encoder_12numeric/build/layer09/verilator.log
+BUILD layer10 exit=0 7.6s -> /home/yang/kwt-worktrees/ds-grad-encoder_12numeric/graduate/ds_tasks/encoder_12numeric/build/layer10/verilator.log
+BUILD layer11 exit=0 6.5s -> /home/yang/kwt-worktrees/ds-grad-encoder_12numeric/graduate/ds_tasks/encoder_12numeric/build/layer11/verilator.log
+BUILD layer12 exit=0 6.3s -> /home/yang/kwt-worktrees/ds-grad-encoder_12numeric/graduate/ds_tasks/encoder_12numeric/build/layer12/verilator.log
+RUN   layer00 exit=0 14.4s pass=True
+RUN   layer01 exit=0 14.0s pass=True
+RUN   layer02 exit=0 14.4s pass=True
+RUN   layer03 exit=0 14.5s pass=True
+RUN   layer04 exit=0 30.4s pass=True
+RUN   layer05 exit=0 14.8s pass=True
+RUN   layer06 exit=0 14.3s pass=True
+RUN   layer07 exit=0 14.7s pass=True
+RUN   layer08 exit=0 14.0s pass=True
+RUN   layer09 exit=0 14.8s pass=True
+RUN   layer10 exit=0 41.6s pass=True
+RUN   layer11 exit=0 15.1s pass=True
+SAMPLE sample_00_encoder.npy bit_exact=True worst_y_nrmse=2.5163%
+RUN   layer00 exit=0 16.0s pass=True
+RUN   layer01 exit=0 15.6s pass=True
+RUN   layer02 exit=0 46.5s pass=True
+RUN   layer03 exit=0 19.8s pass=True
+RUN   layer04 exit=0 19.0s pass=True
+RUN   layer05 exit=0 49.4s pass=True
+RUN   layer06 exit=0 18.4s pass=True
+RUN   layer07 exit=0 39.0s pass=True
+RUN   layer08 exit=0 25.4s pass=True
+RUN   layer09 exit=0 15.0s pass=True
+RUN   layer10 exit=0 15.4s pass=True
+RUN   layer11 exit=0 46.9s pass=True
+SAMPLE sample_01_encoder.npy bit_exact=True worst_y_nrmse=2.7870%
+RUN   layer00 exit=0 16.1s pass=True
+RUN   layer01 exit=0 33.1s pass=True
+RUN   layer02 exit=0 32.4s pass=True
+RUN   layer03 exit=0 16.9s pass=True
+RUN   layer04 exit=0 48.3s pass=True
+RUN   layer05 exit=0 16.3s pass=True
+RUN   layer06 exit=0 15.6s pass=True
+RUN   layer07 exit=0 57.2s pass=True
+RUN   layer08 exit=0 14.0s pass=True
+RUN   layer09 exit=0 14.2s pass=True
+RUN   layer10 exit=0 14.7s pass=True
+RUN   layer11 exit=0 38.9s pass=True
+SAMPLE sample_02_encoder.npy bit_exact=True worst_y_nrmse=2.7963%
+RUN   layer00 exit=0 15.1s pass=True
+RUN   layer01 exit=0 15.6s pass=True
+RUN   layer02 exit=0 25.9s pass=True
+RUN   layer03 exit=0 32.5s pass=True
+RUN   layer04 exit=0 20.2s pass=True
+RUN   layer05 exit=0 44.0s pass=True
+RUN   layer06 exit=0 17.1s pass=True
+RUN   layer07 exit=0 17.9s pass=True
+RUN   layer08 exit=0 24.7s pass=True
+RUN   layer09 exit=0 30.3s pass=True
+RUN   layer10 exit=0 15.4s pass=True
+RUN   layer11 exit=0 15.1s pass=True
+SAMPLE sample_03_encoder.npy bit_exact=True worst_y_nrmse=2.4854%
+RUN   layer00 exit=0 14.6s pass=True
+RUN   layer01 exit=0 35.9s pass=True
+RUN   layer02 exit=0 14.8s pass=True
+RUN   layer03 exit=0 18.1s pass=True
+RUN   layer04 exit=0 15.3s pass=True
+RUN   layer05 exit=0 40.0s pass=True
+RUN   layer06 exit=0 22.3s pass=True
+RUN   layer07 exit=0 14.7s pass=True
+RUN   layer08 exit=0 14.8s pass=True
+RUN   layer09 exit=0 37.5s pass=True
+RUN   layer10 exit=0 15.3s pass=True
+RUN   layer11 exit=0 16.3s pass=True
+SAMPLE sample_04_encoder.npy bit_exact=True worst_y_nrmse=3.1279%
+RUN   layer00 exit=0 49.2s pass=True
+RUN   layer01 exit=0 17.3s pass=True
+RUN   layer02 exit=0 15.1s pass=True
+RUN   layer03 exit=0 23.1s pass=True
+RUN   layer04 exit=0 35.7s pass=True
+RUN   layer05 exit=0 14.4s pass=True
+RUN   layer06 exit=0 14.0s pass=True
+RUN   layer07 exit=0 18.7s pass=True
+RUN   layer08 exit=0 30.3s pass=True
+RUN   layer09 exit=0 16.4s pass=True
+RUN   layer10 exit=0 38.2s pass=True
+RUN   layer11 exit=0 18.0s pass=True
+SAMPLE sample_05_encoder.npy bit_exact=True worst_y_nrmse=2.7448%
+RTL_DONE bit_exact_all=True runtime=1787.86s
+RTL_PASS

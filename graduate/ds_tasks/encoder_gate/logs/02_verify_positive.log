@@ -1,0 +1,16 @@
+  a  (requant attn): 99x64 bit-exact
+  r1 (resid1): 99x64 bit-exact
+  g  (gelu): 99x256 bit-exact
+  f  (ffn2): 99x64 bit-exact
+  r2 (resid2): 99x64 bit-exact
+  y  (ln2): 99x64 bit-exact
+FP32 NRMSE vs graduate golden (dequantised RTL vs FP32):
+  a  (attn_projected): NRMSE 0.1591%  max_abs 1.319e-03
+  r1 (residual1): NRMSE 0.1082%  max_abs 2.889e-03
+  g  (gelu): NRMSE 1.3987%  max_abs 1.293e-02
+  f  (ffn_out): NRMSE 1.3968%  max_abs 1.540e-02
+  r2 (residual2): NRMSE 0.7000%  max_abs 5.001e-02
+  y  (layer_output): NRMSE 0.7289%  max_abs 4.227e-02
+  worst-stage NRMSE 1.3987% [g  (gelu)] (threshold 3.00%)
+GATE bit_exact=PASS nrmse=PASS rows=99 stages=6 worst=1.3987% threshold=3.00%
+VERIFY_PASS

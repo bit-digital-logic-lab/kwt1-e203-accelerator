@@ -1,0 +1,102 @@
+{
+  "task": "encoder_gate",
+  "scope": [
+    "gate the per-stage FP32 NRMSE at 3% (worst stage) in verify_encoder.py",
+    "negative injection to prove the gate fires",
+    "training-split-only gradient-free calibration; validation = evaluation only"
+  ],
+  "commands": [
+    {
+      "name": "01_run_all",
+      "expect": "exit 0",
+      "exit_code": 0,
+      "verdict": "OK",
+      "log": "graduate/ds_tasks/encoder_gate/logs/01_run_all.log",
+      "note": ""
+    },
+    {
+      "name": "02_verify_positive",
+      "expect": "exit 0",
+      "exit_code": 0,
+      "verdict": "OK",
+      "log": "graduate/ds_tasks/encoder_gate/logs/02_verify_positive.log",
+      "note": ""
+    },
+    {
+      "name": "02b_clean_tight_threshold",
+      "expect": "non-zero exit",
+      "exit_code": 1,
+      "verdict": "OK",
+      "log": "graduate/ds_tasks/encoder_gate/logs/02b_clean_tight_threshold.log",
+      "note": ""
+    },
+    {
+      "name": "03_neg_bitexact",
+      "expect": "non-zero exit",
+      "exit_code": 1,
+      "verdict": "OK",
+      "log": "graduate/ds_tasks/encoder_gate/logs/03_neg_bitexact.log",
+      "note": ""
+    },
+    {
+      "name": "04_neg_nrmse",
+      "expect": "non-zero exit",
+      "exit_code": 1,
+      "verdict": "OK",
+      "log": "graduate/ds_tasks/encoder_gate/logs/04_neg_nrmse.log",
+      "note": ""
+    },
+    {
+      "name": "05_gate_selfcheck",
+      "expect": "exit 0",
+      "exit_code": 0,
+      "verdict": "OK",
+      "log": "graduate/ds_tasks/encoder_gate/logs/05_gate_selfcheck.log",
+      "note": ""
+    },
+    {
+      "name": "06_split_calibration",
+      "expect": "exit 0",
+      "exit_code": 0,
+      "verdict": "OK",
+      "log": "graduate/ds_tasks/encoder_gate/logs/06_split_calibration.log",
+      "note": ""
+    }
+  ],
+  "all_ok": true,
+  "positive_run": {
+    "be": "PASS",
+    "nr": "PASS",
+    "rows": "99",
+    "stages": "6",
+    "worst": "1.3987",
+    "thr": "3.00"
+  },
+  "evidence_levels": {
+    "E0_software_reference": {
+      "level": "software reference (NumPy integer model + FP32 golden)",
+      "status": "supported",
+      "where": "graduate/encoder/model/verify_encoder.py (bit-exact oracle, NRMSE golden)"
+    },
+    "E1_rtl_bit_exact": {
+      "level": "RTL functional simulation, bit-exact (Verilator 5.030)",
+      "status": "supported",
+      "where": "6 stages x 99 rows bit-exact; see logs/02_verify_positive.log"
+    },
+    "E2_e203_integration": {
+      "level": "real E203 instruction stream / System Bus / NICE / SRAM macros",
+      "status": "not covered",
+      "where": "E203-like transaction model only (SOFTWARE_BOUNDARY.md)"
+    },
+    "E3_synthesis_sta": {
+      "level": "logic synthesis / 150 MHz STA / area / power",
+      "status": "not covered",
+      "where": "not run in this task"
+    },
+    "E4_official_acceptance": {
+      "level": "official 600-sample evaluation set, NRMSE / accuracy",
+      "status": "not covered",
+      "where": "no official evaluation set/script available here"
+    }
+  }
+}

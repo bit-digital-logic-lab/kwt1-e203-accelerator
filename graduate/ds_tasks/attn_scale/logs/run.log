@@ -1,0 +1,37 @@
+== attn_scale: training-frozen calibration, independent validation ==
+samples: training=3 validation=3
+training  : ['sample_01_encoder.npy', 'sample_03_encoder.npy', 'sample_04_encoder.npy']
+validation: ['sample_00_encoder.npy', 'sample_02_encoder.npy', 'sample_05_encoder.npy']
+
+[1] calibration on training split (no gradients)
+CALIB_OK split=training samples=3 (validation=3 never used) sx=1.961475124e-03 RQ=6 RK=7 RV=7 RC=14 RO=11 KC=6986 SH_KC=37
+CALIB_OK split=training samples=3 (validation=3 never used) sx=1.961475124e-03 RQ=6 RK=7 RV=7 RC=14 RO=11 KC=6986 SH_KC=37
+  determinism: two independent calibrations are identical
+
+[2] independent re-derivation + cross-check
+  fit: sx=1.961475124e-03 RQ=6 RK=7 RV=7 RC=14 RO=11 KC=6986 SH_KC=37
+  constant cross-check: MATCH
+
+[3] validation evaluation (frozen constants; no re-fitting)
+  sample_00_encoder.npy: NRMSE 0.1642%  max_abs 1.339e-03  driver==model True
+  sample_02_encoder.npy: NRMSE 0.2321%  max_abs 2.021e-03  driver==model True
+  sample_05_encoder.npy: NRMSE 0.1748%  max_abs 2.552e-03  driver==model True
+
+[4] training reference + leaky (per-sample scale) diagnostic
+  train sample_01_encoder.npy: NRMSE 0.2034%
+  train sample_03_encoder.npy: NRMSE 0.2190%
+  train sample_04_encoder.npy: NRMSE 0.2726%
+  leaky(baseline) sample_00_encoder.npy: NRMSE 0.1589%  sx=1.356254e-03 RQ/RK/RV=6/7/7 KC=6680
+  leaky(baseline) sample_02_encoder.npy: NRMSE 0.2124%  sx=1.956763e-03 RQ/RK/RV=6/7/7 KC=6952
+  leaky(baseline) sample_05_encoder.npy: NRMSE 0.1707%  sx=2.007658e-03 RQ/RK/RV=7/7/7 KC=7319
+
+[5] leak audit
+  PASS  calibration_file_unchanged_by_eval
+  PASS  calibration_split_is_training
+  PASS  no_validation_sample_in_calibration_provenance
+  PASS  frozen_sx_differs_from_each_validation_sx
+  PASS  driver_matches_model_bit_exact
+  PASS  all_validation_nrmse_below_limit
+
+RESULT written: /home/yang/kwt-worktrees/ds-grad-attn_scale/graduate/ds_tasks/attn_scale/results.json
+SCALE_AUDIT_PASS

@@ -1,0 +1,13 @@
+TASK r2_full_numeric: round-1 scale-contract witness
+ASSET attn_scale  /home/yang/kwt-worktrees/ds-grad-attn_scale/graduate/ds_tasks/attn_scale/attn_calib_train.json sha256=9a535f04b99f0cebce941e88fc0ef8d6fcc9e30f29656d32433dff8d07fa267f
+ASSET postnorm    /home/yang/kwt-worktrees/ds-grad-postnorm_scale/graduate/ds_tasks/postnorm_scale/frozen_postnorm_calib.json sha256=3a1cf51b2f00716b0dc6a182d80e6d4cdf5886fa196affad268a47167bbf53fb
+CHECK attn.scale_x=0.00196147512446 postnorm.s_x=0.00673788148431 relative_diff=70.8888%
+CHECK max_train|X|=13.7924433 attn_scale*2047=4.01513958 covers=False
+CONFLICT earliest_block=layer0.x_scale_contract failed_invariants=['layer0_input_scale_equality', 'attn_scale_covers_training_range']
+WITNESS M_A=round(scale_o/s_a*2^16)=1527 ma1=65960 mb1=15037
+WITNESS sample_00_encoder.npy: naive layer0 r1 NRMSE=237.6331% sat=0/6336 control=0.4716% max|X_int|=1415 (limit 2047)
+STOP earliest_block=layer0.r1 (no further layers executed)
+WITNESS sample_02_encoder.npy: naive layer0 r1 NRMSE=251.3009% sat=1/6336 control=0.3365% max|X_int|=2042 (limit 2047)
+STOP earliest_block=layer0.r1 (no further layers executed)
+WITNESS sample_05_encoder.npy: naive layer0 r1 NRMSE=237.2888% sat=2/6336 control=0.3112% max|X_int|=2047 (limit 2047)
+STOP earliest_block=layer0.r1 (no further layers executed)

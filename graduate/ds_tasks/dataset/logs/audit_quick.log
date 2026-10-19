@@ -1,0 +1,51 @@
+== split labels ==
+  quant_samples.npz: total=40 counts={'training': 20, 'testing': 20} mismatches=0 silence={}
+  quant_samples_10.npz: total=200 counts={'training': 100, 'validation': 100} mismatches=0 silence={}
+  quant_samples_12labels_10.npz: total=240 counts={'training': 120, 'validation': 120} mismatches=0 silence={'training': 10, 'validation': 10}
+  quant_samples_12labels_20.npz: total=480 counts={'training': 240, 'validation': 240} mismatches=0 silence={'training': 20, 'validation': 20}
+  quant_samples_12labels_40.npz: total=960 counts={'training': 480, 'validation': 480} mismatches=0 silence={'training': 40, 'validation': 40}
+  manifest samples: 6 mismatches=0
+== hashes ==
+  ok=True items=16
+  sample_00_mfcc.npy: tensor_content=dcdb5a8ac2daa7bf file_container=a8a85e2878283a0d ok=True
+  sample_00_encoder.npy: tensor_content=a7ffaafdd9866b37 file_container=489dc7c28b2816cd ok=True
+  sample_01_mfcc.npy: tensor_content=43b0658ed234fdb0 file_container=1e24a66c86e777e6 ok=True
+  sample_01_encoder.npy: tensor_content=8a6a9e49a38c073b file_container=d91c92dabc3fcd94 ok=True
+  sample_02_mfcc.npy: tensor_content=8c98d33e2a85e39c file_container=d4bac7237bb83bde ok=True
+  sample_02_encoder.npy: tensor_content=e1f6bff0d1bfe88a file_container=092ad2de82d56dc0 ok=True
+  sample_03_mfcc.npy: tensor_content=9fdb644252b9f5cf file_container=0bc09b6b4970d261 ok=True
+  sample_03_encoder.npy: tensor_content=ef29708b932b2455 file_container=c2c56f4397106005 ok=True
+  sample_04_mfcc.npy: tensor_content=7bc86a41062ee0e8 file_container=9eaa886c83ef7b98 ok=True
+  sample_04_encoder.npy: tensor_content=3bf5f7851fa305bf file_container=6edf03322ddfd789 ok=True
+  sample_05_mfcc.npy: tensor_content=a45db272da20c36c file_container=bf50f5b5c59c8552 ok=True
+  sample_05_encoder.npy: tensor_content=16bf24f4bd5e5b0e file_container=ead66dd353c7012b ok=True
+  tensor-content matches: 12/12 (container hashes informational only)
+== npy content consistency (independent projection) ==
+  ok=True
+  sample_00_encoder.npy: max_abs_diff=0.000e+00 recorded=4.768e-07 ok=True
+  sample_01_encoder.npy: max_abs_diff=0.000e+00 recorded=9.537e-07 ok=True
+  sample_02_encoder.npy: max_abs_diff=0.000e+00 recorded=9.537e-07 ok=True
+  sample_03_encoder.npy: max_abs_diff=0.000e+00 recorded=9.537e-07 ok=True
+  sample_04_encoder.npy: max_abs_diff=0.000e+00 recorded=7.153e-07 ok=True
+  sample_05_encoder.npy: max_abs_diff=0.000e+00 recorded=7.153e-07 ok=True
+== overlap ==
+  ok=True errors=[]
+== calibration ==
+  attn_hardcoded_sample00 = True
+  postnorm_hardcoded_sample00 = True
+  ffn1_validation_used_for_calibration = False
+  blackbox_training = 240
+  blackbox_validation = 240
+  blackbox_disjoint = True
+  blackbox_selected_factors = [(1.0, 1.0), (1.0, 1.0), (1.0, 1.0), (1.0, 1.0), (1.0, 1.0), (1.0, 1.0), (1.0, 1.0), (1.0, 1.0), (1.0, 1.0), (1.0, 1.0), (1.0, 1.0), (1.0, 1.0)]
+  attention_scales_depend_on_sample = True
+  postnorm_scales_depend_on_sample = True
+  results_readme_admits_test_probe = True
+  legacy_pool_quant_samples_testing_rows = 20
+  attention scale_x sample00=1.356254e-03 sample01=1.629903e-03 rel=1.6789e-01
+  attention scale_o sample00=2.475293e-05 sample01=2.974730e-05 rel=1.6789e-01
+VERDICT FAIL (rule violations)
+  VIOLATION encoder attention static scales are derived from validation sample_00
+  VIOLATION encoder postnorm static scales/LUT/output scale are derived from validation sample_00
+  VIOLATION legacy pool quant_samples.npz still contains 20 testing-partition rows that were probed during development (documented contamination)
+report: /home/yang/kwt-worktrees/ds-grad-dataset/graduate/ds_tasks/dataset/logs/audit.json

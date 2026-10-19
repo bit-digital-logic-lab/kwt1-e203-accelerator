@@ -1,0 +1,24 @@
+HEARTBEAT cycles=10000000 layer=2 start=3 y=198
+HEARTBEAT cycles=20000000 layer=4 start=5 y=396
+HEARTBEAT cycles=30000000 layer=6 start=7 y=594
+HEARTBEAT cycles=40000000 layer=8 start=9 y=792
+HEARTBEAT cycles=50000000 layer=10 start=11 y=990
+SMOKE n_start=12 max_layer=11 yrows=1188 n_ld=677568 n_ld_par=595200 head=1
+SMOKE layer 0 param_lD_before_start=49600
+SMOKE layer 1 param_lD_before_start=99200
+SMOKE layer 2 param_lD_before_start=148800
+SMOKE layer 3 param_lD_before_start=198400
+SMOKE layer 4 param_lD_before_start=248000
+SMOKE layer 5 param_lD_before_start=297600
+SMOKE layer 6 param_lD_before_start=347200
+SMOKE layer 7 param_lD_before_start=396800
+SMOKE layer 8 param_lD_before_start=446400
+SMOKE layer 9 param_lD_before_start=496000
+SMOKE layer 10 param_lD_before_start=545600
+SMOKE layer 11 param_lD_before_start=595200
+SMOKE head_token=45 199 65200
+SMOKE_PASS
+- /tmp/opencode/repro-sys/clean-tree-VwOaXK/graduate/encoder/tb/tb_layers_smoke.sv:165: Verilog $finish
+- S i m u l a t i o n   R e p o r t: Verilator 5.030 2024-10-27
+- Verilator: $finish at 564ms; walltime 221.369 s; speed 2.550 ms/s
+- Verilator: cpu 221.265 s on 1 threads; alloced 89 MB

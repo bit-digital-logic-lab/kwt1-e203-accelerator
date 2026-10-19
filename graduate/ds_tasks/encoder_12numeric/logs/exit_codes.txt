@@ -1,0 +1,37 @@
+# encoder_12numeric — real command exit codes (2026-10-19)
+# cwd = worktree root: /home/yang/kwt-worktrees/ds-grad-encoder_12numeric
+# All outputs are written inside graduate/ds_tasks/encoder_12numeric/ only.
+
+[1] L1 software reference (12 layers, train-calibrated, validation-only evaluation)
+    cmd : OPENBLAS_NUM_THREADS=4 OMP_NUM_THREADS=4 python3 \
+          graduate/ds_tasks/encoder_12numeric/model/run_l1.py
+    exit: 0
+    note: L1_DONE samples=246 (240 dataset validation + 6 real validation WAV);
+          worst layer-11 y NRMSE 3.78% (dataset) / 3.13% (real); 11/12 layers < 3%
+    log : logs/run_l1.log , logs/run_l1.console.log
+
+[2] Freeze / re-check the integer tensor pack (deterministic re-calibration)
+    cmd : OPENBLAS_NUM_THREADS=4 OMP_NUM_THREADS=4 python3 \
+          graduate/ds_tasks/encoder_12numeric/model/freeze_int.py
+    exit: 0
+    note: FREEZE_OK layers=12 ; every scale/M_A/attn-param equal to frozen JSON
+
+[3] L2 RTL bit-exact 12-layer chain, FULL run (6 real validation samples)
+    cmd : python3 graduate/ds_tasks/encoder_12numeric/model/run_rtl_chain.py --samples all
+    exit: 0   (launched with nohup; success evidenced by "RTL_PASS" in the log)
+    note: 6 samples x 12 layers = 72 layer-runs, 7128 RTL output rows;
+          a/r1/g/f/r2/y all bit-exact vs the independent integer reference;
+          worst y NRMSE (FP32) 3.1279% (sample_04, layer 11)
+    log : logs/run_rtl_chain.log , logs/run_rtl_chain.console.log
+
+[4] L2 RTL bit-exact chain, exit-code capture re-run (1 sample, 12 layers, cached binaries)
+    cmd : python3 graduate/ds_tasks/encoder_12numeric/model/run_rtl_chain.py --samples 0
+    exit: 0   (captured directly by the shell)
+    note: RTL_PASS, bit_exact_all=True; the full 6-sample rtl_results.json above is authoritative
+    log : logs/run_rtl_chain_recheck.log
+
+[5] Verilator lint of the task testbench + copied RTL (no vectors needed)
+    cmd : verilator --lint-only --timing -Wno-fatal -I<third_party> \
+          --top-module tb_chain_layer <sources...>
+    exit: 0
+    note: 0 errors

@@ -1,0 +1,43 @@
+{
+  "sample": "sample_05_encoder.npy",
+  "shape": [
+    99,
+    64
+  ],
+  "scale_x": 0.001961475124461626,
+  "scale_o": 3.579879541107029e-05,
+  "x_int_max": 2095,
+  "x_int_sat_int16": 0,
+  "x_int_over_a12": 2,
+  "nrmse_fp32": 0.0017484189805285495,
+  "max_abs_err_fp32": 0.0025519176242707886,
+  "rms_ref_fp32": 0.21703867831664247,
+  "P_rowsum_min": 32708,
+  "P_rowsum_max": 32728,
+  "O_int_max": 13892,
+  "sample_index": 2,
+  "T": 99,
+  "D": 64,
+  "act_bits": 12,
+  "w_bits": 10,
+  "F_BITS": 6,
+  "M_LUT": 14,
+  "G_SH": 20,
+  "calibration_split": "training",
+  "calibration_samples": [
+    "sample_01_encoder.npy",
+    "sample_03_encoder.npy",
+    "sample_04_encoder.npy"
+  ],
+  "input_file": "sample_05_encoder.npy",
+  "RQ": 6,
+  "RK": 7,
+  "RV": 7,
+  "RC": 14,
+  "RO": 11,
+  "KC": 6986,
+  "SH_KC": 37
+}
+
+input X=int16 (99*64), weights int16 (64*64), bias int32 (64)
+expected: q,k,v,c,o int16 (99*64); p Q15 (99*99)

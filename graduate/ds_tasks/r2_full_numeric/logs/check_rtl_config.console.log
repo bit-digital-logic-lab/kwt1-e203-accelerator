@@ -1,0 +1,21 @@
+TASK r2_full_numeric: assembled-RTL vs round-1 frozen layer-0 constants
+ASSET frozen /home/yang/kwt-worktrees/ds-grad-encoder_12numeric/graduate/ds_tasks/encoder_12numeric/frozen_12layer_calib.json sha256=5f039ec745e2b4dda1e6de5abb6fdf97316c3e98a0265c31212b53eee669d444
+ASSET attn_params.svh sha256=6dc3e3fd687169cf47f1e60c58171cc151fd551bcf2e07b4495cb37869d3b064
+ASSET kwt_postnorm_cfg.svh sha256=4be4e396e27721fb46e99c7b9bb89a7c11d061043f95496f55179b2efb0ac7b0
+ASSET tb_encoder.sv sha256=c9e334e78a41a3c8d7a99740d54431809891556e648578f0f147b458ace49cfe
+COMPARE KC       rtl=6680 frozen=5152 MISMATCH
+COMPARE SH_KC    rtl=38 frozen=34 MISMATCH
+COMPARE RQ       rtl=6 frozen=5 MISMATCH
+COMPARE RK       rtl=7 frozen=7 OK
+COMPARE RV       rtl=7 frozen=6 MISMATCH
+COMPARE RC       rtl=14 frozen=15 MISMATCH
+COMPARE RO       rtl=11 frozen=11 OK
+COMPARE M_A      rtl=5981 frozen=5247 MISMATCH
+COMPARE MA1      rtl=61302 frozen=65960 MISMATCH
+COMPARE MB1      rtl=12260 frozen=15037 MISMATCH
+COMPARE EPS_Q1   rtl=31173 frozen=1462 MISMATCH
+COMPARE MO1      rtl=410 frozen=410 OK
+COMPARE MGN      rtl=267644 frozen=129003 MISMATCH
+COMPARE MC2      rtl=77111 frozen=62159 MISMATCH
+COMPARE EPS_Q2   rtl=15272 frozen=9924 MISMATCH
+COMPARE MO2      rtl=546 frozen=467 MISMATCH

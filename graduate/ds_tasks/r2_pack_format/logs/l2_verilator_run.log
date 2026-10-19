@@ -1,0 +1,9 @@
+RTL_LANE_UNPACK16 got=4096/4096 err=0
+RTL_LANE_UNPACK32 got=2048/2048 err=0
+RTL_LANE_PACK12   got=6336/6336 err=0
+RTL_LANE_PACK16   got=8192/8192 err=0
+RTL_LANE_PASS
+- /home/yang/kwt-worktrees/kwt-grad-accepted/graduate/ds_tasks/r2_pack_format/tb/tb_byte_lane.sv:196: Verilog $finish
+- S i m u l a t i o n   R e p o r t: Verilator 5.047 devel
+- Verilator: $finish at 159us; walltime 0.015 s; speed 10.758 ms/s
+- Verilator: cpu 0.015 s on 1 threads; allocated 6 MB

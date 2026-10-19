@@ -1,0 +1,4 @@
+EMIT_OK sample0 sample_00_encoder.npy scale_x=0.00673788148 KC=5152 SH_KC=34 O_int_max=4516
+EMIT_OK sample1 sample_02_encoder.npy scale_x=0.00673788148 KC=5152 SH_KC=34 O_int_max=5331
+EMIT_OK sample2 sample_05_encoder.npy scale_x=0.00673788148 KC=5152 SH_KC=34 O_int_max=4042
+GEN_COHERENT_VECTORS_OK dir=/tmp/opencode/r2_scale_contract/rtl_check/vectors
