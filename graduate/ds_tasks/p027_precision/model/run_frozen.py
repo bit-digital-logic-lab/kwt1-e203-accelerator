@@ -128,6 +128,10 @@ def main():
         prev = json.loads((TASK / "results.json").read_text())
         cand = next(r for r in prev["candidates"] if r["name"] == calib.get("name"))
         y_prev = cand["per_layer_pooled_nrmse"]["y"]
+        if len(y_prev) != nlayers:
+            raise ValueError("search/frozen layer counts differ")
+        if cand.get("config_sha256") != manifest["config_canonical_sha256"]:
+            raise ValueError("search/frozen config hashes differ")
         deltas = [abs(a - b) for a, b in zip(pooled["y"], y_prev)]
         cmp_ok = max(deltas) <= 1e-12
         cmp_detail = dict(max_abs_delta=float(max(deltas)),
@@ -141,7 +145,7 @@ def main():
 
     out = dict(
         task="p027_precision_frozen",
-        state=("PASS" if (worst_v <= TARGET and finite and cmp_ok is not False)
+        state=("PASS" if (worst_v <= TARGET and finite and cmp_ok is True)
                else "TARGET_FAIL"),
         name=calib.get("name"),
         config_sha256=manifest["config_sha256"],
