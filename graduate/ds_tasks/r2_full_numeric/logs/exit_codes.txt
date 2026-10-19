@@ -1,0 +1,11 @@
+# r2_full_numeric -- real command exit codes (2026-10-19T05:29:32Z)
+[1] python3 model/run_conflict_witness.py
+    exit: 2   (expected 2: round-1 layer0 x-scale contract conflict)
+    log : logs/run_conflict_witness.console.log
+[2] python3 model/check_rtl_config.py
+    exit: 2   (expected 2: assembled RTL headers != frozen layer-0 pack)
+    log : logs/check_rtl_config.console.log
+[3] python3 model/run_full_numeric.py
+    exit: 0   (expected 0: pooled local NRMSE < 3% on all 12 layers)
+    log : logs/run_full_numeric.console.log
+    note: conservative per-sample tail is 3.78% at layer 11; see results.json
