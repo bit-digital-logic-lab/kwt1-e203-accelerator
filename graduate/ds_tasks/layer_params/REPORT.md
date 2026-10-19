@@ -44,6 +44,27 @@
 CPU 复跑得最差 `0.147048%`，激活尺度最大差 `6.99e-10`、49/3072 偏置差 1 LSB、权重/尺度一致；
 故 **npz/JSON 哈希是设备绑定的**，复现须用同一 `--device`。
 
+## 1b. 验收修正（2026-10-19）：浮点 NRMSE 门限跨设备复验
+
+**问题**：主验收 `verify_manifest.py --device auto`（不设线程环境变量）退出 1。哈希、训练来源、
+12 层整数权重/偏置、INT32、`<3%` 全部通过，但 11 层 `abs(measured-recorded) < 1e-9` 失败。
+
+**诊断**：`nrmse` 的参考项 `val_x @ W + b` 是 FP32 CPU BLAS 归约，其求和顺序依赖 BLAS/OMP
+线程数（记录值来自 4 线程，验收默认 12 线程）与产生激活的设备（CUDA 冻结 → CPU 复验）。
+实测：同设备线程 1/2/8/12 相对记录 4 的最大 `|d|` = `2.0e-8` 百分点；跨设备 CUDA→CPU 最大
+`|d|` = `1.5e-6` 百分点（相对 `1.4e-5`）。`1e-9` 绝对门限在浮点归约上不可满足。
+
+**修正**（仅 `verify_manifest.py`，未改任何数值/npz/json）：整数张量与哈希保持逐位相等断言；
+仅对两个浮点派生量给有依据的容差——
+`NRMSE_RTOL = 1e-3` + `1e-6` 百分点下限（最差跨设备偏差的 ~70 倍，仍比 A11W10/A12W10 方案差
+紧 ~1e3 倍、比 3% 门限紧 ~3e4 倍）；`SCALE_RTOL = 1e-5` 用于激活尺度**来源**（远小于训练/验证
+派生尺度 ≥1.14e-2 的差距，仍拒绝验证集标定）。`<3%` 门限与最差层字段独立断言。
+
+**证据与限制**：`logs/nrmse_diagnosis.txt`。证据限制——容差基于本机 cuda/cpu 两设备与
+线程 1/2/4/8/12 的单次实测（torch 2.5.1+cu121 / numpy 2.1.3），非多机/多版本统计；
+未在 cuDNN 版本或 BLAS 实现变化下扫描；负控制仅在本机验证（记录值 +0.5% 仍被拒）。
+
+
 **硬件装载映射**：manifest 对应 `kwt_encoder_layers_ctrl.sv` 事务
 `sel7 W1(16384×int16)` + `sel8 b1(256×int32)`；每层 staged 装载 33,792 B，
 12 层权重容器 393,216 B（10 位未打包），打包后 240 KiB。
@@ -53,10 +74,12 @@ CPU 复跑得最差 `0.147048%`，激活尺度最大差 `6.99e-10`、49/3072 偏
 | 命令（worktree 根执行） | 退出码 | 结果 |
 | --- | ---: | --- |
 | `…/software/.venv/bin/python graduate/ds_tasks/layer_params/build_layer_manifest.py --device auto` | **0** | A12W10 worst `0.147047%` layer 11；控制点 A11W10 `0.181954%`；`wrote …json/.npz` |
-| `…/software/.venv/bin/python graduate/ds_tasks/layer_params/verify_manifest.py --device auto` | **0** | `VERIFY_PASS samples=480/480 worst=0.147047% layer=11` |
+| `…/software/.venv/bin/python graduate/ds_tasks/layer_params/verify_manifest.py --device auto`（无线程 env，主验收口径） | **0** | `VERIFY_PASS samples=480/480 worst=0.147047% layer=11`，`max_dev=1.99e-08pp` |
+| 同上 `--device cpu` | **0** | `VERIFY_PASS … layer=11`，`max_dev=1.45e-06pp`，尺度来源 max rel `2.6e-07` |
 | 同上 build 加 `--device cpu --output-dir /tmp/opencode/layer_params_cpu` | **0** | CPU 复跑 worst `0.147048%`（设备敏感性证据） |
 
-日志：`graduate/ds_tasks/layer_params/logs/build.log`、`logs/verify.log`。
+日志：`graduate/ds_tasks/layer_params/logs/build.log`、`logs/verify.log`（首次）、
+`logs/verify_auto.log`、`logs/verify_cpu.log`、`logs/nrmse_diagnosis.txt`。
 
 ## 3. 未证事项（不得当作完整研究生组验收）
 

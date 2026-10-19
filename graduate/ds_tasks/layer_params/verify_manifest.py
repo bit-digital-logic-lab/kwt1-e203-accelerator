@@ -7,8 +7,18 @@ FP32 FFN1 inputs, and checks that
   1. every activation scale equals ``max|training_x| / qmax_a`` (training only),
   2. every weight scale equals ``max|W[:, c]| / qmax_w`` (frozen FP32 weights),
   3. every integer weight/bias equals the manifest encoding,
-  4. every layer's validation NRMSE recomputes to the recorded value and <= 3%,
+  4. every layer's validation NRMSE recomputes to the recorded value, within a
+     documented cross-device tolerance, and stays <= 3%,
   5. no validation sample was used to derive a scale.
+
+Hashes, weight scales and integer tensors are checked *bit-exactly* (equality,
+not tolerance). Two floating-point quantities -- the NRMSE and the provenance of
+the activation scale -- carry a documented cross-device tolerance, because both
+depend on FP32 reductions over the FFN1 activations: the NRMSE's reference term
+(``val_x @ W + b``) is a CPU BLAS reduction, and the scale's ``max|train_x|``
+drifts between CUDA and CPU kernels. See NRMSE_RTOL and SCALE_RTOL below for the
+measured bounds. The 3% gate and the worst-layer fields are asserted
+independently on the measured values.
 
 Exit code 0 only when all checks pass.
 """
@@ -27,6 +37,50 @@ INT32_MIN = -(1 << 31)
 HERE = Path(__file__).resolve().parent
 REPO = HERE.parents[2]
 SOFTWARE = REPO / "software"
+
+# Cross-device re-verification tolerance for the floating-point NRMSE only.
+#
+# ``nrmse`` compares the dequantized integer result against the FP32 reference
+# ``val_x @ W + b``. That reference is a CPU BLAS reduction, so its summation
+# order -- and therefore the recorded percentage -- depends on the BLAS/OMP
+# thread count (even at a fixed device) and on the device that produced the
+# FFN1 inputs (the recorded manifest was frozen on CUDA). The value is thus
+# reproducible to ~1e-5 relative, never to the 1e-9 absolute that a naive gate
+# would demand.
+#
+# Measured worst-case deviation from the recorded values, torch 2.5.1+cu121 /
+# NumPy 2.1.3 (see logs/verify_auto.log, logs/verify_cpu.log):
+#   * same device (CUDA activations), OpenBLAS/OMP threads 1/2/8/12 vs the
+#     recorded thread-4 ordering: max |d| ~ 2.0e-8 pp, rel ~ 1.3e-7;
+#   * cross device (CUDA-frozen manifest, CPU re-verify via --device cpu):
+#     max |d| ~ 1.5e-6 pp, rel ~ 1.4e-5 (the largest relative error sits on the
+#     small-NRMSE layer 2).
+# We allow rtol = 1e-3 -- ~70x the worst observed cross-device deviation, while
+# still ~3e2x tighter than the gap between candidate schemes (A11W10 vs A12W10
+# differ by ~3.5e-2 pp) and ~3e4x tighter than the 3% contest gate -- plus a
+# 1e-6 percentage-point absolute floor.
+NRMSE_RTOL = 1e-3
+NRMSE_ATOL_PCT = 1e-6
+
+# Cross-device tolerance for the *provenance* of the activation scale only.
+#
+# ``sx`` is recomputed from the training activations produced by the current
+# device: ``max|train_x| / qmax_a``. Those activations are the FP32 FFN1 inputs
+# and therefore drift slightly between CUDA (cuDNN) and CPU kernels, so the
+# CUDA-frozen ``sx`` is not bit-identical when re-derived on CPU. The check is
+# still a provenance gate -- it must reject a scale derived from the *validation*
+# split -- and the tolerance is far below that distinction:
+#   * measured CUDA-frozen vs CPU-recomputed scale drift (this run): rel <= 2.7e-7;
+#   * train-derived vs validation-derived scale gap: rel >= 1.14e-2 (smallest on
+#     layer 6). SCALE_RTOL = 1e-5 sits ~40x above the observed drift and ~1e3x
+#     below the provenance gap, so using validation data would still fail.
+# The frozen NPZ scale itself is never altered; the integer weights/biases and
+# all hashes are still checked bit-exactly.
+SCALE_RTOL = 1e-5
+
+
+def nrmse_tolerance(recorded):
+    return NRMSE_ATOL_PCT + NRMSE_RTOL * abs(recorded)
 
 
 def sha256(path):
@@ -111,6 +165,7 @@ def main():
 
     frozen = np.load(npz_path, allow_pickle=False)
     recomputed_worst = 0.0
+    worst_nrmse_dev = 0.0
     for layer in range(LAYERS):
         name = f"layer{layer + 1:02}"
         base = f"{PREFIX}/enc_layers/{layer}/ffn/layer_with_weights-0"
@@ -126,7 +181,10 @@ def main():
         qb_raw = frozen[name + "_bias"]
         qw = qw_raw.astype(np.int64)
         qb = qb_raw.astype(np.int64)
-        check(np.isclose(sx, sx_expect, rtol=0, atol=0), f"L{layer+1} scale from training only")
+        check(abs(sx - sx_expect) <= SCALE_RTOL * abs(sx_expect),
+              f"L{layer+1} scale from training only "
+              f"(sx={sx:.6e} train_max/{qmax_a}={sx_expect:.6e}, "
+              f"rel={abs(sx - sx_expect)/abs(sx_expect):.2e} <= {SCALE_RTOL:g})")
         check(np.array_equal(sw, sw_expect), f"L{layer+1} weight scales from frozen FP32")
         check(np.array_equal(qw, qsym(weight, sw, qmax_w)), f"L{layer+1} integer weights")
         check(np.array_equal(qb, np.rint(bias.astype(np.float64) / (sx * sw)).astype(np.int64)),
@@ -140,13 +198,22 @@ def main():
         approx = acc.astype(np.float64) * (sx * sw)
         measured = nrmse(approx, val_x @ weight + bias)
         recorded = manifest["layers"][layer]["validation_nrmse_pct"]
-        check(abs(measured - recorded) < 1e-9, f"L{layer+1} validation NRMSE {measured:.6f}%")
+        deviation = abs(measured - recorded)
+        worst_nrmse_dev = max(worst_nrmse_dev, deviation)
+        tol = nrmse_tolerance(recorded)
+        check(deviation <= tol,
+              f"L{layer+1} validation NRMSE {measured:.6f}% "
+              f"(recorded {recorded:.6f}%, |d|={deviation:.2e} <= {tol:.2e})")
         check(measured <= manifest["contest_target_nrmse_pct"],
               f"L{layer+1} below {manifest['contest_target_nrmse_pct']}% target")
         recomputed_worst = max(recomputed_worst, measured)
 
-    check(abs(recomputed_worst - manifest["worst_validation_nrmse_pct"]) < 1e-9,
-          f"worst validation NRMSE {recomputed_worst:.6f}%")
+    worst_tol = nrmse_tolerance(manifest["worst_validation_nrmse_pct"])
+    check(abs(recomputed_worst - manifest["worst_validation_nrmse_pct"]) <= worst_tol,
+          f"worst validation NRMSE {recomputed_worst:.6f}% "
+          f"(recorded {manifest['worst_validation_nrmse_pct']:.6f}%, "
+          f"|d|={abs(recomputed_worst - manifest['worst_validation_nrmse_pct']):.2e} "
+          f"<= {worst_tol:.2e})")
     check(manifest["worst_layer"] == max(manifest["layers"],
                                          key=lambda x: x["validation_nrmse_pct"])["layer"],
           "worst layer field")
@@ -155,7 +222,8 @@ def main():
         print(f"VERIFY_FAIL {len(failures)} check(s)")
         return 1
     print(f"VERIFY_PASS samples={len(train_ids)}/{len(val_ids)} "
-          f"worst={recomputed_worst:.6f}% layer={manifest['worst_layer']}")
+          f"worst={recomputed_worst:.6f}% layer={manifest['worst_layer']} "
+          f"nrmse_rtol={NRMSE_RTOL:g} max_dev={worst_nrmse_dev:.2e}pp")
     return 0
 
 
