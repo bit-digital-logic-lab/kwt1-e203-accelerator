@@ -1,0 +1,583 @@
+{
+  "samples": 480,
+  "partition": "validation",
+  "inputs_sha256": {
+    "/home/yang/Desktop/ic设计竞赛/software/.build/quant_samples_12labels_40.npz": "43d639fb64ea8d907db967b071010e41e68827368532880ba8a99b92769bbae8",
+    "/home/yang/Desktop/ic设计竞赛/software/results/ffn1_a12w10_static_sym_12labels_40.npz": "10c481c7a79d0ee8063ad807f8c0f685769c2c8e1dbcdb5f33079919dfeef367",
+    "/home/yang/Desktop/ic设计竞赛/software/weights/kwt1_fp32.npz": "8f359abf7adbe287b8f89fca98af46194f98f90f2146784731bff551a155825a"
+  },
+  "format": "1024 blocks/layer; u16 mask, 1025 u16 byte offsets, byte-padded signed W10 values",
+  "dense_w10_bytes": 245760,
+  "dense_w16_bytes": 393216,
+  "metric": "max over 12 layers of sqrt(sum((approx-fp32)^2)/max(sum(fp32^2),1e-16))",
+  "rows": [
+    {
+      "threshold": 0,
+      "layers": [
+        {
+          "layer": 1,
+          "nrmse_pct": 0.10992315871347236,
+          "encoded_weight_bytes": 24547
+        },
+        {
+          "layer": 2,
+          "nrmse_pct": 0.10654056425839734,
+          "encoded_weight_bytes": 24540
+        },
+        {
+          "layer": 3,
+          "nrmse_pct": 0.1157609277237067,
+          "encoded_weight_bytes": 24532
+        },
+        {
+          "layer": 4,
+          "nrmse_pct": 0.12925335040175637,
+          "encoded_weight_bytes": 24544
+        },
+        {
+          "layer": 5,
+          "nrmse_pct": 0.12369918770626889,
+          "encoded_weight_bytes": 24534
+        },
+        {
+          "layer": 6,
+          "nrmse_pct": 0.11779834273454054,
+          "encoded_weight_bytes": 24537
+        },
+        {
+          "layer": 7,
+          "nrmse_pct": 0.11715911742092396,
+          "encoded_weight_bytes": 24547
+        },
+        {
+          "layer": 8,
+          "nrmse_pct": 0.11996893891235139,
+          "encoded_weight_bytes": 24535
+        },
+        {
+          "layer": 9,
+          "nrmse_pct": 0.11735844472371562,
+          "encoded_weight_bytes": 24543
+        },
+        {
+          "layer": 10,
+          "nrmse_pct": 0.13117368473532018,
+          "encoded_weight_bytes": 24537
+        },
+        {
+          "layer": 11,
+          "nrmse_pct": 0.14704773967846563,
+          "encoded_weight_bytes": 24536
+        },
+        {
+          "layer": 12,
+          "nrmse_pct": 0.14342915247623672,
+          "encoded_weight_bytes": 24545
+        }
+      ],
+      "encoded_weight_bytes": 294477,
+      "zero_weights": 459,
+      "worst_nrmse_pct": 0.14704773967846563,
+      "zero_weight_pct": 0.23345947265625,
+      "vs_dense_w10_pct": 19.822998046874996,
+      "vs_dense_w16_pct": -25.110626220703125
+    },
+    {
+      "threshold": 1,
+      "layers": [
+        {
+          "layer": 1,
+          "nrmse_pct": 0.11285178976014543,
+          "encoded_weight_bytes": 24485
+        },
+        {
+          "layer": 2,
+          "nrmse_pct": 0.10669542322482885,
+          "encoded_weight_bytes": 24464
+        },
+        {
+          "layer": 3,
+          "nrmse_pct": 0.11748341866669318,
+          "encoded_weight_bytes": 24464
+        },
+        {
+          "layer": 4,
+          "nrmse_pct": 0.13239345153389934,
+          "encoded_weight_bytes": 24464
+        },
+        {
+          "layer": 5,
+          "nrmse_pct": 0.1280887703070399,
+          "encoded_weight_bytes": 24458
+        },
+        {
+          "layer": 6,
+          "nrmse_pct": 0.12213855341555709,
+          "encoded_weight_bytes": 24453
+        },
+        {
+          "layer": 7,
+          "nrmse_pct": 0.12096075414334254,
+          "encoded_weight_bytes": 24476
+        },
+        {
+          "layer": 8,
+          "nrmse_pct": 0.1211837322077613,
+          "encoded_weight_bytes": 24465
+        },
+        {
+          "layer": 9,
+          "nrmse_pct": 0.1217776735641134,
+          "encoded_weight_bytes": 24469
+        },
+        {
+          "layer": 10,
+          "nrmse_pct": 0.13459210078126627,
+          "encoded_weight_bytes": 24450
+        },
+        {
+          "layer": 11,
+          "nrmse_pct": 0.1512105672441033,
+          "encoded_weight_bytes": 24466
+        },
+        {
+          "layer": 12,
+          "nrmse_pct": 0.1465983821817795,
+          "encoded_weight_bytes": 24466
+        }
+      ],
+      "encoded_weight_bytes": 293580,
+      "zero_weights": 1356,
+      "worst_nrmse_pct": 0.1512105672441033,
+      "zero_weight_pct": 0.689697265625,
+      "vs_dense_w10_pct": 19.4580078125,
+      "vs_dense_w16_pct": -25.3387451171875
+    },
+    {
+      "threshold": 2,
+      "layers": [
+        {
+          "layer": 1,
+          "nrmse_pct": 0.1269272190618678,
+          "encoded_weight_bytes": 24416
+        },
+        {
+          "layer": 2,
+          "nrmse_pct": 0.12119720932202935,
+          "encoded_weight_bytes": 24383
+        },
+        {
+          "layer": 3,
+          "nrmse_pct": 0.12619909304527857,
+          "encoded_weight_bytes": 24405
+        },
+        {
+          "layer": 4,
+          "nrmse_pct": 0.14545809489857006,
+          "encoded_weight_bytes": 24390
+        },
+        {
+          "layer": 5,
+          "nrmse_pct": 0.1416052306712,
+          "encoded_weight_bytes": 24380
+        },
+        {
+          "layer": 6,
+          "nrmse_pct": 0.12677969491715693,
+          "encoded_weight_bytes": 24359
+        },
+        {
+          "layer": 7,
+          "nrmse_pct": 0.13094548513345416,
+          "encoded_weight_bytes": 24416
+        },
+        {
+          "layer": 8,
+          "nrmse_pct": 0.13537967049527655,
+          "encoded_weight_bytes": 24391
+        },
+        {
+          "layer": 9,
+          "nrmse_pct": 0.12807869152792642,
+          "encoded_weight_bytes": 24403
+        },
+        {
+          "layer": 10,
+          "nrmse_pct": 0.14509819146374417,
+          "encoded_weight_bytes": 24353
+        },
+        {
+          "layer": 11,
+          "nrmse_pct": 0.16091708935752236,
+          "encoded_weight_bytes": 24404
+        },
+        {
+          "layer": 12,
+          "nrmse_pct": 0.15939711416661115,
+          "encoded_weight_bytes": 24398
+        }
+      ],
+      "encoded_weight_bytes": 292698,
+      "zero_weights": 2238,
+      "worst_nrmse_pct": 0.16091708935752236,
+      "zero_weight_pct": 1.1383056640625,
+      "vs_dense_w10_pct": 19.099121093750004,
+      "vs_dense_w16_pct": -25.56304931640625
+    },
+    {
+      "threshold": 4,
+      "layers": [
+        {
+          "layer": 1,
+          "nrmse_pct": 0.1913474193988783,
+          "encoded_weight_bytes": 24275
+        },
+        {
+          "layer": 2,
+          "nrmse_pct": 0.1717992800470714,
+          "encoded_weight_bytes": 24258
+        },
+        {
+          "layer": 3,
+          "nrmse_pct": 0.16227103988652294,
+          "encoded_weight_bytes": 24289
+        },
+        {
+          "layer": 4,
+          "nrmse_pct": 0.25372103559494974,
+          "encoded_weight_bytes": 24220
+        },
+        {
+          "layer": 5,
+          "nrmse_pct": 0.20292005529052937,
+          "encoded_weight_bytes": 24235
+        },
+        {
+          "layer": 6,
+          "nrmse_pct": 0.19420281016405688,
+          "encoded_weight_bytes": 24205
+        },
+        {
+          "layer": 7,
+          "nrmse_pct": 0.15755248140762257,
+          "encoded_weight_bytes": 24287
+        },
+        {
+          "layer": 8,
+          "nrmse_pct": 0.1729684083251971,
+          "encoded_weight_bytes": 24254
+        },
+        {
+          "layer": 9,
+          "nrmse_pct": 0.19817479097890164,
+          "encoded_weight_bytes": 24270
+        },
+        {
+          "layer": 10,
+          "nrmse_pct": 0.20579392644047875,
+          "encoded_weight_bytes": 24191
+        },
+        {
+          "layer": 11,
+          "nrmse_pct": 0.23603548053898657,
+          "encoded_weight_bytes": 24247
+        },
+        {
+          "layer": 12,
+          "nrmse_pct": 0.22637276733952624,
+          "encoded_weight_bytes": 24259
+        }
+      ],
+      "encoded_weight_bytes": 290990,
+      "zero_weights": 3940,
+      "worst_nrmse_pct": 0.25372103559494974,
+      "zero_weight_pct": 2.0039876302083335,
+      "vs_dense_w10_pct": 18.404134114583325,
+      "vs_dense_w16_pct": -25.997416178385414
+    },
+    {
+      "threshold": 8,
+      "layers": [
+        {
+          "layer": 1,
+          "nrmse_pct": 0.35922414864344987,
+          "encoded_weight_bytes": 23985
+        },
+        {
+          "layer": 2,
+          "nrmse_pct": 0.3592541189057082,
+          "encoded_weight_bytes": 23958
+        },
+        {
+          "layer": 3,
+          "nrmse_pct": 0.37767543697373823,
+          "encoded_weight_bytes": 24029
+        },
+        {
+          "layer": 4,
+          "nrmse_pct": 0.482718813597058,
+          "encoded_weight_bytes": 23915
+        },
+        {
+          "layer": 5,
+          "nrmse_pct": 0.3929182291550637,
+          "encoded_weight_bytes": 23936
+        },
+        {
+          "layer": 6,
+          "nrmse_pct": 0.3832911601074959,
+          "encoded_weight_bytes": 23890
+        },
+        {
+          "layer": 7,
+          "nrmse_pct": 0.33377280770113005,
+          "encoded_weight_bytes": 24009
+        },
+        {
+          "layer": 8,
+          "nrmse_pct": 0.4705843415468018,
+          "encoded_weight_bytes": 23911
+        },
+        {
+          "layer": 9,
+          "nrmse_pct": 0.3555537619700224,
+          "encoded_weight_bytes": 24026
+        },
+        {
+          "layer": 10,
+          "nrmse_pct": 0.4105117106894597,
+          "encoded_weight_bytes": 23896
+        },
+        {
+          "layer": 11,
+          "nrmse_pct": 0.48509772235972515,
+          "encoded_weight_bytes": 23936
+        },
+        {
+          "layer": 12,
+          "nrmse_pct": 0.45019625353239745,
+          "encoded_weight_bytes": 23986
+        }
+      ],
+      "encoded_weight_bytes": 287477,
+      "zero_weights": 7417,
+      "worst_nrmse_pct": 0.48509772235972515,
+      "zero_weight_pct": 3.7724812825520835,
+      "vs_dense_w10_pct": 16.974690755208343,
+      "vs_dense_w16_pct": -26.89081827799479
+    },
+    {
+      "threshold": 16,
+      "layers": [
+        {
+          "layer": 1,
+          "nrmse_pct": 1.2251097666549713,
+          "encoded_weight_bytes": 23333
+        },
+        {
+          "layer": 2,
+          "nrmse_pct": 0.8619409368292283,
+          "encoded_weight_bytes": 23375
+        },
+        {
+          "layer": 3,
+          "nrmse_pct": 1.0117865228906366,
+          "encoded_weight_bytes": 23465
+        },
+        {
+          "layer": 4,
+          "nrmse_pct": 1.1520902859566848,
+          "encoded_weight_bytes": 23296
+        },
+        {
+          "layer": 5,
+          "nrmse_pct": 1.0247971118000767,
+          "encoded_weight_bytes": 23323
+        },
+        {
+          "layer": 6,
+          "nrmse_pct": 1.0176251606530984,
+          "encoded_weight_bytes": 23181
+        },
+        {
+          "layer": 7,
+          "nrmse_pct": 0.9135395476927224,
+          "encoded_weight_bytes": 23415
+        },
+        {
+          "layer": 8,
+          "nrmse_pct": 1.049255764529135,
+          "encoded_weight_bytes": 23311
+        },
+        {
+          "layer": 9,
+          "nrmse_pct": 0.9497901937408484,
+          "encoded_weight_bytes": 23515
+        },
+        {
+          "layer": 10,
+          "nrmse_pct": 0.9862881594735138,
+          "encoded_weight_bytes": 23320
+        },
+        {
+          "layer": 11,
+          "nrmse_pct": 1.2636487445951397,
+          "encoded_weight_bytes": 23275
+        },
+        {
+          "layer": 12,
+          "nrmse_pct": 1.1692143060459552,
+          "encoded_weight_bytes": 23417
+        }
+      ],
+      "encoded_weight_bytes": 280226,
+      "zero_weights": 14314,
+      "worst_nrmse_pct": 1.2636487445951397,
+      "zero_weight_pct": 7.280476888020833,
+      "vs_dense_w10_pct": 14.024251302083336,
+      "vs_dense_w16_pct": -28.734842936197914
+    },
+    {
+      "threshold": 32,
+      "layers": [
+        {
+          "layer": 1,
+          "nrmse_pct": 2.813747248140557,
+          "encoded_weight_bytes": 22026
+        },
+        {
+          "layer": 2,
+          "nrmse_pct": 2.54200984020449,
+          "encoded_weight_bytes": 22160
+        },
+        {
+          "layer": 3,
+          "nrmse_pct": 2.948247130894167,
+          "encoded_weight_bytes": 22177
+        },
+        {
+          "layer": 4,
+          "nrmse_pct": 3.24448067439503,
+          "encoded_weight_bytes": 21906
+        },
+        {
+          "layer": 5,
+          "nrmse_pct": 2.7263861344546196,
+          "encoded_weight_bytes": 21973
+        },
+        {
+          "layer": 6,
+          "nrmse_pct": 2.310559225755841,
+          "encoded_weight_bytes": 21610
+        },
+        {
+          "layer": 7,
+          "nrmse_pct": 2.8658847976529,
+          "encoded_weight_bytes": 22099
+        },
+        {
+          "layer": 8,
+          "nrmse_pct": 2.465446256537544,
+          "encoded_weight_bytes": 21984
+        },
+        {
+          "layer": 9,
+          "nrmse_pct": 2.764106657912481,
+          "encoded_weight_bytes": 22284
+        },
+        {
+          "layer": 10,
+          "nrmse_pct": 3.1113111845065218,
+          "encoded_weight_bytes": 21978
+        },
+        {
+          "layer": 11,
+          "nrmse_pct": 3.252223940819114,
+          "encoded_weight_bytes": 21957
+        },
+        {
+          "layer": 12,
+          "nrmse_pct": 3.263698870112582,
+          "encoded_weight_bytes": 22196
+        }
+      ],
+      "encoded_weight_bytes": 264350,
+      "zero_weights": 28113,
+      "worst_nrmse_pct": 3.263698870112582,
+      "zero_weight_pct": 14.29901123046875,
+      "vs_dense_w10_pct": 7.564290364583326,
+      "vs_dense_w16_pct": -32.772318522135414
+    },
+    {
+      "threshold": 64,
+      "layers": [
+        {
+          "layer": 1,
+          "nrmse_pct": 7.232743428125311,
+          "encoded_weight_bytes": 19272
+        },
+        {
+          "layer": 2,
+          "nrmse_pct": 7.078408964718652,
+          "encoded_weight_bytes": 19422
+        },
+        {
+          "layer": 3,
+          "nrmse_pct": 7.670904071321967,
+          "encoded_weight_bytes": 19490
+        },
+        {
+          "layer": 4,
+          "nrmse_pct": 8.57263428071509,
+          "encoded_weight_bytes": 19144
+        },
+        {
+          "layer": 5,
+          "nrmse_pct": 7.845782341136502,
+          "encoded_weight_bytes": 19180
+        },
+        {
+          "layer": 6,
+          "nrmse_pct": 7.754296286358072,
+          "encoded_weight_bytes": 18434
+        },
+        {
+          "layer": 7,
+          "nrmse_pct": 6.646078408298127,
+          "encoded_weight_bytes": 19418
+        },
+        {
+          "layer": 8,
+          "nrmse_pct": 7.039796638774269,
+          "encoded_weight_bytes": 19236
+        },
+        {
+          "layer": 9,
+          "nrmse_pct": 7.346471771738427,
+          "encoded_weight_bytes": 19686
+        },
+        {
+          "layer": 10,
+          "nrmse_pct": 8.61591650237774,
+          "encoded_weight_bytes": 19014
+        },
+        {
+          "layer": 11,
+          "nrmse_pct": 9.110797919698458,
+          "encoded_weight_bytes": 19070
+        },
+        {
+          "layer": 12,
+          "nrmse_pct": 8.82529000255524,
+          "encoded_weight_bytes": 19559
+        }
+      ],
+      "encoded_weight_bytes": 230925,
+      "zero_weights": 54914,
+      "worst_nrmse_pct": 9.110797919698458,
+      "zero_weight_pct": 27.930704752604168,
+      "vs_dense_w10_pct": -6.036376953125,
+      "vs_dense_w16_pct": -41.272735595703125
+    }
+  ]
+}
