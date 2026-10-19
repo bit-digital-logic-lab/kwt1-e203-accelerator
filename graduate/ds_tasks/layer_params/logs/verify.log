@@ -1,0 +1,133 @@
+ok   sample cache sha256
+ok   weight archive sha256
+ok   frozen npz sha256
+ok   manifest declares no validation calibration
+ok   manifest declares no test partition
+ok   training sample count
+ok   validation sample count
+ok   no train/val path overlap
+ok   activation shape (960, 12, 99, 64)
+ok   qmax fields
+ok   L1 scale from training only
+ok   L1 weight scales from frozen FP32
+ok   L1 integer weights
+ok   L1 integer bias
+ok   L1 weight shape/dtype
+ok   L1 bias shape/dtype
+ok   L1 weight range
+ok   L1 INT32 accumulate
+ok   L1 validation NRMSE 0.109923%
+ok   L1 below 3.0% target
+ok   L2 scale from training only
+ok   L2 weight scales from frozen FP32
+ok   L2 integer weights
+ok   L2 integer bias
+ok   L2 weight shape/dtype
+ok   L2 bias shape/dtype
+ok   L2 weight range
+ok   L2 INT32 accumulate
+ok   L2 validation NRMSE 0.106543%
+ok   L2 below 3.0% target
+ok   L3 scale from training only
+ok   L3 weight scales from frozen FP32
+ok   L3 integer weights
+ok   L3 integer bias
+ok   L3 weight shape/dtype
+ok   L3 bias shape/dtype
+ok   L3 weight range
+ok   L3 INT32 accumulate
+ok   L3 validation NRMSE 0.115760%
+ok   L3 below 3.0% target
+ok   L4 scale from training only
+ok   L4 weight scales from frozen FP32
+ok   L4 integer weights
+ok   L4 integer bias
+ok   L4 weight shape/dtype
+ok   L4 bias shape/dtype
+ok   L4 weight range
+ok   L4 INT32 accumulate
+ok   L4 validation NRMSE 0.129254%
+ok   L4 below 3.0% target
+ok   L5 scale from training only
+ok   L5 weight scales from frozen FP32
+ok   L5 integer weights
+ok   L5 integer bias
+ok   L5 weight shape/dtype
+ok   L5 bias shape/dtype
+ok   L5 weight range
+ok   L5 INT32 accumulate
+ok   L5 validation NRMSE 0.123703%
+ok   L5 below 3.0% target
+ok   L6 scale from training only
+ok   L6 weight scales from frozen FP32
+ok   L6 integer weights
+ok   L6 integer bias
+ok   L6 weight shape/dtype
+ok   L6 bias shape/dtype
+ok   L6 weight range
+ok   L6 INT32 accumulate
+ok   L6 validation NRMSE 0.117800%
+ok   L6 below 3.0% target
+ok   L7 scale from training only
+ok   L7 weight scales from frozen FP32
+ok   L7 integer weights
+ok   L7 integer bias
+ok   L7 weight shape/dtype
+ok   L7 bias shape/dtype
+ok   L7 weight range
+ok   L7 INT32 accumulate
+ok   L7 validation NRMSE 0.117163%
+ok   L7 below 3.0% target
+ok   L8 scale from training only
+ok   L8 weight scales from frozen FP32
+ok   L8 integer weights
+ok   L8 integer bias
+ok   L8 weight shape/dtype
+ok   L8 bias shape/dtype
+ok   L8 weight range
+ok   L8 INT32 accumulate
+ok   L8 validation NRMSE 0.119971%
+ok   L8 below 3.0% target
+ok   L9 scale from training only
+ok   L9 weight scales from frozen FP32
+ok   L9 integer weights
+ok   L9 integer bias
+ok   L9 weight shape/dtype
+ok   L9 bias shape/dtype
+ok   L9 weight range
+ok   L9 INT32 accumulate
+ok   L9 validation NRMSE 0.117348%
+ok   L9 below 3.0% target
+ok   L10 scale from training only
+ok   L10 weight scales from frozen FP32
+ok   L10 integer weights
+ok   L10 integer bias
+ok   L10 weight shape/dtype
+ok   L10 bias shape/dtype
+ok   L10 weight range
+ok   L10 INT32 accumulate
+ok   L10 validation NRMSE 0.131176%
+ok   L10 below 3.0% target
+ok   L11 scale from training only
+ok   L11 weight scales from frozen FP32
+ok   L11 integer weights
+ok   L11 integer bias
+ok   L11 weight shape/dtype
+ok   L11 bias shape/dtype
+ok   L11 weight range
+ok   L11 INT32 accumulate
+ok   L11 validation NRMSE 0.147047%
+ok   L11 below 3.0% target
+ok   L12 scale from training only
+ok   L12 weight scales from frozen FP32
+ok   L12 integer weights
+ok   L12 integer bias
+ok   L12 weight shape/dtype
+ok   L12 bias shape/dtype
+ok   L12 weight range
+ok   L12 INT32 accumulate
+ok   L12 validation NRMSE 0.143427%
+ok   L12 below 3.0% target
+ok   worst validation NRMSE 0.147047%
+ok   worst layer field
+VERIFY_PASS samples=480/480 worst=0.147047% layer=11

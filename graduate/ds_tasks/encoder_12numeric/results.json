@@ -1,0 +1,90 @@
+{
+  "task": "encoder_12numeric",
+  "evidence_levels": {
+    "software_reference": "yes (12 distinct layers, distinct scales; train-calibrated, validation-only evaluation)",
+    "rtl_bit_exact": "see chain_verify.py (run separately)",
+    "e203": "no",
+    "synthesis": "no",
+    "official_acceptance": "no"
+  },
+  "calibration": {
+    "file": "frozen_12layer_calib.json",
+    "sha256": "5f039ec745e2b4dda1e6de5abb6fdf97316c3e98a0265c31212b53eee669d444",
+    "split": "training",
+    "samples": 240,
+    "gradient_free": true
+  },
+  "validation": {
+    "dataset_samples": 240,
+    "real_samples": [
+      "sample_00_encoder.npy",
+      "sample_01_encoder.npy",
+      "sample_02_encoder.npy",
+      "sample_03_encoder.npy",
+      "sample_04_encoder.npy",
+      "sample_05_encoder.npy"
+    ],
+    "samples_evaluated": 246,
+    "per_layer_y_nrmse_dataset": [
+      0.009720670719711527,
+      0.014282637373708128,
+      0.018072248287771243,
+      0.020252095738673235,
+      0.022400964367328434,
+      0.0217168974719188,
+      0.023350058836777866,
+      0.023167912474779527,
+      0.023857130253764968,
+      0.0252231071326686,
+      0.026961361342693956,
+      0.037838871019377246
+    ],
+    "per_layer_y_nrmse_real": [
+      0.008114606557727218,
+      0.010325417685228844,
+      0.013038597230842042,
+      0.014681575299383921,
+      0.016645631387007618,
+      0.017960707933213874,
+      0.018108361861173566,
+      0.018466790090418416,
+      0.019652757589931777,
+      0.02075341048601732,
+      0.023068194244445145,
+      0.03127906715157293
+    ],
+    "worst_layer": 11,
+    "worst_y_nrmse": 0.037838871019377246,
+    "worst_stage_overall": {
+      "nrmse": 0.06690662527090276,
+      "layer": 10,
+      "stage": "a",
+      "sample": "dataset_val:./stop/97ae8b25_nohash_0.wav"
+    },
+    "stage_max_nrmse": {
+      "a": 0.06690662527090276,
+      "r1": 0.029091675132411635,
+      "g": 0.04336480584670762,
+      "f": 0.039519021816278456,
+      "r2": 0.03708833796617621,
+      "y": 0.037838871019377246
+    },
+    "nrmse_limit": 0.03,
+    "all_layers_below_limit": false
+  },
+  "audit": {
+    "calibration_split_is_training": true,
+    "validation_used_for_calibration": false,
+    "calibration_file_unchanged_by_evaluation": true,
+    "layers_have_distinct_scales": true,
+    "layers_have_distinct_weights": true
+  },
+  "selftest": {
+    "layernorm": "bit-exact",
+    "residual": "bit-exact",
+    "gelu": "bit-exact",
+    "attention": "bit-exact",
+    "samples": 1
+  },
+  "runtime_seconds": 98.48
+}

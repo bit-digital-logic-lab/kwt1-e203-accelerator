@@ -1,0 +1,11 @@
+EXIT=1
+
+# full run:        python3 audit_dataset.py                -> 1  (logs/audit.log)
+# quick run:       python3 audit_dataset.py --skip-archive -> 1  (logs/audit_quick.log)
+# exit code meaning: 0 all checks pass / 1 rule violations detected / 2 infrastructure error.
+# Exit 1 is now carried by the 3 real findings only: 2x validation-sample calibration
+# leakage in the single-layer encoder + 1x legacy testing-partition cache.  The former
+# false positive "12x .npy hash mismatch" is gone: the manifest records
+# tensor-content hashes (np.load(file).tobytes(), validate_real_input_chain.py:93/95),
+# which match 12/12; .npy file-container hashes are recorded separately and are not
+# comparable to the recorded content hashes.

@@ -1,0 +1,18 @@
+train samples used for calibration: ['sample_01_encoder.npy', 'sample_03_encoder.npy', 'sample_04_encoder.npy']
+validation samples (evaluation only): ['sample_00_encoder.npy', 'sample_02_encoder.npy', 'sample_05_encoder.npy']
+  sample_01_encoder.npy: s_x=1.629903e-03 s_a=3.246386e-04 s_g=9.693081e-04 s_r1=1.742839e-03 s_r2=2.066677e-03 s_out=1.868519e-03
+  sample_03_encoder.npy: s_x=1.628495e-03 s_a=2.705700e-04 s_g=9.488163e-04 s_r1=1.729393e-03 s_r2=2.112504e-03 s_out=1.884417e-03
+  sample_04_encoder.npy: s_x=1.961475e-03 s_a=2.620975e-04 s_g=1.433429e-03 s_r1=1.944069e-03 s_r2=2.280583e-03 s_out=1.919566e-03
+training-split aggregate (per-tensor static max):
+  train_max s_x = 1.961475e-03
+  train_max s_a = 3.246386e-04
+  train_max s_g = 1.433429e-03
+  train_max s_r1 = 1.944069e-03
+  train_max s_r2 = 2.280583e-03
+  train_max s_out = 1.919566e-03
+scales currently baked into vectors/meta.json (sample_00-derived):
+  declared s_x = 1.356254e-03  train_max/train rel-diff = 44.624%
+  declared s_a = 2.712451e-04  train_max/train rel-diff = 19.685%
+  declared s_out = 1.831582e-03  train_max/train rel-diff = 4.804%
+gate threshold NRMSE_THRESHOLD = 3.00% (fixed spec constant; not derived from any sample)
+SPLIT_OK n_train=3 n_val=3 calibrated_samples=3 threshold_source=constant

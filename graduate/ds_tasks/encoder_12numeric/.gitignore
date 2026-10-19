@@ -1,0 +1,4 @@
+# RTL build products (Verilator obj_dir, per-layer include dirs and hex stimulus)
+build/
+__pycache__/
+*.pyc

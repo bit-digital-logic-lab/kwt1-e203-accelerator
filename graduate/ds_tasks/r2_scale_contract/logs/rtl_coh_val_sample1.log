@@ -1,0 +1,12 @@
+  q   6336/ 6336 bit-exact  OK0 @-1
+  k   6336/ 6336 bit-exact  OK0 @-1
+  v   6336/ 6336 bit-exact  OK0 @-1
+  p   9801/ 9801 bit-exact  OK0 @-1
+  c   6336/ 6336 bit-exact  OK0 @-1
+  o   6336/ 6336 bit-exact  OK0 @-1
+
+  cycles          = 2957728
+  bit-exact total = 41481/41481 mismatches=0
+  FP32 NRMSE      = 0.24970%  (row0 0.23368%, row98 0.30062%, maxabs 0.00282418)
+
+  RESULT: PASS

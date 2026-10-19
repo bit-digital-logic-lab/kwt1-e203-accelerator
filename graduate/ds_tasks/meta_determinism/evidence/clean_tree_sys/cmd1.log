@@ -1,0 +1,65 @@
+{
+  "T": 99,
+  "D": 64,
+  "act_bits": 12,
+  "w_bits": 10,
+  "scale_x": 0.001356253929119548,
+  "scale_wq": 0.00033734505540470786,
+  "scale_wk": 0.0004142023287640626,
+  "scale_wv": 0.00035431916933003705,
+  "scale_wo": 0.00039298957807910417,
+  "scale_q": 2.9281635639147945e-05,
+  "scale_k": 7.190573258710102e-05,
+  "scale_v": 6.150998599247836e-05,
+  "scale_ct": 3.075499299623918e-05,
+  "scale_o": 2.4752930245463735e-05,
+  "RQ": 6,
+  "RK": 7,
+  "RV": 7,
+  "RC": 14,
+  "RO": 11,
+  "F_BITS": 6,
+  "M_LUT": 14,
+  "G_SH": 20,
+  "KC": 6680,
+  "SH_KC": 38,
+  "sample_index": 0,
+  "input_file": "sample_00_encoder.npy",
+  "nrmse_fp32": 0.0015886401079165293,
+  "nrmse_row0_fp32": 0.0015766155848123138,
+  "nrmse_row_last_fp32": 0.001507706593226715,
+  "max_abs_err_fp32": 0.0012401617082750671,
+  "rms_ref_fp32": 0.21847778188924918,
+  "P_rowsum_min": 32710,
+  "P_rowsum_max": 32726,
+  "O_int_max": 22431,
+  "P_int_max": 2999
+}
+
+input X=int16 (99*64), weights int16 (64*64), bias int32 (64)
+expected: q,k,v,c,o int16 (99*64); p Q15 (99*99)
+GEN_OK M_A=5981 Q_A=16 scale_o=2.475293e-05 scale_a=2.712451e-04
+out_dir=/tmp/opencode/repro-sys/clean-tree-VwOaXK/graduate/encoder/vectors
+HEARTBEAT cycles=2000000 rows=0
+HEARTBEAT cycles=4000000 rows=57
+TB_DONE cycles=4700560 y=99 a=99 r1=99 g=99 f=99 r2=99 sat=0/0
+TB_PASS
+- /tmp/opencode/repro-sys/clean-tree-VwOaXK/graduate/encoder/tb/tb_encoder.sv:198: Verilog $finish
+- S i m u l a t i o n   R e p o r t: Verilator 5.030 2024-10-27
+- Verilator: $finish at 47ms; walltime 20.354 s; speed 2.312 ms/s
+- Verilator: cpu 20.333 s on 1 threads; alloced 90 MB
+  a  (requant attn): 99x64 bit-exact
+  r1 (resid1): 99x64 bit-exact
+  g  (gelu): 99x256 bit-exact
+  f  (ffn2): 99x64 bit-exact
+  r2 (resid2): 99x64 bit-exact
+  y  (ln2): 99x64 bit-exact
+FP32 NRMSE vs graduate golden (dequantised RTL vs FP32):
+  a  (attn_projected): NRMSE 0.1591%  max_abs 1.319e-03
+  r1 (residual1): NRMSE 0.1082%  max_abs 2.889e-03
+  g  (gelu): NRMSE 1.3987%  max_abs 1.293e-02
+  f  (ffn_out): NRMSE 1.3968%  max_abs 1.540e-02
+  r2 (residual2): NRMSE 0.7000%  max_abs 5.001e-02
+  y  (layer_output): NRMSE 0.7289%  max_abs 4.227e-02
+  worst-stage NRMSE 1.3987%  (threshold 3%)
+VERIFY_PASS

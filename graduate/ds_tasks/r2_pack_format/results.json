@@ -1,0 +1,495 @@
+{
+  "task": "r2_pack_format",
+  "format": {
+    "magic": "KWTP",
+    "version": 1,
+    "endianness": "little",
+    "header_bytes": 64,
+    "dirent_bytes": 48,
+    "align_bytes": 16,
+    "dtypes": {
+      "0": "int16",
+      "1": "int32",
+      "2": "fp32",
+      "3": "pack10",
+      "4": "pack12"
+    }
+  },
+  "inputs": {
+    "ffn1_npz": "software/results/ffn1_a12w10_static_sym.npz",
+    "ffn1_npz_sha256": "a77f60fb7c8560adbca73db3cf64dcd5501ec0108b96a1131a00aa722be1918e",
+    "fp32_npz": "software/weights/kwt1_fp32.npz",
+    "fp32_npz_sha256": "8f359abf7adbe287b8f89fca98af46194f98f90f2146784731bff551a155825a",
+    "real_dir": "software/validation/real_input_chain_20261017",
+    "train_samples": [
+      "sample_01_encoder.npy",
+      "sample_03_encoder.npy",
+      "sample_04_encoder.npy"
+    ],
+    "val_samples": [
+      "sample_00_encoder.npy",
+      "sample_02_encoder.npy",
+      "sample_05_encoder.npy"
+    ]
+  },
+  "calibration": {
+    "partition": "training only",
+    "method": "max-abs (gradient free)",
+    "train_max_abs": 4.015139579772949,
+    "activation_scale": 0.001961475124461626,
+    "act_bits": 12,
+    "act_qmax": 2047,
+    "weight_bits": 10,
+    "weight_qmax": 511,
+    "validation_used_for_calibration": false
+  },
+  "params_pack": {
+    "blob_bytes": 406720,
+    "nseg": 24,
+    "sha256": "fc3d929a8356184ad00d799fd7354126b60cc8c62d862f18edd62fa77c3cfa1d",
+    "roundtrip_mismatch": 0,
+    "tight10_bytes": 259264,
+    "tight10_mismatch": 0,
+    "tight12_bytes": 308416,
+    "tight12_mismatch": 0,
+    "entries": [
+      {
+        "name": "L00_W1",
+        "dtype": "int16",
+        "shape": [
+          64,
+          256
+        ],
+        "offset": 1216,
+        "nbytes": 32768
+      },
+      {
+        "name": "L00_b1",
+        "dtype": "int32",
+        "shape": [
+          256
+        ],
+        "offset": 33984,
+        "nbytes": 1024
+      },
+      {
+        "name": "L01_W1",
+        "dtype": "int16",
+        "shape": [
+          64,
+          256
+        ],
+        "offset": 35008,
+        "nbytes": 32768
+      },
+      {
+        "name": "L01_b1",
+        "dtype": "int32",
+        "shape": [
+          256
+        ],
+        "offset": 67776,
+        "nbytes": 1024
+      },
+      {
+        "name": "L02_W1",
+        "dtype": "int16",
+        "shape": [
+          64,
+          256
+        ],
+        "offset": 68800,
+        "nbytes": 32768
+      },
+      {
+        "name": "L02_b1",
+        "dtype": "int32",
+        "shape": [
+          256
+        ],
+        "offset": 101568,
+        "nbytes": 1024
+      },
+      {
+        "name": "L03_W1",
+        "dtype": "int16",
+        "shape": [
+          64,
+          256
+        ],
+        "offset": 102592,
+        "nbytes": 32768
+      },
+      {
+        "name": "L03_b1",
+        "dtype": "int32",
+        "shape": [
+          256
+        ],
+        "offset": 135360,
+        "nbytes": 1024
+      },
+      {
+        "name": "L04_W1",
+        "dtype": "int16",
+        "shape": [
+          64,
+          256
+        ],
+        "offset": 136384,
+        "nbytes": 32768
+      },
+      {
+        "name": "L04_b1",
+        "dtype": "int32",
+        "shape": [
+          256
+        ],
+        "offset": 169152,
+        "nbytes": 1024
+      },
+      {
+        "name": "L05_W1",
+        "dtype": "int16",
+        "shape": [
+          64,
+          256
+        ],
+        "offset": 170176,
+        "nbytes": 32768
+      },
+      {
+        "name": "L05_b1",
+        "dtype": "int32",
+        "shape": [
+          256
+        ],
+        "offset": 202944,
+        "nbytes": 1024
+      },
+      {
+        "name": "L06_W1",
+        "dtype": "int16",
+        "shape": [
+          64,
+          256
+        ],
+        "offset": 203968,
+        "nbytes": 32768
+      },
+      {
+        "name": "L06_b1",
+        "dtype": "int32",
+        "shape": [
+          256
+        ],
+        "offset": 236736,
+        "nbytes": 1024
+      },
+      {
+        "name": "L07_W1",
+        "dtype": "int16",
+        "shape": [
+          64,
+          256
+        ],
+        "offset": 237760,
+        "nbytes": 32768
+      },
+      {
+        "name": "L07_b1",
+        "dtype": "int32",
+        "shape": [
+          256
+        ],
+        "offset": 270528,
+        "nbytes": 1024
+      },
+      {
+        "name": "L08_W1",
+        "dtype": "int16",
+        "shape": [
+          64,
+          256
+        ],
+        "offset": 271552,
+        "nbytes": 32768
+      },
+      {
+        "name": "L08_b1",
+        "dtype": "int32",
+        "shape": [
+          256
+        ],
+        "offset": 304320,
+        "nbytes": 1024
+      },
+      {
+        "name": "L09_W1",
+        "dtype": "int16",
+        "shape": [
+          64,
+          256
+        ],
+        "offset": 305344,
+        "nbytes": 32768
+      },
+      {
+        "name": "L09_b1",
+        "dtype": "int32",
+        "shape": [
+          256
+        ],
+        "offset": 338112,
+        "nbytes": 1024
+      },
+      {
+        "name": "L10_W1",
+        "dtype": "int16",
+        "shape": [
+          64,
+          256
+        ],
+        "offset": 339136,
+        "nbytes": 32768
+      },
+      {
+        "name": "L10_b1",
+        "dtype": "int32",
+        "shape": [
+          256
+        ],
+        "offset": 371904,
+        "nbytes": 1024
+      },
+      {
+        "name": "L11_W1",
+        "dtype": "int16",
+        "shape": [
+          64,
+          256
+        ],
+        "offset": 372928,
+        "nbytes": 32768
+      },
+      {
+        "name": "L11_b1",
+        "dtype": "int32",
+        "shape": [
+          256
+        ],
+        "offset": 405696,
+        "nbytes": 1024
+      }
+    ]
+  },
+  "act_pack": {
+    "blob_bytes": 76384,
+    "sha256": "e8bd93ebd46b2ce333f3dee3780f45f3745b689ab108f296cdc86eb74552137e",
+    "rows": [
+      {
+        "file": "sample_00_encoder.npy",
+        "split": "validation",
+        "bit_exact": true,
+        "quant_nrmse_pct": 0.07831289046482455,
+        "max_abs": 1415
+      },
+      {
+        "file": "sample_01_encoder.npy",
+        "split": "training",
+        "bit_exact": true,
+        "quant_nrmse_pct": 0.06439522765034869,
+        "max_abs": 1701
+      },
+      {
+        "file": "sample_02_encoder.npy",
+        "split": "validation",
+        "bit_exact": true,
+        "quant_nrmse_pct": 0.05433903391313109,
+        "max_abs": 2042
+      },
+      {
+        "file": "sample_03_encoder.npy",
+        "split": "training",
+        "bit_exact": true,
+        "quant_nrmse_pct": 0.0643432717598627,
+        "max_abs": 1700
+      },
+      {
+        "file": "sample_04_encoder.npy",
+        "split": "training",
+        "bit_exact": true,
+        "quant_nrmse_pct": 0.054173273410117566,
+        "max_abs": 2047
+      },
+      {
+        "file": "sample_05_encoder.npy",
+        "split": "validation",
+        "bit_exact": true,
+        "quant_nrmse_pct": 0.14003784202531963,
+        "max_abs": 2048
+      }
+    ],
+    "tight10_bytes": 47872,
+    "tight10_mismatch": 6,
+    "tight10_incompatible": true,
+    "tight12_bytes": 57376,
+    "tight12_mismatch": 0,
+    "worst_val_quant_nrmse_pct": 0.14003784202531963
+  },
+  "fp32_pack": {
+    "blob_bytes": 2437072,
+    "nseg": 162,
+    "sha256": "f7120f2e138d36ffc5e7872320197f6bc19e2c815c3fd0e698c38f6c03dfe303",
+    "roundtrip_mismatch": 0
+  },
+  "bandwidth": {
+    "per_layer": {
+      "W1_int16_container": {
+        "bytes": 32768,
+        "words16": 16384,
+        "words32": 8192,
+        "beats128": 2048
+      },
+      "W1_pack10": {
+        "bytes": 20480,
+        "words16": 10240,
+        "words32": 5120,
+        "beats128": 1280
+      },
+      "W1_pack12": {
+        "bytes": 24576,
+        "words16": 12288,
+        "words32": 6144,
+        "beats128": 1536
+      },
+      "b1_int32": {
+        "bytes": 1024,
+        "words16": 512,
+        "words32": 256,
+        "beats128": 64
+      },
+      "staged_int16": {
+        "bytes": 33792,
+        "words16": 16896,
+        "words32": 8448,
+        "beats128": 2112
+      },
+      "staged_pack10": {
+        "bytes": 21504,
+        "words16": 10752,
+        "words32": 5376,
+        "beats128": 1344
+      },
+      "X_99x64_int16": {
+        "bytes": 12672,
+        "words16": 6336,
+        "words32": 3168,
+        "beats128": 792
+      },
+      "X_99x64_pack12": {
+        "bytes": 9504,
+        "words16": 4752,
+        "words32": 2376,
+        "beats128": 594
+      },
+      "Y_99x256_int16": {
+        "bytes": 50688,
+        "words16": 25344,
+        "words32": 12672,
+        "beats128": 3168
+      }
+    },
+    "twelve_layers": {
+      "params_int16_container": {
+        "bytes": 405504,
+        "words16": 202752,
+        "words32": 101376,
+        "beats128": 25344
+      },
+      "params_pack10": {
+        "bytes": 258048,
+        "words16": 129024,
+        "words32": 64512,
+        "beats128": 16128
+      },
+      "params_pack12": {
+        "bytes": 307200,
+        "words16": 153600,
+        "words32": 76800,
+        "beats128": 19200
+      },
+      "activations_12x99x64_int16": {
+        "bytes": 152064,
+        "words16": 76032,
+        "words32": 38016,
+        "beats128": 9504
+      }
+    },
+    "full_fp32_12layer_pack_bytes": 2437072
+  },
+  "negative_controls": [
+    {
+      "name": "truncated_blob",
+      "kind": "structural",
+      "detected": true,
+      "detail": "ValueError: dir L11_b1: segment exceeds blob"
+    },
+    {
+      "name": "bad_magic",
+      "kind": "structural",
+      "detected": true,
+      "detail": "ValueError: bad magic b'\\x00\\x00\\x00\\x00'"
+    },
+    {
+      "name": "misaligned_offset",
+      "kind": "structural",
+      "detected": true,
+      "detail": "ValueError: dir L00_W1: offset 1217 not 16-byte aligned"
+    },
+    {
+      "name": "dtype_bits_conflict",
+      "kind": "structural",
+      "detected": true,
+      "detail": "ValueError: dir L00_W1: elem_bits 12 inconsistent with dtype 0"
+    },
+    {
+      "name": "dirent_overlap",
+      "kind": "structural",
+      "detected": true,
+      "detail": "UnicodeDecodeError: 'ascii' codec can't decode byte 0x87 in position 0: ordinal not in range(128)"
+    },
+    {
+      "name": "big_endian_decode_mismatch",
+      "kind": "value",
+      "detected": true,
+      "detail": "mismatch observed"
+    },
+    {
+      "name": "pack10_bit_flip_mismatch",
+      "kind": "value",
+      "detected": true,
+      "detail": "mismatch observed"
+    },
+    {
+      "name": "dtype_width_confusion_mismatch",
+      "kind": "value",
+      "detected": true,
+      "detail": "mismatch observed"
+    },
+    {
+      "name": "packed_stream_truncation_detected",
+      "kind": "value",
+      "detected": true,
+      "detail": "mismatch observed"
+    }
+  ],
+  "all_bit_exact": true,
+  "evidence_levels": {
+    "L1_software_reference": "PROVEN: pack/unpack roundtrip + validator + negative controls",
+    "L2_rtl_bit_exact": "see run.sh (Verilator byte-lane) \u2014 status recorded separately",
+    "L3_e203_soc": "MISSING: no official E203/NICE/System-Bus run",
+    "L4_synthesis": "see run.sh (generic yosys) \u2014 not PDK/150MHz",
+    "L5_official_acceptance": "MISSING: no official 600-sample evaluator"
+  }
+}

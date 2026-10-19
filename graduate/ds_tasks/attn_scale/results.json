@@ -1,0 +1,142 @@
+{
+  "task": "attn_scale",
+  "calibration": {
+    "split": "training",
+    "frozen": true,
+    "samples": [
+      "sample_01_encoder.npy",
+      "sample_03_encoder.npy",
+      "sample_04_encoder.npy"
+    ],
+    "calib_file": "attn_calib_train.json",
+    "calib_sha256": "9a535f04b99f0cebce941e88fc0ef8d6fcc9e30f29656d32433dff8d07fa267f",
+    "constants": {
+      "scale_x": 0.001961475124461626,
+      "RQ": 6,
+      "RK": 7,
+      "RV": 7,
+      "KC": 6986,
+      "SH_KC": 37,
+      "RC": 14,
+      "RO": 11,
+      "scale_o": 3.579879541107029e-05,
+      "scale_ct": 4.447924715268956e-05
+    },
+    "bias_int_len": 64,
+    "repeat_deterministic": true
+  },
+  "validation": {
+    "split": "validation",
+    "samples": [
+      "sample_00_encoder.npy",
+      "sample_02_encoder.npy",
+      "sample_05_encoder.npy"
+    ],
+    "rows": [
+      {
+        "sample": "sample_00_encoder.npy",
+        "nrmse": 0.0016419142161868744,
+        "max_abs": 0.0013388676642497876,
+        "bit_exact_driver_vs_model": true,
+        "P_rowsum": [
+          32708,
+          32729
+        ],
+        "O_int_max": 15507
+      },
+      {
+        "sample": "sample_02_encoder.npy",
+        "nrmse": 0.0023208891270378885,
+        "max_abs": 0.0020214378142687783,
+        "bit_exact_driver_vs_model": true,
+        "P_rowsum": [
+          32709,
+          32727
+        ],
+        "O_int_max": 18318
+      },
+      {
+        "sample": "sample_05_encoder.npy",
+        "nrmse": 0.0017484189805285495,
+        "max_abs": 0.0025519176242707886,
+        "bit_exact_driver_vs_model": true,
+        "P_rowsum": [
+          32708,
+          32728
+        ],
+        "O_int_max": 13892
+      }
+    ]
+  },
+  "training_reference": [
+    {
+      "sample": "sample_01_encoder.npy",
+      "nrmse": 0.002033709117477594,
+      "max_abs": 0.0014176945451207512
+    },
+    {
+      "sample": "sample_03_encoder.npy",
+      "nrmse": 0.0021900639508643602,
+      "max_abs": 0.001485378384564362
+    },
+    {
+      "sample": "sample_04_encoder.npy",
+      "nrmse": 0.002725655345435139,
+      "max_abs": 0.0016033060026934831
+    }
+  ],
+  "leaky_baseline": [
+    {
+      "sample": "sample_00_encoder.npy",
+      "nrmse": 0.0015886401079165293,
+      "scale_x": 0.001356253929119548,
+      "RQ": 6,
+      "RK": 7,
+      "RV": 7,
+      "RC": 14,
+      "RO": 11,
+      "KC": 6680,
+      "SH_KC": 38
+    },
+    {
+      "sample": "sample_02_encoder.npy",
+      "nrmse": 0.002123864695756681,
+      "scale_x": 0.0019567628924766285,
+      "RQ": 6,
+      "RK": 7,
+      "RV": 7,
+      "RC": 14,
+      "RO": 11,
+      "KC": 6952,
+      "SH_KC": 37
+    },
+    {
+      "sample": "sample_05_encoder.npy",
+      "nrmse": 0.0017071383169606263,
+      "scale_x": 0.0020076577466583627,
+      "RQ": 7,
+      "RK": 7,
+      "RV": 7,
+      "RC": 13,
+      "RO": 11,
+      "KC": 7319,
+      "SH_KC": 36
+    }
+  ],
+  "leak_audit": {
+    "calibration_file_unchanged_by_eval": true,
+    "calibration_split_is_training": true,
+    "no_validation_sample_in_calibration_provenance": true,
+    "frozen_sx_differs_from_each_validation_sx": true,
+    "driver_matches_model_bit_exact": true,
+    "all_validation_nrmse_below_limit": true
+  },
+  "nrmse_limit": 0.03,
+  "evidence_levels": {
+    "software_reference": "provided (run_attn_scale.py + attn_int_model.py, this results file)",
+    "rtl_bit_exact": "provided (rtl_check.sh: attention RTL 41481/41481 per validation sample)",
+    "e203": "not evidence (no real E203 SoC in this task)",
+    "synthesis": "not evidence",
+    "official_acceptance": "not evidence (no official 600-sample evaluator available)"
+  }
+}

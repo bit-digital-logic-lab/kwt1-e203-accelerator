@@ -1,0 +1,133 @@
+ok   sample cache sha256
+ok   weight archive sha256
+ok   frozen npz sha256
+ok   manifest declares no validation calibration
+ok   manifest declares no test partition
+ok   training sample count
+ok   validation sample count
+ok   no train/val path overlap
+ok   activation shape (960, 12, 99, 64)
+ok   qmax fields
+ok   L1 scale from training only (sx=2.437418e-03 train_max/2047=2.437418e-03, rel=9.56e-08 <= 1e-05)
+ok   L1 weight scales from frozen FP32
+ok   L1 integer weights
+ok   L1 integer bias
+ok   L1 weight shape/dtype
+ok   L1 bias shape/dtype
+ok   L1 weight range
+ok   L1 INT32 accumulate
+ok   L1 validation NRMSE 0.109923% (recorded 0.109923%, |d|=1.10e-07 <= 1.11e-04)
+ok   L1 below 3.0% target
+ok   L2 scale from training only (sx=2.428059e-03 train_max/2047=2.428059e-03, rel=0.00e+00 <= 1e-05)
+ok   L2 weight scales from frozen FP32
+ok   L2 integer weights
+ok   L2 integer bias
+ok   L2 weight shape/dtype
+ok   L2 bias shape/dtype
+ok   L2 weight range
+ok   L2 INT32 accumulate
+ok   L2 validation NRMSE 0.106541% (recorded 0.106543%, |d|=1.45e-06 <= 1.08e-04)
+ok   L2 below 3.0% target
+ok   L3 scale from training only (sx=2.427774e-03 train_max/2047=2.427774e-03, rel=9.59e-08 <= 1e-05)
+ok   L3 weight scales from frozen FP32
+ok   L3 integer weights
+ok   L3 integer bias
+ok   L3 weight shape/dtype
+ok   L3 bias shape/dtype
+ok   L3 weight range
+ok   L3 INT32 accumulate
+ok   L3 validation NRMSE 0.115760% (recorded 0.115760%, |d|=8.53e-08 <= 1.17e-04)
+ok   L3 below 3.0% target
+ok   L4 scale from training only (sx=2.494151e-03 train_max/2047=2.494151e-03, rel=0.00e+00 <= 1e-05)
+ok   L4 weight scales from frozen FP32
+ok   L4 integer weights
+ok   L4 integer bias
+ok   L4 weight shape/dtype
+ok   L4 bias shape/dtype
+ok   L4 weight range
+ok   L4 INT32 accumulate
+ok   L4 validation NRMSE 0.129253% (recorded 0.129254%, |d|=1.26e-06 <= 1.30e-04)
+ok   L4 below 3.0% target
+ok   L5 scale from training only (sx=2.669201e-03 train_max/2047=2.669201e-03, rel=0.00e+00 <= 1e-05)
+ok   L5 weight scales from frozen FP32
+ok   L5 integer weights
+ok   L5 integer bias
+ok   L5 weight shape/dtype
+ok   L5 bias shape/dtype
+ok   L5 weight range
+ok   L5 INT32 accumulate
+ok   L5 validation NRMSE 0.123702% (recorded 0.123703%, |d|=2.60e-07 <= 1.25e-04)
+ok   L5 below 3.0% target
+ok   L6 scale from training only (sx=2.535546e-03 train_max/2047=2.535546e-03, rel=9.19e-08 <= 1e-05)
+ok   L6 weight scales from frozen FP32
+ok   L6 integer weights
+ok   L6 integer bias
+ok   L6 weight shape/dtype
+ok   L6 bias shape/dtype
+ok   L6 weight range
+ok   L6 INT32 accumulate
+ok   L6 validation NRMSE 0.117799% (recorded 0.117800%, |d|=5.89e-07 <= 1.19e-04)
+ok   L6 below 3.0% target
+ok   L7 scale from training only (sx=2.682728e-03 train_max/2047=2.682728e-03, rel=2.60e-07 <= 1e-05)
+ok   L7 weight scales from frozen FP32
+ok   L7 integer weights
+ok   L7 integer bias
+ok   L7 weight shape/dtype
+ok   L7 bias shape/dtype
+ok   L7 weight range
+ok   L7 INT32 accumulate
+ok   L7 validation NRMSE 0.117164% (recorded 0.117163%, |d|=1.43e-06 <= 1.18e-04)
+ok   L7 below 3.0% target
+ok   L8 scale from training only (sx=2.634569e-03 train_max/2047=2.634569e-03, rel=8.84e-08 <= 1e-05)
+ok   L8 weight scales from frozen FP32
+ok   L8 integer weights
+ok   L8 integer bias
+ok   L8 weight shape/dtype
+ok   L8 bias shape/dtype
+ok   L8 weight range
+ok   L8 INT32 accumulate
+ok   L8 validation NRMSE 0.119972% (recorded 0.119971%, |d|=6.86e-07 <= 1.21e-04)
+ok   L8 below 3.0% target
+ok   L9 scale from training only (sx=2.521506e-03 train_max/2047=2.521506e-03, rel=9.24e-08 <= 1e-05)
+ok   L9 weight scales from frozen FP32
+ok   L9 integer weights
+ok   L9 integer bias
+ok   L9 weight shape/dtype
+ok   L9 bias shape/dtype
+ok   L9 weight range
+ok   L9 INT32 accumulate
+ok   L9 validation NRMSE 0.117347% (recorded 0.117348%, |d|=1.09e-06 <= 1.18e-04)
+ok   L9 below 3.0% target
+ok   L10 scale from training only (sx=2.745071e-03 train_max/2047=2.745071e-03, rel=1.70e-07 <= 1e-05)
+ok   L10 weight scales from frozen FP32
+ok   L10 integer weights
+ok   L10 integer bias
+ok   L10 weight shape/dtype
+ok   L10 bias shape/dtype
+ok   L10 weight range
+ok   L10 INT32 accumulate
+ok   L10 validation NRMSE 0.131177% (recorded 0.131176%, |d|=8.72e-07 <= 1.32e-04)
+ok   L10 below 3.0% target
+ok   L11 scale from training only (sx=2.767296e-03 train_max/2047=2.767296e-03, rel=8.42e-08 <= 1e-05)
+ok   L11 weight scales from frozen FP32
+ok   L11 integer weights
+ok   L11 integer bias
+ok   L11 weight shape/dtype
+ok   L11 bias shape/dtype
+ok   L11 weight range
+ok   L11 INT32 accumulate
+ok   L11 validation NRMSE 0.147047% (recorded 0.147047%, |d|=5.87e-07 <= 1.48e-04)
+ok   L11 below 3.0% target
+ok   L12 scale from training only (sx=2.680281e-03 train_max/2047=2.680281e-03, rel=0.00e+00 <= 1e-05)
+ok   L12 weight scales from frozen FP32
+ok   L12 integer weights
+ok   L12 integer bias
+ok   L12 weight shape/dtype
+ok   L12 bias shape/dtype
+ok   L12 weight range
+ok   L12 INT32 accumulate
+ok   L12 validation NRMSE 0.143428% (recorded 0.143427%, |d|=1.00e-06 <= 1.44e-04)
+ok   L12 below 3.0% target
+ok   worst validation NRMSE 0.147047% (recorded 0.147047%, |d|=5.87e-07 <= 1.48e-04)
+ok   worst layer field
+VERIFY_PASS samples=480/480 worst=0.147047% layer=11 nrmse_rtol=0.001 max_dev=1.45e-06pp

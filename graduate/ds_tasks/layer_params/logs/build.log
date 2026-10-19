@@ -1,0 +1,16 @@
+layer=01 train=0.108443% validation=0.109923% sx=2.437418e-03
+layer=02 train=0.106961% validation=0.106543% sx=2.428059e-03
+layer=03 train=0.115554% validation=0.115760% sx=2.427774e-03
+layer=04 train=0.129371% validation=0.129254% sx=2.494151e-03
+layer=05 train=0.123621% validation=0.123703% sx=2.669201e-03
+layer=06 train=0.118506% validation=0.117800% sx=2.535546e-03
+layer=07 train=0.117288% validation=0.117163% sx=2.682728e-03
+layer=08 train=0.120416% validation=0.119971% sx=2.634569e-03
+layer=09 train=0.117384% validation=0.117348% sx=2.521506e-03
+layer=10 train=0.131096% validation=0.131176% sx=2.745071e-03
+layer=11 train=0.146997% validation=0.147047% sx=2.767296e-03
+layer=12 train=0.143458% validation=0.143427% sx=2.680281e-03
+WORST validation=0.147047% layer=11 target=3.000% PASS
+control A11W10: worst=0.181954% layer=11 weight_identical=True bias_identical=True
+control A12W10: worst=0.147047% layer=11 weight_identical=True bias_identical=True
+wrote layer_manifest_A12W10.json and layer_manifest_A12W10.npz

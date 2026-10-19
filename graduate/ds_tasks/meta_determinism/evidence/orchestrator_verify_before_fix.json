@@ -1,0 +1,72 @@
+{
+  "worker": "grad-encoder",
+  "verified_at": "2026-10-19T01:50:51.027706+00:00",
+  "contract_present": true,
+  "contract_path": "ACCEPTANCE.json",
+  "branch": "codex/kwt-grad-encoder",
+  "head": "5136ca1df1f45a0d8314cabe53a08e083b5e7e25",
+  "commands": [
+    {
+      "index": 1,
+      "cmd": "bash graduate/encoder/tb/run.sh",
+      "cwd": "/home/yang/kwt-worktrees/orchestration/.shadow/kwt-verify-grad-encoder-wh8ckhrl",
+      "exit": 0,
+      "expect_exit": 0,
+      "elapsed_seconds": 22.684,
+      "timed_out": false,
+      "ok": true
+    },
+    {
+      "index": 2,
+      "cmd": "bash graduate/encoder/tb/run_smoke.sh",
+      "cwd": "/home/yang/kwt-worktrees/orchestration/.shadow/kwt-verify-grad-encoder-wh8ckhrl",
+      "exit": 0,
+      "expect_exit": 0,
+      "elapsed_seconds": 172.044,
+      "timed_out": false,
+      "ok": true
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "graduate/encoder/tb/build/y.hex",
+      "exists": true,
+      "declared_sha256": "7620a3470ce5d5910c185f86f7704a88a9ef9eb67d21de476709dd859c62b0be",
+      "actual_sha256": "7620a3470ce5d5910c185f86f7704a88a9ef9eb67d21de476709dd859c62b0be",
+      "ok": true
+    },
+    {
+      "path": "graduate/encoder/tb/build/r1.hex",
+      "exists": true,
+      "declared_sha256": "87b3fcdb64149bb24e4f5ea5c0a7e3c18aeb287084c3ae5d5afc4f9536473d60",
+      "actual_sha256": "87b3fcdb64149bb24e4f5ea5c0a7e3c18aeb287084c3ae5d5afc4f9536473d60",
+      "ok": true
+    },
+    {
+      "path": "graduate/encoder/tb/build/g.hex",
+      "exists": true,
+      "declared_sha256": "ef8e15863a8a65f211b724c8762d3ef7dee58856c9066bb9aaba0c8ade058737",
+      "actual_sha256": "ef8e15863a8a65f211b724c8762d3ef7dee58856c9066bb9aaba0c8ade058737",
+      "ok": true
+    },
+    {
+      "path": "graduate/encoder/tb/build/verify.log",
+      "exists": true,
+      "declared_sha256": "7fa33efbad31073841365a9d738c5648d55e4e1bca3179e5fe671f9f9c2339a8",
+      "actual_sha256": "7fa33efbad31073841365a9d738c5648d55e4e1bca3179e5fe671f9f9c2339a8",
+      "ok": true
+    },
+    {
+      "path": "graduate/encoder/vectors/meta.json",
+      "exists": true,
+      "declared_sha256": "124e5d3503bf3539286bdcc0e3e4f3b5093a01ee2963fd67ac0480e70edb40a7",
+      "actual_sha256": "03c020155286f84783a11276cdc07bf307143a13862887860e1338150c3fe880",
+      "ok": false
+    }
+  ],
+  "mounts": [],
+  "verified_ok": false,
+  "reason": "artifact digest mismatch: ['graduate/encoder/vectors/meta.json']",
+  "log": "/home/yang/kwt-worktrees/orchestration/logs/verify-grad-encoder.log",
+  "shadow": null
+}

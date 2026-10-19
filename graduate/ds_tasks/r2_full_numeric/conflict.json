@@ -1,0 +1,63 @@
+{
+  "task": "r2_full_numeric",
+  "state": "CONFIG_CONFLICT",
+  "evidence_level": "L1 software witness (integer attention + residual, FP32 golden); no RTL",
+  "assets": {
+    "attn_scale": {
+      "path": "/home/yang/kwt-worktrees/ds-grad-attn_scale/graduate/ds_tasks/attn_scale/attn_calib_train.json",
+      "sha256": "9a535f04b99f0cebce941e88fc0ef8d6fcc9e30f29656d32433dff8d07fa267f"
+    },
+    "postnorm_scale": {
+      "path": "/home/yang/kwt-worktrees/ds-grad-postnorm_scale/graduate/ds_tasks/postnorm_scale/frozen_postnorm_calib.json",
+      "sha256": "3a1cf51b2f00716b0dc6a182d80e6d4cdf5886fa196affad268a47167bbf53fb"
+    },
+    "frozen_12layer": {
+      "path": "/home/yang/kwt-worktrees/ds-grad-encoder_12numeric/graduate/ds_tasks/encoder_12numeric/frozen_12layer_calib.json",
+      "sha256": "5f039ec745e2b4dda1e6de5abb6fdf97316c3e98a0265c31212b53eee669d444"
+    }
+  },
+  "earliest_block": "layer0.x_scale_contract",
+  "invariants": [
+    {
+      "name": "layer0_input_scale_equality",
+      "required": "attn.scale_x == postnorm.s_x (same integer X enters residual)",
+      "attn": 0.001961475124461626,
+      "postnorm": 0.006737881484313601,
+      "relative_diff": 0.708888449725909,
+      "ok": false
+    },
+    {
+      "name": "attn_scale_covers_training_range",
+      "required": "scale_x * 2047 >= max_train|X|",
+      "attn_scale_x": 0.001961475124461626,
+      "max_train_abs_x": 13.79244327545166,
+      "ok": false
+    }
+  ],
+  "witness_samples": [
+    {
+      "sample": "sample_00_encoder.npy",
+      "naive_r1_nrmse": 2.3763313638692267,
+      "naive_r1_saturated_elements": 0,
+      "control_requant_x_r1_nrmse": 0.004715802282345445,
+      "x_int_max_abs": 1415
+    },
+    {
+      "sample": "sample_02_encoder.npy",
+      "naive_r1_nrmse": 2.5130091594768076,
+      "naive_r1_saturated_elements": 1,
+      "control_requant_x_r1_nrmse": 0.0033645443642254945,
+      "x_int_max_abs": 2042
+    },
+    {
+      "sample": "sample_05_encoder.npy",
+      "naive_r1_nrmse": 2.3728877686181384,
+      "naive_r1_saturated_elements": 2,
+      "control_requant_x_r1_nrmse": 0.003112086354285786,
+      "x_int_max_abs": 2047
+    }
+  ],
+  "samples": 3,
+  "nrmse_limit": 0.03,
+  "runtime_seconds": 0.12784147262573242
+}

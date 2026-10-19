@@ -1,0 +1,30 @@
+[1] freeze calibration on the training split
+    dataset: /home/yang/Desktop/ic设计竞赛/software/.build/quant_samples_12labels_20.npz sha256=ee04e849bc407149618e4ecd5ff99575687586d4e57c0ade6a0b3f7b66c8c149
+  calibration samples: 240 training (240 validation held out)
+  s_x: training max 13.7924434 (sample 90 ./no/06f6c194_nohash_4.wav)
+  s_a: training max 3.14436126 (sample 220 _silence_/training_zero_000.wav)
+  s_g: training max 4.06218241 (sample 82 ./no/1df483c0_nohash_1.wav)
+  s_r1: training max 13.7038471 (sample 30 ./down/c7f9ffb5_nohash_0.wav)
+  s_r2: training max 5.26045041 (sample 147 ./right/9886d8bf_nohash_1.wav)
+  s_out: training max 4.38261075 (sample 147 ./right/9886d8bf_nohash_1.wav)
+    wrote /home/yang/kwt-worktrees/ds-grad-postnorm_scale/graduate/ds_tasks/postnorm_scale/frozen_postnorm_calib.json sha256=3a1cf51b2f00716b0dc6a182d80e6d4cdf5886fa196affad268a47167bbf53fb
+[2] evaluate the frozen integer postnorm on the VALIDATION split
+    40/240 validation samples
+    80/240 validation samples
+    120/240 validation samples
+    160/240 validation samples
+    200/240 validation samples
+    240/240 validation samples
+    validation samples evaluated: 240
+    worst frozen-path NRMSE 1.6898% (sample 379 ./on/e11fbc6e_nohash_2.wav)
+    per-stage NRMSE: r1=0.3465%, g=1.1766%, r2=0.8728%, y=0.7847%
+    sample_00_encoder.npy: NRMSE y=0.7170% worst=1.5634%
+    sample_02_encoder.npy: NRMSE y=0.7374% worst=1.1836%
+    sample_05_encoder.npy: NRMSE y=0.7745% worst=1.0534%
+[3] leak audit
+    calibration file unchanged by evaluation: True
+    provenance maxima are training samples: True
+    frozen scales differ from sample_00 per-sample scale: True
+    validation samples coincidentally sharing a frozen max: 24/240 (all _silence_ clips reuse one waveform)
+    all validation NRMSE below 3.0%: True
+    RTL constant coupling: 8 model constants, 1 match the frozen RTL header (M_A rtl=5981 model=None)

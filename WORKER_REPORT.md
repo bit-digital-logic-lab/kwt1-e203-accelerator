@@ -1,63 +1,80 @@
-# WORKER_REPORT — codex/kwt-integration（KWT-1 整合分支）
+# WORKER_REPORT — codex/kwt-grad-encoder（研究生 5–6 项：单层 PostNorm 编码器组装 + 12 层调度）
 
-- 分支：`codex/kwt-integration`（worktree `/home/yang/kwt-worktrees/integration`）
-- 基线：`main@1494597`
-- 范围：把源文件快照 `d94fb6f` 与 8 个已完成工作分支整合为一个可审查的 Git 分支；
-  归档 9 份 `WORKER_REPORT.md`；实跑快速验收并如实记录退出码；补 `docs/INTEGRATION_STATUS.md`。
-- 边界：只在本 worktree 内操作；未 `checkout`/清理主目录；未 push / 未碰 `origin`；未开子智能体；
-  未改核心数值 RTL；未重跑 12 层整层 E203；未做大面积综合。
+- 分支 / worktree：`codex/kwt-grad-encoder` @ `/home/yang/kwt-worktrees/grad-encoder`
+- 基线：`main@3d9ae98`（grad-attention `405c876` / grad-nonlinear `3084222` / grad-golden `c9a4307`；
+  grad-nonlinear 拼接期间由自身 worker 从 `10aa202` 追加 ANSI 端口表修复提交，见 `PROVENANCE.md`）
+- 范围：把三项成果**组装**为单层 PostNorm 编码器（注意力 + 两处残差 + 两处 LayerNorm +
+  `64→256→64` 前馈 + GELU），并实现 **12 层参数更新/搬运控制**；冻结 E203 软件边界与分类头
+  软件边界。对应 [`题目/640.jpg 9`](题目/640.jpg%209) 第 5、6 项。
+- 边界：只在本 worktree 内操作；未开子智能体；未改主目录/他人分支；未
+  `merge`/`rebase`/`cherry-pick`/`push`；未改 `hardware/`、`software/` 既有本科核心。
+- 交付契约：根目录 `ACCEPTANCE.json`（编排者 `git archive HEAD` 干净副本独立复跑）。
 
-详细冲突、来源 commit、逐项测试与缺口见 **[`docs/INTEGRATION_STATUS.md`](docs/INTEGRATION_STATUS.md)**。
+详细边界与来源见 `graduate/encoder/README.md`、`SOFTWARE_BOUNDARY.md`、`PROVENANCE.md`。
 
-## 提交
+## 1. 本次新增/组装的文件
 
-| 提交 | 内容 |
+| 文件 | 作用 |
 | --- | --- |
-| `dc4fd2a` | 合入 `d94fb6f` 源文件快照（3 处冲突取 main@1494597 的已测钩子实现与 ascii finalizer；其余取快照；删除旧版钩子残留 plugin/assets） |
-| `3ba1412` | 归档 hook-fix 报告（`c89095c` 逻辑已由 main 引入，不重复合入） |
-| `fb71ede` | 整合 `codex/kwt-verification`（`1a3aa75`） |
-| `282017e` | 整合 `codex/kwt-preprocess`（`747d5fa`） |
-| `932db77` | 整合 `codex/kwt-quant`（`7afe9ff`） |
-| `3e82ea9` | 整合 `codex/kwt-architecture`（`df93c87`） |
-| `e1aa166` | 整合 `codex/kwt-driver`（`fcb4b72`，保留 `run_e203.sh` ASCII 路径修复） |
-| `d758eeb` | 整合 `codex/kwt-synth`（`cb23d04`） |
-| `8f6ca75` | 整合 `codex/kwt-design-integration`（`56b8a39`） |
-| `29d0b00` | 整合 `codex/kwt-packaging`（`0731cf3`） |
-| 本提交 | `docs/INTEGRATION_STATUS.md` + 本报告 |
+| `graduate/rtl/encoder/kwt_encoder_layer.sv` | 单层 PostNorm 编码器数据通路（注意力→requant→残差1→LN1→FFN1→GELU→FFN2→残差2→LN2），统一装载端口 |
+| `graduate/rtl/encoder/kwt_ffn1_row.sv` | FFN1 行引擎 `64→256`，INT48 累加，输出 per-channel scale `s_h[c]`（接 postnorm `h`） |
+| `graduate/rtl/encoder/kwt_encoder_layers_ctrl.sv` | 12 层参数更新/层间搬运/分类头边界控制器（纯事务序列，无算术） |
+| `graduate/rtl/encoder/kwt_encoder_top.sv` | layer + ctrl 顶层；E203-like 事务端口 `o_ld_*`/`p_rdata` |
+| `graduate/rtl/encoder/third_party/*` | 只读复制：注意力 RTL（grad-attention）、postnorm FFN/GELU/LN RTL（grad-nonlinear） |
+| `graduate/encoder/model/{attn_int_model,kwt_postnorm_ref}.py` | 只读复制的独立整数参考（仅路径适配） |
+| `graduate/encoder/reference/kwt1_fp32_golden.py` | 只读复制的 FP32 golden（仅路径适配） |
+| `graduate/encoder/model/verify_encoder.py` | 组合独立整数模型 + FP32 误差逐级对照（新增） |
+| `graduate/encoder/vectors/gen_vectors.py` | 生成全部 RTL 激励/参数 hex（新增） |
+| `graduate/encoder/tb/tb_encoder.sv`、`tb/run.sh` | 单层逐级对照 TB + 一键脚本（新增） |
+| `graduate/encoder/tb/tb_layers_smoke.sv`、`tb/run_smoke.sh` | 12 层调度 smoke TB + 一键脚本（新增） |
 
-9 份来源报告归档于 `docs/worker_reports/kwt-*.md`（verification / preprocess / quant /
-architecture / driver / synth / design-integration / packaging / hook-fix）；合并过程中根
-`WORKER_REPORT.md` 始终被移除并归档，**未发生后一份覆盖前一份**。
+## 2. 实跑命令与退出码（本次，2026-10-19）
 
-## 实跑验收（实际退出码）
+| 命令（仓库根执行） | 退出码 | 结果 |
+| --- | ---: | --- |
+| `bash graduate/encoder/tb/run.sh` | **0** | `TB_PASS`（`cycles=4,700,560`）+ `VERIFY_PASS`；6 阶段 99 行**全逐位一致** |
+| `bash graduate/encoder/tb/run_smoke.sh` | **0** | `SMOKE_PASS`；`n_start=12 max_layer=11 yrows=1188 n_ld_par=595200 head=1` |
+| `verilator --lint-only … --top-module kwt_encoder_top …` | **0** | 0 error（仅第三方文件 WIDTH 警告） |
 
-| 命令 | 退出码 |
-| --- | ---: |
-| `git diff --check 1494597 HEAD` | **2**（仅 quant CSV 的 CRLF 与 packaging 报告末尾空行，既有产物；为保 provenance 未改，详见 STATUS §5#1） |
-| `python3 -m unittest discover -s .opencode/skills/quarter-hour-check/tests` | **0**（20 tests OK） |
-| `python3 docs/check_design_evidence.py --results-dir /home/yang/Desktop/ic设计竞赛/hardware/architecture/results` | **0**（`PASS=72 WARN=0 FAIL=0`） |
-| 宿主 C 驱动测试（`cc ... test_kwt_nice_driver.c`） | **0**（`PASS provisional NICE FFN1 descriptor layout and bounds`） |
-| RV32 交叉编译（`riscv64-linux-gnu-gcc ... -march=rv32imac -mabi=ilp32 -c`） | **0** |
-| `negative_injection_check.py`（oss-cad-suite） | **0**（fp32/int16 污染均被检出 exit=1） |
-| `run_tile_edges.sh`（oss-cad-suite） | **0**（正向 21 cases PASS；负向 MISMATCH 被检出） |
-| （附加）`run_e203.sh --real-layers <中文 CASE_ROOT> 0 1` | **0**（12 层各 tile 0 单块 PASS，验证 ASCII 路径修复） |
+复现细节：`run.sh` 先生成向量（`gen_vectors.py` = 运行复制的 `attn_int_model.py` +
+`kwt_postnorm_ref.calibrate()`），再 `verilator --binary` 建 `tb_encoder` 并运行，
+最后 `verify_encoder.py` 做逐位 + FP32 校验。`TB_DONE … sat=0/0` 无 X。
 
-## 关键口径裁定
+## 3. 样本、层
 
-- **E203 12 层状态以 `real_e203_validation0_ascii_*` 为准 = 单样本 12/12 PASS**；
-  `real_e203_validation0_*` 的 `0/12 FAIL` 是**过期**的中文路径运行。packaging 报告中的
-  “0/12” 不得当作当前结论。
-- 保留 `codex/kwt-driver` 的 `run_e203.sh` ASCII 路径修复。
-- `codex/kwt-synth` 已合入（含被修正的综合脚本），补上早前审查文档 §5 的遗漏。
+- **样本**：真实验证输入 `software/validation/real_input_chain_20261017/sample_00_encoder.npy`
+  （`X[99,64]`，SHA 与 manifest 一致）。
+- **层**：`enc_layers/0`（第 0 层），尺度与 FFN1 冻结包（`ffn1_a12w10_static_sym.npz`
+  的 `layer01_*`）一致。
+- **单层逐级对照**：99 行全量，6 个阶段（`a,r1,g,f,r2,y`）。
+- **12 层调度 smoke**：12 层顺序执行，逐层重载 49,600 项参数，共 1,188 行输出。
 
-## 未证事项
+## 4. 数值误差
 
-1. 官方 SoC / System Bus / NICE、PDK、SRAM 宏、SDC 缺失 → 无 150 MHz / ≤2.25 mm² / 功耗签核；
-   iSTA 仍 abort（exit 134），无时序结论。
-2. C 驱动**未**在 E203 指令流中执行（仅宿主 + RV32 编译）。
-3. 官方 600 条评测集未发布 → 官方 NRMSE / 准确率未测；480 软件 / 240 RTL / 1 条 E203 / 官方 600
-   是四个不同统计，不可混用。
-4. `154,240`（L1）与 `838,028`（L2 E203）不可相减当加速比/吞吐；16 行核未接入 E203。
-5. A14W12/A12W12/A16W10 只有软件证据。
-6. `git diff --check` 非 0（纯格式/CRLF，见上）。
-7. 本次未实际 merge 进 `main`、未 push；`main` 的既有未提交改动保持原样。
+单层逐级（RTL vs 组合独立整数模型逐位；RTL 反量化 vs 研究生 FP32 golden）：
+
+| 阶段 | 逐位 | FP32 NRMSE | max_abs |
+| --- | --- | ---: | ---: |
+| `a`（注意力，含 requant） | 99×64 exact | 0.1591% | 1.32e-3 |
+| `r1` | 99×64 exact | 0.1082% | 2.89e-3 |
+| `g`（GELU） | 99×256 exact | **1.3987%** | 1.29e-2 |
+| `f`（FFN2） | 99×64 exact | 1.3968% | 1.54e-2 |
+| `r2` | 99×64 exact | 0.7000% | 5.00e-2 |
+| `y`（编码器输出） | 99×64 exact | 0.7289% | 4.23e-2 |
+
+最差阶段 `g` = **1.3987% < 3% 门槛**；`y` = 0.7289%。逐位一致（0 失配）覆盖
+`a`（含注意力 + requant）到 `y` 的整条链。
+
+## 5. 未证事项（不得宣称完整研究生组验收）
+
+1. **无官方 SoC**：未在真实 E203 指令流/System Bus/NICE 上运行；`o_ld_*`/`p_rdata` 为
+   **E203-like** 事务模型（已在 `SOFTWARE_BOUNDARY.md` 逐条标注）。
+2. **仅第 0 层标定**：第 1–11 层尺度/EPS/GELU LUT 未逐层重算；12 层 smoke 只证**调度**，
+   不证 12 层数值。
+3. 无目标 PDK / SRAM 宏 / SDC：未做 150 MHz STA、面积、功耗签核；仅 Verilator 功能仿真
+   （未跑 Icarus 复核）。
+4. FFN2/注意力的大数组与组合读端口仍是行为存储，未映射题目规定 SRAM 宏。
+5. 分类头为**软件**阶段（题目规定），硬件只给 `head_token`/`head_valid`；未做分类头 RTL。
+6. 未测官方 600 条评测集 NRMSE / 准确率；FP32 参考为官方源码语义的 NumPy golden
+   （grad-golden 已与官方 TF 原文 ≤9.3e-6 吻合），本目录不再重跑 TF。
+7. 本报告不声明“12 层整层 E203 通过”或“研究生 5–6 项全部通过”。

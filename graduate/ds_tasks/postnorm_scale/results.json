@@ -1,0 +1,120 @@
+{
+  "task": "postnorm_scale",
+  "evidence_levels": {
+    "software_reference": "yes (training-frozen scales, validation-only evaluation)",
+    "rtl_bit_exact": "no (RTL constants are frozen at the previous per-sample calibration)",
+    "e203": "no",
+    "synthesis": "no",
+    "official_acceptance": "no"
+  },
+  "calibration": {
+    "file": "frozen_postnorm_calib.json",
+    "sha256": "3a1cf51b2f00716b0dc6a182d80e6d4cdf5886fa196affad268a47167bbf53fb",
+    "split": "training",
+    "samples": 240,
+    "scales": {
+      "s_x": 0.006737881484313601,
+      "s_a": 0.0015360826848143014,
+      "s_g": 0.0019844564798951986,
+      "s_r1": 0.006694600459528453,
+      "s_r2": 0.0025698341020483936,
+      "s_out": 0.0021409920613776282
+    }
+  },
+  "validation": {
+    "dataset_samples": 240,
+    "real_samples": [
+      "sample_00_encoder.npy",
+      "sample_02_encoder.npy",
+      "sample_05_encoder.npy"
+    ],
+    "worst_dataset_nrmse": 0.01689775481275115,
+    "mean_stage_nrmse": {
+      "r1": 0.0034648979305880443,
+      "g": 0.011765743105988706,
+      "r2": 0.008728276619461137,
+      "y": 0.007846518342630133
+    },
+    "real": [
+      {
+        "sample": "sample_00_encoder.npy",
+        "worst_nrmse": 0.015634182773096722
+      },
+      {
+        "sample": "sample_02_encoder.npy",
+        "worst_nrmse": 0.011836445334553271
+      },
+      {
+        "sample": "sample_05_encoder.npy",
+        "worst_nrmse": 0.01053382952751631
+      }
+    ]
+  },
+  "audit": {
+    "calibration_split_is_training": true,
+    "validation_used_for_calibration": false,
+    "calibration_file_unchanged_by_evaluation": true,
+    "provenance_maxima_are_training_samples": true,
+    "no_validation_sample_in_calibration_provenance": true,
+    "frozen_scales_differ_from_sample00_leaky": true,
+    "all_validation_nrmse_below_limit": true,
+    "pass": true
+  },
+  "rtl_coupling": {
+    "cfg_path": "graduate/rtl/encoder/third_party/kwt_postnorm_cfg.svh",
+    "rtl_constants": {
+      "MA1": 61302,
+      "MB1": 12260,
+      "MGN": 267644,
+      "MO1": 410,
+      "MC2": 77111,
+      "MO2": 546,
+      "EPS_Q1": 31173,
+      "EPS_Q2": 15272
+    },
+    "model_constants": {
+      "MA1": 65960,
+      "MB1": 15037,
+      "MGN": 129003,
+      "MO1": 410,
+      "MC2": 62159,
+      "MO2": 467,
+      "EPS_Q1": 1462,
+      "EPS_Q2": 9924
+    },
+    "n_model_constants": 8,
+    "n_matching_rtl_constants": 1,
+    "rtl_M_A": 5981,
+    "model_M_A": null,
+    "regeneration_required": true
+  },
+  "limits": {
+    "nrmse_limit": 0.03,
+    "validation_samples_sharing_a_frozen_max": 24,
+    "sample00_per_sample_scale_differs": {
+      "s_x": true,
+      "s_a": true,
+      "s_g": true,
+      "s_r1": true,
+      "s_r2": true,
+      "s_out": true
+    },
+    "calibration_leaky_examples": [
+      {
+        "index": 240,
+        "sample": "./four/750e3e75_nohash_0.wav",
+        "matching": []
+      },
+      {
+        "index": 241,
+        "sample": "./five/32ad5b65_nohash_1.wav",
+        "matching": []
+      },
+      {
+        "index": 242,
+        "sample": "./seven/d57febf0_nohash_2.wav",
+        "matching": []
+      }
+    ]
+  }
+}

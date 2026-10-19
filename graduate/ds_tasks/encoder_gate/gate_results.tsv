@@ -1,0 +1,7 @@
+01_run_all	0	0	/home/yang/kwt-worktrees/kwt-grad-accepted/graduate/ds_tasks/encoder_gate/logs/01_run_all.log	OK
+02_verify_positive	0	0	/home/yang/kwt-worktrees/kwt-grad-accepted/graduate/ds_tasks/encoder_gate/logs/02_verify_positive.log	OK
+02b_clean_tight_threshold	nonzero	1	/home/yang/kwt-worktrees/kwt-grad-accepted/graduate/ds_tasks/encoder_gate/logs/02b_clean_tight_threshold.log	OK
+03_neg_bitexact	nonzero	1	/home/yang/kwt-worktrees/kwt-grad-accepted/graduate/ds_tasks/encoder_gate/logs/03_neg_bitexact.log	OK
+04_neg_nrmse	nonzero	1	/home/yang/kwt-worktrees/kwt-grad-accepted/graduate/ds_tasks/encoder_gate/logs/04_neg_nrmse.log	OK
+05_gate_selfcheck	0	0	/home/yang/kwt-worktrees/kwt-grad-accepted/graduate/ds_tasks/encoder_gate/logs/05_gate_selfcheck.log	OK
+06_split_calibration	0	0	/home/yang/kwt-worktrees/kwt-grad-accepted/graduate/ds_tasks/encoder_gate/logs/06_split_calibration.log	OK

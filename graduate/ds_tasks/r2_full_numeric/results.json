@@ -1,0 +1,574 @@
+{
+  "task": "r2_full_numeric",
+  "state": "PASS_FORMAL_POOLED_TAIL_ABOVE_LIMIT",
+  "evidence_levels": {
+    "software_reference": "L1: this script, frozen round-1 assets, formal metric on 240 npz validation samples; 3 real validation samples reported separately (deduplicated), 3 real training samples not validation",
+    "rtl_bit_exact": "not run by this task (round-1 L2 claim is not re-verified here)",
+    "e203": "no",
+    "synthesis": "no",
+    "official_acceptance": "no"
+  },
+  "formal_metric": {
+    "scope": "npz validation partition only (manifest.split == 'validation')",
+    "samples": 240,
+    "pooling": "per-layer pooled NRMSE over all 240 samples",
+    "nrmse_formula": "sqrt(sum((int_dequant - fp32_ref)^2) / sum(fp32_ref^2)), denominator floor 1e-8",
+    "gate": "every layer < 3% pooled; per-sample values are diagnostic only",
+    "official_analogue": "official gate pools its own 600-sample evaluation set per layer; this is not that set"
+  },
+  "frozen_assets": {
+    "calib": "/home/yang/kwt-worktrees/ds-grad-encoder_12numeric/graduate/ds_tasks/encoder_12numeric/frozen_12layer_calib.json",
+    "calib_sha256": "5f039ec745e2b4dda1e6de5abb6fdf97316c3e98a0265c31212b53eee669d444",
+    "int_pack": "/home/yang/kwt-worktrees/ds-grad-encoder_12numeric/graduate/ds_tasks/encoder_12numeric/frozen_12layer_int.npz",
+    "int_pack_sha256": "5cf836e0e5108d9a20d7d817ef24423d9cd9f196dd353872f0de5e82da317e5b",
+    "split": "/home/yang/Desktop/ic\u8bbe\u8ba1\u7ade\u8d5b/software/.build/quant_samples_12labels_20.npz",
+    "split_sha256": "ee04e849bc407149618e4ecd5ff99575687586d4e57c0ade6a0b3f7b66c8c149",
+    "weights": "/home/yang/kwt-worktrees/kwt-grad-accepted/software/weights/kwt1_fp32.npz",
+    "weights_sha256": "8f359abf7adbe287b8f89fca98af46194f98f90f2146784731bff551a155825a",
+    "calibration_split": "training",
+    "validation_used_for_calibration": false
+  },
+  "partitions": {
+    "npz": {
+      "training": 240,
+      "validation": 240,
+      "path_form": "npz paths are './<label>/<file>.wav'; manifest uses '<label>/<file>.wav'",
+      "real_training_used_for_fitting": 0
+    },
+    "formal_validation": {
+      "source": "npz partitions == 'validation'",
+      "count": 240
+    },
+    "real_wav": {
+      "dir": "/home/yang/kwt-worktrees/kwt-grad-accepted/software/validation/real_input_chain_20261017",
+      "manifest": "/home/yang/kwt-worktrees/kwt-grad-accepted/software/validation/real_input_chain_20261017/manifest.json",
+      "manifest_sha256": "d6f33945d3f416e48da5135ba73acfd2db90dbe5f630770b0babccb2186e268f",
+      "validation": 3,
+      "training": 3,
+      "validation_files": [
+        "sample_00_encoder.npy",
+        "sample_02_encoder.npy",
+        "sample_05_encoder.npy"
+      ],
+      "training_files": [
+        "sample_01_encoder.npy",
+        "sample_03_encoder.npy",
+        "sample_04_encoder.npy"
+      ]
+    },
+    "dedup": {
+      "key": "archive_member (real manifest) == npz path without leading './'",
+      "overlap_count": 3,
+      "overlap_files": [
+        "sample_00_encoder.npy",
+        "sample_02_encoder.npy",
+        "sample_05_encoder.npy"
+      ],
+      "real_validation_counted_additionally": 0,
+      "unique_validation_total": 240,
+      "combined_count_used": 240,
+      "note": "the 3 real validation WAVs are the same archive members as 3 rows already inside the 240 npz validation rows, so they are reported separately and add 0 unique samples; the 3 real training WAVs are never counted as validation"
+    }
+  },
+  "samples": {
+    "formal_validation": 240,
+    "real_validation_reported_separately": 3,
+    "real_training_reference_only": 3,
+    "counted_in_formal_metric": 240,
+    "evaluated_units": {
+      "formal_validation": 240,
+      "real_validation": 3,
+      "real_training_reference": 3
+    },
+    "training_used_in_formal_metric": 0
+  },
+  "real_samples": [
+    {
+      "file": "sample_00_encoder.npy",
+      "path": "/home/yang/kwt-worktrees/kwt-grad-accepted/software/validation/real_input_chain_20261017/sample_00_encoder.npy",
+      "manifest_split": "validation",
+      "label": "_unknown_",
+      "archive_member": "four/750e3e75_nohash_0.wav",
+      "encoder_sha256": "a7ffaafdd9866b3711903c67db0f3a17845662bc52356f0d1a82410496a54f61",
+      "mfcc_sha256": "dcdb5a8ac2daa7bf2b1c6f18cd964d0f406d2ce6192322c2930ac632f2c962ae",
+      "npz_index": 240,
+      "npz_partition": "validation",
+      "npz_path_raw": "./four/750e3e75_nohash_0.wav",
+      "npz_path": "four/750e3e75_nohash_0.wav",
+      "duplicate_of_npz": true,
+      "counted_in_formal_metric": false,
+      "encoder_max_abs_diff_vs_npz": 2.3126602172851562e-05,
+      "encoder_shape": [
+        99,
+        64
+      ],
+      "y_nrmse_per_layer": [
+        0.007116134511401927,
+        0.009840186705396022,
+        0.011113977921588048,
+        0.013081914420280954,
+        0.014656009130770774,
+        0.01598920929931497,
+        0.01688643951493414,
+        0.01772742360858234,
+        0.018078806610328027,
+        0.01922212051128208,
+        0.021594122805967016,
+        0.025162729957103235
+      ]
+    },
+    {
+      "file": "sample_01_encoder.npy",
+      "path": "/home/yang/kwt-worktrees/kwt-grad-accepted/software/validation/real_input_chain_20261017/sample_01_encoder.npy",
+      "manifest_split": "training",
+      "label": "go",
+      "archive_member": "go/0ba018fc_nohash_4.wav",
+      "encoder_sha256": "8a6a9e49a38c073b1808de7b62ff295cd372af1399e12cb7d037975fec6963f8",
+      "mfcc_sha256": "43b0658ed234fdb01638bcd5ce2e5d8ef4141216650ca622ed839ff2467ddf43",
+      "npz_index": 40,
+      "npz_partition": "training",
+      "npz_path_raw": "./go/0ba018fc_nohash_4.wav",
+      "npz_path": "go/0ba018fc_nohash_4.wav",
+      "duplicate_of_npz": false,
+      "counted_in_formal_metric": false,
+      "encoder_max_abs_diff_vs_npz": 5.781650543212891e-06,
+      "encoder_shape": [
+        99,
+        64
+      ],
+      "y_nrmse_per_layer": [
+        0.007290626605508868,
+        0.01012172375147148,
+        0.01201638659508303,
+        0.013032960086182852,
+        0.014336890108218156,
+        0.016187008586150207,
+        0.017329872714076062,
+        0.01812883970738203,
+        0.018609088007791444,
+        0.02005262953153991,
+        0.022584918939814375,
+        0.027870433268587465
+      ]
+    },
+    {
+      "file": "sample_02_encoder.npy",
+      "path": "/home/yang/kwt-worktrees/kwt-grad-accepted/software/validation/real_input_chain_20261017/sample_02_encoder.npy",
+      "manifest_split": "validation",
+      "label": "no",
+      "archive_member": "no/45692b02_nohash_3.wav",
+      "encoder_sha256": "e1f6bff0d1bfe88a680d69a826ccb1855221e1d8ace873d67679189eca93e116",
+      "mfcc_sha256": "8c98d33e2a85e39c3cef4b822571a7b7890e97665698f48330ca605872d8c133",
+      "npz_index": 320,
+      "npz_partition": "validation",
+      "npz_path_raw": "./no/45692b02_nohash_3.wav",
+      "npz_path": "no/45692b02_nohash_3.wav",
+      "duplicate_of_npz": true,
+      "counted_in_formal_metric": false,
+      "encoder_max_abs_diff_vs_npz": 7.569789886474609e-06,
+      "encoder_shape": [
+        99,
+        64
+      ],
+      "y_nrmse_per_layer": [
+        0.007373263286138654,
+        0.01032541515570619,
+        0.01169872626925551,
+        0.013551886678143986,
+        0.014490861213092428,
+        0.015347017589353558,
+        0.016022117336728148,
+        0.0172829598359203,
+        0.01841038033458339,
+        0.019761829139340794,
+        0.022028425845251144,
+        0.02796288271477725
+      ]
+    },
+    {
+      "file": "sample_03_encoder.npy",
+      "path": "/home/yang/kwt-worktrees/kwt-grad-accepted/software/validation/real_input_chain_20261017/sample_03_encoder.npy",
+      "manifest_split": "training",
+      "label": "no",
+      "archive_member": "no/7e7ca854_nohash_1.wav",
+      "encoder_sha256": "ef29708b932b24554ea754872eece24b7412e20ea8d3ef88ced9b6a34a6cc7d9",
+      "mfcc_sha256": "9fdb644252b9f5cfccb76da538033de38abaf1d63c2a0816ab7f3d722b7d3822",
+      "npz_index": 80,
+      "npz_partition": "training",
+      "npz_path_raw": "./no/7e7ca854_nohash_1.wav",
+      "npz_path": "no/7e7ca854_nohash_1.wav",
+      "duplicate_of_npz": false,
+      "counted_in_formal_metric": false,
+      "encoder_max_abs_diff_vs_npz": 3.933906555175781e-06,
+      "encoder_shape": [
+        99,
+        64
+      ],
+      "y_nrmse_per_layer": [
+        0.007240749316727096,
+        0.00918650977510979,
+        0.01106144705126486,
+        0.012011445535033019,
+        0.013201244263197008,
+        0.01468934807384726,
+        0.015735567894934282,
+        0.01692059838763262,
+        0.017102728230949733,
+        0.018322951247900045,
+        0.021341652008031106,
+        0.024853808516075326
+      ]
+    },
+    {
+      "file": "sample_04_encoder.npy",
+      "path": "/home/yang/kwt-worktrees/kwt-grad-accepted/software/validation/real_input_chain_20261017/sample_04_encoder.npy",
+      "manifest_split": "training",
+      "label": "yes",
+      "archive_member": "yes/676f8138_nohash_0.wav",
+      "encoder_sha256": "3bf5f7851fa305bfedb0f1e9c5ddfee1e01e47c758d7727d7a3398304e8062e2",
+      "mfcc_sha256": "7bc86a41062ee0e8c66ed8fef401c4586b98775245bb878275acb151bc4ac354",
+      "npz_index": 200,
+      "npz_partition": "training",
+      "npz_path_raw": "./yes/676f8138_nohash_0.wav",
+      "npz_path": "yes/676f8138_nohash_0.wav",
+      "duplicate_of_npz": false,
+      "counted_in_formal_metric": false,
+      "encoder_max_abs_diff_vs_npz": 4.351139068603516e-06,
+      "encoder_shape": [
+        99,
+        64
+      ],
+      "y_nrmse_per_layer": [
+        0.008114604229913813,
+        0.010153023357912714,
+        0.012319218462906392,
+        0.01386628840198788,
+        0.015235388004727079,
+        0.01680349702701274,
+        0.017545310326747703,
+        0.018466787146233222,
+        0.019652753210195776,
+        0.02075340498783,
+        0.023068193358365973,
+        0.031279023394039866
+      ]
+    },
+    {
+      "file": "sample_05_encoder.npy",
+      "path": "/home/yang/kwt-worktrees/kwt-grad-accepted/software/validation/real_input_chain_20261017/sample_05_encoder.npy",
+      "manifest_split": "validation",
+      "label": "yes",
+      "archive_member": "yes/ec21c46b_nohash_1.wav",
+      "encoder_sha256": "16bf24f4bd5e5b0e056c43507fdb2e7061194d3ea2792d174c1afd9f22200e90",
+      "mfcc_sha256": "a45db272da20c36c1fa0e841d1f71a79e445fa2516e72b097828f9d12f60e897",
+      "npz_index": 440,
+      "npz_partition": "validation",
+      "npz_path_raw": "./yes/ec21c46b_nohash_1.wav",
+      "npz_path": "yes/ec21c46b_nohash_1.wav",
+      "duplicate_of_npz": true,
+      "counted_in_formal_metric": false,
+      "encoder_max_abs_diff_vs_npz": 1.4066696166992188e-05,
+      "encoder_shape": [
+        99,
+        64
+      ],
+      "y_nrmse_per_layer": [
+        0.007745452879183124,
+        0.009254083710590827,
+        0.013038594945157028,
+        0.014681574198208827,
+        0.016645634982796153,
+        0.017960709141394905,
+        0.018108368040788102,
+        0.018463759688471987,
+        0.018809912910450866,
+        0.019566615867020614,
+        0.02229950898711065,
+        0.027447784639307884
+      ]
+    }
+  ],
+  "nrmse_limit": 0.03,
+  "per_layer_y_nrmse_formal_validation": [
+    0.007883822684198868,
+    0.010625336957590851,
+    0.013025349282301653,
+    0.014381233641079317,
+    0.01564398636946893,
+    0.016931026764871522,
+    0.017870923919582733,
+    0.018588332567279563,
+    0.019573131411672738,
+    0.020511827109000236,
+    0.022367627618066276,
+    0.027527558920877382
+  ],
+  "per_layer_stage_nrmse_formal_validation": {
+    "a": [
+      0.009600873640128906,
+      0.006474413918881514,
+      0.008031593679086513,
+      0.01475501678459034,
+      0.014172838954826262,
+      0.016833174254519596,
+      0.021093669540734244,
+      0.02259225875554839,
+      0.023211431624359978,
+      0.023328576663351037,
+      0.022798884036221698,
+      0.021085931592866126
+    ],
+    "r1": [
+      0.0026569052680844086,
+      0.008345582457804552,
+      0.011479978471994447,
+      0.013349358224006671,
+      0.015144468664961141,
+      0.016187338703699476,
+      0.017519959870286882,
+      0.017998274940438305,
+      0.018954126338669833,
+      0.01951106872331407,
+      0.020641099744055518,
+      0.02241684331363564
+    ],
+    "g": [
+      0.011179413987131103,
+      0.01134754487634431,
+      0.014103505776492234,
+      0.01512304541465768,
+      0.01702450982144096,
+      0.019348484486014186,
+      0.01804486884916451,
+      0.022327502342618617,
+      0.025309263377198524,
+      0.022565837492138356,
+      0.024003982461796403,
+      0.02305351993437784
+    ],
+    "f": [
+      0.011056828454315047,
+      0.009835384739707234,
+      0.012639185211725034,
+      0.012679257905001339,
+      0.013984493106933891,
+      0.018522834406522956,
+      0.013792876800130823,
+      0.018362325079156305,
+      0.02176189919109763,
+      0.01970320679248532,
+      0.023023461940501363,
+      0.02366227401616879
+    ],
+    "r2": [
+      0.008797486396933682,
+      0.010386425373280397,
+      0.012707160203254823,
+      0.014052018937790385,
+      0.01540974200263225,
+      0.01683523464811818,
+      0.017682236681288512,
+      0.018246802724433332,
+      0.019308481946885576,
+      0.020272515618364895,
+      0.021976571467786536,
+      0.02726016759546477
+    ],
+    "y": [
+      0.007883822684198868,
+      0.010625336957590851,
+      0.013025349282301653,
+      0.014381233641079317,
+      0.01564398636946893,
+      0.016931026764871522,
+      0.017870923919582733,
+      0.018588332567279563,
+      0.019573131411672738,
+      0.020511827109000236,
+      0.022367627618066276,
+      0.027527558920877382
+    ]
+  },
+  "per_layer_y_nrmse_formal_persample_max": [
+    0.009720672757736429,
+    0.01428263746335085,
+    0.01807224344144863,
+    0.020252092771086336,
+    0.02240096020921701,
+    0.02171689128942938,
+    0.023350056401594058,
+    0.023167911809948472,
+    0.023857129977121985,
+    0.025223107032815145,
+    0.02696137731728788,
+    0.037838823453643075
+  ],
+  "per_layer_y_nrmse_real_validation": [
+    0.0074234701091549955,
+    0.009812322269171187,
+    0.011977116767984039,
+    0.013789910863421467,
+    0.015297794395759255,
+    0.016473541015800272,
+    0.017029386150826577,
+    0.01783168671080752,
+    0.01843515455048065,
+    0.019516426700869623,
+    0.02197483409435594,
+    0.026878888453197334
+  ],
+  "per_layer_stage_nrmse_real_validation": {
+    "a": [
+      0.002949029196308384,
+      0.005259080122654343,
+      0.008342851065630926,
+      0.014581061485363742,
+      0.012777962627419478,
+      0.015828241075791866,
+      0.01843392666111697,
+      0.02379079544727447,
+      0.023959526725469523,
+      0.0235026568853836,
+      0.024664472102421713,
+      0.019680963627033466
+    ],
+    "r1": [
+      0.0035677222774550413,
+      0.00739661696802989,
+      0.010817683344799532,
+      0.012458702978103921,
+      0.014680540379782043,
+      0.01574172457677528,
+      0.01686204726331161,
+      0.017168949352546328,
+      0.018129031820888954,
+      0.0182966363292971,
+      0.020055229525747464,
+      0.022408059497321463
+    ],
+    "g": [
+      0.012172173248164825,
+      0.010742136406646806,
+      0.013957977149357424,
+      0.01359030312685206,
+      0.01560334172612402,
+      0.020941875339737057,
+      0.017358315944212156,
+      0.02304114884132505,
+      0.025032834619333352,
+      0.019789160933985854,
+      0.023327760174092285,
+      0.021228996410987765
+    ],
+    "f": [
+      0.012249886721994804,
+      0.008860902429214237,
+      0.01301841295691397,
+      0.011731231439707493,
+      0.012844937247715682,
+      0.01959832121671707,
+      0.013017390991976786,
+      0.0191614073823797,
+      0.02182824198644946,
+      0.016571726515026735,
+      0.022094210229926792,
+      0.022425886945332357
+    ],
+    "r2": [
+      0.008206995125013576,
+      0.009429703158244613,
+      0.011694992268690797,
+      0.013520991585683494,
+      0.015218455478623421,
+      0.016396429357780178,
+      0.01689027093735234,
+      0.017497879752806887,
+      0.018265315542661573,
+      0.019093537753038178,
+      0.021563951963864098,
+      0.026014595518738765
+    ],
+    "y": [
+      0.0074234701091549955,
+      0.009812322269171187,
+      0.011977116767984039,
+      0.013789910863421467,
+      0.015297794395759255,
+      0.016473541015800272,
+      0.017029386150826577,
+      0.01783168671080752,
+      0.01843515455048065,
+      0.019516426700869623,
+      0.02197483409435594,
+      0.026878888453197334
+    ]
+  },
+  "per_layer_y_nrmse_real_validation_persample_max": [
+    0.007745452879183124,
+    0.01032541515570619,
+    0.013038594945157028,
+    0.014681574198208827,
+    0.016645634982796153,
+    0.017960709141394905,
+    0.018108368040788102,
+    0.018463759688471987,
+    0.018809912910450866,
+    0.019761829139340794,
+    0.02229950898711065,
+    0.02796288271477725
+  ],
+  "per_layer_y_nrmse_real_training_reference": [
+    0.0075699919124308694,
+    0.00983685623303689,
+    0.011812838268220183,
+    0.012999150622374807,
+    0.014287168978532468,
+    0.01591920644910839,
+    0.016889177338410787,
+    0.017849977650889404,
+    0.018488208544292156,
+    0.01973043618496264,
+    0.022341604456405803,
+    0.028099337944592
+  ],
+  "per_layer_y_nrmse_real_training_persample_max": [
+    0.008114604229913813,
+    0.010153023357912714,
+    0.012319218462906392,
+    0.01386628840198788,
+    0.015235388004727079,
+    0.01680349702701274,
+    0.017545310326747703,
+    0.018466787146233222,
+    0.019652753210195776,
+    0.02075340498783,
+    0.023068193358365973,
+    0.031279023394039866
+  ],
+  "worst_layer": 11,
+  "worst_y_nrmse": 0.027527558920877382,
+  "worst_persample_layer": 11,
+  "worst_persample_y_nrmse": 0.037838823453643075,
+  "all_layers_below_limit": true,
+  "all_layers_below_limit_persample_max": false,
+  "persample_max_is_gate": false,
+  "finite": true,
+  "saturation": {
+    "formal_validation": {
+      "r1": 16,
+      "r2": 16,
+      "y": 5
+    },
+    "real_validation": {
+      "r1": 0,
+      "r2": 0,
+      "y": 0
+    },
+    "real_training_reference": {
+      "r1": 0,
+      "r2": 0,
+      "y": 0
+    }
+  },
+  "runtime_seconds": 30.690252780914307
+}

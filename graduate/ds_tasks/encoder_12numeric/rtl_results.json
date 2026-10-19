@@ -1,0 +1,1068 @@
+{
+  "task": "encoder_12numeric",
+  "evidence_levels": {
+    "software_reference": "L1: model/run_l1.py",
+    "rtl_bit_exact": "L2: this script (per-layer elaborated RTL)",
+    "e203": "no",
+    "synthesis": "no",
+    "official_acceptance": "no"
+  },
+  "layers": 12,
+  "samples": [
+    "sample_00_encoder.npy",
+    "sample_01_encoder.npy",
+    "sample_02_encoder.npy",
+    "sample_03_encoder.npy",
+    "sample_04_encoder.npy",
+    "sample_05_encoder.npy"
+  ],
+  "bit_exact_all": true,
+  "records": [
+    {
+      "sample": "sample_00_encoder.npy",
+      "layers": [
+        {
+          "layer": 0,
+          "stages": {
+            "a": "exact",
+            "r1": "exact",
+            "g": "exact",
+            "f": "exact",
+            "r2": "exact",
+            "y": "exact"
+          },
+          "y_nrmse_fp32": 0.007116137650665693,
+          "y_rows": 99,
+          "bit_exact": true
+        },
+        {
+          "layer": 1,
+          "stages": {
+            "a": "exact",
+            "r1": "exact",
+            "g": "exact",
+            "f": "exact",
+            "r2": "exact",
+            "y": "exact"
+          },
+          "y_nrmse_fp32": 0.009840183083727768,
+          "y_rows": 99,
+          "bit_exact": true
+        },
+        {
+          "layer": 2,
+          "stages": {
+            "a": "exact",
+            "r1": "exact",
+            "g": "exact",
+            "f": "exact",
+            "r2": "exact",
+            "y": "exact"
+          },
+          "y_nrmse_fp32": 0.011113980905740183,
+          "y_rows": 99,
+          "bit_exact": true
+        },
+        {
+          "layer": 3,
+          "stages": {
+            "a": "exact",
+            "r1": "exact",
+            "g": "exact",
+            "f": "exact",
+            "r2": "exact",
+            "y": "exact"
+          },
+          "y_nrmse_fp32": 0.013081911371199607,
+          "y_rows": 99,
+          "bit_exact": true
+        },
+        {
+          "layer": 4,
+          "stages": {
+            "a": "exact",
+            "r1": "exact",
+            "g": "exact",
+            "f": "exact",
+            "r2": "exact",
+            "y": "exact"
+          },
+          "y_nrmse_fp32": 0.014656008360550157,
+          "y_rows": 99,
+          "bit_exact": true
+        },
+        {
+          "layer": 5,
+          "stages": {
+            "a": "exact",
+            "r1": "exact",
+            "g": "exact",
+            "f": "exact",
+            "r2": "exact",
+            "y": "exact"
+          },
+          "y_nrmse_fp32": 0.01598920907119099,
+          "y_rows": 99,
+          "bit_exact": true
+        },
+        {
+          "layer": 6,
+          "stages": {
+            "a": "exact",
+            "r1": "exact",
+            "g": "exact",
+            "f": "exact",
+            "r2": "exact",
+            "y": "exact"
+          },
+          "y_nrmse_fp32": 0.01688643878625753,
+          "y_rows": 99,
+          "bit_exact": true
+        },
+        {
+          "layer": 7,
+          "stages": {
+            "a": "exact",
+            "r1": "exact",
+            "g": "exact",
+            "f": "exact",
+            "r2": "exact",
+            "y": "exact"
+          },
+          "y_nrmse_fp32": 0.017727422615769758,
+          "y_rows": 99,
+          "bit_exact": true
+        },
+        {
+          "layer": 8,
+          "stages": {
+            "a": "exact",
+            "r1": "exact",
+            "g": "exact",
+            "f": "exact",
+            "r2": "exact",
+            "y": "exact"
+          },
+          "y_nrmse_fp32": 0.01807880540435462,
+          "y_rows": 99,
+          "bit_exact": true
+        },
+        {
+          "layer": 9,
+          "stages": {
+            "a": "exact",
+            "r1": "exact",
+            "g": "exact",
+            "f": "exact",
+            "r2": "exact",
+            "y": "exact"
+          },
+          "y_nrmse_fp32": 0.019222128114056974,
+          "y_rows": 99,
+          "bit_exact": true
+        },
+        {
+          "layer": 10,
+          "stages": {
+            "a": "exact",
+            "r1": "exact",
+            "g": "exact",
+            "f": "exact",
+            "r2": "exact",
+            "y": "exact"
+          },
+          "y_nrmse_fp32": 0.021594138703304268,
+          "y_rows": 99,
+          "bit_exact": true
+        },
+        {
+          "layer": 11,
+          "stages": {
+            "a": "exact",
+            "r1": "exact",
+            "g": "exact",
+            "f": "exact",
+            "r2": "exact",
+            "y": "exact"
+          },
+          "y_nrmse_fp32": 0.025162723978242485,
+          "y_rows": 99,
+          "bit_exact": true
+        }
+      ],
+      "bit_exact": true
+    },
+    {
+      "sample": "sample_01_encoder.npy",
+      "layers": [
+        {
+          "layer": 0,
+          "stages": {
+            "a": "exact",
+            "r1": "exact",
+            "g": "exact",
+            "f": "exact",
+            "r2": "exact",
+            "y": "exact"
+          },
+          "y_nrmse_fp32": 0.0072906242663934445,
+          "y_rows": 99,
+          "bit_exact": true
+        },
+        {
+          "layer": 1,
+          "stages": {
+            "a": "exact",
+            "r1": "exact",
+            "g": "exact",
+            "f": "exact",
+            "r2": "exact",
+            "y": "exact"
+          },
+          "y_nrmse_fp32": 0.010121717580848327,
+          "y_rows": 99,
+          "bit_exact": true
+        },
+        {
+          "layer": 2,
+          "stages": {
+            "a": "exact",
+            "r1": "exact",
+            "g": "exact",
+            "f": "exact",
+            "r2": "exact",
+            "y": "exact"
+          },
+          "y_nrmse_fp32": 0.012016379236002775,
+          "y_rows": 99,
+          "bit_exact": true
+        },
+        {
+          "layer": 3,
+          "stages": {
+            "a": "exact",
+            "r1": "exact",
+            "g": "exact",
+            "f": "exact",
+            "r2": "exact",
+            "y": "exact"
+          },
+          "y_nrmse_fp32": 0.013032947753017976,
+          "y_rows": 99,
+          "bit_exact": true
+        },
+        {
+          "layer": 4,
+          "stages": {
+            "a": "exact",
+            "r1": "exact",
+            "g": "exact",
+            "f": "exact",
+            "r2": "exact",
+            "y": "exact"
+          },
+          "y_nrmse_fp32": 0.014336878647482171,
+          "y_rows": 99,
+          "bit_exact": true
+        },
+        {
+          "layer": 5,
+          "stages": {
+            "a": "exact",
+            "r1": "exact",
+            "g": "exact",
+            "f": "exact",
+            "r2": "exact",
+            "y": "exact"
+          },
+          "y_nrmse_fp32": 0.016186989003780378,
+          "y_rows": 99,
+          "bit_exact": true
+        },
+        {
+          "layer": 6,
+          "stages": {
+            "a": "exact",
+            "r1": "exact",
+            "g": "exact",
+            "f": "exact",
+            "r2": "exact",
+            "y": "exact"
+          },
+          "y_nrmse_fp32": 0.01732984477123611,
+          "y_rows": 99,
+          "bit_exact": true
+        },
+        {
+          "layer": 7,
+          "stages": {
+            "a": "exact",
+            "r1": "exact",
+            "g": "exact",
+            "f": "exact",
+            "r2": "exact",
+            "y": "exact"
+          },
+          "y_nrmse_fp32": 0.01812880594704857,
+          "y_rows": 99,
+          "bit_exact": true
+        },
+        {
+          "layer": 8,
+          "stages": {
+            "a": "exact",
+            "r1": "exact",
+            "g": "exact",
+            "f": "exact",
+            "r2": "exact",
+            "y": "exact"
+          },
+          "y_nrmse_fp32": 0.018609052686637293,
+          "y_rows": 99,
+          "bit_exact": true
+        },
+        {
+          "layer": 9,
+          "stages": {
+            "a": "exact",
+            "r1": "exact",
+            "g": "exact",
+            "f": "exact",
+            "r2": "exact",
+            "y": "exact"
+          },
+          "y_nrmse_fp32": 0.020052593281307336,
+          "y_rows": 99,
+          "bit_exact": true
+        },
+        {
+          "layer": 10,
+          "stages": {
+            "a": "exact",
+            "r1": "exact",
+            "g": "exact",
+            "f": "exact",
+            "r2": "exact",
+            "y": "exact"
+          },
+          "y_nrmse_fp32": 0.022584875580748624,
+          "y_rows": 99,
+          "bit_exact": true
+        },
+        {
+          "layer": 11,
+          "stages": {
+            "a": "exact",
+            "r1": "exact",
+            "g": "exact",
+            "f": "exact",
+            "r2": "exact",
+            "y": "exact"
+          },
+          "y_nrmse_fp32": 0.027870402898756433,
+          "y_rows": 99,
+          "bit_exact": true
+        }
+      ],
+      "bit_exact": true
+    },
+    {
+      "sample": "sample_02_encoder.npy",
+      "layers": [
+        {
+          "layer": 0,
+          "stages": {
+            "a": "exact",
+            "r1": "exact",
+            "g": "exact",
+            "f": "exact",
+            "r2": "exact",
+            "y": "exact"
+          },
+          "y_nrmse_fp32": 0.007373264125554738,
+          "y_rows": 99,
+          "bit_exact": true
+        },
+        {
+          "layer": 1,
+          "stages": {
+            "a": "exact",
+            "r1": "exact",
+            "g": "exact",
+            "f": "exact",
+            "r2": "exact",
+            "y": "exact"
+          },
+          "y_nrmse_fp32": 0.010325417685228844,
+          "y_rows": 99,
+          "bit_exact": true
+        },
+        {
+          "layer": 2,
+          "stages": {
+            "a": "exact",
+            "r1": "exact",
+            "g": "exact",
+            "f": "exact",
+            "r2": "exact",
+            "y": "exact"
+          },
+          "y_nrmse_fp32": 0.011698727055056084,
+          "y_rows": 99,
+          "bit_exact": true
+        },
+        {
+          "layer": 3,
+          "stages": {
+            "a": "exact",
+            "r1": "exact",
+            "g": "exact",
+            "f": "exact",
+            "r2": "exact",
+            "y": "exact"
+          },
+          "y_nrmse_fp32": 0.013551885834467673,
+          "y_rows": 99,
+          "bit_exact": true
+        },
+        {
+          "layer": 4,
+          "stages": {
+            "a": "exact",
+            "r1": "exact",
+            "g": "exact",
+            "f": "exact",
+            "r2": "exact",
+            "y": "exact"
+          },
+          "y_nrmse_fp32": 0.014490859286681184,
+          "y_rows": 99,
+          "bit_exact": true
+        },
+        {
+          "layer": 5,
+          "stages": {
+            "a": "exact",
+            "r1": "exact",
+            "g": "exact",
+            "f": "exact",
+            "r2": "exact",
+            "y": "exact"
+          },
+          "y_nrmse_fp32": 0.015347017941124181,
+          "y_rows": 99,
+          "bit_exact": true
+        },
+        {
+          "layer": 6,
+          "stages": {
+            "a": "exact",
+            "r1": "exact",
+            "g": "exact",
+            "f": "exact",
+            "r2": "exact",
+            "y": "exact"
+          },
+          "y_nrmse_fp32": 0.016022122548699808,
+          "y_rows": 99,
+          "bit_exact": true
+        },
+        {
+          "layer": 7,
+          "stages": {
+            "a": "exact",
+            "r1": "exact",
+            "g": "exact",
+            "f": "exact",
+            "r2": "exact",
+            "y": "exact"
+          },
+          "y_nrmse_fp32": 0.017282967939352127,
+          "y_rows": 99,
+          "bit_exact": true
+        },
+        {
+          "layer": 8,
+          "stages": {
+            "a": "exact",
+            "r1": "exact",
+            "g": "exact",
+            "f": "exact",
+            "r2": "exact",
+            "y": "exact"
+          },
+          "y_nrmse_fp32": 0.01841038229123848,
+          "y_rows": 99,
+          "bit_exact": true
+        },
+        {
+          "layer": 9,
+          "stages": {
+            "a": "exact",
+            "r1": "exact",
+            "g": "exact",
+            "f": "exact",
+            "r2": "exact",
+            "y": "exact"
+          },
+          "y_nrmse_fp32": 0.01976181978253232,
+          "y_rows": 99,
+          "bit_exact": true
+        },
+        {
+          "layer": 10,
+          "stages": {
+            "a": "exact",
+            "r1": "exact",
+            "g": "exact",
+            "f": "exact",
+            "r2": "exact",
+            "y": "exact"
+          },
+          "y_nrmse_fp32": 0.02202841196941851,
+          "y_rows": 99,
+          "bit_exact": true
+        },
+        {
+          "layer": 11,
+          "stages": {
+            "a": "exact",
+            "r1": "exact",
+            "g": "exact",
+            "f": "exact",
+            "r2": "exact",
+            "y": "exact"
+          },
+          "y_nrmse_fp32": 0.027962875122551245,
+          "y_rows": 99,
+          "bit_exact": true
+        }
+      ],
+      "bit_exact": true
+    },
+    {
+      "sample": "sample_03_encoder.npy",
+      "layers": [
+        {
+          "layer": 0,
+          "stages": {
+            "a": "exact",
+            "r1": "exact",
+            "g": "exact",
+            "f": "exact",
+            "r2": "exact",
+            "y": "exact"
+          },
+          "y_nrmse_fp32": 0.007240750787107143,
+          "y_rows": 99,
+          "bit_exact": true
+        },
+        {
+          "layer": 1,
+          "stages": {
+            "a": "exact",
+            "r1": "exact",
+            "g": "exact",
+            "f": "exact",
+            "r2": "exact",
+            "y": "exact"
+          },
+          "y_nrmse_fp32": 0.009186514523183538,
+          "y_rows": 99,
+          "bit_exact": true
+        },
+        {
+          "layer": 2,
+          "stages": {
+            "a": "exact",
+            "r1": "exact",
+            "g": "exact",
+            "f": "exact",
+            "r2": "exact",
+            "y": "exact"
+          },
+          "y_nrmse_fp32": 0.01106144094803311,
+          "y_rows": 99,
+          "bit_exact": true
+        },
+        {
+          "layer": 3,
+          "stages": {
+            "a": "exact",
+            "r1": "exact",
+            "g": "exact",
+            "f": "exact",
+            "r2": "exact",
+            "y": "exact"
+          },
+          "y_nrmse_fp32": 0.012011434226639842,
+          "y_rows": 99,
+          "bit_exact": true
+        },
+        {
+          "layer": 4,
+          "stages": {
+            "a": "exact",
+            "r1": "exact",
+            "g": "exact",
+            "f": "exact",
+            "r2": "exact",
+            "y": "exact"
+          },
+          "y_nrmse_fp32": 0.013201223079384587,
+          "y_rows": 99,
+          "bit_exact": true
+        },
+        {
+          "layer": 5,
+          "stages": {
+            "a": "exact",
+            "r1": "exact",
+            "g": "exact",
+            "f": "exact",
+            "r2": "exact",
+            "y": "exact"
+          },
+          "y_nrmse_fp32": 0.014689313157452852,
+          "y_rows": 99,
+          "bit_exact": true
+        },
+        {
+          "layer": 6,
+          "stages": {
+            "a": "exact",
+            "r1": "exact",
+            "g": "exact",
+            "f": "exact",
+            "r2": "exact",
+            "y": "exact"
+          },
+          "y_nrmse_fp32": 0.015735528010874557,
+          "y_rows": 99,
+          "bit_exact": true
+        },
+        {
+          "layer": 7,
+          "stages": {
+            "a": "exact",
+            "r1": "exact",
+            "g": "exact",
+            "f": "exact",
+            "r2": "exact",
+            "y": "exact"
+          },
+          "y_nrmse_fp32": 0.016920552167349657,
+          "y_rows": 99,
+          "bit_exact": true
+        },
+        {
+          "layer": 8,
+          "stages": {
+            "a": "exact",
+            "r1": "exact",
+            "g": "exact",
+            "f": "exact",
+            "r2": "exact",
+            "y": "exact"
+          },
+          "y_nrmse_fp32": 0.017102679635415983,
+          "y_rows": 99,
+          "bit_exact": true
+        },
+        {
+          "layer": 9,
+          "stages": {
+            "a": "exact",
+            "r1": "exact",
+            "g": "exact",
+            "f": "exact",
+            "r2": "exact",
+            "y": "exact"
+          },
+          "y_nrmse_fp32": 0.018322900578225488,
+          "y_rows": 99,
+          "bit_exact": true
+        },
+        {
+          "layer": 10,
+          "stages": {
+            "a": "exact",
+            "r1": "exact",
+            "g": "exact",
+            "f": "exact",
+            "r2": "exact",
+            "y": "exact"
+          },
+          "y_nrmse_fp32": 0.021341596427927607,
+          "y_rows": 99,
+          "bit_exact": true
+        },
+        {
+          "layer": 11,
+          "stages": {
+            "a": "exact",
+            "r1": "exact",
+            "g": "exact",
+            "f": "exact",
+            "r2": "exact",
+            "y": "exact"
+          },
+          "y_nrmse_fp32": 0.024853740734905483,
+          "y_rows": 99,
+          "bit_exact": true
+        }
+      ],
+      "bit_exact": true
+    },
+    {
+      "sample": "sample_04_encoder.npy",
+      "layers": [
+        {
+          "layer": 0,
+          "stages": {
+            "a": "exact",
+            "r1": "exact",
+            "g": "exact",
+            "f": "exact",
+            "r2": "exact",
+            "y": "exact"
+          },
+          "y_nrmse_fp32": 0.008114606557727218,
+          "y_rows": 99,
+          "bit_exact": true
+        },
+        {
+          "layer": 1,
+          "stages": {
+            "a": "exact",
+            "r1": "exact",
+            "g": "exact",
+            "f": "exact",
+            "r2": "exact",
+            "y": "exact"
+          },
+          "y_nrmse_fp32": 0.010153029100120512,
+          "y_rows": 99,
+          "bit_exact": true
+        },
+        {
+          "layer": 2,
+          "stages": {
+            "a": "exact",
+            "r1": "exact",
+            "g": "exact",
+            "f": "exact",
+            "r2": "exact",
+            "y": "exact"
+          },
+          "y_nrmse_fp32": 0.012319218733019876,
+          "y_rows": 99,
+          "bit_exact": true
+        },
+        {
+          "layer": 3,
+          "stages": {
+            "a": "exact",
+            "r1": "exact",
+            "g": "exact",
+            "f": "exact",
+            "r2": "exact",
+            "y": "exact"
+          },
+          "y_nrmse_fp32": 0.013866286384166059,
+          "y_rows": 99,
+          "bit_exact": true
+        },
+        {
+          "layer": 4,
+          "stages": {
+            "a": "exact",
+            "r1": "exact",
+            "g": "exact",
+            "f": "exact",
+            "r2": "exact",
+            "y": "exact"
+          },
+          "y_nrmse_fp32": 0.015235385634728281,
+          "y_rows": 99,
+          "bit_exact": true
+        },
+        {
+          "layer": 5,
+          "stages": {
+            "a": "exact",
+            "r1": "exact",
+            "g": "exact",
+            "f": "exact",
+            "r2": "exact",
+            "y": "exact"
+          },
+          "y_nrmse_fp32": 0.0168034966895872,
+          "y_rows": 99,
+          "bit_exact": true
+        },
+        {
+          "layer": 6,
+          "stages": {
+            "a": "exact",
+            "r1": "exact",
+            "g": "exact",
+            "f": "exact",
+            "r2": "exact",
+            "y": "exact"
+          },
+          "y_nrmse_fp32": 0.01754530940203947,
+          "y_rows": 99,
+          "bit_exact": true
+        },
+        {
+          "layer": 7,
+          "stages": {
+            "a": "exact",
+            "r1": "exact",
+            "g": "exact",
+            "f": "exact",
+            "r2": "exact",
+            "y": "exact"
+          },
+          "y_nrmse_fp32": 0.018466790090418416,
+          "y_rows": 99,
+          "bit_exact": true
+        },
+        {
+          "layer": 8,
+          "stages": {
+            "a": "exact",
+            "r1": "exact",
+            "g": "exact",
+            "f": "exact",
+            "r2": "exact",
+            "y": "exact"
+          },
+          "y_nrmse_fp32": 0.019652757589931777,
+          "y_rows": 99,
+          "bit_exact": true
+        },
+        {
+          "layer": 9,
+          "stages": {
+            "a": "exact",
+            "r1": "exact",
+            "g": "exact",
+            "f": "exact",
+            "r2": "exact",
+            "y": "exact"
+          },
+          "y_nrmse_fp32": 0.02075341048601732,
+          "y_rows": 99,
+          "bit_exact": true
+        },
+        {
+          "layer": 10,
+          "stages": {
+            "a": "exact",
+            "r1": "exact",
+            "g": "exact",
+            "f": "exact",
+            "r2": "exact",
+            "y": "exact"
+          },
+          "y_nrmse_fp32": 0.023068194244445145,
+          "y_rows": 99,
+          "bit_exact": true
+        },
+        {
+          "layer": 11,
+          "stages": {
+            "a": "exact",
+            "r1": "exact",
+            "g": "exact",
+            "f": "exact",
+            "r2": "exact",
+            "y": "exact"
+          },
+          "y_nrmse_fp32": 0.03127906715157293,
+          "y_rows": 99,
+          "bit_exact": true
+        }
+      ],
+      "bit_exact": true
+    },
+    {
+      "sample": "sample_05_encoder.npy",
+      "layers": [
+        {
+          "layer": 0,
+          "stages": {
+            "a": "exact",
+            "r1": "exact",
+            "g": "exact",
+            "f": "exact",
+            "r2": "exact",
+            "y": "exact"
+          },
+          "y_nrmse_fp32": 0.0077454493340221725,
+          "y_rows": 99,
+          "bit_exact": true
+        },
+        {
+          "layer": 1,
+          "stages": {
+            "a": "exact",
+            "r1": "exact",
+            "g": "exact",
+            "f": "exact",
+            "r2": "exact",
+            "y": "exact"
+          },
+          "y_nrmse_fp32": 0.009254077128760812,
+          "y_rows": 99,
+          "bit_exact": true
+        },
+        {
+          "layer": 2,
+          "stages": {
+            "a": "exact",
+            "r1": "exact",
+            "g": "exact",
+            "f": "exact",
+            "r2": "exact",
+            "y": "exact"
+          },
+          "y_nrmse_fp32": 0.013038597230842042,
+          "y_rows": 99,
+          "bit_exact": true
+        },
+        {
+          "layer": 3,
+          "stages": {
+            "a": "exact",
+            "r1": "exact",
+            "g": "exact",
+            "f": "exact",
+            "r2": "exact",
+            "y": "exact"
+          },
+          "y_nrmse_fp32": 0.014681575299383921,
+          "y_rows": 99,
+          "bit_exact": true
+        },
+        {
+          "layer": 4,
+          "stages": {
+            "a": "exact",
+            "r1": "exact",
+            "g": "exact",
+            "f": "exact",
+            "r2": "exact",
+            "y": "exact"
+          },
+          "y_nrmse_fp32": 0.016645631387007618,
+          "y_rows": 99,
+          "bit_exact": true
+        },
+        {
+          "layer": 5,
+          "stages": {
+            "a": "exact",
+            "r1": "exact",
+            "g": "exact",
+            "f": "exact",
+            "r2": "exact",
+            "y": "exact"
+          },
+          "y_nrmse_fp32": 0.017960707933213874,
+          "y_rows": 99,
+          "bit_exact": true
+        },
+        {
+          "layer": 6,
+          "stages": {
+            "a": "exact",
+            "r1": "exact",
+            "g": "exact",
+            "f": "exact",
+            "r2": "exact",
+            "y": "exact"
+          },
+          "y_nrmse_fp32": 0.018108361861173566,
+          "y_rows": 99,
+          "bit_exact": true
+        },
+        {
+          "layer": 7,
+          "stages": {
+            "a": "exact",
+            "r1": "exact",
+            "g": "exact",
+            "f": "exact",
+            "r2": "exact",
+            "y": "exact"
+          },
+          "y_nrmse_fp32": 0.018463746779336675,
+          "y_rows": 99,
+          "bit_exact": true
+        },
+        {
+          "layer": 8,
+          "stages": {
+            "a": "exact",
+            "r1": "exact",
+            "g": "exact",
+            "f": "exact",
+            "r2": "exact",
+            "y": "exact"
+          },
+          "y_nrmse_fp32": 0.01880989110720497,
+          "y_rows": 99,
+          "bit_exact": true
+        },
+        {
+          "layer": 9,
+          "stages": {
+            "a": "exact",
+            "r1": "exact",
+            "g": "exact",
+            "f": "exact",
+            "r2": "exact",
+            "y": "exact"
+          },
+          "y_nrmse_fp32": 0.01956659301392064,
+          "y_rows": 99,
+          "bit_exact": true
+        },
+        {
+          "layer": 10,
+          "stages": {
+            "a": "exact",
+            "r1": "exact",
+            "g": "exact",
+            "f": "exact",
+            "r2": "exact",
+            "y": "exact"
+          },
+          "y_nrmse_fp32": 0.022299475052037106,
+          "y_rows": 99,
+          "bit_exact": true
+        },
+        {
+          "layer": 11,
+          "stages": {
+            "a": "exact",
+            "r1": "exact",
+            "g": "exact",
+            "f": "exact",
+            "r2": "exact",
+            "y": "exact"
+          },
+          "y_nrmse_fp32": 0.027447768307152766,
+          "y_rows": 99,
+          "bit_exact": true
+        }
+      ],
+      "bit_exact": true
+    }
+  ],
+  "worst_y_nrmse": 0.03127906715157293,
+  "runtime_seconds": 1787.86
+}

@@ -1,0 +1,91 @@
+{
+  "task": "r2_full_numeric",
+  "state": "RTL_CONFIG_CONFLICT",
+  "evidence_level": "static constant comparison (no simulation)",
+  "assets": {
+    "frozen_12layer_calib.json": {
+      "path": "/home/yang/kwt-worktrees/ds-grad-encoder_12numeric/graduate/ds_tasks/encoder_12numeric/frozen_12layer_calib.json",
+      "sha256": "5f039ec745e2b4dda1e6de5abb6fdf97316c3e98a0265c31212b53eee669d444"
+    },
+    "attn_params.svh": {
+      "path": "/home/yang/kwt-worktrees/kwt-grad-accepted/graduate/rtl/encoder/third_party/attn_params.svh",
+      "sha256": "6dc3e3fd687169cf47f1e60c58171cc151fd551bcf2e07b4495cb37869d3b064"
+    },
+    "kwt_postnorm_cfg.svh": {
+      "path": "/home/yang/kwt-worktrees/kwt-grad-accepted/graduate/rtl/encoder/third_party/kwt_postnorm_cfg.svh",
+      "sha256": "4be4e396e27721fb46e99c7b9bb89a7c11d061043f95496f55179b2efb0ac7b0"
+    },
+    "tb_encoder.sv": {
+      "path": "/home/yang/kwt-worktrees/kwt-grad-accepted/graduate/encoder/tb/tb_encoder.sv",
+      "sha256": "c9e334e78a41a3c8d7a99740d54431809891556e648578f0f147b458ace49cfe"
+    }
+  },
+  "mismatches": [
+    {
+      "name": "KC",
+      "rtl": 6680,
+      "frozen": 5152
+    },
+    {
+      "name": "SH_KC",
+      "rtl": 38,
+      "frozen": 34
+    },
+    {
+      "name": "RQ",
+      "rtl": 6,
+      "frozen": 5
+    },
+    {
+      "name": "RV",
+      "rtl": 7,
+      "frozen": 6
+    },
+    {
+      "name": "RC",
+      "rtl": 14,
+      "frozen": 15
+    },
+    {
+      "name": "M_A",
+      "rtl": 5981,
+      "frozen": 5247
+    },
+    {
+      "name": "MA1",
+      "rtl": 61302,
+      "frozen": 65960
+    },
+    {
+      "name": "MB1",
+      "rtl": 12260,
+      "frozen": 15037
+    },
+    {
+      "name": "EPS_Q1",
+      "rtl": 31173,
+      "frozen": 1462
+    },
+    {
+      "name": "MGN",
+      "rtl": 267644,
+      "frozen": 129003
+    },
+    {
+      "name": "MC2",
+      "rtl": 77111,
+      "frozen": 62159
+    },
+    {
+      "name": "EPS_Q2",
+      "rtl": 15272,
+      "frozen": 9924
+    },
+    {
+      "name": "MO2",
+      "rtl": 546,
+      "frozen": 467
+    }
+  ],
+  "mismatch_count": 13
+}
