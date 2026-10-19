@@ -1,0 +1,797 @@
+{
+  "task": "r2_preprocess",
+  "started": "2026-10-19T11:51:16+0800",
+  "all_gates_pass": true,
+  "environment": {
+    "python": "3.12.12",
+    "numpy": "2.5.2",
+    "cwd": "/home/yang/kwt-worktrees/ds-grad-r2_preprocess"
+  },
+  "inputs": {
+    "archive": "/home/yang/Desktop/ic设计竞赛/资料/数据集/speech_commands_v0.02.tar.gz",
+    "archive_bytes": 2428923189,
+    "weights": "/home/yang/kwt-worktrees/ds-grad-r2_preprocess/software/weights/kwt1_fp32.npz",
+    "weights_sha256": "8f359abf7adbe287b8f89fca98af46194f98f90f2146784731bff551a155825a",
+    "flags": "/home/yang/kwt-worktrees/ds-grad-r2_preprocess/资料/ARM_KWT-1_237e4097/models_data_v2_12_labels/kwt1/flags.json",
+    "flags_sha256": "fcd480d309f96d2029a3ba764634f9e46dd73b667c0ebb84b66af02680494c58",
+    "samples_dir": "/home/yang/kwt-worktrees/ds-grad-r2_preprocess/software/validation/real_input_chain_20261017",
+    "manifest": "/home/yang/kwt-worktrees/ds-grad-r2_preprocess/software/validation/real_input_chain_20261017/manifest.json",
+    "manifest_weights_sha256": "8f359abf7adbe287b8f89fca98af46194f98f90f2146784731bff551a155825a"
+  },
+  "frame_count_derivation": {
+    "desired_samples": 16000,
+    "window_size_samples": 480,
+    "window_stride_samples": 160,
+    "derived_mfcc_rows": 98,
+    "class_token_rows": 1,
+    "encoder_rows": 99,
+    "config_spectrogram_length": 98
+  },
+  "counts": {
+    "stored_real_samples": 6,
+    "extra_real_samples": 7,
+    "total_real_samples": 13,
+    "training": 3,
+    "validation": 3,
+    "mfcc_elements_checked": 23520,
+    "encoder_elements_checked": 38016
+  },
+  "aggregate": {
+    "mfcc_independent_max_abs": 7.152557373046875e-05,
+    "encoder_same_input_max_abs": 0.0,
+    "encoder_independent_max_abs": 2.6702880859375e-05,
+    "encoder_independent_worst_nrmse": 2.596761456272636e-06,
+    "padding_class_token_max_abs": 0.0,
+    "padding_pos_shifted_min_max_abs": 0.6244934815913439,
+    "extra_worst_mfcc": 0.00012683868408203125,
+    "extra_worst_encoder": 4.4345855712890625e-05
+  },
+  "split_discipline": {
+    "rule": "official Speech Commands hash rule (prepare_quant_samples.split_for)",
+    "stored_samples_training": 3,
+    "stored_samples_validation": 3,
+    "calibration_performed": false,
+    "thresholds_source": "a-priori float32-rounding constants; not fitted on any split",
+    "validation_used_for": "evaluation only; no scale/threshold derived from validation samples"
+  },
+  "evidence_levels": {
+    "software_reference": {
+      "status": "PROVEN (this task)",
+      "level": "E2 independent reimplementation + E3 metamorphic/padding-discriminating + E4 serialization self-consistency",
+      "detail": "independent float64 NumPy WAV->MFCC->99x64 vs shipped artefacts on 6 real samples with stored artifacts, plus independent-vs-production cross-check on extra real samples"
+    },
+    "rtl_bit_exact": {
+      "status": "NOT PROVEN BY THIS TASK",
+      "level": "n/a",
+      "detail": "offline preprocessing is computer-side; no RTL in this task"
+    },
+    "e203_soc": {
+      "status": "NOT PROVEN BY THIS TASK",
+      "level": "n/a",
+      "detail": "no E203 instruction stream / System Bus / NICE integration exercised"
+    },
+    "synthesis": {
+      "status": "NOT PROVEN BY THIS TASK",
+      "level": "n/a",
+      "detail": "no PDK/SDC; no 150 MHz timing, area or power sign-off"
+    },
+    "official_acceptance": {
+      "status": "NOT PROVEN BY THIS TASK",
+      "level": "n/a",
+      "detail": "6 real samples with stored artifacts (+7 extras); not the official 600-sample set"
+    }
+  },
+  "samples": [
+    {
+      "index": 0,
+      "archive_member": "four/750e3e75_nohash_0.wav",
+      "split": "validation",
+      "label": "_unknown_",
+      "wav_sha256": "2ad981ba82162e0084d3ab3dc0ae6bdb79ac908a72067a1e752ebe2318bcee9f",
+      "wav_sha256_matches_manifest": true,
+      "wav_format": {
+        "channels": 1,
+        "sample_rate_hz": 16000,
+        "sample_width_bytes": 2,
+        "frames": 16000,
+        "compression": "NONE"
+      },
+      "wav_pcm_frames": 16000,
+      "mfcc_meta": {
+        "nframes": 98,
+        "mel_last_bin": 244
+      },
+      "mfcc_independent_max_abs": 7.152557373046875e-05,
+      "mfcc_exact_elements": 164,
+      "mfcc_total_elements": 3920,
+      "mfcc_production_vs_stored_max_abs": 6.020069122314453e-05,
+      "encoder_same_input_max_abs": 0.0,
+      "encoder_file_byte_identical": true,
+      "encoder_independent_max_abs": 2.6702880859375e-05,
+      "encoder_independent_nrmse": 2.596761456272636e-06,
+      "padding": {
+        "class_token_row_max_abs": 0.0,
+        "pos_offset_correct_max_abs": 0.0,
+        "pos_offset_shifted_max_abs": 0.6244934815913439,
+        "pos_absent_max_abs": 0.6524280309677124,
+        "class_token_vs_frame0_max_abs": 2.1275259852409363
+      },
+      "serialization": {
+        "mfcc": {
+          "file_bytes": 15808,
+          "file_sha256": "a8a85e2878283a0d3cd40f157243b10aa5034c2544bbfb21d292da9c422aad15",
+          "npy_version": "1.0",
+          "descr": "<f4",
+          "fortran_order": false,
+          "header_shape": [
+            98,
+            40
+          ],
+          "shape": [
+            98,
+            40
+          ],
+          "dtype": "float32",
+          "c_contiguous": true,
+          "data_offset": 128,
+          "payload_bytes": 15680,
+          "expected_payload_bytes": 15680,
+          "array_bytes_sha256": "dcdb5a8ac2daa7bf2b1c6f18cd964d0f406d2ce6192322c2930ac632f2c962ae",
+          "manifest_array_sha256": "dcdb5a8ac2daa7bf2b1c6f18cd964d0f406d2ce6192322c2930ac632f2c962ae",
+          "array_bytes_match_manifest": true,
+          "roundtrip_byte_identical": true,
+          "roundtrip_array_equal": true,
+          "finite": true
+        },
+        "encoder": {
+          "file_bytes": 25472,
+          "file_sha256": "489dc7c28b2816cdb7cfc35e3f98c2dd674112f71d9357f746db57de4a27c058",
+          "npy_version": "1.0",
+          "descr": "<f4",
+          "fortran_order": false,
+          "header_shape": [
+            99,
+            64
+          ],
+          "shape": [
+            99,
+            64
+          ],
+          "dtype": "float32",
+          "c_contiguous": true,
+          "data_offset": 128,
+          "payload_bytes": 25344,
+          "expected_payload_bytes": 25344,
+          "array_bytes_sha256": "a7ffaafdd9866b3711903c67db0f3a17845662bc52356f0d1a82410496a54f61",
+          "manifest_array_sha256": "a7ffaafdd9866b3711903c67db0f3a17845662bc52356f0d1a82410496a54f61",
+          "array_bytes_match_manifest": true,
+          "roundtrip_byte_identical": true,
+          "roundtrip_array_equal": true,
+          "finite": true
+        }
+      },
+      "class_token_row_sha256": "2dd8f4859e596e0aef761aca7052f2803fb39df7f922872a22775baf4bf51e64"
+    },
+    {
+      "index": 1,
+      "archive_member": "go/0ba018fc_nohash_4.wav",
+      "split": "training",
+      "label": "go",
+      "wav_sha256": "27c020d1debc9ca2ab2e8c431d7bc458fdffdbefda7a1c9bdc2471898fe8e402",
+      "wav_sha256_matches_manifest": true,
+      "wav_format": {
+        "channels": 1,
+        "sample_rate_hz": 16000,
+        "sample_width_bytes": 2,
+        "frames": 16000,
+        "compression": "NONE"
+      },
+      "wav_pcm_frames": 16000,
+      "mfcc_meta": {
+        "nframes": 98,
+        "mel_last_bin": 244
+      },
+      "mfcc_independent_max_abs": 2.288818359375e-05,
+      "mfcc_exact_elements": 187,
+      "mfcc_total_elements": 3920,
+      "mfcc_production_vs_stored_max_abs": 1.4662742614746094e-05,
+      "encoder_same_input_max_abs": 0.0,
+      "encoder_file_byte_identical": true,
+      "encoder_independent_max_abs": 1.2934207916259766e-05,
+      "encoder_independent_nrmse": 8.893811316680475e-07,
+      "padding": {
+        "class_token_row_max_abs": 0.0,
+        "pos_offset_correct_max_abs": 0.0,
+        "pos_offset_shifted_max_abs": 0.6244934815913439,
+        "pos_absent_max_abs": 0.6524280309677124,
+        "class_token_vs_frame0_max_abs": 2.8862636014819145
+      },
+      "serialization": {
+        "mfcc": {
+          "file_bytes": 15808,
+          "file_sha256": "1e24a66c86e777e6882181b832fdd545f511cd2c6e93747a929b94b77a7588c0",
+          "npy_version": "1.0",
+          "descr": "<f4",
+          "fortran_order": false,
+          "header_shape": [
+            98,
+            40
+          ],
+          "shape": [
+            98,
+            40
+          ],
+          "dtype": "float32",
+          "c_contiguous": true,
+          "data_offset": 128,
+          "payload_bytes": 15680,
+          "expected_payload_bytes": 15680,
+          "array_bytes_sha256": "43b0658ed234fdb01638bcd5ce2e5d8ef4141216650ca622ed839ff2467ddf43",
+          "manifest_array_sha256": "43b0658ed234fdb01638bcd5ce2e5d8ef4141216650ca622ed839ff2467ddf43",
+          "array_bytes_match_manifest": true,
+          "roundtrip_byte_identical": true,
+          "roundtrip_array_equal": true,
+          "finite": true
+        },
+        "encoder": {
+          "file_bytes": 25472,
+          "file_sha256": "d91c92dabc3fcd94e05920731e0acfb4596e30989e5d8a1906dbcd6aa697b1a5",
+          "npy_version": "1.0",
+          "descr": "<f4",
+          "fortran_order": false,
+          "header_shape": [
+            99,
+            64
+          ],
+          "shape": [
+            99,
+            64
+          ],
+          "dtype": "float32",
+          "c_contiguous": true,
+          "data_offset": 128,
+          "payload_bytes": 25344,
+          "expected_payload_bytes": 25344,
+          "array_bytes_sha256": "8a6a9e49a38c073b1808de7b62ff295cd372af1399e12cb7d037975fec6963f8",
+          "manifest_array_sha256": "8a6a9e49a38c073b1808de7b62ff295cd372af1399e12cb7d037975fec6963f8",
+          "array_bytes_match_manifest": true,
+          "roundtrip_byte_identical": true,
+          "roundtrip_array_equal": true,
+          "finite": true
+        }
+      },
+      "class_token_row_sha256": "2dd8f4859e596e0aef761aca7052f2803fb39df7f922872a22775baf4bf51e64"
+    },
+    {
+      "index": 2,
+      "archive_member": "no/45692b02_nohash_3.wav",
+      "split": "validation",
+      "label": "no",
+      "wav_sha256": "420e490b843fb29fdbc1fc95d343df38cbdcc54cf1b43c9df306192eb6e55c5b",
+      "wav_sha256_matches_manifest": true,
+      "wav_format": {
+        "channels": 1,
+        "sample_rate_hz": 16000,
+        "sample_width_bytes": 2,
+        "frames": 16000,
+        "compression": "NONE"
+      },
+      "wav_pcm_frames": 16000,
+      "mfcc_meta": {
+        "nframes": 98,
+        "mel_last_bin": 244
+      },
+      "mfcc_independent_max_abs": 3.078579902648926e-05,
+      "mfcc_exact_elements": 165,
+      "mfcc_total_elements": 3920,
+      "mfcc_production_vs_stored_max_abs": 2.4318695068359375e-05,
+      "encoder_same_input_max_abs": 0.0,
+      "encoder_file_byte_identical": true,
+      "encoder_independent_max_abs": 1.1920928955078125e-05,
+      "encoder_independent_nrmse": 7.190476230255359e-07,
+      "padding": {
+        "class_token_row_max_abs": 0.0,
+        "pos_offset_correct_max_abs": 0.0,
+        "pos_offset_shifted_max_abs": 0.6244934815913439,
+        "pos_absent_max_abs": 0.6524280309677124,
+        "class_token_vs_frame0_max_abs": 3.579312317073345
+      },
+      "serialization": {
+        "mfcc": {
+          "file_bytes": 15808,
+          "file_sha256": "d4bac7237bb83bde50a4cfdf35018105bd888925890ea79cca55d1592e92416c",
+          "npy_version": "1.0",
+          "descr": "<f4",
+          "fortran_order": false,
+          "header_shape": [
+            98,
+            40
+          ],
+          "shape": [
+            98,
+            40
+          ],
+          "dtype": "float32",
+          "c_contiguous": true,
+          "data_offset": 128,
+          "payload_bytes": 15680,
+          "expected_payload_bytes": 15680,
+          "array_bytes_sha256": "8c98d33e2a85e39c3cef4b822571a7b7890e97665698f48330ca605872d8c133",
+          "manifest_array_sha256": "8c98d33e2a85e39c3cef4b822571a7b7890e97665698f48330ca605872d8c133",
+          "array_bytes_match_manifest": true,
+          "roundtrip_byte_identical": true,
+          "roundtrip_array_equal": true,
+          "finite": true
+        },
+        "encoder": {
+          "file_bytes": 25472,
+          "file_sha256": "092ad2de82d56dc0a737dd8655dab1e32fcdc31da4f02b384e2eae67aa6e5e43",
+          "npy_version": "1.0",
+          "descr": "<f4",
+          "fortran_order": false,
+          "header_shape": [
+            99,
+            64
+          ],
+          "shape": [
+            99,
+            64
+          ],
+          "dtype": "float32",
+          "c_contiguous": true,
+          "data_offset": 128,
+          "payload_bytes": 25344,
+          "expected_payload_bytes": 25344,
+          "array_bytes_sha256": "e1f6bff0d1bfe88a680d69a826ccb1855221e1d8ace873d67679189eca93e116",
+          "manifest_array_sha256": "e1f6bff0d1bfe88a680d69a826ccb1855221e1d8ace873d67679189eca93e116",
+          "array_bytes_match_manifest": true,
+          "roundtrip_byte_identical": true,
+          "roundtrip_array_equal": true,
+          "finite": true
+        }
+      },
+      "class_token_row_sha256": "2dd8f4859e596e0aef761aca7052f2803fb39df7f922872a22775baf4bf51e64"
+    },
+    {
+      "index": 3,
+      "archive_member": "no/7e7ca854_nohash_1.wav",
+      "split": "training",
+      "label": "no",
+      "wav_sha256": "1bb2d25d2982cfd75866b61f31da9f02abc1baef565986235685efa940450aa8",
+      "wav_sha256_matches_manifest": true,
+      "wav_format": {
+        "channels": 1,
+        "sample_rate_hz": 16000,
+        "sample_width_bytes": 2,
+        "frames": 16000,
+        "compression": "NONE"
+      },
+      "wav_pcm_frames": 16000,
+      "mfcc_meta": {
+        "nframes": 98,
+        "mel_last_bin": 244
+      },
+      "mfcc_independent_max_abs": 1.9073486328125e-05,
+      "mfcc_exact_elements": 196,
+      "mfcc_total_elements": 3920,
+      "mfcc_production_vs_stored_max_abs": 1.3768672943115234e-05,
+      "encoder_same_input_max_abs": 0.0,
+      "encoder_file_byte_identical": true,
+      "encoder_independent_max_abs": 4.887580871582031e-06,
+      "encoder_independent_nrmse": 5.086399489818676e-07,
+      "padding": {
+        "class_token_row_max_abs": 0.0,
+        "pos_offset_correct_max_abs": 0.0,
+        "pos_offset_shifted_max_abs": 0.6244934815913439,
+        "pos_absent_max_abs": 0.6524280309677124,
+        "class_token_vs_frame0_max_abs": 1.723270159214735
+      },
+      "serialization": {
+        "mfcc": {
+          "file_bytes": 15808,
+          "file_sha256": "0bc09b6b4970d261ee0bc0711ebea2098475ed43681f931edbeb307589c5df4e",
+          "npy_version": "1.0",
+          "descr": "<f4",
+          "fortran_order": false,
+          "header_shape": [
+            98,
+            40
+          ],
+          "shape": [
+            98,
+            40
+          ],
+          "dtype": "float32",
+          "c_contiguous": true,
+          "data_offset": 128,
+          "payload_bytes": 15680,
+          "expected_payload_bytes": 15680,
+          "array_bytes_sha256": "9fdb644252b9f5cfccb76da538033de38abaf1d63c2a0816ab7f3d722b7d3822",
+          "manifest_array_sha256": "9fdb644252b9f5cfccb76da538033de38abaf1d63c2a0816ab7f3d722b7d3822",
+          "array_bytes_match_manifest": true,
+          "roundtrip_byte_identical": true,
+          "roundtrip_array_equal": true,
+          "finite": true
+        },
+        "encoder": {
+          "file_bytes": 25472,
+          "file_sha256": "c2c56f43971060054e0234c82d6551a3a8f2165bb020d1e564e31c37eb01dd9c",
+          "npy_version": "1.0",
+          "descr": "<f4",
+          "fortran_order": false,
+          "header_shape": [
+            99,
+            64
+          ],
+          "shape": [
+            99,
+            64
+          ],
+          "dtype": "float32",
+          "c_contiguous": true,
+          "data_offset": 128,
+          "payload_bytes": 25344,
+          "expected_payload_bytes": 25344,
+          "array_bytes_sha256": "ef29708b932b24554ea754872eece24b7412e20ea8d3ef88ced9b6a34a6cc7d9",
+          "manifest_array_sha256": "ef29708b932b24554ea754872eece24b7412e20ea8d3ef88ced9b6a34a6cc7d9",
+          "array_bytes_match_manifest": true,
+          "roundtrip_byte_identical": true,
+          "roundtrip_array_equal": true,
+          "finite": true
+        }
+      },
+      "class_token_row_sha256": "2dd8f4859e596e0aef761aca7052f2803fb39df7f922872a22775baf4bf51e64"
+    },
+    {
+      "index": 4,
+      "archive_member": "yes/676f8138_nohash_0.wav",
+      "split": "training",
+      "label": "yes",
+      "wav_sha256": "b71582f69fa339b7972df3fc0b31c6d7482b98630a10cccf329dcda6fb0e8b45",
+      "wav_sha256_matches_manifest": true,
+      "wav_format": {
+        "channels": 1,
+        "sample_rate_hz": 16000,
+        "sample_width_bytes": 2,
+        "frames": 16000,
+        "compression": "NONE"
+      },
+      "wav_pcm_frames": 16000,
+      "mfcc_meta": {
+        "nframes": 98,
+        "mel_last_bin": 244
+      },
+      "mfcc_independent_max_abs": 3.4332275390625e-05,
+      "mfcc_exact_elements": 199,
+      "mfcc_total_elements": 3920,
+      "mfcc_production_vs_stored_max_abs": 1.33514404296875e-05,
+      "encoder_same_input_max_abs": 0.0,
+      "encoder_file_byte_identical": true,
+      "encoder_independent_max_abs": 1.1563301086425781e-05,
+      "encoder_independent_nrmse": 7.703840208123654e-07,
+      "padding": {
+        "class_token_row_max_abs": 0.0,
+        "pos_offset_correct_max_abs": 0.0,
+        "pos_offset_shifted_max_abs": 0.6244934815913439,
+        "pos_absent_max_abs": 0.6524280309677124,
+        "class_token_vs_frame0_max_abs": 3.3781253695487976
+      },
+      "serialization": {
+        "mfcc": {
+          "file_bytes": 15808,
+          "file_sha256": "9eaa886c83ef7b98f8c065f72e5a95213db27990f51dd85f37a693b60d89e121",
+          "npy_version": "1.0",
+          "descr": "<f4",
+          "fortran_order": false,
+          "header_shape": [
+            98,
+            40
+          ],
+          "shape": [
+            98,
+            40
+          ],
+          "dtype": "float32",
+          "c_contiguous": true,
+          "data_offset": 128,
+          "payload_bytes": 15680,
+          "expected_payload_bytes": 15680,
+          "array_bytes_sha256": "7bc86a41062ee0e8c66ed8fef401c4586b98775245bb878275acb151bc4ac354",
+          "manifest_array_sha256": "7bc86a41062ee0e8c66ed8fef401c4586b98775245bb878275acb151bc4ac354",
+          "array_bytes_match_manifest": true,
+          "roundtrip_byte_identical": true,
+          "roundtrip_array_equal": true,
+          "finite": true
+        },
+        "encoder": {
+          "file_bytes": 25472,
+          "file_sha256": "6edf03322ddfd789bb9ec40fa86fbb18a3e3e036fe4fc774ef1e1bf45f85435f",
+          "npy_version": "1.0",
+          "descr": "<f4",
+          "fortran_order": false,
+          "header_shape": [
+            99,
+            64
+          ],
+          "shape": [
+            99,
+            64
+          ],
+          "dtype": "float32",
+          "c_contiguous": true,
+          "data_offset": 128,
+          "payload_bytes": 25344,
+          "expected_payload_bytes": 25344,
+          "array_bytes_sha256": "3bf5f7851fa305bfedb0f1e9c5ddfee1e01e47c758d7727d7a3398304e8062e2",
+          "manifest_array_sha256": "3bf5f7851fa305bfedb0f1e9c5ddfee1e01e47c758d7727d7a3398304e8062e2",
+          "array_bytes_match_manifest": true,
+          "roundtrip_byte_identical": true,
+          "roundtrip_array_equal": true,
+          "finite": true
+        }
+      },
+      "class_token_row_sha256": "2dd8f4859e596e0aef761aca7052f2803fb39df7f922872a22775baf4bf51e64"
+    },
+    {
+      "index": 5,
+      "archive_member": "yes/ec21c46b_nohash_1.wav",
+      "split": "validation",
+      "label": "yes",
+      "wav_sha256": "1ce323d7fa4db2cef1c7eecf85eb9277cae6c0670f79f69bc5cbbd03b8226c45",
+      "wav_sha256_matches_manifest": true,
+      "wav_format": {
+        "channels": 1,
+        "sample_rate_hz": 16000,
+        "sample_width_bytes": 2,
+        "frames": 16000,
+        "compression": "NONE"
+      },
+      "wav_pcm_frames": 16000,
+      "mfcc_meta": {
+        "nframes": 98,
+        "mel_last_bin": 244
+      },
+      "mfcc_independent_max_abs": 5.91278076171875e-05,
+      "mfcc_exact_elements": 250,
+      "mfcc_total_elements": 3920,
+      "mfcc_production_vs_stored_max_abs": 3.248080611228943e-05,
+      "encoder_same_input_max_abs": 0.0,
+      "encoder_file_byte_identical": true,
+      "encoder_independent_max_abs": 2.0623207092285156e-05,
+      "encoder_independent_nrmse": 8.4052256471384e-07,
+      "padding": {
+        "class_token_row_max_abs": 0.0,
+        "pos_offset_correct_max_abs": 0.0,
+        "pos_offset_shifted_max_abs": 0.6244934815913439,
+        "pos_absent_max_abs": 0.6524280309677124,
+        "class_token_vs_frame0_max_abs": 3.573234260082245
+      },
+      "serialization": {
+        "mfcc": {
+          "file_bytes": 15808,
+          "file_sha256": "bf50f5b5c59c855251236bd0f968bf306b9fad59d9abee024190984746bb6833",
+          "npy_version": "1.0",
+          "descr": "<f4",
+          "fortran_order": false,
+          "header_shape": [
+            98,
+            40
+          ],
+          "shape": [
+            98,
+            40
+          ],
+          "dtype": "float32",
+          "c_contiguous": true,
+          "data_offset": 128,
+          "payload_bytes": 15680,
+          "expected_payload_bytes": 15680,
+          "array_bytes_sha256": "a45db272da20c36c1fa0e841d1f71a79e445fa2516e72b097828f9d12f60e897",
+          "manifest_array_sha256": "a45db272da20c36c1fa0e841d1f71a79e445fa2516e72b097828f9d12f60e897",
+          "array_bytes_match_manifest": true,
+          "roundtrip_byte_identical": true,
+          "roundtrip_array_equal": true,
+          "finite": true
+        },
+        "encoder": {
+          "file_bytes": 25472,
+          "file_sha256": "ead66dd353c7012b1837db0d14b99f1914e53ca9a3dab20d2a7a26fce61934c4",
+          "npy_version": "1.0",
+          "descr": "<f4",
+          "fortran_order": false,
+          "header_shape": [
+            99,
+            64
+          ],
+          "shape": [
+            99,
+            64
+          ],
+          "dtype": "float32",
+          "c_contiguous": true,
+          "data_offset": 128,
+          "payload_bytes": 25344,
+          "expected_payload_bytes": 25344,
+          "array_bytes_sha256": "16bf24f4bd5e5b0e056c43507fdb2e7061194d3ea2792d174c1afd9f22200e90",
+          "manifest_array_sha256": "16bf24f4bd5e5b0e056c43507fdb2e7061194d3ea2792d174c1afd9f22200e90",
+          "array_bytes_match_manifest": true,
+          "roundtrip_byte_identical": true,
+          "roundtrip_array_equal": true,
+          "finite": true
+        }
+      },
+      "class_token_row_sha256": "2dd8f4859e596e0aef761aca7052f2803fb39df7f922872a22775baf4bf51e64"
+    }
+  ],
+  "extra_samples": [
+    {
+      "archive_member": "up/1b88bf70_nohash_0.wav",
+      "label": "up",
+      "split": "training",
+      "wav_sha256": "2f25ecdf867ce970b5d49f97df100c6bcf39548b37083506fa3e7d7884126412",
+      "wav_format": {
+        "channels": 1,
+        "sample_rate_hz": 16000,
+        "sample_width_bytes": 2,
+        "frames": 16000,
+        "compression": "NONE"
+      },
+      "wav_pcm_frames": 16000,
+      "mfcc_independent_vs_production_max_abs": 3.528594970703125e-05,
+      "encoder_independent_vs_production_max_abs": 1.537799835205078e-05
+    },
+    {
+      "archive_member": "down/1b88bf70_nohash_0.wav",
+      "label": "down",
+      "split": "training",
+      "wav_sha256": "d11e0bd03b243392569ac71618b5beedd74c073a94a6f5faf06a9aa20f85440e",
+      "wav_format": {
+        "channels": 1,
+        "sample_rate_hz": 16000,
+        "sample_width_bytes": 2,
+        "frames": 16000,
+        "compression": "NONE"
+      },
+      "wav_pcm_frames": 16000,
+      "mfcc_independent_vs_production_max_abs": 5.1021575927734375e-05,
+      "encoder_independent_vs_production_max_abs": 1.990795135498047e-05
+    },
+    {
+      "archive_member": "left/1b88bf70_nohash_0.wav",
+      "label": "left",
+      "split": "training",
+      "wav_sha256": "ebc5bc8d30ca4de3f8f5b3a2c2637dbf498a0c99e2064e2aa3af1ee16df096f3",
+      "wav_format": {
+        "channels": 1,
+        "sample_rate_hz": 16000,
+        "sample_width_bytes": 2,
+        "frames": 16000,
+        "compression": "NONE"
+      },
+      "wav_pcm_frames": 16000,
+      "mfcc_independent_vs_production_max_abs": 2.86102294921875e-05,
+      "encoder_independent_vs_production_max_abs": 1.0728836059570312e-05
+    },
+    {
+      "archive_member": "right/1b88bf70_nohash_0.wav",
+      "label": "right",
+      "split": "training",
+      "wav_sha256": "40b0064f70fe9c655890310aabbd2f630773a9b6db79c9aabad70d472369c0a2",
+      "wav_format": {
+        "channels": 1,
+        "sample_rate_hz": 16000,
+        "sample_width_bytes": 2,
+        "frames": 16000,
+        "compression": "NONE"
+      },
+      "wav_pcm_frames": 16000,
+      "mfcc_independent_vs_production_max_abs": 7.43865966796875e-05,
+      "encoder_independent_vs_production_max_abs": 2.968311309814453e-05
+    },
+    {
+      "archive_member": "on/1b88bf70_nohash_0.wav",
+      "label": "on",
+      "split": "training",
+      "wav_sha256": "631bc337f5cf82cf0821385dc6619a57ab1652eaae9fa1618e9024e01a660e94",
+      "wav_format": {
+        "channels": 1,
+        "sample_rate_hz": 16000,
+        "sample_width_bytes": 2,
+        "frames": 16000,
+        "compression": "NONE"
+      },
+      "wav_pcm_frames": 16000,
+      "mfcc_independent_vs_production_max_abs": 2.288818359375e-05,
+      "encoder_independent_vs_production_max_abs": 5.304813385009766e-06
+    },
+    {
+      "archive_member": "off/1b88bf70_nohash_0.wav",
+      "label": "off",
+      "split": "training",
+      "wav_sha256": "6e5d6bcf3a1fb17379c9789228d5de7260e96ec7e7cb24abdddb3b6752c9b1ea",
+      "wav_format": {
+        "channels": 1,
+        "sample_rate_hz": 16000,
+        "sample_width_bytes": 2,
+        "frames": 16000,
+        "compression": "NONE"
+      },
+      "wav_pcm_frames": 16000,
+      "mfcc_independent_vs_production_max_abs": 0.00012683868408203125,
+      "encoder_independent_vs_production_max_abs": 4.4345855712890625e-05
+    },
+    {
+      "archive_member": "stop/1b88bf70_nohash_0.wav",
+      "label": "stop",
+      "split": "training",
+      "wav_sha256": "60534d412aa331651605a54e2b783485849fd705caaff9bfc3a345257617b1aa",
+      "wav_format": {
+        "channels": 1,
+        "sample_rate_hz": 16000,
+        "sample_width_bytes": 2,
+        "frames": 16000,
+        "compression": "NONE"
+      },
+      "wav_pcm_frames": 16000,
+      "mfcc_independent_vs_production_max_abs": 3.3020973205566406e-05,
+      "encoder_independent_vs_production_max_abs": 1.4841556549072266e-05
+    }
+  ],
+  "gates": [
+    {
+      "name": "frame_count_derivation",
+      "pass": true,
+      "detail": "{\"desired_samples\": 16000, \"window_size_samples\": 480, \"window_stride_samples\": 160, \"derived_mfcc_rows\": 98, \"class_token_rows\": 1, \"encoder_rows\": 99, \"config_spectrogram_length\": 98}"
+    },
+    {
+      "name": "archive_all_targets_found",
+      "pass": true,
+      "detail": "found=['four/750e3e75_nohash_0.wav', 'go/0ba018fc_nohash_4.wav', 'no/45692b02_nohash_3.wav', 'no/7e7ca854_nohash_1.wav', 'yes/676f8138_nohash_0.wav', 'yes/ec21c46b_nohash_1.wav']"
+    },
+    {
+      "name": "sample::four/750e3e75_nohash_0.wav",
+      "pass": true,
+      "detail": "split=validation mfcc_err=7.15e-05 enc_same=0 enc_e2e=2.67e-05 nrmse=2.6e-06 cls=0 pos_shift=0.624"
+    },
+    {
+      "name": "sample::go/0ba018fc_nohash_4.wav",
+      "pass": true,
+      "detail": "split=training mfcc_err=2.29e-05 enc_same=0 enc_e2e=1.29e-05 nrmse=8.89e-07 cls=0 pos_shift=0.624"
+    },
+    {
+      "name": "sample::no/45692b02_nohash_3.wav",
+      "pass": true,
+      "detail": "split=validation mfcc_err=3.08e-05 enc_same=0 enc_e2e=1.19e-05 nrmse=7.19e-07 cls=0 pos_shift=0.624"
+    },
+    {
+      "name": "sample::no/7e7ca854_nohash_1.wav",
+      "pass": true,
+      "detail": "split=training mfcc_err=1.91e-05 enc_same=0 enc_e2e=4.89e-06 nrmse=5.09e-07 cls=0 pos_shift=0.624"
+    },
+    {
+      "name": "sample::yes/676f8138_nohash_0.wav",
+      "pass": true,
+      "detail": "split=training mfcc_err=3.43e-05 enc_same=0 enc_e2e=1.16e-05 nrmse=7.7e-07 cls=0 pos_shift=0.624"
+    },
+    {
+      "name": "sample::yes/ec21c46b_nohash_1.wav",
+      "pass": true,
+      "detail": "split=validation mfcc_err=5.91e-05 enc_same=0 enc_e2e=2.06e-05 nrmse=8.41e-07 cls=0 pos_shift=0.624"
+    },
+    {
+      "name": "class_token_row_identical_across_samples",
+      "pass": true,
+      "detail": "1 distinct"
+    },
+    {
+      "name": "extra_real_samples_path_cross_check",
+      "pass": true,
+      "detail": "n=7 worst_mfcc=0.000127 worst_encoder=4.43e-05"
+    },
+    {
+      "name": "split_discipline",
+      "pass": true,
+      "detail": "{\"rule\": \"official Speech Commands hash rule (prepare_quant_samples.split_for)\", \"stored_samples_training\": 3, \"stored_samples_validation\": 3, \"calibration_performed\": false, \"thresholds_source\": \"a-priori float32-rounding constants; not fitted on any split\", \"validation_used_for\": \"evaluation only; no scale/threshold derived from validation samples\"}"
+    }
+  ]
+}
