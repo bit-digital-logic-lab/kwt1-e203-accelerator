@@ -1,80 +1,63 @@
-# WORKER_REPORT — codex/kwt-grad-encoder（研究生 5–6 项：单层 PostNorm 编码器组装 + 12 层调度）
+# WORKER_REPORT — r2_pack_format（12 层参数与 99×64 激活的字节打包/解包与 roundtrip）
 
-- 分支 / worktree：`codex/kwt-grad-encoder` @ `/home/yang/kwt-worktrees/grad-encoder`
-- 基线：`main@3d9ae98`（grad-attention `405c876` / grad-nonlinear `3084222` / grad-golden `c9a4307`；
-  grad-nonlinear 拼接期间由自身 worker 从 `10aa202` 追加 ANSI 端口表修复提交，见 `PROVENANCE.md`）
-- 范围：把三项成果**组装**为单层 PostNorm 编码器（注意力 + 两处残差 + 两处 LayerNorm +
-  `64→256→64` 前馈 + GELU），并实现 **12 层参数更新/搬运控制**；冻结 E203 软件边界与分类头
-  软件边界。对应 [`题目/640.jpg 9`](题目/640.jpg%209) 第 5、6 项。
-- 边界：只在本 worktree 内操作；未开子智能体；未改主目录/他人分支；未
-  `merge`/`rebase`/`cherry-pick`/`push`；未改 `hardware/`、`software/` 既有本科核心。
-- 交付契约：根目录 `ACCEPTANCE.json`（编排者 `git archive HEAD` 干净副本独立复跑）。
+- 分支 / worktree：`codex/kwt-ds-grad-r2_pack_format` @ `/home/yang/kwt-worktrees/ds-grad-r2_pack_format`
+- 范围：**只写** `graduate/ds_tasks/r2_pack_format/**` 与根 `WORKER_REPORT.md`；未开子智能体；
+  未改其他 worktree；未 `merge`/`rebase`/`push`；未改 `graduate/encoder`、`software/`、`hardware/` 既有文件（只读）。
+- 只读使用主工程 `/home/yang/Desktop/ic设计竞赛` 的 gitignored 数据；未提交大数据/密钥/缓存；
+  构建目录固定在 `/tmp/opencode/r2_pack_format/`。
 
-详细边界与来源见 `graduate/encoder/README.md`、`SOFTWARE_BOUNDARY.md`、`PROVENANCE.md`。
+## 1. 结果
 
-## 1. 本次新增/组装的文件
+**KWT1-PACK v1 已定义并可运行，roundtrip 逐位无损。**
 
-| 文件 | 作用 |
-| --- | --- |
-| `graduate/rtl/encoder/kwt_encoder_layer.sv` | 单层 PostNorm 编码器数据通路（注意力→requant→残差1→LN1→FFN1→GELU→FFN2→残差2→LN2），统一装载端口 |
-| `graduate/rtl/encoder/kwt_ffn1_row.sv` | FFN1 行引擎 `64→256`，INT48 累加，输出 per-channel scale `s_h[c]`（接 postnorm `h`） |
-| `graduate/rtl/encoder/kwt_encoder_layers_ctrl.sv` | 12 层参数更新/层间搬运/分类头边界控制器（纯事务序列，无算术） |
-| `graduate/rtl/encoder/kwt_encoder_top.sv` | layer + ctrl 顶层；E203-like 事务端口 `o_ld_*`/`p_rdata` |
-| `graduate/rtl/encoder/third_party/*` | 只读复制：注意力 RTL（grad-attention）、postnorm FFN/GELU/LN RTL（grad-nonlinear） |
-| `graduate/encoder/model/{attn_int_model,kwt_postnorm_ref}.py` | 只读复制的独立整数参考（仅路径适配） |
-| `graduate/encoder/reference/kwt1_fp32_golden.py` | 只读复制的 FP32 golden（仅路径适配） |
-| `graduate/encoder/model/verify_encoder.py` | 组合独立整数模型 + FP32 误差逐级对照（新增） |
-| `graduate/encoder/vectors/gen_vectors.py` | 生成全部 RTL 激励/参数 hex（新增） |
-| `graduate/encoder/tb/tb_encoder.sv`、`tb/run.sh` | 单层逐级对照 TB + 一键脚本（新增） |
-| `graduate/encoder/tb/tb_layers_smoke.sv`、`tb/run_smoke.sh` | 12 层调度 smoke TB + 一键脚本（新增） |
+- **格式**：小端（LE，与 E203/RISC-V 一致）；blob 头 64 B + 48 B/段目录；payload 与每段
+  16 B 对齐；int16@2 B、int32/fp32@4 B；值行主序；PACK10/PACK12 为 LSB-first 有符号补码位流。
+- **打包与 roundtrip（L1 软件参考，`run_pack.py` → `results.json`）**：
 
-## 2. 实跑命令与退出码（本次，2026-10-19）
+  | 对象 | 段数 | 字节 | 失配 |
+  | --- | ---: | ---: | ---: |
+  | 12 层 FFN1（W1 int16 + b1 int32）容器 | 24 | 406,720 | **0** |
+  | 同上 PACK10 / PACK12 | 24 | 259,264 / 308,416 | **0 / 0** |
+  | 6 条真实 99×64 激活 int16 容器 | 6 | 76,384 | **0** |
+  | 同上 PACK12 / PACK10 | 6 | 57,376 / 47,872 | **0 / 6（不兼容）** |
+  | 完整 12 层 FP32 参数容器 | 162 | 2,437,072 | **0** |
 
-| 命令（仓库根执行） | 退出码 | 结果 |
+  10-bit 位流对 12-bit 激活不适用（`|q|` 达 2048），作为不兼容对照记录。
+- **量化-打包联合校验（划分规则）**：激活尺度 `s_x = max_{training}|X|/2047 = 1.961475e-3`
+  仅由 training 划分（`sample_01/03/04`）无梯度求得；validation 划分（`sample_00/02/05`）
+  **仅评估**，最差 `0.1400%`（打包无损，误差纯来自 12-bit 量化）。
+- **带宽/端序/对齐**已列表（见 `README.md` §三）：单层 staged 容器 33,792 B → PACK10 21,504 B；
+  12 层参数 405,504 / 258,048 / 307,200 B；X 12,672 B、Y 50,688 B；均给出 @16/32/128-bit 口径。
+- **负对照 9 项全检出**：结构类（截断、magic、错位、dtype 冲突、目录越界）与取值类
+  （大端解码、位流翻转、位宽混淆、位流截断），证明 checker 非空转。
+- **L2 RTL 逐位（字节/位序）**：Verilator `tb_byte_lane` LE unpack16 `4096/4096`、
+  unpack32 `2048/2048`、pack16 `8192/8192`、PACK12 `6336/6336`，err=0。
+- **L4 综合（部分）**：泛型 yosys 0.63 对三模块 `synth` 0 problem（仅证可综合，非 PDK/时序）。
+
+## 2. 复现命令与退出码（本任务，2026-10-19）
+
+| 命令（worktree 根执行） | 退出码 | 结果 |
 | --- | ---: | --- |
-| `bash graduate/encoder/tb/run.sh` | **0** | `TB_PASS`（`cycles=4,700,560`）+ `VERIFY_PASS`；6 阶段 99 行**全逐位一致** |
-| `bash graduate/encoder/tb/run_smoke.sh` | **0** | `SMOKE_PASS`；`n_start=12 max_layer=11 yrows=1188 n_ld_par=595200 head=1` |
-| `verilator --lint-only … --top-module kwt_encoder_top …` | **0** | 0 error（仅第三方文件 WIDTH 警告） |
+| `bash graduate/ds_tasks/r2_pack_format/run.sh` | **0** | `R2_PACK_FORMAT_SUITE_PASS` |
+| ↳ `l1_run_pack`：`python3 graduate/ds_tasks/r2_pack_format/run_pack.py --build-dir /tmp/opencode/r2_pack_format` | **0** | `ALL_BIT_EXACT=True worst_val_quant_nrmse=0.1400%` |
+| ↳ `l2_emit_vectors`：`python3 …/emit_rtl_vectors.py /tmp/opencode/r2_pack_format/rtl` | **0** | 生成 8,192 B/8,192 B/9,504 B 激励 |
+| ↳ `l2_verilator_build`：`verilator --binary --timing … -Mdir /tmp/opencode/r2_pack_format/rtl/obj_dir` | **0** | 0 error（`-Wno-WIDTHTRUNC` 消 1 处条件位宽提示） |
+| ↳ `l2_verilator_run`：`cd /tmp/opencode/r2_pack_format/rtl && ./obj_dir/Vtb_byte_lane` | **0** | `RTL_LANE_PASS`（4 项 got/exp 全等、err=0） |
+| ↳ `l4_yosys_synth`：`yosys -p "read_verilog -sv …; synth -top <top>; stat"`（`kwt_le_unpack`/`kwt_le_pack`/`kwt_bit_unpack`） | **0** | 三模块 `Found and reported 0 problems` |
 
-复现细节：`run.sh` 先生成向量（`gen_vectors.py` = 运行复制的 `attn_int_model.py` +
-`kwt_postnorm_ref.calibrate()`），再 `verilator --binary` 建 `tb_encoder` 并运行，
-最后 `verify_encoder.py` 做逐位 + FP32 校验。`TB_DONE … sat=0/0` 无 X。
+日志与退出码：`graduate/ds_tasks/r2_pack_format/logs/summary.tsv` 及同级 `l1_run_pack.log`、
+`l2_emit_vectors.log`、`l2_verilator_build.log`、`l2_verilator_run.log`、`l4_yosys_synth.log`。
+输入 SHA-256：`ffn1_a12w10_static_sym.npz = a77f60fb…918e`、`kwt1_fp32.npz = 8f359abf…25825a`。
 
-## 3. 样本、层
+## 3. 未证事项（不得当作完整研究生组验收）
 
-- **样本**：真实验证输入 `software/validation/real_input_chain_20261017/sample_00_encoder.npy`
-  （`X[99,64]`，SHA 与 manifest 一致）。
-- **层**：`enc_layers/0`（第 0 层），尺度与 FFN1 冻结包（`ffn1_a12w10_static_sym.npz`
-  的 `layer01_*`）一致。
-- **单层逐级对照**：99 行全量，6 个阶段（`a,r1,g,f,r2,y`）。
-- **12 层调度 smoke**：12 层顺序执行，逐层重载 49,600 项参数，共 1,188 行输出。
-
-## 4. 数值误差
-
-单层逐级（RTL vs 组合独立整数模型逐位；RTL 反量化 vs 研究生 FP32 golden）：
-
-| 阶段 | 逐位 | FP32 NRMSE | max_abs |
-| --- | --- | ---: | ---: |
-| `a`（注意力，含 requant） | 99×64 exact | 0.1591% | 1.32e-3 |
-| `r1` | 99×64 exact | 0.1082% | 2.89e-3 |
-| `g`（GELU） | 99×256 exact | **1.3987%** | 1.29e-2 |
-| `f`（FFN2） | 99×64 exact | 1.3968% | 1.54e-2 |
-| `r2` | 99×64 exact | 0.7000% | 5.00e-2 |
-| `y`（编码器输出） | 99×64 exact | 0.7289% | 4.23e-2 |
-
-最差阶段 `g` = **1.3987% < 3% 门槛**；`y` = 0.7289%。逐位一致（0 失配）覆盖
-`a`（含注意力 + requant）到 `y` 的整条链。
-
-## 5. 未证事项（不得宣称完整研究生组验收）
-
-1. **无官方 SoC**：未在真实 E203 指令流/System Bus/NICE 上运行；`o_ld_*`/`p_rdata` 为
-   **E203-like** 事务模型（已在 `SOFTWARE_BOUNDARY.md` 逐条标注）。
-2. **仅第 0 层标定**：第 1–11 层尺度/EPS/GELU LUT 未逐层重算；12 层 smoke 只证**调度**，
-   不证 12 层数值。
-3. 无目标 PDK / SRAM 宏 / SDC：未做 150 MHz STA、面积、功耗签核；仅 Verilator 功能仿真
-   （未跑 Icarus 复核）。
-4. FFN2/注意力的大数组与组合读端口仍是行为存储，未映射题目规定 SRAM 宏。
-5. 分类头为**软件**阶段（题目规定），硬件只给 `head_token`/`head_valid`；未做分类头 RTL。
-6. 未测官方 600 条评测集 NRMSE / 准确率；FP32 参考为官方源码语义的 NumPy golden
-   （grad-golden 已与官方 TF 原文 ≤9.3e-6 吻合），本目录不再重跑 TF。
-7. 本报告不声明“12 层整层 E203 通过”或“研究生 5–6 项全部通过”。
+1. **12 层整数参数仅覆盖 FFN1**：注意力的逐层整数包、FFN2/LN 的逐层整数包不在本任务；
+   完整 12 层参数以 **FP32 容器**打包（往返无损，但非整数量化产物）。格式为其预留同构段。
+2. **不是数值精度证据**：打包/解包逐位无损；激活量化只做 **6 条真实样本**（3 训练/3 验证）
+   的量化-打包联合校验，未做 480/480 或 12 层整链 NRMSE；未跑官方 600 条评测脚本。
+3. **无 E203 / SoC**：未在官方 E203 指令流、System Bus 或 NICE 上运行；只对齐 16 B 描述符地址口径，
+   未实现 DMA/总线事务。
+4. **综合非签核**：泛型 yosys `synth` 只证可综合；**无 PDK/SDC/SRAM 宏，未做 150 MHz STA、面积、功耗**。
+5. **未证 bit-packing 的硬件收益**：PACK10/PACK12 的带宽节省是字节口径，未综合紧密解包器，
+   未测其面积/时序开销；未对产品 RTL 做逐位整链校验。
+6. 本报告不声明“12 层整层 E203 通过”或“研究生 5–6 项验收通过”。

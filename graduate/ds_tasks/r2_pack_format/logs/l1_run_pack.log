@@ -1,0 +1,29 @@
+== r2_pack_format: KWT1-PACK v1 ==
+train samples=3 val samples=3
+train max|X|=4.015140 -> s_x=1.961475124e-03 (2^-8.9938)
+PARAM_PACK bytes=406720 nseg=24 roundtrip_mismatch=0
+PARAM_PACK tight10 bytes=259264 mismatch=0
+PARAM_PACK tight12 bytes=308416 mismatch=0
+ACT_PACK bytes=76384 samples=6
+  sample_00_encoder.npy  validation exact=True quant_nrmse=0.0783% max|q|=1415
+  sample_01_encoder.npy  training   exact=True quant_nrmse=0.0644% max|q|=1701
+  sample_02_encoder.npy  validation exact=True quant_nrmse=0.0543% max|q|=2042
+  sample_03_encoder.npy  training   exact=True quant_nrmse=0.0643% max|q|=1700
+  sample_04_encoder.npy  training   exact=True quant_nrmse=0.0542% max|q|=2047
+  sample_05_encoder.npy  validation exact=True quant_nrmse=0.1400% max|q|=2048
+ACT_PACK tight12 bytes=57376 mismatch=0
+ACT_PACK tight10 bytes=47872 mismatch=6 (EXPECTED >0: 12-bit activations do not fit a 10-bit stream)
+FP32_PACK bytes=2437072 nseg=162 roundtrip_mismatch=0
+negative controls:
+  NEG-OK   truncated_blob: ValueError: dir L11_b1: segment exceeds blob
+  NEG-OK   bad_magic: ValueError: bad magic b'\x00\x00\x00\x00'
+  NEG-OK   misaligned_offset: ValueError: dir L00_W1: offset 1217 not 16-byte aligned
+  NEG-OK   dtype_bits_conflict: ValueError: dir L00_W1: elem_bits 12 inconsistent with dtype 0
+  NEG-OK   dirent_overlap: UnicodeDecodeError: 'ascii' codec can't decode byte 0x87 in position 0: ordinal not in ran
+  NEG-OK   big_endian_decode_mismatch: mismatch observed
+  NEG-OK   pack10_bit_flip_mismatch: mismatch observed
+  NEG-OK   dtype_width_confusion_mismatch: mismatch observed
+  NEG-OK   packed_stream_truncation_detected: mismatch observed
+ALL_BIT_EXACT=True worst_val_quant_nrmse=0.1400%
+results -> /home/yang/kwt-worktrees/ds-grad-r2_pack_format/graduate/ds_tasks/r2_pack_format/results.json
+R2_PACK_FORMAT_DONE

@@ -1,0 +1,4 @@
+EMIT_RTL_VECTORS ok dir=/tmp/opencode/r2_pack_format/rtl
+  bytes16=8192 words16=4096
+  bytes32=8192 words32=2048
+  pack12_bytes=9504 vals=6336 max|q|=1415
