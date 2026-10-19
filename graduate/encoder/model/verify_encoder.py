@@ -12,9 +12,13 @@ Checks:
   2. composed independent integer model (attention model -> requant -> postnorm
      ref -> FFN1) reproduces every RTL stage a/r1/g/f/r2/y bit for bit.
   3. FP32 error of the dequantised RTL stages against the graduate FP32 golden
-     (`reference/kwt1_fp32_golden.py`, item 5), NRMSE per stage.
+     (`reference/kwt1_fp32_golden.py`, item 5), NRMSE per stage; the worst-stage
+     NRMSE is gated against NRMSE_THRESHOLD (3%, a fixed spec/acceptance
+     constant, not fitted from any sample).
 
-Exit code 0 only when every bit-exact check passes.
+Exit code 0 only when every bit-exact check passes AND the worst-stage NRMSE is
+at or below NRMSE_THRESHOLD.  `--negative-inject {bitexact,nrmse}` injects a
+controlled fault so that the gate itself can be shown to fire (test only).
 """
 
 import argparse
@@ -34,6 +38,16 @@ import kwt_postnorm_ref as ref                  # noqa: E402
 import kwt1_fp32_golden as golden               # noqa: E402
 
 Q_A = 16
+
+# Acceptance gate: the worst-stage dequantised NRMSE must be <= 3%.  This is a
+# fixed spec constant, deliberately NOT derived from any calibration/validation
+# sample (see graduate/ds_tasks/encoder_gate/README.md on the split policy).
+NRMSE_THRESHOLD = 0.03
+
+# `--negative-inject nrmse` perturbs only the FP32 dequantisation path (stage
+# label -> multiplicative factor) so the NRMSE gate is exercised without
+# touching the bit-exact integer arrays.
+NRMSE_INJECT = {"y  (layer_output)": 1.10}
 
 
 def read_hex(path, rows, cols, width):
@@ -65,6 +79,15 @@ def nrmse(a, b):
     return float(np.linalg.norm(a - b) / max(np.linalg.norm(b), 1e-300))
 
 
+def nrmse_ok(worst, threshold=NRMSE_THRESHOLD):
+    """Gate predicate: fail strictly when worst-stage NRMSE exceeds the ceiling.
+
+    Kept as a standalone function so the boundary can be unit-tested without a
+    full Verilator rebuild (see graduate/ds_tasks/encoder_gate/gate_selfcheck.py).
+    """
+    return float(worst) <= float(threshold)
+
+
 def cmp_bit(name, rtl, mdl, ok_flag):
     if rtl.shape != mdl.shape:
         print(f"  {name}: SHAPE rtl={rtl.shape} model={mdl.shape}")
@@ -83,6 +106,11 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--build", type=Path, default=ENC / "tb/build")
     ap.add_argument("--vectors", type=Path, default=VEC)
+    ap.add_argument("--nrmse-threshold", type=float, default=NRMSE_THRESHOLD,
+                    help="worst-stage NRMSE ceiling (spec constant; not fitted)")
+    ap.add_argument("--negative-inject", choices=("none", "bitexact", "nrmse"),
+                    default="none",
+                    help="inject a controlled fault to prove the gate fires")
     args = ap.parse_args()
     build = args.build
     meta = json.loads((args.vectors / "meta.json").read_text())
@@ -109,6 +137,12 @@ def main():
     r2 = read_hex(build / "r2.hex", T, D, 16)
     y = read_hex(build / "y.hex", T, D, 16)
 
+    neg = args.negative_inject
+    if neg == "bitexact":
+        y = y.copy()
+        y[0, 0] += 1
+        print("[neg-inject] bitexact: y[0,0] += 1 (one RTL stage cell corrupted)")
+
     ok = True
     ok = cmp_bit("a  (requant attn)", a_rtl, a_model, ok)
     ok = cmp_bit("r1 (resid1)", r1, model["r1"], ok)
@@ -134,16 +168,38 @@ def main():
         "r2 (residual2)":      (r2 * sc["s_r2"], arrays["residual2"]),
         "y  (layer_output)":   (y * sc["s_out"], arrays["layer_output"]),
     }
+    if neg == "nrmse":
+        print(f"[neg-inject] nrmse: {NRMSE_INJECT} applied to the dequantised RTL path")
+
     print("FP32 NRMSE vs graduate golden (dequantised RTL vs FP32):")
     worst = 0.0
+    worst_name = ""
+    nrmse_fail = {}
     for name, (approx, exact) in fp.items():
+        if neg == "nrmse":
+            approx = approx * NRMSE_INJECT.get(name, 1.0)
         e = nrmse(approx, exact)
-        worst = max(worst, e)
-        print(f"  {name}: NRMSE {e*100:.4f}%  max_abs {np.max(np.abs(approx-exact)):.3e}")
-    print(f"  worst-stage NRMSE {worst*100:.4f}%  (threshold 3%)")
+        if e > worst:
+            worst, worst_name = e, name
+        if not nrmse_ok(e, args.nrmse_threshold):
+            nrmse_fail[name] = e
+        flag = "  <-- OVER THRESHOLD" if name in nrmse_fail else ""
+        print(f"  {name}: NRMSE {e*100:.4f}%  max_abs {np.max(np.abs(approx-exact)):.3e}{flag}")
+    print(f"  worst-stage NRMSE {worst*100:.4f}% [{worst_name.strip()}] "
+          f"(threshold {args.nrmse_threshold*100:.2f}%)")
 
+    reasons = []
     if not ok:
-        print("VERIFY_FAIL")
+        reasons.append("bit_exact")
+    if not nrmse_ok(worst, args.nrmse_threshold):
+        reasons.append("nrmse")
+    print(f"GATE bit_exact={'PASS' if ok else 'FAIL'} "
+          f"nrmse={'PASS' if not nrmse_fail else 'FAIL'} "
+          f"rows={T} stages={len(fp)} worst={worst*100:.4f}% "
+          f"threshold={args.nrmse_threshold*100:.2f}%")
+
+    if reasons:
+        print("VERIFY_FAIL reason=" + ",".join(reasons))
         raise SystemExit(1)
     print("VERIFY_PASS")
 

@@ -1,79 +1,83 @@
-# WORKER_REPORT — codex/kwt-grad-encoder（研究生 5–6 项：单层 PostNorm 编码器组装 + 12 层调度）
+# WORKER_REPORT — encoder_gate（研究生 5–6 项：NRMSE 3% 门禁修复 + 负例注入）
 
-- 分支 / worktree：`codex/kwt-grad-encoder` @ `/home/yang/kwt-worktrees/grad-encoder`
-- 基线：`main@3d9ae98`（grad-attention `405c876` / grad-nonlinear `10aa202` / grad-golden `c9a4307` 均为终态）
-- 范围：把三项成果**组装**为单层 PostNorm 编码器（注意力 + 两处残差 + 两处 LayerNorm +
-  `64→256→64` 前馈 + GELU），并实现 **12 层参数更新/搬运控制**；冻结 E203 软件边界与分类头
-  软件边界。对应 [`题目/640.jpg 9`](题目/640.jpg%209) 第 5、6 项。
-- 边界：只在本 worktree 内操作；未开子智能体；未改主目录/他人分支；未
-  `merge`/`rebase`/`cherry-pick`/`push`；未改 `hardware/`、`software/` 既有本科核心。
-- 交付契约：根目录 `ACCEPTANCE.json`（编排者 `git archive HEAD` 干净副本独立复跑）。
+- 分支 / worktree：`codex/kwt-ds-grad-encoder_gate` @ `/home/yang/kwt-worktrees/ds-grad-encoder_gate`
+- 基线：`5136ca1`（grad-encoder 组装终态）
+- 允许改动范围：`graduate/encoder/model/verify_encoder.py` 与 `graduate/ds_tasks/encoder_gate/`
+  （外加本根报告）。未改 RTL、未改 `gen_vectors.py`/`kwt_postnorm_ref.py`/`run.sh`、
+  未动 `hardware/`、`software/`、`docs/`；未开子智能体；未 `merge`/`rebase`/`push`。
+- 上一版 grad-encoder 组装报告见 git 提交 `5136ca1`（本文件按任务要求改为三段式）。
 
-详细边界与来源见 `graduate/encoder/README.md`、`SOFTWARE_BOUNDARY.md`、`PROVENANCE.md`。
+## 1. 结果
 
-## 1. 本次新增/组装的文件
+**缺陷**：`verify_encoder.py` 第 3 项检查算了 `worst` 并打印，却从未用它判定；
+只有“逐位一致 (`ok`)”会失败。于是阶段逐位一致、但最差阶段 NRMSE 超 3% 时，
+脚本仍打印 `VERIFY_PASS` 且 `exit 0` —— 3% 门禁是空门禁。
 
-| 文件 | 作用 |
-| --- | --- |
-| `graduate/rtl/encoder/kwt_encoder_layer.sv` | 单层 PostNorm 编码器数据通路（注意力→requant→残差1→LN1→FFN1→GELU→FFN2→残差2→LN2），统一装载端口 |
-| `graduate/rtl/encoder/kwt_ffn1_row.sv` | FFN1 行引擎 `64→256`，INT48 累加，输出 per-channel scale `s_h[c]`（接 postnorm `h`） |
-| `graduate/rtl/encoder/kwt_encoder_layers_ctrl.sv` | 12 层参数更新/层间搬运/分类头边界控制器（纯事务序列，无算术） |
-| `graduate/rtl/encoder/kwt_encoder_top.sv` | layer + ctrl 顶层；E203-like 事务端口 `o_ld_*`/`p_rdata` |
-| `graduate/rtl/encoder/third_party/*` | 只读复制：注意力 RTL（grad-attention）、postnorm FFN/GELU/LN RTL（grad-nonlinear） |
-| `graduate/encoder/model/{attn_int_model,kwt_postnorm_ref}.py` | 只读复制的独立整数参考（仅路径适配） |
-| `graduate/encoder/reference/kwt1_fp32_golden.py` | 只读复制的 FP32 golden（仅路径适配） |
-| `graduate/encoder/model/verify_encoder.py` | 组合独立整数模型 + FP32 误差逐级对照（新增） |
-| `graduate/encoder/vectors/gen_vectors.py` | 生成全部 RTL 激励/参数 hex（新增） |
-| `graduate/encoder/tb/tb_encoder.sv`、`tb/run.sh` | 单层逐级对照 TB + 一键脚本（新增） |
-| `graduate/encoder/tb/tb_layers_smoke.sv`、`tb/run_smoke.sh` | 12 层调度 smoke TB + 一键脚本（新增） |
+**修复**（仅 `verify_encoder.py`，+63/−7）：
 
-## 2. 实跑命令与退出码（本次，2026-10-19）
+- 新增规格常数 `NRMSE_THRESHOLD = 0.03` 与谓词 `nrmse_ok(worst)`（`<= 3%` 过，**严格超 3% 失败**）。
+- 最差阶段超阈值 → 打印 `GATE ... nrmse=FAIL`、`VERIFY_FAIL reason=nrmse`，`exit 1`。
+- exit 0 当且仅当**逐位全一致 且 最差阶段 NRMSE ≤ 3%**。
+- 负例注入 `--negative-inject {none,bitexact,nrmse}`：`bitexact` 污染 `y[0,0]`；
+  `nrmse` 只乘反量化路径（整数阵列不动），使两条门禁可分别被证伪。
+- `--nrmse-threshold` 可覆盖阈值，用于证明门禁随实测值动作。
 
-| 命令（仓库根执行） | 退出码 | 结果 |
+**证据层级表**（本任务只到 E0/E1）：
+
+| 层级 | 内容 | 状态 | 证据 |
+| --- | --- | --- | --- |
+| **E0 软件参考** | NumPy 独立整数模型 + 研究生 FP32 golden | ✅ 已用 | `verify_encoder.py` oracle / NRMSE 参考 |
+| **E1 RTL 逐位** | Verilator 5.030 功能仿真，6 阶段 × 99 行逐位一致 | ✅ 已跑 | `logs/01_run_all.log`、`logs/02_verify_positive.log` |
+| **E2 E203** | 真实 E203 指令流 / System Bus / NICE / SRAM 宏 | ❌ 未覆盖 | 仅 E203-like 事务模型（`SOFTWARE_BOUNDARY.md`） |
+| **E3 综合** | 逻辑综合 / 150 MHz STA / 面积 / 功耗 | ❌ 未覆盖 | 本任务未跑 |
+| **E4 官方验收** | 官方 600 条评测集 NRMSE / 准确率 | ❌ 未覆盖 | 无官方评测集/脚本 |
+
+**实测数值**（真实样本，`sample_00`，第 0 层，99 行）：
+
+- 正向：`GATE bit_exact=PASS nrmse=PASS rows=99 stages=6 worst=1.3987% threshold=3.00%` → `VERIFY_PASS`。
+- 逐位：6 阶段（`a,r1,g,f,r2,y`）× 99 行 = **57,024** 个整数项全部一致。
+- NRMSE 最差阶段 `g`(GELU) = **1.3987%** < 3%；`y`(编码器输出) = 0.7289%。
+- 负例 `bitexact`：`reason=bit_exact`，`exit 1`。
+- 负例 `nrmse`：`y` NRMSE **9.9819%**，`reason=nrmse`，`exit 1`。
+- 阈值灵敏度：干净数据 + 0.10% 阈值 → `reason=nrmse`，`exit 1`（证明门禁随实测值动作）。
+- 门禁谓词边界：12 项软件单测通过（3.00% 过、3.01% 失败）。
+
+**划分策略**：训练划分 `sample_01/03/04` 只做无梯度标定；验证划分
+`sample_00/02/05` 仅评估。`NRMSE_THRESHOLD` 为常数 3%，**不由任何样本拟合**。
+
+## 2. 复现命令与退出码
+
+在仓库根 `/home/yang/kwt-worktrees/ds-grad-encoder_gate` 执行（2026-10-19，Verilator 5.030，Python 3.10 + NumPy 1.21.5）：
+
+| 命令 | 退出码 | 结果 / 日志 |
 | --- | ---: | --- |
-| `bash graduate/encoder/tb/run.sh` | **0** | `TB_PASS`（`cycles=4,700,560`）+ `VERIFY_PASS`；6 阶段 99 行**全逐位一致** |
-| `bash graduate/encoder/tb/run_smoke.sh` | **0** | `SMOKE_PASS`；`n_start=12 max_layer=11 yrows=1188 n_ld_par=595200 head=1` |
-| `verilator --lint-only … --top-module kwt_encoder_top …` | **0** | 0 error（仅第三方文件 WIDTH 警告） |
+| `bash graduate/encoder/tb/run.sh` | **0** | `TB_PASS` + `VERIFY_PASS`；6 阶段 99 行逐位一致（`logs/01_run_all.log`） |
+| `python3 graduate/encoder/model/verify_encoder.py` | **0** | `GATE ... nrmse=PASS worst=1.3987%`（`logs/02_verify_positive.log`） |
+| `python3 .../verify_encoder.py --nrmse-threshold 0.001` | **1** | `VERIFY_FAIL reason=nrmse`（`logs/02b_clean_tight_threshold.log`） |
+| `python3 .../verify_encoder.py --negative-inject bitexact` | **1** | `VERIFY_FAIL reason=bit_exact`（`logs/03_neg_bitexact.log`） |
+| `python3 .../verify_encoder.py --negative-inject nrmse` | **1** | `VERIFY_FAIL reason=nrmse`，`y` 9.9819%（`logs/04_neg_nrmse.log`） |
+| `python3 graduate/ds_tasks/encoder_gate/gate_selfcheck.py` | **0** | `SELFCHECK_PASS checks=12`（`logs/05_gate_selfcheck.log`） |
+| `python3 graduate/ds_tasks/encoder_gate/split_calibration.py` | **0** | `SPLIT_OK n_train=3 n_val=3 threshold_source=constant`（`logs/06_split_calibration.log`） |
+| `bash graduate/ds_tasks/encoder_gate/run_gate.sh` | **0** | 7 用例全过：`PASS=7 FAIL=0` / `GATE_DRIVER_PASS`；汇总 `summary.json` |
+| `bash graduate/encoder/tb/run_smoke.sh` | **0** | `SMOKE_PASS`（12 层调度；未改 RTL，回归确认） |
 
-复现细节：`run.sh` 先生成向量（`gen_vectors.py` = 运行复制的 `attn_int_model.py` +
-`kwt_postnorm_ref.calibrate()`），再 `verilator --binary` 建 `tb_encoder` 并运行，
-最后 `verify_encoder.py` 做逐位 + FP32 校验。`TB_DONE … sat=0/0` 无 X。
+样本数：正向 99 行 × 6 阶段 = 57,024 项逐位；标定 3 个训练样本；评估 3 个验证样本。
+墙上时间：`run.sh` ≈ 22 s，`run_gate.sh` ≈ 46 s，`run_smoke.sh` ≈ 259 s。
 
-## 3. 样本、层
+## 3. 未证事项
 
-- **样本**：真实验证输入 `software/validation/real_input_chain_20261017/sample_00_encoder.npy`
-  （`X[99,64]`，SHA 与 manifest 一致）。
-- **层**：`enc_layers/0`（第 0 层），尺度与 FFN1 冻结包（`ffn1_a12w10_static_sym.npz`
-  的 `layer01_*`）一致。
-- **单层逐级对照**：99 行全量，6 个阶段（`a,r1,g,f,r2,y`）。
-- **12 层调度 smoke**：12 层顺序执行，逐层重载 49,600 项参数，共 1,188 行输出。
-
-## 4. 数值误差
-
-单层逐级（RTL vs 组合独立整数模型逐位；RTL 反量化 vs 研究生 FP32 golden）：
-
-| 阶段 | 逐位 | FP32 NRMSE | max_abs |
-| --- | --- | ---: | ---: |
-| `a`（注意力，含 requant） | 99×64 exact | 0.1591% | 1.32e-3 |
-| `r1` | 99×64 exact | 0.1082% | 2.89e-3 |
-| `g`（GELU） | 99×256 exact | **1.3987%** | 1.29e-2 |
-| `f`（FFN2） | 99×64 exact | 1.3968% | 1.54e-2 |
-| `r2` | 99×64 exact | 0.7000% | 5.00e-2 |
-| `y`（编码器输出） | 99×64 exact | 0.7289% | 4.23e-2 |
-
-最差阶段 `g` = **1.3987% < 3% 门槛**；`y` = 0.7289%。逐位一致（0 失配）覆盖
-`a`（含注意力 + requant）到 `y` 的整条链。
-
-## 5. 未证事项（不得宣称完整研究生组验收）
-
-1. **无官方 SoC**：未在真实 E203 指令流/System Bus/NICE 上运行；`o_ld_*`/`p_rdata` 为
-   **E203-like** 事务模型（已在 `SOFTWARE_BOUNDARY.md` 逐条标注）。
-2. **仅第 0 层标定**：第 1–11 层尺度/EPS/GELU LUT 未逐层重算；12 层 smoke 只证**调度**，
-   不证 12 层数值。
-3. 无目标 PDK / SRAM 宏 / SDC：未做 150 MHz STA、面积、功耗签核；仅 Verilator 功能仿真
-   （未跑 Icarus 复核）。
-4. FFN2/注意力的大数组与组合读端口仍是行为存储，未映射题目规定 SRAM 宏。
-5. 分类头为**软件**阶段（题目规定），硬件只给 `head_token`/`head_valid`；未做分类头 RTL。
-6. 未测官方 600 条评测集 NRMSE / 准确率；FP32 参考为官方源码语义的 NumPy golden
-   （grad-golden 已与官方 TF 原文 ≤9.3e-6 吻合），本目录不再重跑 TF。
-7. 本报告不声明“12 层整层 E203 通过”或“研究生 5–6 项全部通过”。
+1. **未修先前尺度泄漏（超出本任务文件范围）**：`vectors/meta.json` 与 RTL 激励的尺度来自
+   `kwt_postnorm_ref.calibrate()`，其硬编码 `SAMPLE = sample_00`（**验证样本**）。训练划分重算显示
+   `s_x` 偏差 **+44.6%**、`s_a` **+19.7%**、`s_out` **+4.8%**。该文件本任务无权修改，
+   故尺度仍未遵守“训练标定/验证评估”分离；需在后续任务把 `calibrate()` 改为读取训练划分。
+   门禁阈值不受影响（是规格常数）。
+2. **只到 E1**：本门禁只证“Verilator 功能仿真逐位一致 + 反量化 NRMSE ≤ 3%”，
+   不证 E2（真实 E203/总线/SRAM 宏）、E3（综合/150 MHz STA/面积/功耗）、
+   E4（官方 600 条评测集 NRMSE/准确率）。
+3. **仍是单层单样本**：只评估第 0 层、验证样本 `sample_00`；12 层数值正确性、
+   其余验证样本（`sample_02/05`）的端到端 NRMSE 未测。负例注入为**构造故障**，
+   证明门禁会响，不代表真实设计必然触发。
+4. **FP32 参考为 NumPy golden**：非本次从官方 TF 重跑（grad-golden 已与官方 TF ≤9.3e-6 吻合）。
+5. **ACCEPTANCE.json 的 `verify.log` 哈希将失效**：正向日志新增 `GATE` 行，
+   旧 `ACCEPTANCE.json` 记录的 `graduate/encoder/tb/build/verify.log` sha256 不再匹配；
+   `ACCEPTANCE.json` 不在本任务允许改动范围，未更新。
