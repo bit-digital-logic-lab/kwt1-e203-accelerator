@@ -1,0 +1,24 @@
+{
+  "worker": "grad-encoder",
+  "commands": [
+    {
+      "cmd": "bash graduate/encoder/tb/run.sh",
+      "cwd": ".",
+      "timeout": 900,
+      "expect_exit": 0
+    },
+    {
+      "cmd": "bash graduate/encoder/tb/run_smoke.sh",
+      "cwd": ".",
+      "timeout": 1200,
+      "expect_exit": 0
+    }
+  ],
+  "artifacts": [
+    {"path": "graduate/encoder/tb/build/y.hex", "sha256": "7620a3470ce5d5910c185f86f7704a88a9ef9eb67d21de476709dd859c62b0be"},
+    {"path": "graduate/encoder/tb/build/r1.hex", "sha256": "87b3fcdb64149bb24e4f5ea5c0a7e3c18aeb287084c3ae5d5afc4f9536473d60"},
+    {"path": "graduate/encoder/tb/build/g.hex", "sha256": "ef8e15863a8a65f211b724c8762d3ef7dee58856c9066bb9aaba0c8ade058737"},
+    {"path": "graduate/encoder/tb/build/verify.log", "sha256": "7fa33efbad31073841365a9d738c5648d55e4e1bca3179e5fe671f9f9c2339a8"},
+    {"path": "graduate/encoder/vectors/meta.json", "sha256": "124e5d3503bf3539286bdcc0e3e4f3b5093a01ee2963fd67ac0480e70edb40a7"}
+  ]
+}
