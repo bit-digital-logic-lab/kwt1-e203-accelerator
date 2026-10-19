@@ -1,0 +1,5 @@
+# Independent acceptance check
+
+From this worktree, `bash hardware/experiments/streaming_mac/bias_overlap/run.sh` exited 0 on 2026-10-19. The rerun passed five normal shapes, six robustness scenarios and the bias-bank/arbiter unit test. Its full FFN1 cycles were baseline 154240, accepted dual 125603, and bias-overlap 121915, with all 25344 results checked against independent NumPy INT32 golden values. Generated path-dependent logs were restored after the check; the committed worktree is clean.
+
+The 3688-cycle difference from the accepted dual experiment measures the **combined** A row streaming, W/bias prefetch and shared-bus scheduling changes. It does not isolate the causal contribution of moving bias alone. The task harness still instantiates two complete row-broadcast MAC cores to provide two CACC pages. The bias bank's current asynchronous read is a functional RTL model; mapping it to the allowed synchronous 16-bit SRAM macros, checking port conflicts and closing 150 MHz/2.25 mm² remain separate work.

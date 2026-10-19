@@ -1,0 +1,368 @@
+{
+  "label": "MODEL ONLY - calibrated to accepted RTL, not a new RTL run",
+  "constants": {
+    "rows": 16,
+    "cols": 16,
+    "capture_latency": 259,
+    "compute_tile": "2 clear + ROWS A reads + K*COLS MAC + 5 tail",
+    "drain": "2 slots (cycles) per valid INT32 result",
+    "bus": "one 16-bit slot/cycle; OUT>BIAS>A>W"
+  },
+  "baseline_dual": [
+    {
+      "case": "tiny",
+      "m": 3,
+      "k": 4,
+      "n": 5,
+      "gaps": false,
+      "baseline_model": 462,
+      "baseline_rtl": 462,
+      "baseline_delta": 0,
+      "dual_model": 463,
+      "dual_rtl": 463,
+      "dual_delta": 0
+    },
+    {
+      "case": "ragged",
+      "m": 10,
+      "k": 7,
+      "n": 19,
+      "gaps": true,
+      "baseline_model": 1261,
+      "baseline_rtl": 1262,
+      "baseline_delta": -1,
+      "dual_model": 1261,
+      "dual_rtl": 1261,
+      "dual_delta": 0
+    },
+    {
+      "case": "twotile",
+      "m": 32,
+      "k": 8,
+      "n": 16,
+      "gaps": true,
+      "baseline_model": 2118,
+      "baseline_rtl": 2118,
+      "baseline_delta": 0,
+      "dual_model": 2118,
+      "dual_rtl": 2119,
+      "dual_delta": -1
+    },
+    {
+      "case": "overflow",
+      "m": 8,
+      "k": 64,
+      "n": 16,
+      "gaps": true,
+      "baseline_model": 3191,
+      "baseline_rtl": 3192,
+      "baseline_delta": -1,
+      "dual_model": 3192,
+      "dual_rtl": 3191,
+      "dual_delta": 1
+    },
+    {
+      "case": "full",
+      "m": 99,
+      "k": 64,
+      "n": 256,
+      "gaps": false,
+      "baseline_model": 154240,
+      "baseline_rtl": 154240,
+      "baseline_delta": 0,
+      "dual_model": 125603,
+      "dual_rtl": 125603,
+      "dual_delta": 0
+    }
+  ],
+  "bias_overlap_sweep": [
+    {
+      "a_preload_tiles": 1,
+      "cycles": 121913,
+      "initial_load_cycles": null,
+      "compute_wall_cycles": null,
+      "tail_cycles": null,
+      "bias_delay": 0,
+      "out_bp": 1,
+      "bus_gap": 0,
+      "stalls": {
+        "load": 4183,
+        "cacc": 0,
+        "bias": 0,
+        "stage": 0,
+        "out_bp": 0
+      },
+      "bus": {
+        "out": 50688,
+        "bias": 512,
+        "a": 6336,
+        "w": 16384,
+        "idle": 47993
+      },
+      "mac_cycles_model": 117264
+    },
+    {
+      "a_preload_tiles": 2,
+      "cycles": 121913,
+      "initial_load_cycles": null,
+      "compute_wall_cycles": null,
+      "tail_cycles": null,
+      "bias_delay": 0,
+      "out_bp": 1,
+      "bus_gap": 0,
+      "stalls": {
+        "load": 4183,
+        "cacc": 0,
+        "bias": 0,
+        "stage": 0,
+        "out_bp": 0
+      },
+      "bus": {
+        "out": 50688,
+        "bias": 512,
+        "a": 6336,
+        "w": 16384,
+        "idle": 47993
+      },
+      "mac_cycles_model": 117264
+    },
+    {
+      "a_preload_tiles": 3,
+      "cycles": 121913,
+      "initial_load_cycles": null,
+      "compute_wall_cycles": null,
+      "tail_cycles": null,
+      "bias_delay": 0,
+      "out_bp": 1,
+      "bus_gap": 0,
+      "stalls": {
+        "load": 4183,
+        "cacc": 0,
+        "bias": 0,
+        "stage": 0,
+        "out_bp": 0
+      },
+      "bus": {
+        "out": 50688,
+        "bias": 512,
+        "a": 6336,
+        "w": 16384,
+        "idle": 47993
+      },
+      "mac_cycles_model": 117264
+    },
+    {
+      "a_preload_tiles": 4,
+      "cycles": 122881,
+      "initial_load_cycles": null,
+      "compute_wall_cycles": null,
+      "tail_cycles": null,
+      "bias_delay": 0,
+      "out_bp": 1,
+      "bus_gap": 0,
+      "stalls": {
+        "load": 5151,
+        "cacc": 0,
+        "bias": 0,
+        "stage": 0,
+        "out_bp": 0
+      },
+      "bus": {
+        "out": 50688,
+        "bias": 512,
+        "a": 6336,
+        "w": 16384,
+        "idle": 48961
+      },
+      "mac_cycles_model": 117264
+    },
+    {
+      "a_preload_tiles": 5,
+      "cycles": 123905,
+      "initial_load_cycles": null,
+      "compute_wall_cycles": null,
+      "tail_cycles": null,
+      "bias_delay": 0,
+      "out_bp": 1,
+      "bus_gap": 0,
+      "stalls": {
+        "load": 6175,
+        "cacc": 0,
+        "bias": 0,
+        "stage": 0,
+        "out_bp": 0
+      },
+      "bus": {
+        "out": 50688,
+        "bias": 512,
+        "a": 6336,
+        "w": 16384,
+        "idle": 49985
+      },
+      "mac_cycles_model": 117264
+    },
+    {
+      "a_preload_tiles": 6,
+      "cycles": 124929,
+      "initial_load_cycles": null,
+      "compute_wall_cycles": null,
+      "tail_cycles": null,
+      "bias_delay": 0,
+      "out_bp": 1,
+      "bus_gap": 0,
+      "stalls": {
+        "load": 7199,
+        "cacc": 0,
+        "bias": 0,
+        "stage": 0,
+        "out_bp": 0
+      },
+      "bus": {
+        "out": 50688,
+        "bias": 512,
+        "a": 6336,
+        "w": 16384,
+        "idle": 51009
+      },
+      "mac_cycles_model": 117264
+    },
+    {
+      "a_preload_tiles": 7,
+      "cycles": 125121,
+      "initial_load_cycles": null,
+      "compute_wall_cycles": null,
+      "tail_cycles": null,
+      "bias_delay": 0,
+      "out_bp": 1,
+      "bus_gap": 0,
+      "stalls": {
+        "load": 7391,
+        "cacc": 0,
+        "bias": 0,
+        "stage": 0,
+        "out_bp": 0
+      },
+      "bus": {
+        "out": 50688,
+        "bias": 512,
+        "a": 6336,
+        "w": 16384,
+        "idle": 51201
+      },
+      "mac_cycles_model": 117264
+    }
+  ],
+  "bias_overlap_cases": [
+    {
+      "case": "delayed_bias_6000",
+      "cycles": 121923,
+      "initial_load_cycles": null,
+      "compute_wall_cycles": null,
+      "tail_cycles": null,
+      "a_preload_tiles": 3,
+      "bias_delay": 6000,
+      "out_bp": 1,
+      "bus_gap": 0,
+      "stalls": {
+        "load": 4095,
+        "cacc": 98,
+        "bias": 888,
+        "stage": 745,
+        "out_bp": 0
+      },
+      "bus": {
+        "out": 50688,
+        "bias": 512,
+        "a": 6336,
+        "w": 16384,
+        "idle": 48003
+      },
+      "mac_cycles_model": 117264
+    },
+    {
+      "case": "delayed_bias_20000",
+      "cycles": 135923,
+      "initial_load_cycles": null,
+      "compute_wall_cycles": null,
+      "tail_cycles": null,
+      "a_preload_tiles": 3,
+      "bias_delay": 20000,
+      "out_bp": 1,
+      "bus_gap": 0,
+      "stalls": {
+        "load": 4095,
+        "cacc": 14098,
+        "bias": 14888,
+        "stage": 745,
+        "out_bp": 0
+      },
+      "bus": {
+        "out": 50688,
+        "bias": 512,
+        "a": 6336,
+        "w": 16384,
+        "idle": 62003
+      },
+      "mac_cycles_model": 117264
+    },
+    {
+      "case": "out_backpressure_3",
+      "cycles": 186135,
+      "initial_load_cycles": null,
+      "compute_wall_cycles": null,
+      "tail_cycles": null,
+      "a_preload_tiles": 3,
+      "bias_delay": 0,
+      "out_bp": 3,
+      "bus_gap": 0,
+      "stalls": {
+        "load": 4127,
+        "cacc": 61804,
+        "bias": 0,
+        "stage": 143318,
+        "out_bp": 101376
+      },
+      "bus": {
+        "out": 50688,
+        "bias": 512,
+        "a": 6336,
+        "w": 16384,
+        "idle": 112215
+      },
+      "mac_cycles_model": 117264
+    },
+    {
+      "case": "bus_gap_7",
+      "cycles": 123927,
+      "initial_load_cycles": null,
+      "compute_wall_cycles": null,
+      "tail_cycles": null,
+      "a_preload_tiles": 3,
+      "bias_delay": 0,
+      "out_bp": 1,
+      "bus_gap": 7,
+      "stalls": {
+        "load": 6182,
+        "cacc": 0,
+        "bias": 0,
+        "stage": 0,
+        "out_bp": 0
+      },
+      "bus": {
+        "out": 50688,
+        "bias": 512,
+        "a": 6336,
+        "w": 16384,
+        "idle": 50007
+      },
+      "mac_cycles_model": 117264
+    }
+  ],
+  "rtl_measurements": {
+    "baseline_full": 154240,
+    "accepted_dual_full": 125603,
+    "bias_overlap_full": 121915,
+    "bias_overlap_delayed": 121927,
+    "bias_overlap_out_bp": 186136
+  }
+}
