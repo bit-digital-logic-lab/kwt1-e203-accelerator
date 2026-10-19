@@ -1,0 +1,6 @@
+ARCH_METRICS cycles=463 initial_load_cycles=86 compute_cycles=85 drain_cycles=290 stall_cycles=0 feed_stall_cycles=0 dump_not_ready_cycles=0 a_load_words=12 w_load_words=20 bias_load_words=10 out_write_words=30 a_local_reads=12 w_local_reads=64 checked_outputs=15 checked_padding=0 overlapped_output_words=0 overlapped_captures=0
+PASS single-mac-array dual-cacc task M=3 K=4 N=5 gaps=0 bp=2
+- /home/yang/kwt-worktrees/ds-p027-singlemac/hardware/experiments/single_mac_dual_cacc/tb/tb_kwt_single_mac_task.sv:345: Verilog $finish
+- S i m u l a t i o n   R e p o r t: Verilator 5.047 devel
+- Verilator: $finish at 5ns; walltime 0.008 s; speed 582.822 ns/s
+- Verilator: cpu 0.008 s on 1 threads; allocated 6 MB
