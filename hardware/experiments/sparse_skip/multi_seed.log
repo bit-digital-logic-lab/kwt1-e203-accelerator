@@ -1,0 +1,4 @@
+PASS seed=1 checked=512 cycles=5148 dense_ops=29696 gated_ops=9731
+PASS seed=7 checked=512 cycles=5148 dense_ops=29696 gated_ops=9731
+PASS seed=101 checked=512 cycles=5148 dense_ops=29696 gated_ops=9731
+PASS seed=20261019 checked=512 cycles=5148 dense_ops=29696 gated_ops=9731

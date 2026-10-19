@@ -1,0 +1,899 @@
+
+-- Running command `read_verilog -sv hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv; hierarchy -top kwt_row_broadcast_tile_zero_gate; proc; opt; memory_collect; stat' --
+
+1. Executing Verilog-2005 frontend: hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv
+Parsing SystemVerilog input from `hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv' to AST representation.
+Generating RTLIL representation for module `\kwt_row_broadcast_tile_zero_gate'.
+Warning: Replacing memory \product_q with list of registers. See hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:48
+Successfully finished Verilog frontend.
+
+2. Executing HIERARCHY pass (managing design hierarchy).
+
+2.1. Analyzing design hierarchy..
+Top module:  \kwt_row_broadcast_tile_zero_gate
+
+2.2. Analyzing design hierarchy..
+Top module:  \kwt_row_broadcast_tile_zero_gate
+Removed 0 unused modules.
+
+3. Executing PROC pass (convert processes to netlists).
+
+3.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+3.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Marked 3 switch rules as full_case in process $proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:89$390 in module kwt_row_broadcast_tile_zero_gate.
+Marked 3 switch rules as full_case in process $proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:80$374 in module kwt_row_broadcast_tile_zero_gate.
+Marked 3 switch rules as full_case in process $proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:89$347 in module kwt_row_broadcast_tile_zero_gate.
+Marked 3 switch rules as full_case in process $proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:80$331 in module kwt_row_broadcast_tile_zero_gate.
+Marked 3 switch rules as full_case in process $proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:89$304 in module kwt_row_broadcast_tile_zero_gate.
+Marked 3 switch rules as full_case in process $proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:80$288 in module kwt_row_broadcast_tile_zero_gate.
+Marked 3 switch rules as full_case in process $proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:89$261 in module kwt_row_broadcast_tile_zero_gate.
+Marked 3 switch rules as full_case in process $proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:80$245 in module kwt_row_broadcast_tile_zero_gate.
+Marked 3 switch rules as full_case in process $proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:89$218 in module kwt_row_broadcast_tile_zero_gate.
+Marked 3 switch rules as full_case in process $proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:80$202 in module kwt_row_broadcast_tile_zero_gate.
+Marked 3 switch rules as full_case in process $proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:89$175 in module kwt_row_broadcast_tile_zero_gate.
+Marked 3 switch rules as full_case in process $proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:80$159 in module kwt_row_broadcast_tile_zero_gate.
+Marked 3 switch rules as full_case in process $proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:89$132 in module kwt_row_broadcast_tile_zero_gate.
+Marked 3 switch rules as full_case in process $proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:80$116 in module kwt_row_broadcast_tile_zero_gate.
+Marked 3 switch rules as full_case in process $proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:89$89 in module kwt_row_broadcast_tile_zero_gate.
+Marked 3 switch rules as full_case in process $proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:80$73 in module kwt_row_broadcast_tile_zero_gate.
+Marked 2 switch rules as full_case in process $proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:118$59 in module kwt_row_broadcast_tile_zero_gate.
+Marked 3 switch rules as full_case in process $proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:44$29 in module kwt_row_broadcast_tile_zero_gate.
+Removed a total of 0 dead cases.
+
+3.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 18 redundant assignments.
+Promoted 50 assignments to connections.
+
+3.4. Executing PROC_INIT pass (extract init attributes).
+
+3.5. Executing PROC_ARST pass (detect async resets in processes).
+Found async reset \rst_n in `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:89$390'.
+Found async reset \rst_n in `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:89$347'.
+Found async reset \rst_n in `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:89$304'.
+Found async reset \rst_n in `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:89$261'.
+Found async reset \rst_n in `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:89$218'.
+Found async reset \rst_n in `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:89$175'.
+Found async reset \rst_n in `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:89$132'.
+Found async reset \rst_n in `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:89$89'.
+Found async reset \rst_n in `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:118$59'.
+Found async reset \rst_n in `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:44$29'.
+
+3.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+<suppressed ~76 debug messages>
+
+3.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:89$390'.
+     1/12: $3$lookahead\g_psum_bank[7].valid_bits$389[15:0]$399
+     2/12: $3$bitselwrite$pos$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:103$14[3:0]$398
+     3/12: $0\g_psum_bank[7].forward_valid[0:0]
+     4/12: $0\g_psum_bank[7].pending[0:0]
+     5/12: $2$lookahead\g_psum_bank[7].valid_bits$389[15:0]$397
+     6/12: $2$bitselwrite$pos$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:103$14[3:0]$396
+     7/12: $1$lookahead\g_psum_bank[7].valid_bits$389[15:0]$395
+     8/12: $1$bitselwrite$pos$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:103$14[3:0]$394
+     9/12: $0\g_psum_bank[7].forward_value[31:0]
+    10/12: $0\g_psum_bank[7].pending_product[31:0]
+    11/12: $0\g_psum_bank[7].pending_col[3:0]
+    12/12: $0\g_psum_bank[7].pending_old_valid[0:0]
+Creating decoders for process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:80$374'.
+     1/7: $2$memwr$\g_psum_bank[7].psum_mem$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:82$22_EN[31:0]$384
+     2/7: $2$memwr$\g_psum_bank[7].psum_mem$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:82$22_DATA[31:0]$383
+     3/7: $2$memwr$\g_psum_bank[7].psum_mem$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:82$22_ADDR[3:0]$382
+     4/7: $1$memwr$\g_psum_bank[7].psum_mem$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:82$22_EN[31:0]$381
+     5/7: $1$memwr$\g_psum_bank[7].psum_mem$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:82$22_DATA[31:0]$380
+     6/7: $1$memwr$\g_psum_bank[7].psum_mem$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:82$22_ADDR[3:0]$379
+     7/7: $0\g_psum_bank[7].read_data[31:0]
+Creating decoders for process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:89$347'.
+     1/12: $3$lookahead\g_psum_bank[6].valid_bits$346[15:0]$356
+     2/12: $3$bitselwrite$pos$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:103$13[3:0]$355
+     3/12: $0\g_psum_bank[6].forward_valid[0:0]
+     4/12: $0\g_psum_bank[6].pending[0:0]
+     5/12: $2$lookahead\g_psum_bank[6].valid_bits$346[15:0]$354
+     6/12: $2$bitselwrite$pos$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:103$13[3:0]$353
+     7/12: $1$lookahead\g_psum_bank[6].valid_bits$346[15:0]$352
+     8/12: $1$bitselwrite$pos$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:103$13[3:0]$351
+     9/12: $0\g_psum_bank[6].forward_value[31:0]
+    10/12: $0\g_psum_bank[6].pending_product[31:0]
+    11/12: $0\g_psum_bank[6].pending_col[3:0]
+    12/12: $0\g_psum_bank[6].pending_old_valid[0:0]
+Creating decoders for process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:80$331'.
+     1/7: $2$memwr$\g_psum_bank[6].psum_mem$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:82$21_EN[31:0]$341
+     2/7: $2$memwr$\g_psum_bank[6].psum_mem$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:82$21_DATA[31:0]$340
+     3/7: $2$memwr$\g_psum_bank[6].psum_mem$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:82$21_ADDR[3:0]$339
+     4/7: $1$memwr$\g_psum_bank[6].psum_mem$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:82$21_EN[31:0]$338
+     5/7: $1$memwr$\g_psum_bank[6].psum_mem$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:82$21_DATA[31:0]$337
+     6/7: $1$memwr$\g_psum_bank[6].psum_mem$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:82$21_ADDR[3:0]$336
+     7/7: $0\g_psum_bank[6].read_data[31:0]
+Creating decoders for process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:89$304'.
+     1/12: $3$lookahead\g_psum_bank[5].valid_bits$303[15:0]$313
+     2/12: $3$bitselwrite$pos$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:103$12[3:0]$312
+     3/12: $0\g_psum_bank[5].forward_valid[0:0]
+     4/12: $0\g_psum_bank[5].pending[0:0]
+     5/12: $2$lookahead\g_psum_bank[5].valid_bits$303[15:0]$311
+     6/12: $2$bitselwrite$pos$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:103$12[3:0]$310
+     7/12: $1$lookahead\g_psum_bank[5].valid_bits$303[15:0]$309
+     8/12: $1$bitselwrite$pos$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:103$12[3:0]$308
+     9/12: $0\g_psum_bank[5].forward_value[31:0]
+    10/12: $0\g_psum_bank[5].pending_product[31:0]
+    11/12: $0\g_psum_bank[5].pending_col[3:0]
+    12/12: $0\g_psum_bank[5].pending_old_valid[0:0]
+Creating decoders for process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:80$288'.
+     1/7: $2$memwr$\g_psum_bank[5].psum_mem$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:82$20_EN[31:0]$298
+     2/7: $2$memwr$\g_psum_bank[5].psum_mem$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:82$20_DATA[31:0]$297
+     3/7: $2$memwr$\g_psum_bank[5].psum_mem$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:82$20_ADDR[3:0]$296
+     4/7: $1$memwr$\g_psum_bank[5].psum_mem$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:82$20_EN[31:0]$295
+     5/7: $1$memwr$\g_psum_bank[5].psum_mem$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:82$20_DATA[31:0]$294
+     6/7: $1$memwr$\g_psum_bank[5].psum_mem$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:82$20_ADDR[3:0]$293
+     7/7: $0\g_psum_bank[5].read_data[31:0]
+Creating decoders for process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:89$261'.
+     1/12: $3$lookahead\g_psum_bank[4].valid_bits$260[15:0]$270
+     2/12: $3$bitselwrite$pos$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:103$11[3:0]$269
+     3/12: $0\g_psum_bank[4].forward_valid[0:0]
+     4/12: $0\g_psum_bank[4].pending[0:0]
+     5/12: $2$lookahead\g_psum_bank[4].valid_bits$260[15:0]$268
+     6/12: $2$bitselwrite$pos$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:103$11[3:0]$267
+     7/12: $1$lookahead\g_psum_bank[4].valid_bits$260[15:0]$266
+     8/12: $1$bitselwrite$pos$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:103$11[3:0]$265
+     9/12: $0\g_psum_bank[4].forward_value[31:0]
+    10/12: $0\g_psum_bank[4].pending_product[31:0]
+    11/12: $0\g_psum_bank[4].pending_col[3:0]
+    12/12: $0\g_psum_bank[4].pending_old_valid[0:0]
+Creating decoders for process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:80$245'.
+     1/7: $2$memwr$\g_psum_bank[4].psum_mem$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:82$19_EN[31:0]$255
+     2/7: $2$memwr$\g_psum_bank[4].psum_mem$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:82$19_DATA[31:0]$254
+     3/7: $2$memwr$\g_psum_bank[4].psum_mem$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:82$19_ADDR[3:0]$253
+     4/7: $1$memwr$\g_psum_bank[4].psum_mem$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:82$19_EN[31:0]$252
+     5/7: $1$memwr$\g_psum_bank[4].psum_mem$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:82$19_DATA[31:0]$251
+     6/7: $1$memwr$\g_psum_bank[4].psum_mem$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:82$19_ADDR[3:0]$250
+     7/7: $0\g_psum_bank[4].read_data[31:0]
+Creating decoders for process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:89$218'.
+     1/12: $3$lookahead\g_psum_bank[3].valid_bits$217[15:0]$227
+     2/12: $3$bitselwrite$pos$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:103$10[3:0]$226
+     3/12: $0\g_psum_bank[3].forward_valid[0:0]
+     4/12: $0\g_psum_bank[3].pending[0:0]
+     5/12: $2$lookahead\g_psum_bank[3].valid_bits$217[15:0]$225
+     6/12: $2$bitselwrite$pos$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:103$10[3:0]$224
+     7/12: $1$lookahead\g_psum_bank[3].valid_bits$217[15:0]$223
+     8/12: $1$bitselwrite$pos$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:103$10[3:0]$222
+     9/12: $0\g_psum_bank[3].forward_value[31:0]
+    10/12: $0\g_psum_bank[3].pending_product[31:0]
+    11/12: $0\g_psum_bank[3].pending_col[3:0]
+    12/12: $0\g_psum_bank[3].pending_old_valid[0:0]
+Creating decoders for process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:80$202'.
+     1/7: $2$memwr$\g_psum_bank[3].psum_mem$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:82$18_EN[31:0]$212
+     2/7: $2$memwr$\g_psum_bank[3].psum_mem$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:82$18_DATA[31:0]$211
+     3/7: $2$memwr$\g_psum_bank[3].psum_mem$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:82$18_ADDR[3:0]$210
+     4/7: $1$memwr$\g_psum_bank[3].psum_mem$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:82$18_EN[31:0]$209
+     5/7: $1$memwr$\g_psum_bank[3].psum_mem$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:82$18_DATA[31:0]$208
+     6/7: $1$memwr$\g_psum_bank[3].psum_mem$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:82$18_ADDR[3:0]$207
+     7/7: $0\g_psum_bank[3].read_data[31:0]
+Creating decoders for process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:89$175'.
+     1/12: $3$lookahead\g_psum_bank[2].valid_bits$174[15:0]$184
+     2/12: $3$bitselwrite$pos$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:103$9[3:0]$183
+     3/12: $0\g_psum_bank[2].forward_valid[0:0]
+     4/12: $0\g_psum_bank[2].pending[0:0]
+     5/12: $2$lookahead\g_psum_bank[2].valid_bits$174[15:0]$182
+     6/12: $2$bitselwrite$pos$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:103$9[3:0]$181
+     7/12: $1$lookahead\g_psum_bank[2].valid_bits$174[15:0]$180
+     8/12: $1$bitselwrite$pos$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:103$9[3:0]$179
+     9/12: $0\g_psum_bank[2].forward_value[31:0]
+    10/12: $0\g_psum_bank[2].pending_product[31:0]
+    11/12: $0\g_psum_bank[2].pending_col[3:0]
+    12/12: $0\g_psum_bank[2].pending_old_valid[0:0]
+Creating decoders for process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:80$159'.
+     1/7: $2$memwr$\g_psum_bank[2].psum_mem$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:82$17_EN[31:0]$169
+     2/7: $2$memwr$\g_psum_bank[2].psum_mem$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:82$17_DATA[31:0]$168
+     3/7: $2$memwr$\g_psum_bank[2].psum_mem$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:82$17_ADDR[3:0]$167
+     4/7: $1$memwr$\g_psum_bank[2].psum_mem$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:82$17_EN[31:0]$166
+     5/7: $1$memwr$\g_psum_bank[2].psum_mem$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:82$17_DATA[31:0]$165
+     6/7: $1$memwr$\g_psum_bank[2].psum_mem$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:82$17_ADDR[3:0]$164
+     7/7: $0\g_psum_bank[2].read_data[31:0]
+Creating decoders for process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:89$132'.
+     1/12: $3$lookahead\g_psum_bank[1].valid_bits$131[15:0]$141
+     2/12: $3$bitselwrite$pos$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:103$8[3:0]$140
+     3/12: $0\g_psum_bank[1].forward_valid[0:0]
+     4/12: $0\g_psum_bank[1].pending[0:0]
+     5/12: $2$lookahead\g_psum_bank[1].valid_bits$131[15:0]$139
+     6/12: $2$bitselwrite$pos$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:103$8[3:0]$138
+     7/12: $1$lookahead\g_psum_bank[1].valid_bits$131[15:0]$137
+     8/12: $1$bitselwrite$pos$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:103$8[3:0]$136
+     9/12: $0\g_psum_bank[1].forward_value[31:0]
+    10/12: $0\g_psum_bank[1].pending_product[31:0]
+    11/12: $0\g_psum_bank[1].pending_col[3:0]
+    12/12: $0\g_psum_bank[1].pending_old_valid[0:0]
+Creating decoders for process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:80$116'.
+     1/7: $2$memwr$\g_psum_bank[1].psum_mem$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:82$16_EN[31:0]$126
+     2/7: $2$memwr$\g_psum_bank[1].psum_mem$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:82$16_DATA[31:0]$125
+     3/7: $2$memwr$\g_psum_bank[1].psum_mem$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:82$16_ADDR[3:0]$124
+     4/7: $1$memwr$\g_psum_bank[1].psum_mem$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:82$16_EN[31:0]$123
+     5/7: $1$memwr$\g_psum_bank[1].psum_mem$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:82$16_DATA[31:0]$122
+     6/7: $1$memwr$\g_psum_bank[1].psum_mem$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:82$16_ADDR[3:0]$121
+     7/7: $0\g_psum_bank[1].read_data[31:0]
+Creating decoders for process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:89$89'.
+     1/12: $3$lookahead\g_psum_bank[0].valid_bits$88[15:0]$98
+     2/12: $3$bitselwrite$pos$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:103$7[3:0]$97
+     3/12: $0\g_psum_bank[0].forward_valid[0:0]
+     4/12: $0\g_psum_bank[0].pending[0:0]
+     5/12: $2$lookahead\g_psum_bank[0].valid_bits$88[15:0]$96
+     6/12: $2$bitselwrite$pos$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:103$7[3:0]$95
+     7/12: $1$lookahead\g_psum_bank[0].valid_bits$88[15:0]$94
+     8/12: $1$bitselwrite$pos$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:103$7[3:0]$93
+     9/12: $0\g_psum_bank[0].forward_value[31:0]
+    10/12: $0\g_psum_bank[0].pending_product[31:0]
+    11/12: $0\g_psum_bank[0].pending_col[3:0]
+    12/12: $0\g_psum_bank[0].pending_old_valid[0:0]
+Creating decoders for process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:80$73'.
+     1/7: $2$memwr$\g_psum_bank[0].psum_mem$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:82$15_EN[31:0]$83
+     2/7: $2$memwr$\g_psum_bank[0].psum_mem$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:82$15_DATA[31:0]$82
+     3/7: $2$memwr$\g_psum_bank[0].psum_mem$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:82$15_ADDR[3:0]$81
+     4/7: $1$memwr$\g_psum_bank[0].psum_mem$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:82$15_EN[31:0]$80
+     5/7: $1$memwr$\g_psum_bank[0].psum_mem$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:82$15_DATA[31:0]$79
+     6/7: $1$memwr$\g_psum_bank[0].psum_mem$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:82$15_ADDR[3:0]$78
+     7/7: $0\g_psum_bank[0].read_data[31:0]
+Creating decoders for process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:118$59'.
+     1/4: $0\dump_valid[0:0]
+     2/4: $0\dump_bias_q[31:0]
+     3/4: $0\dump_col_q[3:0]
+     4/4: $0\dump_row_q[2:0]
+Creating decoders for process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:44$29'.
+     1/14: $3$fordecl_block$4.r[31:0]$42
+     2/14: $0\product_valid_q[7:0]
+     3/14: $2$fordecl_block$4.r[31:0]$35
+     4/14: $1$fordecl_block$4.r[31:0]$34
+     5/14: $1$fordecl_block$2.r[31:0]$33
+     6/14: $0\product_q[7][31:0]
+     7/14: $0\product_q[6][31:0]
+     8/14: $0\product_q[5][31:0]
+     9/14: $0\product_q[4][31:0]
+    10/14: $0\product_q[3][31:0]
+    11/14: $0\product_q[2][31:0]
+    12/14: $0\product_q[1][31:0]
+    13/14: $0\product_q[0][31:0]
+    14/14: $0\product_col_q[3:0]
+
+3.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+
+3.9. Executing PROC_DFF pass (convert process syncs to FFs).
+Creating register for signal `\kwt_row_broadcast_tile_zero_gate.\g_psum_bank[7].valid_bits' using process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:89$390'.
+  created $adff cell `$procdff$1162' with positive edge clock and positive level reset.
+Creating register for signal `\kwt_row_broadcast_tile_zero_gate.\g_psum_bank[7].pending' using process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:89$390'.
+  created $adff cell `$procdff$1167' with positive edge clock and positive level reset.
+Creating register for signal `\kwt_row_broadcast_tile_zero_gate.\g_psum_bank[7].pending_old_valid' using process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:89$390'.
+  created $adff cell `$procdff$1172' with positive edge clock and positive level reset.
+Creating register for signal `\kwt_row_broadcast_tile_zero_gate.\g_psum_bank[7].pending_col' using process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:89$390'.
+  created $adff cell `$procdff$1177' with positive edge clock and positive level reset.
+Creating register for signal `\kwt_row_broadcast_tile_zero_gate.\g_psum_bank[7].pending_product' using process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:89$390'.
+  created $adff cell `$procdff$1182' with positive edge clock and positive level reset.
+Creating register for signal `\kwt_row_broadcast_tile_zero_gate.\g_psum_bank[7].forward_valid' using process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:89$390'.
+  created $adff cell `$procdff$1187' with positive edge clock and positive level reset.
+Creating register for signal `\kwt_row_broadcast_tile_zero_gate.\g_psum_bank[7].forward_value' using process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:89$390'.
+  created $adff cell `$procdff$1192' with positive edge clock and positive level reset.
+Creating register for signal `\kwt_row_broadcast_tile_zero_gate.\g_psum_bank[7].read_data' using process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:80$374'.
+  created $dff cell `$procdff$1193' with positive edge clock.
+Creating register for signal `\kwt_row_broadcast_tile_zero_gate.$memwr$\g_psum_bank[7].psum_mem$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:82$22_ADDR' using process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:80$374'.
+  created $dff cell `$procdff$1194' with positive edge clock.
+Creating register for signal `\kwt_row_broadcast_tile_zero_gate.$memwr$\g_psum_bank[7].psum_mem$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:82$22_DATA' using process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:80$374'.
+  created $dff cell `$procdff$1195' with positive edge clock.
+Creating register for signal `\kwt_row_broadcast_tile_zero_gate.$memwr$\g_psum_bank[7].psum_mem$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:82$22_EN' using process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:80$374'.
+  created $dff cell `$procdff$1196' with positive edge clock.
+Creating register for signal `\kwt_row_broadcast_tile_zero_gate.\g_psum_bank[6].valid_bits' using process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:89$347'.
+  created $adff cell `$procdff$1201' with positive edge clock and positive level reset.
+Creating register for signal `\kwt_row_broadcast_tile_zero_gate.\g_psum_bank[6].pending' using process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:89$347'.
+  created $adff cell `$procdff$1206' with positive edge clock and positive level reset.
+Creating register for signal `\kwt_row_broadcast_tile_zero_gate.\g_psum_bank[6].pending_old_valid' using process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:89$347'.
+  created $adff cell `$procdff$1211' with positive edge clock and positive level reset.
+Creating register for signal `\kwt_row_broadcast_tile_zero_gate.\g_psum_bank[6].pending_col' using process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:89$347'.
+  created $adff cell `$procdff$1216' with positive edge clock and positive level reset.
+Creating register for signal `\kwt_row_broadcast_tile_zero_gate.\g_psum_bank[6].pending_product' using process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:89$347'.
+  created $adff cell `$procdff$1221' with positive edge clock and positive level reset.
+Creating register for signal `\kwt_row_broadcast_tile_zero_gate.\g_psum_bank[6].forward_valid' using process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:89$347'.
+  created $adff cell `$procdff$1226' with positive edge clock and positive level reset.
+Creating register for signal `\kwt_row_broadcast_tile_zero_gate.\g_psum_bank[6].forward_value' using process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:89$347'.
+  created $adff cell `$procdff$1231' with positive edge clock and positive level reset.
+Creating register for signal `\kwt_row_broadcast_tile_zero_gate.\g_psum_bank[6].read_data' using process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:80$331'.
+  created $dff cell `$procdff$1232' with positive edge clock.
+Creating register for signal `\kwt_row_broadcast_tile_zero_gate.$memwr$\g_psum_bank[6].psum_mem$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:82$21_ADDR' using process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:80$331'.
+  created $dff cell `$procdff$1233' with positive edge clock.
+Creating register for signal `\kwt_row_broadcast_tile_zero_gate.$memwr$\g_psum_bank[6].psum_mem$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:82$21_DATA' using process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:80$331'.
+  created $dff cell `$procdff$1234' with positive edge clock.
+Creating register for signal `\kwt_row_broadcast_tile_zero_gate.$memwr$\g_psum_bank[6].psum_mem$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:82$21_EN' using process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:80$331'.
+  created $dff cell `$procdff$1235' with positive edge clock.
+Creating register for signal `\kwt_row_broadcast_tile_zero_gate.\g_psum_bank[5].valid_bits' using process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:89$304'.
+  created $adff cell `$procdff$1240' with positive edge clock and positive level reset.
+Creating register for signal `\kwt_row_broadcast_tile_zero_gate.\g_psum_bank[5].pending' using process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:89$304'.
+  created $adff cell `$procdff$1245' with positive edge clock and positive level reset.
+Creating register for signal `\kwt_row_broadcast_tile_zero_gate.\g_psum_bank[5].pending_old_valid' using process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:89$304'.
+  created $adff cell `$procdff$1250' with positive edge clock and positive level reset.
+Creating register for signal `\kwt_row_broadcast_tile_zero_gate.\g_psum_bank[5].pending_col' using process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:89$304'.
+  created $adff cell `$procdff$1255' with positive edge clock and positive level reset.
+Creating register for signal `\kwt_row_broadcast_tile_zero_gate.\g_psum_bank[5].pending_product' using process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:89$304'.
+  created $adff cell `$procdff$1260' with positive edge clock and positive level reset.
+Creating register for signal `\kwt_row_broadcast_tile_zero_gate.\g_psum_bank[5].forward_valid' using process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:89$304'.
+  created $adff cell `$procdff$1265' with positive edge clock and positive level reset.
+Creating register for signal `\kwt_row_broadcast_tile_zero_gate.\g_psum_bank[5].forward_value' using process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:89$304'.
+  created $adff cell `$procdff$1270' with positive edge clock and positive level reset.
+Creating register for signal `\kwt_row_broadcast_tile_zero_gate.\g_psum_bank[5].read_data' using process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:80$288'.
+  created $dff cell `$procdff$1271' with positive edge clock.
+Creating register for signal `\kwt_row_broadcast_tile_zero_gate.$memwr$\g_psum_bank[5].psum_mem$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:82$20_ADDR' using process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:80$288'.
+  created $dff cell `$procdff$1272' with positive edge clock.
+Creating register for signal `\kwt_row_broadcast_tile_zero_gate.$memwr$\g_psum_bank[5].psum_mem$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:82$20_DATA' using process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:80$288'.
+  created $dff cell `$procdff$1273' with positive edge clock.
+Creating register for signal `\kwt_row_broadcast_tile_zero_gate.$memwr$\g_psum_bank[5].psum_mem$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:82$20_EN' using process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:80$288'.
+  created $dff cell `$procdff$1274' with positive edge clock.
+Creating register for signal `\kwt_row_broadcast_tile_zero_gate.\g_psum_bank[4].valid_bits' using process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:89$261'.
+  created $adff cell `$procdff$1279' with positive edge clock and positive level reset.
+Creating register for signal `\kwt_row_broadcast_tile_zero_gate.\g_psum_bank[4].pending' using process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:89$261'.
+  created $adff cell `$procdff$1284' with positive edge clock and positive level reset.
+Creating register for signal `\kwt_row_broadcast_tile_zero_gate.\g_psum_bank[4].pending_old_valid' using process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:89$261'.
+  created $adff cell `$procdff$1289' with positive edge clock and positive level reset.
+Creating register for signal `\kwt_row_broadcast_tile_zero_gate.\g_psum_bank[4].pending_col' using process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:89$261'.
+  created $adff cell `$procdff$1294' with positive edge clock and positive level reset.
+Creating register for signal `\kwt_row_broadcast_tile_zero_gate.\g_psum_bank[4].pending_product' using process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:89$261'.
+  created $adff cell `$procdff$1299' with positive edge clock and positive level reset.
+Creating register for signal `\kwt_row_broadcast_tile_zero_gate.\g_psum_bank[4].forward_valid' using process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:89$261'.
+  created $adff cell `$procdff$1304' with positive edge clock and positive level reset.
+Creating register for signal `\kwt_row_broadcast_tile_zero_gate.\g_psum_bank[4].forward_value' using process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:89$261'.
+  created $adff cell `$procdff$1309' with positive edge clock and positive level reset.
+Creating register for signal `\kwt_row_broadcast_tile_zero_gate.\g_psum_bank[4].read_data' using process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:80$245'.
+  created $dff cell `$procdff$1310' with positive edge clock.
+Creating register for signal `\kwt_row_broadcast_tile_zero_gate.$memwr$\g_psum_bank[4].psum_mem$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:82$19_ADDR' using process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:80$245'.
+  created $dff cell `$procdff$1311' with positive edge clock.
+Creating register for signal `\kwt_row_broadcast_tile_zero_gate.$memwr$\g_psum_bank[4].psum_mem$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:82$19_DATA' using process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:80$245'.
+  created $dff cell `$procdff$1312' with positive edge clock.
+Creating register for signal `\kwt_row_broadcast_tile_zero_gate.$memwr$\g_psum_bank[4].psum_mem$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:82$19_EN' using process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:80$245'.
+  created $dff cell `$procdff$1313' with positive edge clock.
+Creating register for signal `\kwt_row_broadcast_tile_zero_gate.\g_psum_bank[3].valid_bits' using process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:89$218'.
+  created $adff cell `$procdff$1318' with positive edge clock and positive level reset.
+Creating register for signal `\kwt_row_broadcast_tile_zero_gate.\g_psum_bank[3].pending' using process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:89$218'.
+  created $adff cell `$procdff$1323' with positive edge clock and positive level reset.
+Creating register for signal `\kwt_row_broadcast_tile_zero_gate.\g_psum_bank[3].pending_old_valid' using process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:89$218'.
+  created $adff cell `$procdff$1328' with positive edge clock and positive level reset.
+Creating register for signal `\kwt_row_broadcast_tile_zero_gate.\g_psum_bank[3].pending_col' using process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:89$218'.
+  created $adff cell `$procdff$1333' with positive edge clock and positive level reset.
+Creating register for signal `\kwt_row_broadcast_tile_zero_gate.\g_psum_bank[3].pending_product' using process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:89$218'.
+  created $adff cell `$procdff$1338' with positive edge clock and positive level reset.
+Creating register for signal `\kwt_row_broadcast_tile_zero_gate.\g_psum_bank[3].forward_valid' using process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:89$218'.
+  created $adff cell `$procdff$1343' with positive edge clock and positive level reset.
+Creating register for signal `\kwt_row_broadcast_tile_zero_gate.\g_psum_bank[3].forward_value' using process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:89$218'.
+  created $adff cell `$procdff$1348' with positive edge clock and positive level reset.
+Creating register for signal `\kwt_row_broadcast_tile_zero_gate.\g_psum_bank[3].read_data' using process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:80$202'.
+  created $dff cell `$procdff$1349' with positive edge clock.
+Creating register for signal `\kwt_row_broadcast_tile_zero_gate.$memwr$\g_psum_bank[3].psum_mem$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:82$18_ADDR' using process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:80$202'.
+  created $dff cell `$procdff$1350' with positive edge clock.
+Creating register for signal `\kwt_row_broadcast_tile_zero_gate.$memwr$\g_psum_bank[3].psum_mem$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:82$18_DATA' using process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:80$202'.
+  created $dff cell `$procdff$1351' with positive edge clock.
+Creating register for signal `\kwt_row_broadcast_tile_zero_gate.$memwr$\g_psum_bank[3].psum_mem$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:82$18_EN' using process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:80$202'.
+  created $dff cell `$procdff$1352' with positive edge clock.
+Creating register for signal `\kwt_row_broadcast_tile_zero_gate.\g_psum_bank[2].valid_bits' using process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:89$175'.
+  created $adff cell `$procdff$1357' with positive edge clock and positive level reset.
+Creating register for signal `\kwt_row_broadcast_tile_zero_gate.\g_psum_bank[2].pending' using process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:89$175'.
+  created $adff cell `$procdff$1362' with positive edge clock and positive level reset.
+Creating register for signal `\kwt_row_broadcast_tile_zero_gate.\g_psum_bank[2].pending_old_valid' using process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:89$175'.
+  created $adff cell `$procdff$1367' with positive edge clock and positive level reset.
+Creating register for signal `\kwt_row_broadcast_tile_zero_gate.\g_psum_bank[2].pending_col' using process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:89$175'.
+  created $adff cell `$procdff$1372' with positive edge clock and positive level reset.
+Creating register for signal `\kwt_row_broadcast_tile_zero_gate.\g_psum_bank[2].pending_product' using process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:89$175'.
+  created $adff cell `$procdff$1377' with positive edge clock and positive level reset.
+Creating register for signal `\kwt_row_broadcast_tile_zero_gate.\g_psum_bank[2].forward_valid' using process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:89$175'.
+  created $adff cell `$procdff$1382' with positive edge clock and positive level reset.
+Creating register for signal `\kwt_row_broadcast_tile_zero_gate.\g_psum_bank[2].forward_value' using process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:89$175'.
+  created $adff cell `$procdff$1387' with positive edge clock and positive level reset.
+Creating register for signal `\kwt_row_broadcast_tile_zero_gate.\g_psum_bank[2].read_data' using process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:80$159'.
+  created $dff cell `$procdff$1388' with positive edge clock.
+Creating register for signal `\kwt_row_broadcast_tile_zero_gate.$memwr$\g_psum_bank[2].psum_mem$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:82$17_ADDR' using process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:80$159'.
+  created $dff cell `$procdff$1389' with positive edge clock.
+Creating register for signal `\kwt_row_broadcast_tile_zero_gate.$memwr$\g_psum_bank[2].psum_mem$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:82$17_DATA' using process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:80$159'.
+  created $dff cell `$procdff$1390' with positive edge clock.
+Creating register for signal `\kwt_row_broadcast_tile_zero_gate.$memwr$\g_psum_bank[2].psum_mem$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:82$17_EN' using process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:80$159'.
+  created $dff cell `$procdff$1391' with positive edge clock.
+Creating register for signal `\kwt_row_broadcast_tile_zero_gate.\g_psum_bank[1].valid_bits' using process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:89$132'.
+  created $adff cell `$procdff$1396' with positive edge clock and positive level reset.
+Creating register for signal `\kwt_row_broadcast_tile_zero_gate.\g_psum_bank[1].pending' using process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:89$132'.
+  created $adff cell `$procdff$1401' with positive edge clock and positive level reset.
+Creating register for signal `\kwt_row_broadcast_tile_zero_gate.\g_psum_bank[1].pending_old_valid' using process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:89$132'.
+  created $adff cell `$procdff$1406' with positive edge clock and positive level reset.
+Creating register for signal `\kwt_row_broadcast_tile_zero_gate.\g_psum_bank[1].pending_col' using process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:89$132'.
+  created $adff cell `$procdff$1411' with positive edge clock and positive level reset.
+Creating register for signal `\kwt_row_broadcast_tile_zero_gate.\g_psum_bank[1].pending_product' using process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:89$132'.
+  created $adff cell `$procdff$1416' with positive edge clock and positive level reset.
+Creating register for signal `\kwt_row_broadcast_tile_zero_gate.\g_psum_bank[1].forward_valid' using process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:89$132'.
+  created $adff cell `$procdff$1421' with positive edge clock and positive level reset.
+Creating register for signal `\kwt_row_broadcast_tile_zero_gate.\g_psum_bank[1].forward_value' using process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:89$132'.
+  created $adff cell `$procdff$1426' with positive edge clock and positive level reset.
+Creating register for signal `\kwt_row_broadcast_tile_zero_gate.\g_psum_bank[1].read_data' using process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:80$116'.
+  created $dff cell `$procdff$1427' with positive edge clock.
+Creating register for signal `\kwt_row_broadcast_tile_zero_gate.$memwr$\g_psum_bank[1].psum_mem$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:82$16_ADDR' using process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:80$116'.
+  created $dff cell `$procdff$1428' with positive edge clock.
+Creating register for signal `\kwt_row_broadcast_tile_zero_gate.$memwr$\g_psum_bank[1].psum_mem$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:82$16_DATA' using process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:80$116'.
+  created $dff cell `$procdff$1429' with positive edge clock.
+Creating register for signal `\kwt_row_broadcast_tile_zero_gate.$memwr$\g_psum_bank[1].psum_mem$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:82$16_EN' using process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:80$116'.
+  created $dff cell `$procdff$1430' with positive edge clock.
+Creating register for signal `\kwt_row_broadcast_tile_zero_gate.\g_psum_bank[0].valid_bits' using process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:89$89'.
+  created $adff cell `$procdff$1435' with positive edge clock and positive level reset.
+Creating register for signal `\kwt_row_broadcast_tile_zero_gate.\g_psum_bank[0].pending' using process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:89$89'.
+  created $adff cell `$procdff$1440' with positive edge clock and positive level reset.
+Creating register for signal `\kwt_row_broadcast_tile_zero_gate.\g_psum_bank[0].pending_old_valid' using process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:89$89'.
+  created $adff cell `$procdff$1445' with positive edge clock and positive level reset.
+Creating register for signal `\kwt_row_broadcast_tile_zero_gate.\g_psum_bank[0].pending_col' using process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:89$89'.
+  created $adff cell `$procdff$1450' with positive edge clock and positive level reset.
+Creating register for signal `\kwt_row_broadcast_tile_zero_gate.\g_psum_bank[0].pending_product' using process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:89$89'.
+  created $adff cell `$procdff$1455' with positive edge clock and positive level reset.
+Creating register for signal `\kwt_row_broadcast_tile_zero_gate.\g_psum_bank[0].forward_valid' using process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:89$89'.
+  created $adff cell `$procdff$1460' with positive edge clock and positive level reset.
+Creating register for signal `\kwt_row_broadcast_tile_zero_gate.\g_psum_bank[0].forward_value' using process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:89$89'.
+  created $adff cell `$procdff$1465' with positive edge clock and positive level reset.
+Creating register for signal `\kwt_row_broadcast_tile_zero_gate.\g_psum_bank[0].read_data' using process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:80$73'.
+  created $dff cell `$procdff$1466' with positive edge clock.
+Creating register for signal `\kwt_row_broadcast_tile_zero_gate.$memwr$\g_psum_bank[0].psum_mem$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:82$15_ADDR' using process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:80$73'.
+  created $dff cell `$procdff$1467' with positive edge clock.
+Creating register for signal `\kwt_row_broadcast_tile_zero_gate.$memwr$\g_psum_bank[0].psum_mem$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:82$15_DATA' using process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:80$73'.
+  created $dff cell `$procdff$1468' with positive edge clock.
+Creating register for signal `\kwt_row_broadcast_tile_zero_gate.$memwr$\g_psum_bank[0].psum_mem$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:82$15_EN' using process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:80$73'.
+  created $dff cell `$procdff$1469' with positive edge clock.
+Creating register for signal `\kwt_row_broadcast_tile_zero_gate.\dump_valid' using process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:118$59'.
+  created $adff cell `$procdff$1474' with positive edge clock and positive level reset.
+Creating register for signal `\kwt_row_broadcast_tile_zero_gate.\dump_row_q' using process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:118$59'.
+  created $adff cell `$procdff$1479' with positive edge clock and positive level reset.
+Creating register for signal `\kwt_row_broadcast_tile_zero_gate.\dump_col_q' using process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:118$59'.
+  created $adff cell `$procdff$1484' with positive edge clock and positive level reset.
+Creating register for signal `\kwt_row_broadcast_tile_zero_gate.\dump_bias_q' using process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:118$59'.
+  created $adff cell `$procdff$1489' with positive edge clock and positive level reset.
+Creating register for signal `\kwt_row_broadcast_tile_zero_gate.\product_valid_q' using process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:44$29'.
+  created $adff cell `$procdff$1494' with positive edge clock and positive level reset.
+Creating register for signal `\kwt_row_broadcast_tile_zero_gate.\product_col_q' using process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:44$29'.
+  created $adff cell `$procdff$1499' with positive edge clock and positive level reset.
+Creating register for signal `\kwt_row_broadcast_tile_zero_gate.$fordecl_block$2.r' using process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:44$29'.
+  created $adff cell `$procdff$1504' with positive edge clock and positive level reset.
+Creating register for signal `\kwt_row_broadcast_tile_zero_gate.$fordecl_block$4.r' using process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:44$29'.
+  created $dff cell `$procdff$1511' with positive edge clock.
+Creating register for signal `\kwt_row_broadcast_tile_zero_gate.\product_q[0]' using process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:44$29'.
+  created $adff cell `$procdff$1516' with positive edge clock and positive level reset.
+Creating register for signal `\kwt_row_broadcast_tile_zero_gate.\product_q[1]' using process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:44$29'.
+  created $adff cell `$procdff$1521' with positive edge clock and positive level reset.
+Creating register for signal `\kwt_row_broadcast_tile_zero_gate.\product_q[2]' using process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:44$29'.
+  created $adff cell `$procdff$1526' with positive edge clock and positive level reset.
+Creating register for signal `\kwt_row_broadcast_tile_zero_gate.\product_q[3]' using process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:44$29'.
+  created $adff cell `$procdff$1531' with positive edge clock and positive level reset.
+Creating register for signal `\kwt_row_broadcast_tile_zero_gate.\product_q[4]' using process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:44$29'.
+  created $adff cell `$procdff$1536' with positive edge clock and positive level reset.
+Creating register for signal `\kwt_row_broadcast_tile_zero_gate.\product_q[5]' using process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:44$29'.
+  created $adff cell `$procdff$1541' with positive edge clock and positive level reset.
+Creating register for signal `\kwt_row_broadcast_tile_zero_gate.\product_q[6]' using process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:44$29'.
+  created $adff cell `$procdff$1546' with positive edge clock and positive level reset.
+Creating register for signal `\kwt_row_broadcast_tile_zero_gate.\product_q[7]' using process `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:44$29'.
+  created $adff cell `$procdff$1551' with positive edge clock and positive level reset.
+
+3.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+3.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Found and cleaned up 4 empty switches in `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:89$390'.
+Removing empty process `kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:89$390'.
+Found and cleaned up 4 empty switches in `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:80$374'.
+Removing empty process `kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:80$374'.
+Found and cleaned up 4 empty switches in `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:89$347'.
+Removing empty process `kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:89$347'.
+Found and cleaned up 4 empty switches in `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:80$331'.
+Removing empty process `kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:80$331'.
+Found and cleaned up 4 empty switches in `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:89$304'.
+Removing empty process `kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:89$304'.
+Found and cleaned up 4 empty switches in `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:80$288'.
+Removing empty process `kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:80$288'.
+Found and cleaned up 4 empty switches in `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:89$261'.
+Removing empty process `kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:89$261'.
+Found and cleaned up 4 empty switches in `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:80$245'.
+Removing empty process `kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:80$245'.
+Found and cleaned up 4 empty switches in `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:89$218'.
+Removing empty process `kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:89$218'.
+Found and cleaned up 4 empty switches in `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:80$202'.
+Removing empty process `kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:80$202'.
+Found and cleaned up 4 empty switches in `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:89$175'.
+Removing empty process `kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:89$175'.
+Found and cleaned up 4 empty switches in `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:80$159'.
+Removing empty process `kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:80$159'.
+Found and cleaned up 4 empty switches in `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:89$132'.
+Removing empty process `kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:89$132'.
+Found and cleaned up 4 empty switches in `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:80$116'.
+Removing empty process `kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:80$116'.
+Found and cleaned up 4 empty switches in `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:89$89'.
+Removing empty process `kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:89$89'.
+Found and cleaned up 4 empty switches in `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:80$73'.
+Removing empty process `kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:80$73'.
+Found and cleaned up 2 empty switches in `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:118$59'.
+Removing empty process `kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:118$59'.
+Found and cleaned up 10 empty switches in `\kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:44$29'.
+Removing empty process `kwt_row_broadcast_tile_zero_gate.$proc$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:44$29'.
+Cleaned up 76 empty switches.
+
+3.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module kwt_row_broadcast_tile_zero_gate.
+<suppressed ~211 debug messages>
+
+4. Executing OPT pass (performing simple optimizations).
+
+4.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module kwt_row_broadcast_tile_zero_gate.
+<suppressed ~3 debug messages>
+
+4.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\kwt_row_broadcast_tile_zero_gate'.
+Computing hashes of 674 cells of `\kwt_row_broadcast_tile_zero_gate'.
+Finding duplicate cells in `\kwt_row_broadcast_tile_zero_gate'.
+Computing hashes of 570 cells of `\kwt_row_broadcast_tile_zero_gate'.
+Finding duplicate cells in `\kwt_row_broadcast_tile_zero_gate'.
+Computing hashes of 561 cells of `\kwt_row_broadcast_tile_zero_gate'.
+Finding duplicate cells in `\kwt_row_broadcast_tile_zero_gate'.
+<suppressed ~339 debug messages>
+Removed a total of 113 cells.
+
+4.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \kwt_row_broadcast_tile_zero_gate..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+    dead port 1/2 on $mux $procmux$1083.
+    dead port 1/2 on $mux $procmux$1042.
+    dead port 1/2 on $mux $procmux$1036.
+    dead port 1/2 on $mux $procmux$1030.
+    dead port 1/2 on $mux $procmux$1002.
+    dead port 2/2 on $mux $procmux$1002.
+    dead port 1/2 on $mux $procmux$990.
+    dead port 2/2 on $mux $procmux$990.
+    dead port 1/2 on $mux $procmux$987.
+    dead port 2/2 on $mux $procmux$987.
+    dead port 1/2 on $mux $procmux$984.
+    dead port 1/2 on $mux $procmux$961.
+    dead port 1/2 on $mux $procmux$955.
+    dead port 1/2 on $mux $procmux$949.
+    dead port 1/2 on $mux $procmux$921.
+    dead port 2/2 on $mux $procmux$921.
+    dead port 1/2 on $mux $procmux$909.
+    dead port 2/2 on $mux $procmux$909.
+    dead port 1/2 on $mux $procmux$906.
+    dead port 2/2 on $mux $procmux$906.
+    dead port 1/2 on $mux $procmux$903.
+    dead port 1/2 on $mux $procmux$880.
+    dead port 1/2 on $mux $procmux$874.
+    dead port 1/2 on $mux $procmux$868.
+    dead port 1/2 on $mux $procmux$840.
+    dead port 2/2 on $mux $procmux$840.
+    dead port 1/2 on $mux $procmux$828.
+    dead port 2/2 on $mux $procmux$828.
+    dead port 1/2 on $mux $procmux$825.
+    dead port 2/2 on $mux $procmux$825.
+    dead port 1/2 on $mux $procmux$822.
+    dead port 1/2 on $mux $procmux$799.
+    dead port 1/2 on $mux $procmux$793.
+    dead port 1/2 on $mux $procmux$787.
+    dead port 1/2 on $mux $procmux$759.
+    dead port 2/2 on $mux $procmux$759.
+    dead port 1/2 on $mux $procmux$747.
+    dead port 2/2 on $mux $procmux$747.
+    dead port 1/2 on $mux $procmux$744.
+    dead port 2/2 on $mux $procmux$744.
+    dead port 1/2 on $mux $procmux$741.
+    dead port 1/2 on $mux $procmux$718.
+    dead port 1/2 on $mux $procmux$712.
+    dead port 1/2 on $mux $procmux$706.
+    dead port 1/2 on $mux $procmux$678.
+    dead port 2/2 on $mux $procmux$678.
+    dead port 1/2 on $mux $procmux$666.
+    dead port 2/2 on $mux $procmux$666.
+    dead port 1/2 on $mux $procmux$663.
+    dead port 2/2 on $mux $procmux$663.
+    dead port 1/2 on $mux $procmux$660.
+    dead port 1/2 on $mux $procmux$637.
+    dead port 1/2 on $mux $procmux$631.
+    dead port 1/2 on $mux $procmux$625.
+    dead port 1/2 on $mux $procmux$597.
+    dead port 2/2 on $mux $procmux$597.
+    dead port 1/2 on $mux $procmux$585.
+    dead port 2/2 on $mux $procmux$585.
+    dead port 1/2 on $mux $procmux$582.
+    dead port 2/2 on $mux $procmux$582.
+    dead port 1/2 on $mux $procmux$579.
+    dead port 1/2 on $mux $procmux$556.
+    dead port 1/2 on $mux $procmux$550.
+    dead port 1/2 on $mux $procmux$544.
+    dead port 1/2 on $mux $procmux$516.
+    dead port 2/2 on $mux $procmux$516.
+    dead port 1/2 on $mux $procmux$504.
+    dead port 2/2 on $mux $procmux$504.
+    dead port 1/2 on $mux $procmux$501.
+    dead port 2/2 on $mux $procmux$501.
+    dead port 1/2 on $mux $procmux$498.
+    dead port 1/2 on $mux $procmux$475.
+    dead port 1/2 on $mux $procmux$469.
+    dead port 1/2 on $mux $procmux$463.
+    dead port 1/2 on $mux $procmux$435.
+    dead port 2/2 on $mux $procmux$435.
+    dead port 1/2 on $mux $procmux$423.
+    dead port 2/2 on $mux $procmux$423.
+    dead port 1/2 on $mux $procmux$420.
+    dead port 2/2 on $mux $procmux$420.
+    dead port 1/2 on $mux $procmux$417.
+Removed 81 multiplexer ports.
+<suppressed ~374 debug messages>
+
+4.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \kwt_row_broadcast_tile_zero_gate.
+    Consolidated identical input bits for $mux cell $procmux$1028:
+      Old ports: A=0, B=32'11111111111111111111111111111111, Y=$procmux$1028_Y
+      New ports: A=1'0, B=1'1, Y=$procmux$1028_Y [0]
+      New connections: $procmux$1028_Y [31:1] = { $procmux$1028_Y [0] $procmux$1028_Y [0] $procmux$1028_Y [0] $procmux$1028_Y [0] $procmux$1028_Y [0] $procmux$1028_Y [0] $procmux$1028_Y [0] $procmux$1028_Y [0] $procmux$1028_Y [0] $procmux$1028_Y [0] $procmux$1028_Y [0] $procmux$1028_Y [0] $procmux$1028_Y [0] $procmux$1028_Y [0] $procmux$1028_Y [0] $procmux$1028_Y [0] $procmux$1028_Y [0] $procmux$1028_Y [0] $procmux$1028_Y [0] $procmux$1028_Y [0] $procmux$1028_Y [0] $procmux$1028_Y [0] $procmux$1028_Y [0] $procmux$1028_Y [0] $procmux$1028_Y [0] $procmux$1028_Y [0] $procmux$1028_Y [0] $procmux$1028_Y [0] $procmux$1028_Y [0] $procmux$1028_Y [0] $procmux$1028_Y [0] }
+    Consolidated identical input bits for $mux cell $procmux$947:
+      Old ports: A=0, B=32'11111111111111111111111111111111, Y=$procmux$947_Y
+      New ports: A=1'0, B=1'1, Y=$procmux$947_Y [0]
+      New connections: $procmux$947_Y [31:1] = { $procmux$947_Y [0] $procmux$947_Y [0] $procmux$947_Y [0] $procmux$947_Y [0] $procmux$947_Y [0] $procmux$947_Y [0] $procmux$947_Y [0] $procmux$947_Y [0] $procmux$947_Y [0] $procmux$947_Y [0] $procmux$947_Y [0] $procmux$947_Y [0] $procmux$947_Y [0] $procmux$947_Y [0] $procmux$947_Y [0] $procmux$947_Y [0] $procmux$947_Y [0] $procmux$947_Y [0] $procmux$947_Y [0] $procmux$947_Y [0] $procmux$947_Y [0] $procmux$947_Y [0] $procmux$947_Y [0] $procmux$947_Y [0] $procmux$947_Y [0] $procmux$947_Y [0] $procmux$947_Y [0] $procmux$947_Y [0] $procmux$947_Y [0] $procmux$947_Y [0] $procmux$947_Y [0] }
+    Consolidated identical input bits for $mux cell $procmux$866:
+      Old ports: A=0, B=32'11111111111111111111111111111111, Y=$procmux$866_Y
+      New ports: A=1'0, B=1'1, Y=$procmux$866_Y [0]
+      New connections: $procmux$866_Y [31:1] = { $procmux$866_Y [0] $procmux$866_Y [0] $procmux$866_Y [0] $procmux$866_Y [0] $procmux$866_Y [0] $procmux$866_Y [0] $procmux$866_Y [0] $procmux$866_Y [0] $procmux$866_Y [0] $procmux$866_Y [0] $procmux$866_Y [0] $procmux$866_Y [0] $procmux$866_Y [0] $procmux$866_Y [0] $procmux$866_Y [0] $procmux$866_Y [0] $procmux$866_Y [0] $procmux$866_Y [0] $procmux$866_Y [0] $procmux$866_Y [0] $procmux$866_Y [0] $procmux$866_Y [0] $procmux$866_Y [0] $procmux$866_Y [0] $procmux$866_Y [0] $procmux$866_Y [0] $procmux$866_Y [0] $procmux$866_Y [0] $procmux$866_Y [0] $procmux$866_Y [0] $procmux$866_Y [0] }
+    Consolidated identical input bits for $mux cell $procmux$785:
+      Old ports: A=0, B=32'11111111111111111111111111111111, Y=$procmux$785_Y
+      New ports: A=1'0, B=1'1, Y=$procmux$785_Y [0]
+      New connections: $procmux$785_Y [31:1] = { $procmux$785_Y [0] $procmux$785_Y [0] $procmux$785_Y [0] $procmux$785_Y [0] $procmux$785_Y [0] $procmux$785_Y [0] $procmux$785_Y [0] $procmux$785_Y [0] $procmux$785_Y [0] $procmux$785_Y [0] $procmux$785_Y [0] $procmux$785_Y [0] $procmux$785_Y [0] $procmux$785_Y [0] $procmux$785_Y [0] $procmux$785_Y [0] $procmux$785_Y [0] $procmux$785_Y [0] $procmux$785_Y [0] $procmux$785_Y [0] $procmux$785_Y [0] $procmux$785_Y [0] $procmux$785_Y [0] $procmux$785_Y [0] $procmux$785_Y [0] $procmux$785_Y [0] $procmux$785_Y [0] $procmux$785_Y [0] $procmux$785_Y [0] $procmux$785_Y [0] $procmux$785_Y [0] }
+    Consolidated identical input bits for $mux cell $procmux$704:
+      Old ports: A=0, B=32'11111111111111111111111111111111, Y=$procmux$704_Y
+      New ports: A=1'0, B=1'1, Y=$procmux$704_Y [0]
+      New connections: $procmux$704_Y [31:1] = { $procmux$704_Y [0] $procmux$704_Y [0] $procmux$704_Y [0] $procmux$704_Y [0] $procmux$704_Y [0] $procmux$704_Y [0] $procmux$704_Y [0] $procmux$704_Y [0] $procmux$704_Y [0] $procmux$704_Y [0] $procmux$704_Y [0] $procmux$704_Y [0] $procmux$704_Y [0] $procmux$704_Y [0] $procmux$704_Y [0] $procmux$704_Y [0] $procmux$704_Y [0] $procmux$704_Y [0] $procmux$704_Y [0] $procmux$704_Y [0] $procmux$704_Y [0] $procmux$704_Y [0] $procmux$704_Y [0] $procmux$704_Y [0] $procmux$704_Y [0] $procmux$704_Y [0] $procmux$704_Y [0] $procmux$704_Y [0] $procmux$704_Y [0] $procmux$704_Y [0] $procmux$704_Y [0] }
+    Consolidated identical input bits for $mux cell $procmux$623:
+      Old ports: A=0, B=32'11111111111111111111111111111111, Y=$procmux$623_Y
+      New ports: A=1'0, B=1'1, Y=$procmux$623_Y [0]
+      New connections: $procmux$623_Y [31:1] = { $procmux$623_Y [0] $procmux$623_Y [0] $procmux$623_Y [0] $procmux$623_Y [0] $procmux$623_Y [0] $procmux$623_Y [0] $procmux$623_Y [0] $procmux$623_Y [0] $procmux$623_Y [0] $procmux$623_Y [0] $procmux$623_Y [0] $procmux$623_Y [0] $procmux$623_Y [0] $procmux$623_Y [0] $procmux$623_Y [0] $procmux$623_Y [0] $procmux$623_Y [0] $procmux$623_Y [0] $procmux$623_Y [0] $procmux$623_Y [0] $procmux$623_Y [0] $procmux$623_Y [0] $procmux$623_Y [0] $procmux$623_Y [0] $procmux$623_Y [0] $procmux$623_Y [0] $procmux$623_Y [0] $procmux$623_Y [0] $procmux$623_Y [0] $procmux$623_Y [0] $procmux$623_Y [0] }
+    Consolidated identical input bits for $mux cell $procmux$542:
+      Old ports: A=0, B=32'11111111111111111111111111111111, Y=$procmux$542_Y
+      New ports: A=1'0, B=1'1, Y=$procmux$542_Y [0]
+      New connections: $procmux$542_Y [31:1] = { $procmux$542_Y [0] $procmux$542_Y [0] $procmux$542_Y [0] $procmux$542_Y [0] $procmux$542_Y [0] $procmux$542_Y [0] $procmux$542_Y [0] $procmux$542_Y [0] $procmux$542_Y [0] $procmux$542_Y [0] $procmux$542_Y [0] $procmux$542_Y [0] $procmux$542_Y [0] $procmux$542_Y [0] $procmux$542_Y [0] $procmux$542_Y [0] $procmux$542_Y [0] $procmux$542_Y [0] $procmux$542_Y [0] $procmux$542_Y [0] $procmux$542_Y [0] $procmux$542_Y [0] $procmux$542_Y [0] $procmux$542_Y [0] $procmux$542_Y [0] $procmux$542_Y [0] $procmux$542_Y [0] $procmux$542_Y [0] $procmux$542_Y [0] $procmux$542_Y [0] $procmux$542_Y [0] }
+    Consolidated identical input bits for $mux cell $procmux$461:
+      Old ports: A=0, B=32'11111111111111111111111111111111, Y=$procmux$461_Y
+      New ports: A=1'0, B=1'1, Y=$procmux$461_Y [0]
+      New connections: $procmux$461_Y [31:1] = { $procmux$461_Y [0] $procmux$461_Y [0] $procmux$461_Y [0] $procmux$461_Y [0] $procmux$461_Y [0] $procmux$461_Y [0] $procmux$461_Y [0] $procmux$461_Y [0] $procmux$461_Y [0] $procmux$461_Y [0] $procmux$461_Y [0] $procmux$461_Y [0] $procmux$461_Y [0] $procmux$461_Y [0] $procmux$461_Y [0] $procmux$461_Y [0] $procmux$461_Y [0] $procmux$461_Y [0] $procmux$461_Y [0] $procmux$461_Y [0] $procmux$461_Y [0] $procmux$461_Y [0] $procmux$461_Y [0] $procmux$461_Y [0] $procmux$461_Y [0] $procmux$461_Y [0] $procmux$461_Y [0] $procmux$461_Y [0] $procmux$461_Y [0] $procmux$461_Y [0] $procmux$461_Y [0] }
+  Optimizing cells in module \kwt_row_broadcast_tile_zero_gate.
+    Consolidated identical input bits for $mux cell $procmux$1045:
+      Old ports: A=$2$memwr$\g_psum_bank[0].psum_mem$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:82$15_EN[31:0]$83, B=0, Y=$procmux$1045_Y
+      New ports: A=$procmux$1028_Y [0], B=1'0, Y=$procmux$1045_Y [0]
+      New connections: $procmux$1045_Y [31:1] = { $procmux$1045_Y [0] $procmux$1045_Y [0] $procmux$1045_Y [0] $procmux$1045_Y [0] $procmux$1045_Y [0] $procmux$1045_Y [0] $procmux$1045_Y [0] $procmux$1045_Y [0] $procmux$1045_Y [0] $procmux$1045_Y [0] $procmux$1045_Y [0] $procmux$1045_Y [0] $procmux$1045_Y [0] $procmux$1045_Y [0] $procmux$1045_Y [0] $procmux$1045_Y [0] $procmux$1045_Y [0] $procmux$1045_Y [0] $procmux$1045_Y [0] $procmux$1045_Y [0] $procmux$1045_Y [0] $procmux$1045_Y [0] $procmux$1045_Y [0] $procmux$1045_Y [0] $procmux$1045_Y [0] $procmux$1045_Y [0] $procmux$1045_Y [0] $procmux$1045_Y [0] $procmux$1045_Y [0] $procmux$1045_Y [0] $procmux$1045_Y [0] }
+    Consolidated identical input bits for $mux cell $procmux$964:
+      Old ports: A=$2$memwr$\g_psum_bank[1].psum_mem$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:82$16_EN[31:0]$126, B=0, Y=$procmux$964_Y
+      New ports: A=$procmux$947_Y [0], B=1'0, Y=$procmux$964_Y [0]
+      New connections: $procmux$964_Y [31:1] = { $procmux$964_Y [0] $procmux$964_Y [0] $procmux$964_Y [0] $procmux$964_Y [0] $procmux$964_Y [0] $procmux$964_Y [0] $procmux$964_Y [0] $procmux$964_Y [0] $procmux$964_Y [0] $procmux$964_Y [0] $procmux$964_Y [0] $procmux$964_Y [0] $procmux$964_Y [0] $procmux$964_Y [0] $procmux$964_Y [0] $procmux$964_Y [0] $procmux$964_Y [0] $procmux$964_Y [0] $procmux$964_Y [0] $procmux$964_Y [0] $procmux$964_Y [0] $procmux$964_Y [0] $procmux$964_Y [0] $procmux$964_Y [0] $procmux$964_Y [0] $procmux$964_Y [0] $procmux$964_Y [0] $procmux$964_Y [0] $procmux$964_Y [0] $procmux$964_Y [0] $procmux$964_Y [0] }
+    Consolidated identical input bits for $mux cell $procmux$883:
+      Old ports: A=$2$memwr$\g_psum_bank[2].psum_mem$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:82$17_EN[31:0]$169, B=0, Y=$procmux$883_Y
+      New ports: A=$procmux$866_Y [0], B=1'0, Y=$procmux$883_Y [0]
+      New connections: $procmux$883_Y [31:1] = { $procmux$883_Y [0] $procmux$883_Y [0] $procmux$883_Y [0] $procmux$883_Y [0] $procmux$883_Y [0] $procmux$883_Y [0] $procmux$883_Y [0] $procmux$883_Y [0] $procmux$883_Y [0] $procmux$883_Y [0] $procmux$883_Y [0] $procmux$883_Y [0] $procmux$883_Y [0] $procmux$883_Y [0] $procmux$883_Y [0] $procmux$883_Y [0] $procmux$883_Y [0] $procmux$883_Y [0] $procmux$883_Y [0] $procmux$883_Y [0] $procmux$883_Y [0] $procmux$883_Y [0] $procmux$883_Y [0] $procmux$883_Y [0] $procmux$883_Y [0] $procmux$883_Y [0] $procmux$883_Y [0] $procmux$883_Y [0] $procmux$883_Y [0] $procmux$883_Y [0] $procmux$883_Y [0] }
+    Consolidated identical input bits for $mux cell $procmux$802:
+      Old ports: A=$2$memwr$\g_psum_bank[3].psum_mem$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:82$18_EN[31:0]$212, B=0, Y=$procmux$802_Y
+      New ports: A=$procmux$785_Y [0], B=1'0, Y=$procmux$802_Y [0]
+      New connections: $procmux$802_Y [31:1] = { $procmux$802_Y [0] $procmux$802_Y [0] $procmux$802_Y [0] $procmux$802_Y [0] $procmux$802_Y [0] $procmux$802_Y [0] $procmux$802_Y [0] $procmux$802_Y [0] $procmux$802_Y [0] $procmux$802_Y [0] $procmux$802_Y [0] $procmux$802_Y [0] $procmux$802_Y [0] $procmux$802_Y [0] $procmux$802_Y [0] $procmux$802_Y [0] $procmux$802_Y [0] $procmux$802_Y [0] $procmux$802_Y [0] $procmux$802_Y [0] $procmux$802_Y [0] $procmux$802_Y [0] $procmux$802_Y [0] $procmux$802_Y [0] $procmux$802_Y [0] $procmux$802_Y [0] $procmux$802_Y [0] $procmux$802_Y [0] $procmux$802_Y [0] $procmux$802_Y [0] $procmux$802_Y [0] }
+    Consolidated identical input bits for $mux cell $procmux$721:
+      Old ports: A=$2$memwr$\g_psum_bank[4].psum_mem$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:82$19_EN[31:0]$255, B=0, Y=$procmux$721_Y
+      New ports: A=$procmux$704_Y [0], B=1'0, Y=$procmux$721_Y [0]
+      New connections: $procmux$721_Y [31:1] = { $procmux$721_Y [0] $procmux$721_Y [0] $procmux$721_Y [0] $procmux$721_Y [0] $procmux$721_Y [0] $procmux$721_Y [0] $procmux$721_Y [0] $procmux$721_Y [0] $procmux$721_Y [0] $procmux$721_Y [0] $procmux$721_Y [0] $procmux$721_Y [0] $procmux$721_Y [0] $procmux$721_Y [0] $procmux$721_Y [0] $procmux$721_Y [0] $procmux$721_Y [0] $procmux$721_Y [0] $procmux$721_Y [0] $procmux$721_Y [0] $procmux$721_Y [0] $procmux$721_Y [0] $procmux$721_Y [0] $procmux$721_Y [0] $procmux$721_Y [0] $procmux$721_Y [0] $procmux$721_Y [0] $procmux$721_Y [0] $procmux$721_Y [0] $procmux$721_Y [0] $procmux$721_Y [0] }
+    Consolidated identical input bits for $mux cell $procmux$640:
+      Old ports: A=$2$memwr$\g_psum_bank[5].psum_mem$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:82$20_EN[31:0]$298, B=0, Y=$procmux$640_Y
+      New ports: A=$procmux$623_Y [0], B=1'0, Y=$procmux$640_Y [0]
+      New connections: $procmux$640_Y [31:1] = { $procmux$640_Y [0] $procmux$640_Y [0] $procmux$640_Y [0] $procmux$640_Y [0] $procmux$640_Y [0] $procmux$640_Y [0] $procmux$640_Y [0] $procmux$640_Y [0] $procmux$640_Y [0] $procmux$640_Y [0] $procmux$640_Y [0] $procmux$640_Y [0] $procmux$640_Y [0] $procmux$640_Y [0] $procmux$640_Y [0] $procmux$640_Y [0] $procmux$640_Y [0] $procmux$640_Y [0] $procmux$640_Y [0] $procmux$640_Y [0] $procmux$640_Y [0] $procmux$640_Y [0] $procmux$640_Y [0] $procmux$640_Y [0] $procmux$640_Y [0] $procmux$640_Y [0] $procmux$640_Y [0] $procmux$640_Y [0] $procmux$640_Y [0] $procmux$640_Y [0] $procmux$640_Y [0] }
+    Consolidated identical input bits for $mux cell $procmux$559:
+      Old ports: A=$2$memwr$\g_psum_bank[6].psum_mem$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:82$21_EN[31:0]$341, B=0, Y=$procmux$559_Y
+      New ports: A=$procmux$542_Y [0], B=1'0, Y=$procmux$559_Y [0]
+      New connections: $procmux$559_Y [31:1] = { $procmux$559_Y [0] $procmux$559_Y [0] $procmux$559_Y [0] $procmux$559_Y [0] $procmux$559_Y [0] $procmux$559_Y [0] $procmux$559_Y [0] $procmux$559_Y [0] $procmux$559_Y [0] $procmux$559_Y [0] $procmux$559_Y [0] $procmux$559_Y [0] $procmux$559_Y [0] $procmux$559_Y [0] $procmux$559_Y [0] $procmux$559_Y [0] $procmux$559_Y [0] $procmux$559_Y [0] $procmux$559_Y [0] $procmux$559_Y [0] $procmux$559_Y [0] $procmux$559_Y [0] $procmux$559_Y [0] $procmux$559_Y [0] $procmux$559_Y [0] $procmux$559_Y [0] $procmux$559_Y [0] $procmux$559_Y [0] $procmux$559_Y [0] $procmux$559_Y [0] $procmux$559_Y [0] }
+    Consolidated identical input bits for $mux cell $procmux$478:
+      Old ports: A=$2$memwr$\g_psum_bank[7].psum_mem$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:82$22_EN[31:0]$384, B=0, Y=$procmux$478_Y
+      New ports: A=$procmux$461_Y [0], B=1'0, Y=$procmux$478_Y [0]
+      New connections: $procmux$478_Y [31:1] = { $procmux$478_Y [0] $procmux$478_Y [0] $procmux$478_Y [0] $procmux$478_Y [0] $procmux$478_Y [0] $procmux$478_Y [0] $procmux$478_Y [0] $procmux$478_Y [0] $procmux$478_Y [0] $procmux$478_Y [0] $procmux$478_Y [0] $procmux$478_Y [0] $procmux$478_Y [0] $procmux$478_Y [0] $procmux$478_Y [0] $procmux$478_Y [0] $procmux$478_Y [0] $procmux$478_Y [0] $procmux$478_Y [0] $procmux$478_Y [0] $procmux$478_Y [0] $procmux$478_Y [0] $procmux$478_Y [0] $procmux$478_Y [0] $procmux$478_Y [0] $procmux$478_Y [0] $procmux$478_Y [0] $procmux$478_Y [0] $procmux$478_Y [0] $procmux$478_Y [0] $procmux$478_Y [0] }
+  Optimizing cells in module \kwt_row_broadcast_tile_zero_gate.
+Performed a total of 16 changes.
+
+4.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\kwt_row_broadcast_tile_zero_gate'.
+Computing hashes of 504 cells of `\kwt_row_broadcast_tile_zero_gate'.
+Finding duplicate cells in `\kwt_row_broadcast_tile_zero_gate'.
+Removed a total of 0 cells.
+
+4.6. Executing OPT_DFF pass (perform DFF optimizations).
+Adding EN signal on $procdff$1388 ($dff) from module kwt_row_broadcast_tile_zero_gate (D = $procmux$895_Y, Q = \g_psum_bank[2].read_data).
+Adding EN signal on $procdff$1484 ($adff) from module kwt_row_broadcast_tile_zero_gate (D = \dump_col, Q = \dump_col_q).
+Adding EN signal on $procdff$1271 ($dff) from module kwt_row_broadcast_tile_zero_gate (D = $procmux$652_Y, Q = \g_psum_bank[5].read_data).
+Adding EN signal on $procdff$1289 ($adff) from module kwt_row_broadcast_tile_zero_gate (D = $shiftx$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:110$281_Y, Q = \g_psum_bank[4].pending_old_valid).
+Adding EN signal on $procdff$1294 ($adff) from module kwt_row_broadcast_tile_zero_gate (D = \product_col_q, Q = \g_psum_bank[4].pending_col).
+Adding EN signal on $procdff$1299 ($adff) from module kwt_row_broadcast_tile_zero_gate (D = \product_q[4], Q = \g_psum_bank[4].pending_product).
+Adding EN signal on $procdff$1489 ($adff) from module kwt_row_broadcast_tile_zero_gate (D = \dump_bias, Q = \dump_bias_q).
+Adding EN signal on $procdff$1516 ($adff) from module kwt_row_broadcast_tile_zero_gate (D = $mul$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:56$44_Y, Q = \product_q[0]).
+Adding EN signal on $procdff$1396 ($adff) from module kwt_row_broadcast_tile_zero_gate (D = $procmux$918_Y, Q = \g_psum_bank[1].valid_bits).
+Adding EN signal on $procdff$1309 ($adff) from module kwt_row_broadcast_tile_zero_gate (D = $add$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:74$243_Y, Q = \g_psum_bank[4].forward_value).
+Adding EN signal on $procdff$1310 ($dff) from module kwt_row_broadcast_tile_zero_gate (D = $procmux$733_Y, Q = \g_psum_bank[4].read_data).
+Adding EN signal on $procdff$1546 ($adff) from module kwt_row_broadcast_tile_zero_gate (D = $mul$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:56$56_Y, Q = \product_q[6]).
+Adding EN signal on $procdff$1318 ($adff) from module kwt_row_broadcast_tile_zero_gate (D = $procmux$756_Y, Q = \g_psum_bank[3].valid_bits).
+Adding EN signal on $procdff$1427 ($dff) from module kwt_row_broadcast_tile_zero_gate (D = $procmux$976_Y, Q = \g_psum_bank[1].read_data).
+Adding EN signal on $procdff$1279 ($adff) from module kwt_row_broadcast_tile_zero_gate (D = $procmux$675_Y, Q = \g_psum_bank[4].valid_bits).
+Adding EN signal on $procdff$1328 ($adff) from module kwt_row_broadcast_tile_zero_gate (D = $shiftx$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:110$238_Y, Q = \g_psum_bank[3].pending_old_valid).
+Adding EN signal on $procdff$1406 ($adff) from module kwt_row_broadcast_tile_zero_gate (D = $shiftx$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:110$152_Y, Q = \g_psum_bank[1].pending_old_valid).
+Adding EN signal on $procdff$1333 ($adff) from module kwt_row_broadcast_tile_zero_gate (D = \product_col_q, Q = \g_psum_bank[3].pending_col).
+Adding EN signal on $procdff$1531 ($adff) from module kwt_row_broadcast_tile_zero_gate (D = $mul$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:56$50_Y, Q = \product_q[3]).
+Adding EN signal on $procdff$1387 ($adff) from module kwt_row_broadcast_tile_zero_gate (D = $add$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:74$157_Y, Q = \g_psum_bank[2].forward_value).
+Adding EN signal on $procdff$1499 ($adff) from module kwt_row_broadcast_tile_zero_gate (D = \in_col, Q = \product_col_q).
+Adding EN signal on $procdff$1182 ($adff) from module kwt_row_broadcast_tile_zero_gate (D = \product_q[7], Q = \g_psum_bank[7].pending_product).
+Adding EN signal on $procdff$1349 ($dff) from module kwt_row_broadcast_tile_zero_gate (D = $procmux$814_Y, Q = \g_psum_bank[3].read_data).
+Adding EN signal on $procdff$1536 ($adff) from module kwt_row_broadcast_tile_zero_gate (D = $mul$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:56$52_Y, Q = \product_q[4]).
+Adding EN signal on $procdff$1192 ($adff) from module kwt_row_broadcast_tile_zero_gate (D = $add$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:74$372_Y, Q = \g_psum_bank[7].forward_value).
+Adding EN signal on $procdff$1193 ($dff) from module kwt_row_broadcast_tile_zero_gate (D = $procmux$490_Y, Q = \g_psum_bank[7].read_data).
+Adding EN signal on $procdff$1201 ($adff) from module kwt_row_broadcast_tile_zero_gate (D = $procmux$513_Y, Q = \g_psum_bank[6].valid_bits).
+Adding EN signal on $procdff$1445 ($adff) from module kwt_row_broadcast_tile_zero_gate (D = $shiftx$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:110$109_Y, Q = \g_psum_bank[0].pending_old_valid).
+Handling D = Q on $procdff$1504 ($adff) from module kwt_row_broadcast_tile_zero_gate (removing D path).
+Adding EN signal on $procdff$1357 ($adff) from module kwt_row_broadcast_tile_zero_gate (D = $procmux$837_Y, Q = \g_psum_bank[2].valid_bits).
+Adding EN signal on $procdff$1416 ($adff) from module kwt_row_broadcast_tile_zero_gate (D = \product_q[1], Q = \g_psum_bank[1].pending_product).
+Adding EN signal on $procdff$1211 ($adff) from module kwt_row_broadcast_tile_zero_gate (D = $shiftx$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:110$367_Y, Q = \g_psum_bank[6].pending_old_valid).
+Adding EN signal on $procdff$1465 ($adff) from module kwt_row_broadcast_tile_zero_gate (D = $add$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:74$71_Y, Q = \g_psum_bank[0].forward_value).
+Adding EN signal on $procdff$1216 ($adff) from module kwt_row_broadcast_tile_zero_gate (D = \product_col_q, Q = \g_psum_bank[6].pending_col).
+Adding EN signal on $procdff$1466 ($dff) from module kwt_row_broadcast_tile_zero_gate (D = $procmux$1057_Y, Q = \g_psum_bank[0].read_data).
+Adding EN signal on $procdff$1221 ($adff) from module kwt_row_broadcast_tile_zero_gate (D = \product_q[6], Q = \g_psum_bank[6].pending_product).
+Adding EN signal on $procdff$1551 ($adff) from module kwt_row_broadcast_tile_zero_gate (D = $mul$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:56$58_Y, Q = \product_q[7]).
+Adding EN signal on $procdff$1231 ($adff) from module kwt_row_broadcast_tile_zero_gate (D = $add$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:74$329_Y, Q = \g_psum_bank[6].forward_value).
+Adding EN signal on $procdff$1232 ($dff) from module kwt_row_broadcast_tile_zero_gate (D = $procmux$571_Y, Q = \g_psum_bank[6].read_data).
+Adding EN signal on $procdff$1367 ($adff) from module kwt_row_broadcast_tile_zero_gate (D = $shiftx$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:110$195_Y, Q = \g_psum_bank[2].pending_old_valid).
+Adding EN signal on $procdff$1240 ($adff) from module kwt_row_broadcast_tile_zero_gate (D = $procmux$594_Y, Q = \g_psum_bank[5].valid_bits).
+Adding EN signal on $procdff$1372 ($adff) from module kwt_row_broadcast_tile_zero_gate (D = \product_col_q, Q = \g_psum_bank[2].pending_col).
+Adding EN signal on $procdff$1250 ($adff) from module kwt_row_broadcast_tile_zero_gate (D = $shiftx$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:110$324_Y, Q = \g_psum_bank[5].pending_old_valid).
+Adding EN signal on $procdff$1255 ($adff) from module kwt_row_broadcast_tile_zero_gate (D = \product_col_q, Q = \g_psum_bank[5].pending_col).
+Adding EN signal on $procdff$1511 ($dff) from module kwt_row_broadcast_tile_zero_gate (D = $3$fordecl_block$4.r[31:0]$42, Q = $fordecl_block$4.r).
+Adding EN signal on $procdff$1377 ($adff) from module kwt_row_broadcast_tile_zero_gate (D = \product_q[2], Q = \g_psum_bank[2].pending_product).
+Adding EN signal on $procdff$1260 ($adff) from module kwt_row_broadcast_tile_zero_gate (D = \product_q[5], Q = \g_psum_bank[5].pending_product).
+Adding EN signal on $procdff$1526 ($adff) from module kwt_row_broadcast_tile_zero_gate (D = $mul$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:56$48_Y, Q = \product_q[2]).
+Adding EN signal on $procdff$1541 ($adff) from module kwt_row_broadcast_tile_zero_gate (D = $mul$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:56$54_Y, Q = \product_q[5]).
+Adding EN signal on $procdff$1426 ($adff) from module kwt_row_broadcast_tile_zero_gate (D = $add$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:74$114_Y, Q = \g_psum_bank[1].forward_value).
+Adding EN signal on $procdff$1479 ($adff) from module kwt_row_broadcast_tile_zero_gate (D = \dump_row, Q = \dump_row_q).
+Adding EN signal on $procdff$1270 ($adff) from module kwt_row_broadcast_tile_zero_gate (D = $add$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:74$286_Y, Q = \g_psum_bank[5].forward_value).
+Adding EN signal on $procdff$1338 ($adff) from module kwt_row_broadcast_tile_zero_gate (D = \product_q[3], Q = \g_psum_bank[3].pending_product).
+Adding EN signal on $procdff$1521 ($adff) from module kwt_row_broadcast_tile_zero_gate (D = $mul$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:56$46_Y, Q = \product_q[1]).
+Adding EN signal on $procdff$1162 ($adff) from module kwt_row_broadcast_tile_zero_gate (D = $procmux$432_Y, Q = \g_psum_bank[7].valid_bits).
+Adding EN signal on $procdff$1411 ($adff) from module kwt_row_broadcast_tile_zero_gate (D = \product_col_q, Q = \g_psum_bank[1].pending_col).
+Adding EN signal on $procdff$1450 ($adff) from module kwt_row_broadcast_tile_zero_gate (D = \product_col_q, Q = \g_psum_bank[0].pending_col).
+Adding EN signal on $procdff$1435 ($adff) from module kwt_row_broadcast_tile_zero_gate (D = $procmux$999_Y, Q = \g_psum_bank[0].valid_bits).
+Adding EN signal on $procdff$1172 ($adff) from module kwt_row_broadcast_tile_zero_gate (D = $shiftx$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:110$410_Y, Q = \g_psum_bank[7].pending_old_valid).
+Adding EN signal on $procdff$1177 ($adff) from module kwt_row_broadcast_tile_zero_gate (D = \product_col_q, Q = \g_psum_bank[7].pending_col).
+Adding EN signal on $procdff$1348 ($adff) from module kwt_row_broadcast_tile_zero_gate (D = $add$hardware/experiments/sparse_skip/kwt_row_broadcast_tile_zero_gate.sv:74$200_Y, Q = \g_psum_bank[3].forward_value).
+Adding EN signal on $procdff$1455 ($adff) from module kwt_row_broadcast_tile_zero_gate (D = \product_q[0], Q = \g_psum_bank[0].pending_product).
+Setting constant 0-bit at position 0 on $procdff$1504 ($dlatch) from module kwt_row_broadcast_tile_zero_gate.
+Setting constant 0-bit at position 1 on $procdff$1504 ($dlatch) from module kwt_row_broadcast_tile_zero_gate.
+Setting constant 0-bit at position 2 on $procdff$1504 ($dlatch) from module kwt_row_broadcast_tile_zero_gate.
+Setting constant 1-bit at position 3 on $procdff$1504 ($dlatch) from module kwt_row_broadcast_tile_zero_gate.
+Setting constant 0-bit at position 4 on $procdff$1504 ($dlatch) from module kwt_row_broadcast_tile_zero_gate.
+Setting constant 0-bit at position 5 on $procdff$1504 ($dlatch) from module kwt_row_broadcast_tile_zero_gate.
+Setting constant 0-bit at position 6 on $procdff$1504 ($dlatch) from module kwt_row_broadcast_tile_zero_gate.
+Setting constant 0-bit at position 7 on $procdff$1504 ($dlatch) from module kwt_row_broadcast_tile_zero_gate.
+Setting constant 0-bit at position 8 on $procdff$1504 ($dlatch) from module kwt_row_broadcast_tile_zero_gate.
+Setting constant 0-bit at position 9 on $procdff$1504 ($dlatch) from module kwt_row_broadcast_tile_zero_gate.
+Setting constant 0-bit at position 10 on $procdff$1504 ($dlatch) from module kwt_row_broadcast_tile_zero_gate.
+Setting constant 0-bit at position 11 on $procdff$1504 ($dlatch) from module kwt_row_broadcast_tile_zero_gate.
+Setting constant 0-bit at position 12 on $procdff$1504 ($dlatch) from module kwt_row_broadcast_tile_zero_gate.
+Setting constant 0-bit at position 13 on $procdff$1504 ($dlatch) from module kwt_row_broadcast_tile_zero_gate.
+Setting constant 0-bit at position 14 on $procdff$1504 ($dlatch) from module kwt_row_broadcast_tile_zero_gate.
+Setting constant 0-bit at position 15 on $procdff$1504 ($dlatch) from module kwt_row_broadcast_tile_zero_gate.
+Setting constant 0-bit at position 16 on $procdff$1504 ($dlatch) from module kwt_row_broadcast_tile_zero_gate.
+Setting constant 0-bit at position 17 on $procdff$1504 ($dlatch) from module kwt_row_broadcast_tile_zero_gate.
+Setting constant 0-bit at position 18 on $procdff$1504 ($dlatch) from module kwt_row_broadcast_tile_zero_gate.
+Setting constant 0-bit at position 19 on $procdff$1504 ($dlatch) from module kwt_row_broadcast_tile_zero_gate.
+Setting constant 0-bit at position 20 on $procdff$1504 ($dlatch) from module kwt_row_broadcast_tile_zero_gate.
+Setting constant 0-bit at position 21 on $procdff$1504 ($dlatch) from module kwt_row_broadcast_tile_zero_gate.
+Setting constant 0-bit at position 22 on $procdff$1504 ($dlatch) from module kwt_row_broadcast_tile_zero_gate.
+Setting constant 0-bit at position 23 on $procdff$1504 ($dlatch) from module kwt_row_broadcast_tile_zero_gate.
+Setting constant 0-bit at position 24 on $procdff$1504 ($dlatch) from module kwt_row_broadcast_tile_zero_gate.
+Setting constant 0-bit at position 25 on $procdff$1504 ($dlatch) from module kwt_row_broadcast_tile_zero_gate.
+Setting constant 0-bit at position 26 on $procdff$1504 ($dlatch) from module kwt_row_broadcast_tile_zero_gate.
+Setting constant 0-bit at position 27 on $procdff$1504 ($dlatch) from module kwt_row_broadcast_tile_zero_gate.
+Setting constant 0-bit at position 28 on $procdff$1504 ($dlatch) from module kwt_row_broadcast_tile_zero_gate.
+Setting constant 0-bit at position 29 on $procdff$1504 ($dlatch) from module kwt_row_broadcast_tile_zero_gate.
+Setting constant 0-bit at position 30 on $procdff$1504 ($dlatch) from module kwt_row_broadcast_tile_zero_gate.
+Setting constant 0-bit at position 31 on $procdff$1504 ($dlatch) from module kwt_row_broadcast_tile_zero_gate.
+
+4.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \kwt_row_broadcast_tile_zero_gate..
+Removed 144 unused cells and 919 unused wires.
+<suppressed ~146 debug messages>
+
+4.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module kwt_row_broadcast_tile_zero_gate.
+<suppressed ~16 debug messages>
+
+4.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+4.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \kwt_row_broadcast_tile_zero_gate..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~182 debug messages>
+
+4.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \kwt_row_broadcast_tile_zero_gate.
+Performed a total of 0 changes.
+
+4.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\kwt_row_broadcast_tile_zero_gate'.
+Computing hashes of 478 cells of `\kwt_row_broadcast_tile_zero_gate'.
+Finding duplicate cells in `\kwt_row_broadcast_tile_zero_gate'.
+Computing hashes of 428 cells of `\kwt_row_broadcast_tile_zero_gate'.
+Finding duplicate cells in `\kwt_row_broadcast_tile_zero_gate'.
+Computing hashes of 410 cells of `\kwt_row_broadcast_tile_zero_gate'.
+Finding duplicate cells in `\kwt_row_broadcast_tile_zero_gate'.
+<suppressed ~204 debug messages>
+Removed a total of 68 cells.
+
+4.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+4.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \kwt_row_broadcast_tile_zero_gate..
+Removed 0 unused cells and 68 unused wires.
+<suppressed ~1 debug messages>
+
+4.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module kwt_row_broadcast_tile_zero_gate.
+
+4.16. Rerunning OPT passes. (Maybe there is more to do..)
+
+4.17. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \kwt_row_broadcast_tile_zero_gate..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~182 debug messages>
+
+4.18. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \kwt_row_broadcast_tile_zero_gate.
+Performed a total of 0 changes.
+
+4.19. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\kwt_row_broadcast_tile_zero_gate'.
+Computing hashes of 410 cells of `\kwt_row_broadcast_tile_zero_gate'.
+Finding duplicate cells in `\kwt_row_broadcast_tile_zero_gate'.
+Removed a total of 0 cells.
+
+4.20. Executing OPT_DFF pass (perform DFF optimizations).
+
+4.21. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \kwt_row_broadcast_tile_zero_gate..
+
+4.22. Executing OPT_EXPR pass (perform const folding).
+Optimizing module kwt_row_broadcast_tile_zero_gate.
+
+4.23. Finished fast OPT passes. (There is nothing left to do.)
+
+5. Executing MEMORY_COLLECT pass (generating $mem cells).
+
+6. Printing statistics.
+
+=== kwt_row_broadcast_tile_zero_gate ===
+
+        +----------Local Count, excluding submodules.
+        | 
+      401 wires
+     5930 wire bits
+      103 public wires
+     2052 public wire bits
+       14 ports
+      233 port bits
+      394 cells
+        9   $add
+       18   $adff
+       52   $adffe
+       10   $and
+        8   $dffe
+       15   $eq
+       41   $logic_and
+        1   $logic_not
+        8   $mem_v2
+        8   $mul
+      115   $mux
+        8   $neg
+        9   $not
+        8   $or
+       33   $reduce_and
+       25   $reduce_bool
+        8   $shift
+       18   $shiftx
+

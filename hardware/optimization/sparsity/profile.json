@@ -1,0 +1,42 @@
+{
+  "method": "read-only, A12W10 exact integer zero; no pruning/rounding applied",
+  "partition": "validation",
+  "samples": 480,
+  "layers": 12,
+  "inputs_sha256": {
+    "/home/yang/Desktop/ic设计竞赛/software/.build/quant_samples_12labels_40.npz": "43d639fb64ea8d907db967b071010e41e68827368532880ba8a99b92769bbae8",
+    "/home/yang/Desktop/ic设计竞赛/software/results/ffn1_a12w10_static_sym_12labels_40.npz": "10c481c7a79d0ee8063ad807f8c0f685769c2c8e1dbcdb5f33079919dfeef367",
+    "/home/yang/Desktop/ic设计竞赛/software/weights/kwt1_fp32.npz": "8f359abf7adbe287b8f89fca98af46194f98f90f2146784731bff551a155825a"
+  },
+  "activation_zero_fraction": 0.001074026944795174,
+  "weight_zero_fraction": 0.0023345947265625,
+  "weight_abs_le_1_fraction": 0.00689697265625,
+  "weight_abs_le_2_fraction": 0.011383056640625,
+  "activation_abs_le_1_fraction": 0.0032015850782126823,
+  "activation_abs_le_2_fraction": 0.005351420016133558,
+  "total_mac": 9342812160,
+  "exact_zero_product_mac": 31823902,
+  "exact_zero_product_mac_fraction": 0.0034062444427866993,
+  "counterfactual_abs_le_threshold_product_mac_fraction": {
+    "1": 0.010076903119499301,
+    "2": 0.016674721093825354
+  },
+  "fully_zero_activation_rows": 0,
+  "activation_rows": 570240,
+  "fully_zero_weight_columns": 0,
+  "weight_columns": 3072,
+  "tile_16x16_k_skip": 0,
+  "tile_16x16_k_total": 41287680,
+  "tile_16x16_k_skip_fraction": 0.0,
+  "tile_16x16_k_block_skips": {
+    "4": 0,
+    "8": 0,
+    "16": 0
+  },
+  "tile_16x16_k_block_totals": {
+    "4": 10321920,
+    "8": 5160960,
+    "16": 2580480
+  },
+  "bound_note": "MAC gating fraction is an operation/energy upper bound, not cycle speedup. Tile-K skips require per-cycle all-lane zero detection and dynamic K suppression; block skips require block metadata or scanning. Load/write/bias cycles remain."
+}
