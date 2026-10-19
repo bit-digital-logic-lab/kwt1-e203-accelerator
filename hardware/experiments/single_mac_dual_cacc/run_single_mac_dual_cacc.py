@@ -345,15 +345,14 @@ def main():
         "cacc_two_pages_16x16x32": {
             "bytes": 2 * 16 * 16 * 4,
             "if_register_mapped": "2 x 256 x 32 = 4096 flops + 512 valid bits (as this experiment)",
-            "if_macro_mapped": "4 x 16b x 1024 macros (2 per 32-bit word per page), or 2 x 16b x 1024 with 32-bit width-cascade",
-            "ports": "per page: 1W accumulate (one row lane/cycle) + 1R dump (async/registered read). "
-                     "The two pages never share a port, so a 1R1W macro per page suffices.",
+            "if_macro_mapped": "row-banked sketch: 2 pages x 16 rows x 2 width slices = 64 x 16b x 128 minimum-size macros, heavily underfilled; exact mapping unproven",
+            "ports": "the active page performs 16 independent row-accumulator updates each cycle, each requiring old-sum read and new-sum write or forwarding; the inactive page supplies one dump read. One 1R1W macro per whole page is insufficient.",
         },
         "bias_group": {
             "size": "N=256 INT32 = 1024 B",
             "note": "bias is read at export only and added AFTER the CACC read; "
                     "it never enters the multiplier feed",
-            "macros": "2 x 16b x 256 (or slice of the result buffer)",
+            "macros": "2 x 16b x 1024 (overallocated), registers, or a slice of an existing bank; 16b x 256 is not an allowed macro size",
         },
         "result_buffer": {
             "size": "16x16 INT32 = 1024 B (kwt_tile_output_stage, unchanged)",

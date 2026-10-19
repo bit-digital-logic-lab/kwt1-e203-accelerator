@@ -41,7 +41,7 @@ reported, not hidden.
   b_word      ──┼─►  stage 1: prod_q[r] <= a[r]*b        (registers)
   in_page     ──┘            │  prod_valid_q, page, col, mask
                              ▼
-  stage 2 (per page, the only psum write port)
+  stage 2 (active page: 16 row lanes write 16 psums/cycle)
    psum_page0[16][16] INT32   psum_page1[16][16] INT32   + valid bits
         │ 1R dump (page selected by dump_page)
         ▼
@@ -113,8 +113,8 @@ two-core harness, while matching the two-core cycle count.
 
 | buffer | size | 16-bit macro budget | ports |
 | --- | ---: | --- | --- |
-| CACC two pages 2 × 16×16×32 | 2 048 B | as registers here: 2 × 256 × 32 flops + 512 valid bits; if macro-mapped: 4 × `16b×1024` (2 per 32-bit word per page) | per page 1W accumulate (one row lane/cycle) + 1R dump; pages are disjoint so a 1R1W macro per page suffices |
-| bias group N=256 | 1 024 B | 2 × `16b×256` (or a slice of the result buffer) | read at export only; added after the CACC read |
+| CACC two pages 2 × 16×16×32 | 2 048 B | as registers here: 4 096 data flops + 512 valid bits. A row-banked macro sketch needs 2 pages × 16 rows × 2 width slices = **64 × `16b×128`** minimum-size macros, with considerable unused capacity | the active page updates **16 different row accumulators per cycle**, each needing old-sum read and new-sum write or equivalent forwarding; the inactive page supplies one dump read. One 1R1W macro for a whole page cannot sustain this. Exact bank/port mapping is unproven |
+| bias group N=256 | 1 024 B | 2 × `16b×1024` (overallocated) or registers/slice of an existing bank; `16b×256` is not an allowed macro size | read at export only; added after the CACC read |
 | result buffer 16×16×32 | 1 024 B | 2 × `16b×1024` (32-bit width-cascade) | 1W capture + 1R drain (`kwt_tile_output_stage`, unchanged) |
 
 ## 6. What is achievable / NOT proven
