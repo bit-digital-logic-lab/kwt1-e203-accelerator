@@ -16,6 +16,7 @@ PROJECT = Path('/home/yang/Desktop/ic设计竞赛')
 ROOT = Path('/home/yang/kwt-worktrees')
 STATE = ROOT / 'ds-fleet-20261019'
 MODEL = 'opencode-go/deepseek-v4.1-flash'
+OPENCODE = Path('/home/yang/.nvm/versions/node/v24.18.0/bin/opencode')
 BASE = 'codex/kwt-grad-encoder'
 CHECK = PROJECT / '.opencode/skills/quarter-hour-check/scripts/check.py'
 PREPARE_LOCK = threading.Lock()
@@ -92,7 +93,7 @@ def run_one(task):
     path = STATE / 'status' / f'{task_id}.json'
     log = STATE / 'logs' / f'{task_id}.log'
     prior = json.loads(path.read_text()) if path.exists() else None
-    if prior and prior.get('terminal'):
+    if prior and prior.get('state') == 'submitted':
         return prior
     before = call(['git', '-C', str(worktree), 'rev-parse', 'HEAD']).stdout.strip()
     status = {'task': task_id, 'branch': branch, 'worktree': str(worktree),
@@ -107,17 +108,24 @@ def run_one(task):
               '根目录 WORKER_REPORT.md 写三段：结果、复现命令与退出码、未证事项。'
               '只 git add 本任务文件并 commit，保持工作树干净。输出最多一行 commit 与报告路径，然后退出。'
               '可只读使用主工程 /home/yang/Desktop/ic设计竞赛 的 gitignored 数据，不得将大数据、密钥或缓存提交。')
-    cmd = ['opencode', 'run', '--standalone', '--auto', '--model', MODEL, prompt]
+    if not OPENCODE.is_file():
+        raise RuntimeError(f'OpenCode executable missing: {OPENCODE}')
+    cmd = [str(OPENCODE), 'run', '--standalone', '--auto', '--model', MODEL, prompt]
     log.parent.mkdir(parents=True, exist_ok=True)
     started = time.monotonic()
     with log.open('w') as f:
         try:
+            env = dict(os.environ)
+            env['PATH'] = f"{OPENCODE.parent}:/usr/local/bin:/usr/bin:/bin"
             result = subprocess.run(cmd, cwd=worktree, stdin=subprocess.DEVNULL,
-                                    stdout=f, stderr=subprocess.STDOUT, timeout=2700)
+                                    stdout=f, stderr=subprocess.STDOUT, timeout=2700, env=env)
             code = result.returncode
         except subprocess.TimeoutExpired:
             code = 124
             f.write('\nTIMEOUT 2700 seconds\n')
+        except OSError as exc:
+            code = 127
+            f.write(f'\nEXEC_FAILED {type(exc).__name__}: {exc}\n')
     after = call(['git', '-C', str(worktree), 'rev-parse', 'HEAD']).stdout.strip()
     dirty = call(['git', '-C', str(worktree), 'status', '--porcelain']).stdout.strip()
     report = worktree / 'WORKER_REPORT.md'
@@ -166,7 +174,13 @@ def main():
                            'model':MODEL, 'task_count':len(TASKS), 'finished':len(results),
                            'submitted':sum(x['state']=='submitted' for x in results),
                            'failed':sum(x['state']=='failed' for x in results)})
-        results.append(run_one(TASKS[-1]))
+        try:
+            results.append(run_one(TASKS[-1]))
+        except Exception as exc:
+            failure = {'task': TASKS[-1][0], 'state':'failed', 'terminal':True,
+                       'error':f'{type(exc).__name__}: {exc}', 'finished_at':stamp()}
+            write_json(STATE / 'status' / f"{TASKS[-1][0]}.json", failure)
+            results.append(failure)
     finally:
         final = {'state':'complete', 'updated_at':stamp(), 'model':MODEL,
                  'task_count':len(TASKS), 'finished':len(results),
