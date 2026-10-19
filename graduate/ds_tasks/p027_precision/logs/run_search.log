@@ -1,0 +1,35 @@
+DATA split=/home/yang/Desktop/ic设计竞赛/software/.build/quant_samples_12labels_20.npz sha256=ee04e849bc407149618e4ecd5ff99575687586d4e57c0ade6a0b3f7b66c8c149
+DATA weights=/home/yang/kwt-worktrees/ds-p027-precision/software/weights/kwt1_fp32.npz sha256=8f359abf7adbe287b8f89fca98af46194f98f90f2146784731bff551a155825a
+DATA partitions training=240 validation=240 test=0
+REF fp32 golden cache, 240 validation samples (13.1s)
+CALIB training maxima over 240 training samples (11.2s); train-fit diagnostic on the first 96 training samples (validation-independent)
+CAND A12W10: worst L11 y=2.7538% all<3%=True target<=0.27%=False sat={'a': 0, 'r1': 16, 'g': 6, 'r2': 16, 'y': 5} acc={'qkv': 23, 'score': 35, 'ctx': 31, 'attn_out': 28, 'ffn1': 24, 'ffn2': 23} (34.9s)
+  y%:  0.7885  1.0628  1.3032  1.4392  1.5655  1.6943  1.7884  1.8600  1.9586  2.0521  2.2376  2.7538
+  train-fit (96 training samples, validation-independent): worst=2.6968% target<=0.27%=False
+CAND A16W10: worst L11 y=0.3301% all<3%=True target<=0.27%=False sat={'a': 0, 'r1': 17, 'g': 6, 'r2': 16, 'y': 5} acc={'qkv': 27, 'score': 35, 'ctx': 36, 'attn_out': 28, 'ffn1': 28, 'ffn2': 27} (51.1s)
+  y%:  0.0784  0.1251  0.1736  0.1844  0.1947  0.2071  0.2087  0.2183  0.2256  0.2308  0.2495  0.3301
+  train-fit (96 training samples, validation-independent): worst=0.3218% target<=0.27%=False
+CAND A16W12: worst L11 y=0.1517% all<3%=True target<=0.27%=True sat={'a': 0, 'r1': 16, 'g': 6, 'r2': 18, 'y': 5} acc={'qkv': 29, 'score': 35, 'ctx': 36, 'attn_out': 30, 'ffn1': 30, 'ffn2': 29} (34.7s)
+  y%:  0.0480  0.0591  0.1039  0.1017  0.1055  0.1108  0.1091  0.1115  0.1150  0.1201  0.1300  0.1517
+  train-fit (96 training samples, validation-independent): worst=0.1286% target<=0.27%=True
+CAND A16W16: worst L11 y=0.1301% all<3%=True target<=0.27%=True sat={'a': 0, 'r1': 16, 'g': 6, 'r2': 18, 'y': 5} acc={'qkv': 33, 'score': 35, 'ctx': 36, 'attn_out': 34, 'ffn1': 34, 'ffn2': 33} (46.8s)
+  y%:  0.0456  0.0516  0.0972  0.0924  0.0965  0.0984  0.0959  0.0982  0.1018  0.1068  0.1155  0.1301
+  train-fit (96 training samples, validation-independent): worst=0.1043% target<=0.27%=True
+CAND A20W16: worst L11 y=0.0977% all<3%=True target<=0.27%=True sat={'a': 0, 'r1': 16, 'g': 6, 'r2': 18, 'y': 5} acc={'qkv': 37, 'score': 43, 'ctx': 40, 'attn_out': 38, 'ffn1': 38, 'ffn2': 37} (34.6s)
+  y%:  0.0316  0.0365  0.0868  0.0786  0.0803  0.0766  0.0709  0.0711  0.0739  0.0776  0.0864  0.0977
+  train-fit (96 training samples, validation-independent): worst=0.0562% target<=0.27%=True
+CAND A16W12_lut10: worst L11 y=0.2524% all<3%=True target<=0.27%=True sat={'a': 0, 'r1': 16, 'g': 6, 'r2': 18, 'y': 5} acc={'qkv': 29, 'score': 35, 'ctx': 36, 'attn_out': 30, 'ffn1': 30, 'ffn2': 29} (47.2s)
+  y%:  0.0776  0.0965  0.1389  0.1429  0.1482  0.1628  0.1623  0.1666  0.1743  0.1846  0.2002  0.2524
+  train-fit (96 training samples, validation-independent): worst=0.2377% target<=0.27%=True
+CAND SEL_A20xy_W12: worst L11 y=0.1287% all<3%=True target<=0.27%=True sat={'a': 0, 'r1': 16, 'g': 6, 'r2': 18, 'y': 5} acc={'qkv': 33, 'score': 43, 'ctx': 40, 'attn_out': 34, 'ffn1': 30, 'ffn2': 29} (35.9s)
+  y%:  0.0359  0.0476  0.0953  0.0910  0.0935  0.0944  0.0907  0.0914  0.0944  0.0980  0.1079  0.1287
+  train-fit (96 training samples, validation-independent): worst=0.0981% target<=0.27%=True
+CAND SEL_A20xy_W16: worst L11 y=0.1023% all<3%=True target<=0.27%=True sat={'a': 0, 'r1': 16, 'g': 6, 'r2': 18, 'y': 5} acc={'qkv': 37, 'score': 43, 'ctx': 40, 'attn_out': 38, 'ffn1': 34, 'ffn2': 33} (53.5s)
+  y%:  0.0328  0.0381  0.0882  0.0803  0.0824  0.0793  0.0744  0.0748  0.0777  0.0815  0.0903  0.1023
+  train-fit (96 training samples, validation-independent): worst=0.0640% target<=0.27%=True
+CAND A16W16_hr105: worst L11 y=0.1078% all<3%=True target<=0.27%=True sat={'a': 0, 'r1': 0, 'g': 0, 'r2': 10, 'y': 0} acc={'qkv': 33, 'score': 35, 'ctx': 36, 'attn_out': 34, 'ffn1': 34, 'ffn2': 33} (39.8s)
+  y%:  0.0372  0.0438  0.0694  0.0692  0.0741  0.0793  0.0803  0.0831  0.0869  0.0893  0.0944  0.1078
+  train-fit (96 training samples, validation-independent): worst=0.1066% target<=0.27%=True
+CAND SEL_A20xy_W12_hr105: worst L11 y=0.1047% all<3%=True target<=0.27%=True sat={'a': 0, 'r1': 0, 'g': 0, 'r2': 10, 'y': 0} acc={'qkv': 33, 'score': 43, 'ctx': 40, 'attn_out': 34, 'ffn1': 30, 'ffn2': 29} (34.7s)
+  y%:  0.0232  0.0372  0.0660  0.0666  0.0682  0.0728  0.0718  0.0724  0.0745  0.0757  0.0828  0.1046
+  train-fit (96 training samples, validation-independent): worst=0.0983% target<=0.27%=True

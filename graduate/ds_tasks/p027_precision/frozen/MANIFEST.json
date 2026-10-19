@@ -1,0 +1,7 @@
+{
+  "config": "frozen_config.json",
+  "config_sha256": "6b273d895c716dcbc5a9652596a1756fd80d41e9f79dad60c8052b199d3b148f",
+  "calib": "frozen_calib.npz",
+  "calib_sha256": "2f7f25b9ec6b2839e49b4a6ef866d0a4b3fd6d7ea0d74e8bf594867b1b8908be",
+  "config_canonical_sha256": "ec0b1bd87d5b40713daf8a1857b5226968aedd24d5536417bbdba195287d4207"
+}

@@ -1,0 +1,10 @@
+# p027_precision -- real command exit codes (2026-10-19T10:48:49Z)
+[1] python3 model/run_search.py
+    exit: 0   (0 = search completed)
+    log : logs/run_search.console.log
+[2] python3 model/freeze_config.py --name A16W12
+    exit: 0   (0 = frozen pack written)
+    log : logs/freeze_config.console.log
+[3] python3 model/run_frozen.py --pack frozen
+    exit: 0   (0 = target met in the frozen rerun; 3 = target not met)
+    log : logs/run_frozen.console.log

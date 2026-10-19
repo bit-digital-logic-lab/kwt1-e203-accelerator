@@ -1,0 +1,33 @@
+PACK config_sha256=6b273d895c716dcbc5a9652596a1756fd80d41e9f79dad60c8052b199d3b148f calib_sha256=2f7f25b9ec6b2839e49b4a6ef866d0a4b3fd6d7ea0d74e8bf594867b1b8908be
+PACK layer_count=12 stage_bits={'x': 16, 'a': 16, 'r1': 16, 'ln1': 16, 'g': 16, 'r2': 16, 'y': 16} w=(12,12,12)
+CALIBRATION_CALLS=0 (frozen pack loaded; training split not read)
+DATA split=/home/yang/Desktop/ic设计竞赛/software/.build/quant_samples_12labels_20.npz sha256=ee04e849bc407149618e4ecd5ff99575687586d4e57c0ade6a0b3f7b66c8c149 validation=240 training_rows_loaded=0
+RESULT per-layer pooled y NRMSE (240 validation samples, %):
+  layer  0:   0.0480
+  layer  1:   0.0591
+  layer  2:   0.1039
+  layer  3:   0.1017
+  layer  4:   0.1055
+  layer  5:   0.1108
+  layer  6:   0.1091
+  layer  7:   0.1115
+  layer  8:   0.1150
+  layer  9:   0.1201
+  layer 10:   0.1300
+  layer 11:   0.1517
+RESULT worst layer=11 y=0.1517% target=0.27% met=True finite=True
+RESULT saturation={'a': 0, 'r1': 16, 'g': 6, 'r2': 18, 'y': 5} accumulator_bits={'qkv': 29, 'score': 35, 'ctx': 36, 'attn_out': 30, 'ffn1': 30, 'ffn2': 29}
+RESULT integer y SHA-256 per layer:
+  layer  0: 7179adbc8546920d18074f8e3710c5a1850df596215cf93f2ac2f3999f0eba15
+  layer  1: 9d5099f8e540b8e63640f8ca7ee55f7c8b2e91d1e6d0db20322903a499fa3f1d
+  layer  2: de10b134bb59991a3c9c0899a479474447b229866a820a57d1ec478ef4ff2a52
+  layer  3: c4a7a6b6e271941dbbbf67de81d55c78208f97c65b37560e8e859feafbb28184
+  layer  4: 1379c788cd6affc858a9c748e86af9dfa505c04f9edddf7fbe29d9bda780a6ff
+  layer  5: 358126a9c81d5f714b996b3d800d3b14e969d57de1d79f96f04cf1acb9dcf952
+  layer  6: d396999210ab3075f2c326826efd7c4c82bbc42b73d4a91cd704a61fda809aa7
+  layer  7: 6d03c57bf3403e3263779fbad2be58940e6bad6194914e3e081415aad5f45666
+  layer  8: 7bf3417fdb5684a534459f507c83959c03a825acf970d3c9f54275e4a820bfb0
+  layer  9: 3f3ee3f6c184f16262d9e62b501508f496b24f67880381610c33f3afa6fcae74
+  layer 10: e631f679949ef7f19ee183ab71fb507bb7cfd305f11edfd98373b6ceea2e09a2
+  layer 11: 36decc19796567456e84c2a5911e69708f4ff186fa9df82f528377fb8ed7570e
+COMPARE search worst=0.151701% frozen worst=0.151701% max|delta|=0.000e+00 identical=True

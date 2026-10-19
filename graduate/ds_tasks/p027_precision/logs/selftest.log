@@ -1,0 +1,5 @@
+SELFTEST PASS
+A12W10: scalar==vector, scale-continuity, acc<=64 OK (acc={'qkv': 23, 'score': 35, 'ctx': 30, 'attn_out': 28, 'ffn1': 24, 'ffn2': 23}, sat={'a': 0, 'r1': 0, 'g': 12, 'r2': 1, 'y': 1})
+A16W16: scalar==vector, scale-continuity, acc<=64 OK (acc={'qkv': 33, 'score': 35, 'ctx': 35, 'attn_out': 34, 'ffn1': 34, 'ffn2': 33}, sat={'a': 0, 'r1': 0, 'g': 12, 'r2': 3, 'y': 2})
+A20W16: scalar==vector, scale-continuity, acc<=64 OK (acc={'qkv': 37, 'score': 35, 'ctx': 35, 'attn_out': 34, 'ffn1': 38, 'ffn2': 37}, sat={'a': 0, 'r1': 0, 'g': 12, 'r2': 3, 'y': 2})
+A12W10 frozen-measurement worst=2.75379% (240 validation samples) -- reference 2.7528%
