@@ -1,0 +1,6 @@
+ARCH_METRICS cycles=2118 initial_load_cycles=416 compute_cycles=314 drain_cycles=871 a_load_words=256 w_load_words=128 bias_load_words=32 out_write_words=1024 a_local_reads=256 w_local_reads=256 checked_outputs=512 checked_padding=0 overlapped_output_words=60
+PASS row-broadcast staged task M=32 K=8 N=16 gaps=1
+- /home/yang/kwt-worktrees/ds-p027-bias/hardware/architecture/tb/tb_kwt_row_broadcast_staged_task.sv:269: Verilog $finish
+- S i m u l a t i o n   R e p o r t: Verilator 5.047 devel
+- Verilator: $finish at 21ns; walltime 0.009 s; speed 2.251 us/s
+- Verilator: cpu 0.009 s on 1 threads; allocated 6 MB

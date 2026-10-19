@@ -1,3 +1,82 @@
+# WORKER_REPORT — bias-overlap one-descriptor FFN1 schedule
+
+- Worktree: `ds-p027-bias` · branch `codex/kwt-ds-streaming-bias` (from accepted
+  `streaming_mac` commit `c337966`). No sub-agents. Only new artifacts were
+  added: `hardware/experiments/streaming_mac/bias_overlap/` and this report.
+- Task: implement the user correction that A, W and bias are prepared
+  concurrently where local SRAM ports allow, and that bias is added at CACC
+  export instead of forming a pre-MAC barrier; test it.
+
+## Design
+
+One descriptor (`A/W/bias/out` bases + `M/K/N`) drives four engines:
+
+- A resident fill: sequential 16-bit words; a row tile becomes computable when
+  its own `ROWS*K` words are resident (`+A_PRELOAD_TILES` gates the first tile).
+- W ping-pong prefetch: next column-group page fills the idle page while the
+  current group computes.
+- Bias column-group prefetch into a dedicated 256×32 bank: 16 INT32 = 32
+  shared 16-bit slots per group; `group_valid[ct]` only after all 32 half-writes.
+- MAC on one CACC page while the other page is exported; `dump_bias` is read
+  from the dedicated bank and added at the CACC dump, so compute never waits
+  for bias.
+
+"Simultaneous" is precise: the A/W/bias/CACC/output **local SRAM ports** may
+operate concurrently, but there is **one shared 16-bit bus** carrying at most
+one word/slot per cycle. `kwt_shared_bus_arbiter.sv` grants exactly one
+requester per enabled cycle (fixed priority OUT > BIAS > A > W); the TB asserts
+`bus_grant_a+w+bias+out` equals the architectural slot count. No path claims
+two bus transfers in one cycle. Valid/ready back-pressure, reset semantics,
+hazards (partial bias group, A before resident, W page reuse, CACC page while
+exporting, output-stage overflow, stale bias after reset) and the bias-miss
+deadline are documented in the sub-README and exercised by RTL tests.
+
+## Measured vs modelled (full FFN1, 16 rows)
+
+| variant | actual RTL | model | notes |
+| --- | ---: | ---: | --- |
+| baseline single-CACC | 154 240 | 154 240 | matches committed exactly |
+| accepted dual-CACC | 125 603 | 125 603 | matches committed exactly |
+| **bias-overlap, preload=3** | **121 915** | **121 913** | −3 688 (−2.94 %) vs dual; −32 325 (−20.96 %) vs baseline |
+| delayed bias 6 000 | 121 927 | 121 923 | bias stall 889, CACC stall 100, outputs exact |
+| delayed bias 20 000 | 135 927 | 135 923 | bias stall 14 889, CACC stall 14 100, exact |
+| output back-pressure /3 | 186 136 | 186 135 | exact |
+| bus gap /7 | 123 929 | 123 927 | exact |
+
+Preload sweep (RTL): 1/2/3 = 121 915, 4 = 122 883, 5 = 123 907, 6 = 124 931,
+7 (all A resident) = 125 123. Preload 3 is recommended (same total as 1/2 with
+only 56 in-compute stalls). Unit microtest `PASS` (bank validity/reset,
+delayed bias, one-hot arbiter, held-request back-pressure).
+
+## Commands / exits
+
+```bash
+bash hardware/experiments/streaming_mac/bias_overlap/run.sh   # exit 0
+python3 hardware/experiments/streaming_mac/bias_overlap/model/bus_event_model.py \
+  --out .../model/model_results.json --rtl-results .../results.json   # exit 0
+```
+Last run: `run.sh` exit 0; `PASS bias-overlap experiment: 5 normal cases + 6
+robustness cases, unit=PASS`. Logs and `results.json` under the new directory.
+
+## Honest limits
+
+- Cycle counts are functional/task simulation, not an E203 SoC run and not a
+  150 MHz STA. 150 MHz/12-layer figures are conditional arithmetic.
+- The gain is real but small (2.94 % vs the accepted dual) because the old
+  bias barrier was only 512 shared-bus slots; the page/stream overlap adds the
+  rest. If the project requires a bigger win, it must come from a wider bus or
+  more MAC parallelism, which this experiment does not claim.
+- Area/macro/port counts are capacity-only: new bias bank 1 KiB (2 ×
+  `16b×1024`), tiny combinational arbiter, unchanged A/W/CACC/output buffers.
+  The 2.25 mm² fit and exact macro bank/port arbitration remain unproven.
+- Single-port A macro would break the A row-tile streaming assumption; the
+  report states the required 1R+1W split.
+
+
+---
+
+## Appendix: previous accepted report (preserved verbatim from c337966)
+
 # WORKER_REPORT — codex/kwt-ds-streaming-mac（KWT-1 矩阵单元：是否等待全部数据 / 双 CACC 流式调度）
 
 - 分支 / worktree：`codex/kwt-ds-streaming-mac` @ `/home/yang/kwt-worktrees/ds-p027-streaming`

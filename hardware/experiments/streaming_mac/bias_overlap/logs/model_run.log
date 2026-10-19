@@ -1,0 +1,17 @@
+tiny     baseline model=462 rtl=462 d=+0 | dual model=463 rtl=463 d=+0
+ragged   baseline model=1261 rtl=1262 d=-1 | dual model=1261 rtl=1261 d=+0
+twotile  baseline model=2118 rtl=2118 d=+0 | dual model=2118 rtl=2119 d=-1
+overflow baseline model=3191 rtl=3192 d=-1 | dual model=3192 rtl=3191 d=+1
+full     baseline model=154240 rtl=154240 d=+0 | dual model=125603 rtl=125603 d=+0
+bias-overlap full preload=1: model=121913 stalls={'load': 4183, 'cacc': 0, 'bias': 0, 'stage': 0, 'out_bp': 0} bus={'out': 50688, 'bias': 512, 'a': 6336, 'w': 16384, 'idle': 47993}
+bias-overlap full preload=2: model=121913 stalls={'load': 4183, 'cacc': 0, 'bias': 0, 'stage': 0, 'out_bp': 0} bus={'out': 50688, 'bias': 512, 'a': 6336, 'w': 16384, 'idle': 47993}
+bias-overlap full preload=3: model=121913 stalls={'load': 4183, 'cacc': 0, 'bias': 0, 'stage': 0, 'out_bp': 0} bus={'out': 50688, 'bias': 512, 'a': 6336, 'w': 16384, 'idle': 47993}
+bias-overlap full preload=4: model=122881 stalls={'load': 5151, 'cacc': 0, 'bias': 0, 'stage': 0, 'out_bp': 0} bus={'out': 50688, 'bias': 512, 'a': 6336, 'w': 16384, 'idle': 48961}
+bias-overlap full preload=5: model=123905 stalls={'load': 6175, 'cacc': 0, 'bias': 0, 'stage': 0, 'out_bp': 0} bus={'out': 50688, 'bias': 512, 'a': 6336, 'w': 16384, 'idle': 49985}
+bias-overlap full preload=6: model=124929 stalls={'load': 7199, 'cacc': 0, 'bias': 0, 'stage': 0, 'out_bp': 0} bus={'out': 50688, 'bias': 512, 'a': 6336, 'w': 16384, 'idle': 51009}
+bias-overlap full preload=7: model=125121 stalls={'load': 7391, 'cacc': 0, 'bias': 0, 'stage': 0, 'out_bp': 0} bus={'out': 50688, 'bias': 512, 'a': 6336, 'w': 16384, 'idle': 51201}
+delayed_bias_6000: model=121923 stalls={'load': 4095, 'cacc': 98, 'bias': 888, 'stage': 745, 'out_bp': 0}
+delayed_bias_20000: model=135923 stalls={'load': 4095, 'cacc': 14098, 'bias': 14888, 'stage': 745, 'out_bp': 0}
+out_backpressure_3: model=186135 stalls={'load': 4127, 'cacc': 61804, 'bias': 0, 'stage': 143318, 'out_bp': 101376}
+bus_gap_7: model=123927 stalls={'load': 6182, 'cacc': 0, 'bias': 0, 'stage': 0, 'out_bp': 0}
+WROTE /home/yang/kwt-worktrees/ds-p027-bias/hardware/experiments/streaming_mac/bias_overlap/model/model_results.json
