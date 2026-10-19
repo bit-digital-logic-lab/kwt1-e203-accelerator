@@ -1,7 +1,8 @@
 # WORKER_REPORT — codex/kwt-grad-encoder（研究生 5–6 项：单层 PostNorm 编码器组装 + 12 层调度）
 
 - 分支 / worktree：`codex/kwt-grad-encoder` @ `/home/yang/kwt-worktrees/grad-encoder`
-- 基线：`main@3d9ae98`（grad-attention `405c876` / grad-nonlinear `10aa202` / grad-golden `c9a4307` 均为终态）
+- 基线：`main@3d9ae98`（grad-attention `405c876` / grad-nonlinear `3084222` / grad-golden `c9a4307`；
+  grad-nonlinear 拼接期间由自身 worker 从 `10aa202` 追加 ANSI 端口表修复提交，见 `PROVENANCE.md`）
 - 范围：把三项成果**组装**为单层 PostNorm 编码器（注意力 + 两处残差 + 两处 LayerNorm +
   `64→256→64` 前馈 + GELU），并实现 **12 层参数更新/搬运控制**；冻结 E203 软件边界与分类头
   软件边界。对应 [`题目/640.jpg 9`](题目/640.jpg%209) 第 5、6 项。

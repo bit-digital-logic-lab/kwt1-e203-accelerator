@@ -5,12 +5,18 @@
 “仓库根定位”改为向上搜索 `software/weights/kwt1_fp32.npz`，使其在更浅的
 `graduate/encoder/` 路径下可用）。数值代码逐行未改。
 
+> 注：`codex/kwt-grad-nonlinear` 在本目录开始拼接之后、由**其自身 worker** 追加了提交
+> `3084222`（把 `kwt_postnorm_ffn` 的 `D/HID` 从 cfg localparam 改为模块 parameter，修
+> ANSI 端口表以便 Icarus elaborate）。本目录随即从 `3084222` 重新复制
+> `kwt_postnorm_ffn.sv`、`kwt_postnorm_cfg.svh` 两个文件；其余文件的来源仍为 `10aa202`
+> 与 `405c876`/`c9a4307`。两次内容在 Verilator 下功能一致（`run.sh` 产物哈希不变）。
+
 ## 来源分支（终态提交）
 
 | 分支 | 提交（SHA） |
 | --- | --- |
 | `codex/kwt-grad-attention` | `405c8768b9ff44f8faaba3e3e76d532ce2641473` |
-| `codex/kwt-grad-nonlinear` | `10aa202b1a13585faa9bac82a36eb32cdaccf725` |
+| `codex/kwt-grad-nonlinear` | `3084222b0247e525eb3c0061134a1fc88d69bff6` |
 | `codex/kwt-grad-golden`    | `c9a430734901fc761e8160986400a154f59a3bb3` |
 
 ## 复制文件与哈希
@@ -26,8 +32,8 @@
 | `graduate/rtl/encoder/third_party/kwt_layernorm.sv` | grad-nonlinear `…/rtl/kwt_layernorm.sv` | `9270bd19…374edf` |
 | `graduate/rtl/encoder/third_party/kwt_gelu.sv` | grad-nonlinear `…/rtl/kwt_gelu.sv` | `affeeb85…cb1bb` |
 | `graduate/rtl/encoder/third_party/kwt_ffn2.sv` | grad-nonlinear `…/rtl/kwt_ffn2.sv` | `87b179b7…78f4e` |
-| `graduate/rtl/encoder/third_party/kwt_postnorm_ffn.sv` | grad-nonlinear `…/rtl/kwt_postnorm_ffn.sv` | `c7e56560…bc7a0c` |
-| `graduate/rtl/encoder/third_party/kwt_postnorm_cfg.svh` | grad-nonlinear `…/rtl/kwt_postnorm_cfg.svh` | `4be4e396…b0ac7b0` |
+| `graduate/rtl/encoder/third_party/kwt_postnorm_ffn.sv` | grad-nonlinear `…/rtl/kwt_postnorm_ffn.sv` | `a13ac115…78f8005` |
+| `graduate/rtl/encoder/third_party/kwt_postnorm_cfg.svh` | grad-nonlinear `…/rtl/kwt_postnorm_cfg.svh` | `5179f131…369a899` |
 
 （RTL 文件名后带 `…` 为省略前缀；完整值见 `WORKER_REPORT.md` / `sha256sum` 输出。）
 

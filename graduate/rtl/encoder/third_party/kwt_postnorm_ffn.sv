@@ -28,7 +28,10 @@
 //
 // One row is processed at a time (no cross-row pipelining); every interface is
 // valid/ready and stalls correctly under backpressure.
-module kwt_postnorm_ffn (
+module kwt_postnorm_ffn #(
+    parameter int D   = 64,
+    parameter int HID = 256
+) (
     input  logic clk,
     input  logic rst_n,
 
