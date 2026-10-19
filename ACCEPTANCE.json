@@ -19,6 +19,6 @@
     {"path": "graduate/encoder/tb/build/r1.hex", "sha256": "87b3fcdb64149bb24e4f5ea5c0a7e3c18aeb287084c3ae5d5afc4f9536473d60"},
     {"path": "graduate/encoder/tb/build/g.hex", "sha256": "ef8e15863a8a65f211b724c8762d3ef7dee58856c9066bb9aaba0c8ade058737"},
     {"path": "graduate/encoder/tb/build/verify.log", "sha256": "7fa33efbad31073841365a9d738c5648d55e4e1bca3179e5fe671f9f9c2339a8"},
-    {"path": "graduate/encoder/vectors/meta.json", "sha256": "124e5d3503bf3539286bdcc0e3e4f3b5093a01ee2963fd67ac0480e70edb40a7"}
+    {"path": "graduate/encoder/vectors/meta.json", "sha256": "03c020155286f84783a11276cdc07bf307143a13862887860e1338150c3fe880"}
   ]
 }
