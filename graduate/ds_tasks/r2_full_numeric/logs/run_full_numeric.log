@@ -1,42 +1,78 @@
-TASK r2_full_numeric: frozen round-1 12-layer pack, validation-only
+TASK r2_full_numeric: frozen round-1 12-layer pack, npz-validation formal metric
 ASSET frozen_dir=/home/yang/kwt-worktrees/ds-grad-encoder_12numeric/graduate/ds_tasks/encoder_12numeric
 ASSET calib=frozen_12layer_calib.json sha256=5f039ec745e2b4dda1e6de5abb6fdf97316c3e98a0265c31212b53eee669d444
 ASSET int_pack=frozen_12layer_int.npz sha256=5cf836e0e5108d9a20d7d817ef24423d9cd9f196dd353872f0de5e82da317e5b
 CONTRACT frozen pack internal scales/M_A consistent (12 layers)
 DATA split=/home/yang/Desktop/ic设计竞赛/software/.build/quant_samples_12labels_20.npz sha256=ee04e849bc407149618e4ecd5ff99575687586d4e57c0ade6a0b3f7b66c8c149
 DATA weights=/home/yang/kwt-worktrees/ds-grad-r2_full_numeric/software/weights/kwt1_fp32.npz sha256=8f359abf7adbe287b8f89fca98af46194f98f90f2146784731bff551a155825a
-DATA training=240 (NOT used here) validation=240
-DATA real_dir=/home/yang/kwt-worktrees/ds-grad-r2_full_numeric/software/validation/real_input_chain_20261017
-DATA validation dataset=240 real=6 total=246
-EVAL dataset_val: 240 samples x 12 layers done
-EVAL real_val: 6 samples x 12 layers done
-RESULT per-layer pooled y NRMSE (dataset / real / combined):
-  layer  0:   0.7884% /   0.7497% /   0.7875%
-  layer  1:   1.0625% /   0.9825% /   1.0607%
-  layer  2:   1.3025% /   1.1896% /   1.2999%
-  layer  3:   1.4381% /   1.3400% /   1.4358%
-  layer  4:   1.5644% /   1.4803% /   1.5624%
-  layer  5:   1.6931% /   1.6200% /   1.6914%
-  layer  6:   1.7871% /   1.6960% /   1.7849%
-  layer  7:   1.8588% /   1.7841% /   1.8570%
-  layer  8:   1.9573% /   1.8462% /   1.9547%
-  layer  9:   2.0512% /   1.9624% /   2.0491%
-  layer 10:   2.2368% /   2.2159% /   2.2363%
-  layer 11:   2.7528% /   2.7497% /   2.7527%
-RESULT per-layer per-sample-max y NRMSE (dataset / real / combined):
-  layer  0:   0.9721% /   0.8115% /   0.9721%
-  layer  1:   1.4283% /   1.0325% /   1.4283%
-  layer  2:   1.8072% /   1.3039% /   1.8072%
-  layer  3:   2.0252% /   1.4682% /   2.0252%
-  layer  4:   2.2401% /   1.6646% /   2.2401%
-  layer  5:   2.1717% /   1.7961% /   2.1717%
-  layer  6:   2.3350% /   1.8108% /   2.3350%
-  layer  7:   2.3168% /   1.8467% /   2.3168%
-  layer  8:   2.3857% /   1.9653% /   2.3857%
-  layer  9:   2.5223% /   2.0753% /   2.5223%
-  layer 10:   2.6961% /   2.3068% /   2.6961%
-  layer 11:   3.7839% /   3.1279% /   3.7839%
-RESULT worst combined pooled layer=11 y_nrmse=2.7527% limit=3.0%
-RESULT worst per-sample-max layer=11 y_nrmse=3.7839% limit=3.0% tail_below_limit=False state=PASS_POOLED_TAIL_ABOVE_LIMIT
-RESULT samples=246 dataset=240 real=6 layers=12 finite=True
-RESULT saturation_counts={'r1': 16, 'r2': 16, 'y': 5}
+DATA npz partitions: training=240 validation=240 (npz training rows are NOT used here)
+DATA real manifest (path/partition evidence):
+  sample_00_encoder.npy: manifest_split=validation archive_member=four/750e3e75_nohash_0.wav npz_index=240 npz_partition=validation npz_path='./four/750e3e75_nohash_0.wav' duplicate_of_npz=True counted_in_formal_metric=False encoder_max_abs_diff_vs_npz=2.313e-05
+  sample_01_encoder.npy: manifest_split=training archive_member=go/0ba018fc_nohash_4.wav npz_index=40 npz_partition=training npz_path='./go/0ba018fc_nohash_4.wav' duplicate_of_npz=False counted_in_formal_metric=False encoder_max_abs_diff_vs_npz=5.782e-06
+  sample_02_encoder.npy: manifest_split=validation archive_member=no/45692b02_nohash_3.wav npz_index=320 npz_partition=validation npz_path='./no/45692b02_nohash_3.wav' duplicate_of_npz=True counted_in_formal_metric=False encoder_max_abs_diff_vs_npz=7.570e-06
+  sample_03_encoder.npy: manifest_split=training archive_member=no/7e7ca854_nohash_1.wav npz_index=80 npz_partition=training npz_path='./no/7e7ca854_nohash_1.wav' duplicate_of_npz=False counted_in_formal_metric=False encoder_max_abs_diff_vs_npz=3.934e-06
+  sample_04_encoder.npy: manifest_split=training archive_member=yes/676f8138_nohash_0.wav npz_index=200 npz_partition=training npz_path='./yes/676f8138_nohash_0.wav' duplicate_of_npz=False counted_in_formal_metric=False encoder_max_abs_diff_vs_npz=4.351e-06
+  sample_05_encoder.npy: manifest_split=validation archive_member=yes/ec21c46b_nohash_1.wav npz_index=440 npz_partition=validation npz_path='./yes/ec21c46b_nohash_1.wav' duplicate_of_npz=True counted_in_formal_metric=False encoder_max_abs_diff_vs_npz=1.407e-05
+DATA formal metric scope = npz validation only: 240 samples
+DATA real validation reported separately: 3 samples (3 duplicate of npz validation -> +0 unique)
+DATA real training reference only (NOT validation): 3 samples
+EVAL formal npz validation: 240 samples x 12 layers done
+EVAL real validation (separate): 3 samples done
+EVAL real training reference (not validation): 3 samples done
+RESULT formal per-layer pooled y NRMSE (240 npz validation only):
+  layer  0:   0.7884%
+  layer  1:   1.0625%
+  layer  2:   1.3025%
+  layer  3:   1.4381%
+  layer  4:   1.5644%
+  layer  5:   1.6931%
+  layer  6:   1.7871%
+  layer  7:   1.8588%
+  layer  8:   1.9573%
+  layer  9:   2.0512%
+  layer 10:   2.2368%
+  layer 11:   2.7528%
+RESULT real validation y NRMSE (3 samples, separate, NOT added to 240):
+  layer  0: pooled   0.7423% per-sample-max   0.7745%
+  layer  1: pooled   0.9812% per-sample-max   1.0325%
+  layer  2: pooled   1.1977% per-sample-max   1.3039%
+  layer  3: pooled   1.3790% per-sample-max   1.4682%
+  layer  4: pooled   1.5298% per-sample-max   1.6646%
+  layer  5: pooled   1.6474% per-sample-max   1.7961%
+  layer  6: pooled   1.7029% per-sample-max   1.8108%
+  layer  7: pooled   1.7832% per-sample-max   1.8464%
+  layer  8: pooled   1.8435% per-sample-max   1.8810%
+  layer  9: pooled   1.9516% per-sample-max   1.9762%
+  layer 10: pooled   2.1975% per-sample-max   2.2300%
+  layer 11: pooled   2.6879% per-sample-max   2.7963%
+RESULT real training reference y NRMSE (3 samples, NOT validation):
+  layer  0: pooled   0.7570% per-sample-max   0.8115%
+  layer  1: pooled   0.9837% per-sample-max   1.0153%
+  layer  2: pooled   1.1813% per-sample-max   1.2319%
+  layer  3: pooled   1.2999% per-sample-max   1.3866%
+  layer  4: pooled   1.4287% per-sample-max   1.5235%
+  layer  5: pooled   1.5919% per-sample-max   1.6803%
+  layer  6: pooled   1.6889% per-sample-max   1.7545%
+  layer  7: pooled   1.7850% per-sample-max   1.8467%
+  layer  8: pooled   1.8488% per-sample-max   1.9653%
+  layer  9: pooled   1.9730% per-sample-max   2.0753%
+  layer 10: pooled   2.2342% per-sample-max   2.3068%
+  layer 11: pooled   2.8099% per-sample-max   3.1279%
+RESULT tail diagnostic on formal 240 (per-sample max, NOT the gate):
+  layer  0:   0.9721%
+  layer  1:   1.4283%
+  layer  2:   1.8072%
+  layer  3:   2.0252%
+  layer  4:   2.2401%
+  layer  5:   2.1717%
+  layer  6:   2.3350%
+  layer  7:   2.3168%
+  layer  8:   2.3857%
+  layer  9:   2.5223%
+  layer 10:   2.6961%
+  layer 11:   3.7839%
+RESULT worst formal pooled layer=11 y_nrmse=2.7528% limit=3.0%
+RESULT worst per-sample tail layer=11 y_nrmse=3.7839% (diagnostic only, tail_below_limit=False)
+RESULT formal_samples=240 real_validation=3 real_training_reference=3 unique_validation_total=240 evaluated_units=240+3+3 layers=12 finite=True
+RESULT saturation_counts formal={'r1': 16, 'r2': 16, 'y': 5} real_validation={'r1': 0, 'r2': 0, 'y': 0} real_training_reference={'r1': 0, 'r2': 0, 'y': 0} state=PASS_FORMAL_POOLED_TAIL_ABOVE_LIMIT
+RESULT gate semantics: official-style gate is per-layer pooled over the evaluation set (600 samples officially); per-sample values are not a gate

@@ -37,27 +37,27 @@
   "witness_samples": [
     {
       "sample": "sample_00_encoder.npy",
-      "naive_r1_nrmse": 2.376331363891909,
+      "naive_r1_nrmse": 2.3763313638692267,
       "naive_r1_saturated_elements": 0,
-      "control_requant_x_r1_nrmse": 0.004715802195417411,
+      "control_requant_x_r1_nrmse": 0.004715802282345445,
       "x_int_max_abs": 1415
     },
     {
       "sample": "sample_02_encoder.npy",
-      "naive_r1_nrmse": 2.5130091586766894,
+      "naive_r1_nrmse": 2.5130091594768076,
       "naive_r1_saturated_elements": 1,
-      "control_requant_x_r1_nrmse": 0.003364545337268121,
+      "control_requant_x_r1_nrmse": 0.0033645443642254945,
       "x_int_max_abs": 2042
     },
     {
       "sample": "sample_05_encoder.npy",
-      "naive_r1_nrmse": 2.3728877681376135,
+      "naive_r1_nrmse": 2.3728877686181384,
       "naive_r1_saturated_elements": 2,
-      "control_requant_x_r1_nrmse": 0.0031120856772332674,
+      "control_requant_x_r1_nrmse": 0.003112086354285786,
       "x_int_max_abs": 2047
     }
   ],
   "samples": 3,
   "nrmse_limit": 0.03,
-  "runtime_seconds": 0.2872021198272705
+  "runtime_seconds": 0.21721220016479492
 }

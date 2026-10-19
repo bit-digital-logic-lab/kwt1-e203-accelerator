@@ -1,4 +1,6 @@
-# r2_full_numeric -- real command exit codes (2026-10-19T05:29:32Z)
+# r2_full_numeric -- real command exit codes (2026-10-19T08:01:18Z)
+# semantics: phase 1/2 exit 2 = reproduced conflict (expected), phase 3
+# exit 0 = formal pooled gate pass on 240 npz validation samples only.
 [1] python3 model/run_conflict_witness.py
     exit: 2   (expected 2: round-1 layer0 x-scale contract conflict)
     log : logs/run_conflict_witness.console.log
@@ -6,6 +8,9 @@
     exit: 2   (expected 2: assembled RTL headers != frozen layer-0 pack)
     log : logs/check_rtl_config.console.log
 [3] python3 model/run_full_numeric.py
-    exit: 0   (expected 0: pooled local NRMSE < 3% on all 12 layers)
+    exit: 0   (expected 0: 12/12 layers pooled NRMSE < 3% on 240 npz validation)
+    state: PASS_FORMAL_POOLED_TAIL_ABOVE_LIMIT
     log : logs/run_full_numeric.console.log
-    note: conservative per-sample tail is 3.78% at layer 11; see results.json
+    metric: formal = per-layer pooled over the 240 npz validation samples;
+            real validation 3 reported separately (0 unique added);
+            real training 3 reference only; per-sample tail is diagnostic.
