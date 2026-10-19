@@ -11,11 +11,11 @@
 | 核查项 | 结论 | 说明 |
 | --- | --- | --- |
 | 训练/验证划分标签 | **通过** | 5 个缓存 + 6 条真实样本共 1920+6 条，按官方 SHA1 说话人哈希规则重算，真实 WAV 标签 0 处不一致；合成静音按划分单独生成，不计入 |
-| 哈希 | **不一致（1 类）** | 权重、flags、数据归档、A12W10 参数包、6 条 WAV 全部一致；**6 条 `mfcc/encoder .npy` 的 SHA-256 与 manifest 记录不符**，但独立投影校验证实张量内容一致（见 §3） |
+| 哈希 | **通过** | 权重、flags、数据归档、A12W10 参数包、6 条 WAV 全部一致；6 条 `mfcc/encoder .npy` 的**张量内容哈希 12/12 与 manifest 记录一致**（§3）。manifest 记录的是 `np.load(f).tobytes()` 内容哈希，`.npy` **文件容器哈希另记存档、不与前者比较** |
 | 样本重叠 | **通过** | 各缓存 train/val/test 路径两两 0 重叠；跨缓存 0 重叠；真实样本特征张量 0 重复 |
 | 现有校准泄漏 | **发现 2 处** | ① 单层编码器的注意力/PostNorm 静态尺度由**验证划分样本 `sample_00`** 求得；② 早期缓存 `quant_samples.npz` 仍含 20 条**测试划分**样本，曾被开发调试看过（已在 `results/README.md` 自述） |
 
-脚本整体判定 `VERDICT FAIL (rule violations)`，退出码 **1**（检测到规则违规），共 4 条违规（§5）。
+脚本整体判定 `VERDICT FAIL (rule violations)`，退出码 **1**（检测到规则违规），共 **3 条**违规（§5）：全部为真实存在的样本标定泄漏与旧测试缓存，**无哈希类误报**。
 
 ## 1. 证据层级标注
 
@@ -45,18 +45,25 @@
 - `_silence_/*.wav` 是脚本按划分生成的 1 秒全零波形，不是 Speech Commands 归档成员，官方哈希规则对其不适用；它们与所属划分一致（题目规定静音按官方流程在各划分内生成）。
 - 合成静音在训练与验证划分下**逐字节相同**（全零），审计将其排除在“重复张量”之外，因为它按设计属于两个划分。
 
-## 3. 哈希核查
+## 3. 哈希核查（通过）
 
-| 对象 | 结果 |
-| --- | --- |
-| `software/weights/kwt1_fp32.npz` | 一致（`8f359abf…825a`，与 manifest、A12W10 JSON 双重一致） |
-| `flags.json` | 一致（`fcd480d3…4c58`） |
-| `speech_commands_v0.02.tar.gz` | 记录 2,428,923,189 字节，SHA-256 `af14739e…ff58`，105,878 个成员 / 105,835 个 WAV，可完整流式读取；题目未给外部期望值，只登记 |
-| 6 条真实 WAV（归档内） | **全部一致**，与 manifest `wav_sha256` 逐字节吻合 |
-| `software/results/ffn1_a12w10_static_sym.npz` | 一致（`a77f60fb…918e`，与 A12W10 JSON 的 `parameter_sha256` 一致） |
-| 6 条 `sample_0X_mfcc.npy` / `sample_0X_encoder.npy` | **不一致**：committed 文件哈希 ≠ manifest `mfcc_sha256`/`encoder_sha256`（复现命令见 §6） |
+哈希分**两类**，分别计算、分别记录、**互不比较**：
 
-哈希不一致但**内容一致**的独立证据：用只读的 `software/offline_encoder_input.py` 的 40→64 投影，从当前 `mfcc.npy` 重算 `encoder.npy`，误差 `4.77e-07 … 9.54e-07`，与 manifest 自记的 `encoder_independent_max_abs_error` 逐条**完全相等**。因此判定为**记录哈希过期/序列化不一致**，而非张量损坏；但仍属于必须修正的可复现性缺陷（当前 `manifest.json` 无法按哈希校验）。
+- **文件容器哈希** = 整个文件字节的 SHA-256（`.npz`/`.json`/`.tar.gz`/`.wav`）。
+- **张量内容哈希** = `np.load(file).tobytes()` 的 SHA-256（`.npy`）。这是 manifest 记录的种类：`software/validate_real_input_chain.py` 第 93/95 行把 `mfcc_sha256`/`encoder_sha256` 定义为 `hashlib.sha256(array.tobytes())`。
+
+| 对象 | 哈希种类 | 结果 |
+| --- | --- | --- |
+| `software/weights/kwt1_fp32.npz` | 容器 | 一致（`8f359abf…825a`，与 manifest、A12W10 JSON 双重一致） |
+| `flags.json` | 容器 | 一致（`fcd480d3…4c58`） |
+| `speech_commands_v0.02.tar.gz` | 容器 | 记录 2,428,923,189 字节，SHA-256 `af14739e…ff58`，105,878 个成员 / 105,835 个 WAV，可完整流式读取；题目未给外部期望值，只登记 |
+| 6 条真实 WAV（归档内） | 容器 | **全部一致**，与 manifest `wav_sha256` 逐字节吻合 |
+| `software/results/ffn1_a12w10_static_sym.npz` | 容器 | 一致（`a77f60fb…918e`，与 A12W10 JSON 的 `parameter_sha256` 一致） |
+| 6 条 `sample_0X_mfcc.npy` / `sample_0X_encoder.npy` | **张量内容** | **12/12 全部一致**，与 manifest `mfcc_sha256`/`encoder_sha256` 逐条相等 |
+
+> **误报更正（哈希种类混淆）**：早期审计用 `sha256(文件字节)` 去比对 manifest 的 `mfcc_sha256`/`encoder_sha256`，报出 12 处“不一致”。这是**量纲不同的误报**——`.npy` 容器额外包含 `\x93NUMPY` 魔数与形状/dtype/版本头，同一张量被不同 NumPy 版本重存后容器哈希即变，而内容哈希不变。现脚本对每条样本同时输出 `tensor_content` 与 `file_container` 两个字段（`logs/audit.json` → `hashes.items.sample_XX_{mfcc,encoder}`，日志中逐行打印），**只用内容哈希对内容哈希比较**；容器哈希仅存档登记，manifest 对其没有期望值（`hashes.hash_kinds` 字段写明该约定）。
+
+第二重独立证据（内容一致性）：用只读的 `software/offline_encoder_input.py` 的 40→64 投影，从当前 `mfcc.npy` 重算 `encoder.npy`，最大绝对误差 **0.0**，且不超过 manifest 自记的 `encoder_independent_max_abs_error`（`4.77e-07…9.54e-07`）。即已提交的 `.npy` 张量内容与生成时的独立校验**完全一致**。
 
 ## 4. 样本重叠核查（通过）
 
@@ -117,21 +124,21 @@ echo "EXIT=$?"   # -> EXIT=1
 
 | 命令 | 退出码 | 说明 |
 | --- | ---: | --- |
-| `python3 audit_dataset.py` | **1** | 划分/重叠/内容校验通过；4 条词汇级违规（§0） |
-| `python3 audit_dataset.py --skip-archive` | **1** | 同上，不含归档 SHA-256 |
+| `python3 audit_dataset.py` | **1** | 划分 / 哈希（含 12/12 张量内容哈希）/ 重叠 / 内容一致性全部通过；剩 3 条真实泄漏违规（§0、§5） |
+| `python3 audit_dataset.py --skip-archive` | **1** | 同上，不含归档 SHA-256（哈希条目 23 → 17） |
 
-退出码语义：`0` 全部通过；`1` 检出规则违规；`2` 基础设施错误。退出码 **1 是本任务要登记的发现**，不是脚本故障。
+退出码语义：`0` 全部通过；`1` 检出规则违规；`2` 基础设施错误。退出码 **1 是本任务要登记的发现**，不是脚本故障。`logs/_tmp_calibration/` 是标定复算的运行期 scratch 目录（每次运行重新生成，不提交）。
 
 ## 7. 建议修复（不改本目录外文件，供工程侧执行）
 
 1. **编码器标定改用训练划分样本**：把 `graduate/encoder/vectors/gen_vectors.py` 的 `SAMPLE` 换成 training 划分样本（如 `sample_01`），或在 `attn_int_model.py`/`kwt_postnorm_ref.calibrate()` 增加“训练标定 + 验证评估”两段式入口；重跑 RTL 逐位，并在验证划分上评估，禁止用 `sample_00` 求任何尺度。
-2. **修正 `manifest.json` 哈希**：对当前 committed `sample_0X_{mfcc,encoder}.npy` 重算并写回 `mfcc_sha256`/`encoder_sha256`，或恢复与记录哈希一致的原始文件；否则 `validate_real_input_chain.py` 的哈希门禁形同失效。
+2. **哈希语义显式化（加固，非缺陷）**：manifest 的 `mfcc_sha256`/`encoder_sha256` 是张量内容哈希（`array.tobytes()`），当前 12/12 一致，**无需改值**；建议在 `manifest.json` 增加 `"hash_kind": "tensor-content"` 字段并在校验脚本入口打印，避免下游再拿 `.npy` 文件哈希去比对而误报。（本任务不改 `software/` 内任何文件。）
 3. **隔离测试划分**：删除/迁移 `quant_samples.npz` 的 testing 行，或改名并在 `.build` 层面禁止其进入标定；在脚本入口把 `partitions` 含 `testing` 直接拒绝（`export_ffn1_quantized.py` 已有此检查，`quantize_ffn1.py` 尚未强制）。
 
 ## 8. 未证事项
 
 1. 本报告只做**数据来源/划分/重叠/泄漏**审计（软件参考层级）；不证明 RTL 逐位、E203 SoC、综合、官方 600 条验收。
-2. 6 条 `.npy` 哈希不符的**根因**未定（仅排除张量内容损坏），需工程侧确认是重存序列化还是内容再生。
+2. manifest 只记录**张量内容哈希**，不记录 `.npy` **容器哈希**；因此“容器字节是否与生成时逐字节相同”无法校验（本次已把容器哈希登记入 `logs/audit.json`，但无外部期望值可比）。容器差异与张量内容一致性无关，不影响任何结论。
 3. 60 条真实音频的**说话人身份**无法在本目录验证是否与训练说话人集合分离；审计只复现官方文件名哈希规则。
 4. `_silence_` 合成静音是否与组委会官方静音生成完全一致未证（题目规定按官方评估流程生成 1 秒全零波形）。
 5. 未下载/比对 Speech Commands V2 归档的官方发布 SHA-256（题目未提供期望值）。

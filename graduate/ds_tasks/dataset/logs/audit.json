@@ -76,211 +76,236 @@
   "split_mismatches": [],
   "manifest_split_mismatches": [],
   "hashes": {
-    "ok": false,
+    "ok": true,
     "items": {
       "weights": {
         "path": "/home/yang/kwt-worktrees/ds-grad-dataset/software/weights/kwt1_fp32.npz",
         "expected": "8f359abf7adbe287b8f89fca98af46194f98f90f2146784731bff551a155825a",
+        "hash_kind": "file-container (whole-file bytes)",
         "actual": "8f359abf7adbe287b8f89fca98af46194f98f90f2146784731bff551a155825a",
         "ok": true
       },
       "flags": {
         "path": "/home/yang/Desktop/ic设计竞赛/资料/ARM_KWT-1_237e4097/models_data_v2_12_labels/kwt1/flags.json",
         "expected": "fcd480d309f96d2029a3ba764634f9e46dd73b667c0ebb84b66af02680494c58",
+        "hash_kind": "file-container (whole-file bytes)",
         "actual": "fcd480d309f96d2029a3ba764634f9e46dd73b667c0ebb84b66af02680494c58",
         "ok": true
       },
       "sample_00_encoder": {
         "path": "/home/yang/kwt-worktrees/ds-grad-dataset/software/validation/real_input_chain_20261017/sample_00_encoder.npy",
         "expected": "a7ffaafdd9866b3711903c67db0f3a17845662bc52356f0d1a82410496a54f61",
-        "actual": "489dc7c28b2816cdb7cfc35e3f98c2dd674112f71d9357f746db57de4a27c058",
-        "ok": false
+        "hash_kind": "tensor-content (np.load(file).tobytes())",
+        "content_sha256": "a7ffaafdd9866b3711903c67db0f3a17845662bc52356f0d1a82410496a54f61",
+        "container_sha256": "489dc7c28b2816cdb7cfc35e3f98c2dd674112f71d9357f746db57de4a27c058",
+        "shape": [
+          99,
+          64
+        ],
+        "dtype": "float32",
+        "ok": true
       },
       "sample_00_mfcc": {
         "path": "/home/yang/kwt-worktrees/ds-grad-dataset/software/validation/real_input_chain_20261017/sample_00_mfcc.npy",
         "expected": "dcdb5a8ac2daa7bf2b1c6f18cd964d0f406d2ce6192322c2930ac632f2c962ae",
-        "actual": "a8a85e2878283a0d3cd40f157243b10aa5034c2544bbfb21d292da9c422aad15",
-        "ok": false
+        "hash_kind": "tensor-content (np.load(file).tobytes())",
+        "content_sha256": "dcdb5a8ac2daa7bf2b1c6f18cd964d0f406d2ce6192322c2930ac632f2c962ae",
+        "container_sha256": "a8a85e2878283a0d3cd40f157243b10aa5034c2544bbfb21d292da9c422aad15",
+        "shape": [
+          98,
+          40
+        ],
+        "dtype": "float32",
+        "ok": true
       },
       "sample_01_encoder": {
         "path": "/home/yang/kwt-worktrees/ds-grad-dataset/software/validation/real_input_chain_20261017/sample_01_encoder.npy",
         "expected": "8a6a9e49a38c073b1808de7b62ff295cd372af1399e12cb7d037975fec6963f8",
-        "actual": "d91c92dabc3fcd94e05920731e0acfb4596e30989e5d8a1906dbcd6aa697b1a5",
-        "ok": false
+        "hash_kind": "tensor-content (np.load(file).tobytes())",
+        "content_sha256": "8a6a9e49a38c073b1808de7b62ff295cd372af1399e12cb7d037975fec6963f8",
+        "container_sha256": "d91c92dabc3fcd94e05920731e0acfb4596e30989e5d8a1906dbcd6aa697b1a5",
+        "shape": [
+          99,
+          64
+        ],
+        "dtype": "float32",
+        "ok": true
       },
       "sample_01_mfcc": {
         "path": "/home/yang/kwt-worktrees/ds-grad-dataset/software/validation/real_input_chain_20261017/sample_01_mfcc.npy",
         "expected": "43b0658ed234fdb01638bcd5ce2e5d8ef4141216650ca622ed839ff2467ddf43",
-        "actual": "1e24a66c86e777e6882181b832fdd545f511cd2c6e93747a929b94b77a7588c0",
-        "ok": false
+        "hash_kind": "tensor-content (np.load(file).tobytes())",
+        "content_sha256": "43b0658ed234fdb01638bcd5ce2e5d8ef4141216650ca622ed839ff2467ddf43",
+        "container_sha256": "1e24a66c86e777e6882181b832fdd545f511cd2c6e93747a929b94b77a7588c0",
+        "shape": [
+          98,
+          40
+        ],
+        "dtype": "float32",
+        "ok": true
       },
       "sample_02_encoder": {
         "path": "/home/yang/kwt-worktrees/ds-grad-dataset/software/validation/real_input_chain_20261017/sample_02_encoder.npy",
         "expected": "e1f6bff0d1bfe88a680d69a826ccb1855221e1d8ace873d67679189eca93e116",
-        "actual": "092ad2de82d56dc0a737dd8655dab1e32fcdc31da4f02b384e2eae67aa6e5e43",
-        "ok": false
+        "hash_kind": "tensor-content (np.load(file).tobytes())",
+        "content_sha256": "e1f6bff0d1bfe88a680d69a826ccb1855221e1d8ace873d67679189eca93e116",
+        "container_sha256": "092ad2de82d56dc0a737dd8655dab1e32fcdc31da4f02b384e2eae67aa6e5e43",
+        "shape": [
+          99,
+          64
+        ],
+        "dtype": "float32",
+        "ok": true
       },
       "sample_02_mfcc": {
         "path": "/home/yang/kwt-worktrees/ds-grad-dataset/software/validation/real_input_chain_20261017/sample_02_mfcc.npy",
         "expected": "8c98d33e2a85e39c3cef4b822571a7b7890e97665698f48330ca605872d8c133",
-        "actual": "d4bac7237bb83bde50a4cfdf35018105bd888925890ea79cca55d1592e92416c",
-        "ok": false
+        "hash_kind": "tensor-content (np.load(file).tobytes())",
+        "content_sha256": "8c98d33e2a85e39c3cef4b822571a7b7890e97665698f48330ca605872d8c133",
+        "container_sha256": "d4bac7237bb83bde50a4cfdf35018105bd888925890ea79cca55d1592e92416c",
+        "shape": [
+          98,
+          40
+        ],
+        "dtype": "float32",
+        "ok": true
       },
       "sample_03_encoder": {
         "path": "/home/yang/kwt-worktrees/ds-grad-dataset/software/validation/real_input_chain_20261017/sample_03_encoder.npy",
         "expected": "ef29708b932b24554ea754872eece24b7412e20ea8d3ef88ced9b6a34a6cc7d9",
-        "actual": "c2c56f43971060054e0234c82d6551a3a8f2165bb020d1e564e31c37eb01dd9c",
-        "ok": false
+        "hash_kind": "tensor-content (np.load(file).tobytes())",
+        "content_sha256": "ef29708b932b24554ea754872eece24b7412e20ea8d3ef88ced9b6a34a6cc7d9",
+        "container_sha256": "c2c56f43971060054e0234c82d6551a3a8f2165bb020d1e564e31c37eb01dd9c",
+        "shape": [
+          99,
+          64
+        ],
+        "dtype": "float32",
+        "ok": true
       },
       "sample_03_mfcc": {
         "path": "/home/yang/kwt-worktrees/ds-grad-dataset/software/validation/real_input_chain_20261017/sample_03_mfcc.npy",
         "expected": "9fdb644252b9f5cfccb76da538033de38abaf1d63c2a0816ab7f3d722b7d3822",
-        "actual": "0bc09b6b4970d261ee0bc0711ebea2098475ed43681f931edbeb307589c5df4e",
-        "ok": false
+        "hash_kind": "tensor-content (np.load(file).tobytes())",
+        "content_sha256": "9fdb644252b9f5cfccb76da538033de38abaf1d63c2a0816ab7f3d722b7d3822",
+        "container_sha256": "0bc09b6b4970d261ee0bc0711ebea2098475ed43681f931edbeb307589c5df4e",
+        "shape": [
+          98,
+          40
+        ],
+        "dtype": "float32",
+        "ok": true
       },
       "sample_04_encoder": {
         "path": "/home/yang/kwt-worktrees/ds-grad-dataset/software/validation/real_input_chain_20261017/sample_04_encoder.npy",
         "expected": "3bf5f7851fa305bfedb0f1e9c5ddfee1e01e47c758d7727d7a3398304e8062e2",
-        "actual": "6edf03322ddfd789bb9ec40fa86fbb18a3e3e036fe4fc774ef1e1bf45f85435f",
-        "ok": false
+        "hash_kind": "tensor-content (np.load(file).tobytes())",
+        "content_sha256": "3bf5f7851fa305bfedb0f1e9c5ddfee1e01e47c758d7727d7a3398304e8062e2",
+        "container_sha256": "6edf03322ddfd789bb9ec40fa86fbb18a3e3e036fe4fc774ef1e1bf45f85435f",
+        "shape": [
+          99,
+          64
+        ],
+        "dtype": "float32",
+        "ok": true
       },
       "sample_04_mfcc": {
         "path": "/home/yang/kwt-worktrees/ds-grad-dataset/software/validation/real_input_chain_20261017/sample_04_mfcc.npy",
         "expected": "7bc86a41062ee0e8c66ed8fef401c4586b98775245bb878275acb151bc4ac354",
-        "actual": "9eaa886c83ef7b98f8c065f72e5a95213db27990f51dd85f37a693b60d89e121",
-        "ok": false
+        "hash_kind": "tensor-content (np.load(file).tobytes())",
+        "content_sha256": "7bc86a41062ee0e8c66ed8fef401c4586b98775245bb878275acb151bc4ac354",
+        "container_sha256": "9eaa886c83ef7b98f8c065f72e5a95213db27990f51dd85f37a693b60d89e121",
+        "shape": [
+          98,
+          40
+        ],
+        "dtype": "float32",
+        "ok": true
       },
       "sample_05_encoder": {
         "path": "/home/yang/kwt-worktrees/ds-grad-dataset/software/validation/real_input_chain_20261017/sample_05_encoder.npy",
         "expected": "16bf24f4bd5e5b0e056c43507fdb2e7061194d3ea2792d174c1afd9f22200e90",
-        "actual": "ead66dd353c7012b1837db0d14b99f1914e53ca9a3dab20d2a7a26fce61934c4",
-        "ok": false
+        "hash_kind": "tensor-content (np.load(file).tobytes())",
+        "content_sha256": "16bf24f4bd5e5b0e056c43507fdb2e7061194d3ea2792d174c1afd9f22200e90",
+        "container_sha256": "ead66dd353c7012b1837db0d14b99f1914e53ca9a3dab20d2a7a26fce61934c4",
+        "shape": [
+          99,
+          64
+        ],
+        "dtype": "float32",
+        "ok": true
       },
       "sample_05_mfcc": {
         "path": "/home/yang/kwt-worktrees/ds-grad-dataset/software/validation/real_input_chain_20261017/sample_05_mfcc.npy",
         "expected": "a45db272da20c36c1fa0e841d1f71a79e445fa2516e72b097828f9d12f60e897",
-        "actual": "bf50f5b5c59c855251236bd0f968bf306b9fad59d9abee024190984746bb6833",
-        "ok": false
+        "hash_kind": "tensor-content (np.load(file).tobytes())",
+        "content_sha256": "a45db272da20c36c1fa0e841d1f71a79e445fa2516e72b097828f9d12f60e897",
+        "container_sha256": "bf50f5b5c59c855251236bd0f968bf306b9fad59d9abee024190984746bb6833",
+        "shape": [
+          98,
+          40
+        ],
+        "dtype": "float32",
+        "ok": true
       },
       "ffn1_frozen_npz": {
         "path": "/home/yang/kwt-worktrees/ds-grad-dataset/software/results/ffn1_a12w10_static_sym.npz",
         "expected": "a77f60fb7c8560adbca73db3cf64dcd5501ec0108b96a1131a00aa722be1918e",
+        "hash_kind": "file-container (whole-file bytes)",
         "actual": "a77f60fb7c8560adbca73db3cf64dcd5501ec0108b96a1131a00aa722be1918e",
         "ok": true
       },
       "ffn1_weights_ref": {
         "path": "/home/yang/kwt-worktrees/ds-grad-dataset/software/weights/kwt1_fp32.npz",
         "expected": "8f359abf7adbe287b8f89fca98af46194f98f90f2146784731bff551a155825a",
+        "hash_kind": "file-container (whole-file bytes)",
         "actual": "8f359abf7adbe287b8f89fca98af46194f98f90f2146784731bff551a155825a",
-        "ok": true
-      },
-      "dataset_archive": {
-        "path": "/home/yang/Desktop/ic设计竞赛/资料/数据集/speech_commands_v0.02.tar.gz",
-        "sha256": "af14739ee7dc311471de98f5f9d2c9191b18aedfe957f4a6ff791c709868ff58",
-        "bytes": 2428923189,
-        "members": 105878,
-        "wav_members": 105835
-      },
-      "wav::four/750e3e75_nohash_0.wav": {
-        "expected": "2ad981ba82162e0084d3ab3dc0ae6bdb79ac908a72067a1e752ebe2318bcee9f",
-        "actual": {
-          "wav_bytes": 32044,
-          "wav_sha256": "2ad981ba82162e0084d3ab3dc0ae6bdb79ac908a72067a1e752ebe2318bcee9f"
-        },
-        "ok": true
-      },
-      "wav::go/0ba018fc_nohash_4.wav": {
-        "expected": "27c020d1debc9ca2ab2e8c431d7bc458fdffdbefda7a1c9bdc2471898fe8e402",
-        "actual": {
-          "wav_bytes": 32044,
-          "wav_sha256": "27c020d1debc9ca2ab2e8c431d7bc458fdffdbefda7a1c9bdc2471898fe8e402"
-        },
-        "ok": true
-      },
-      "wav::no/45692b02_nohash_3.wav": {
-        "expected": "420e490b843fb29fdbc1fc95d343df38cbdcc54cf1b43c9df306192eb6e55c5b",
-        "actual": {
-          "wav_bytes": 32044,
-          "wav_sha256": "420e490b843fb29fdbc1fc95d343df38cbdcc54cf1b43c9df306192eb6e55c5b"
-        },
-        "ok": true
-      },
-      "wav::no/7e7ca854_nohash_1.wav": {
-        "expected": "1bb2d25d2982cfd75866b61f31da9f02abc1baef565986235685efa940450aa8",
-        "actual": {
-          "wav_bytes": 32044,
-          "wav_sha256": "1bb2d25d2982cfd75866b61f31da9f02abc1baef565986235685efa940450aa8"
-        },
-        "ok": true
-      },
-      "wav::yes/676f8138_nohash_0.wav": {
-        "expected": "b71582f69fa339b7972df3fc0b31c6d7482b98630a10cccf329dcda6fb0e8b45",
-        "actual": {
-          "wav_bytes": 32044,
-          "wav_sha256": "b71582f69fa339b7972df3fc0b31c6d7482b98630a10cccf329dcda6fb0e8b45"
-        },
-        "ok": true
-      },
-      "wav::yes/ec21c46b_nohash_1.wav": {
-        "expected": "1ce323d7fa4db2cef1c7eecf85eb9277cae6c0670f79f69bc5cbbd03b8226c45",
-        "actual": {
-          "wav_bytes": 32044,
-          "wav_sha256": "1ce323d7fa4db2cef1c7eecf85eb9277cae6c0670f79f69bc5cbbd03b8226c45"
-        },
         "ok": true
       }
     },
-    "errors": [
-      "sample_00_encoder: 489dc7c28b2816cdb7cfc35e3f98c2dd674112f71d9357f746db57de4a27c058 != a7ffaafdd9866b3711903c67db0f3a17845662bc52356f0d1a82410496a54f61",
-      "sample_00_mfcc: a8a85e2878283a0d3cd40f157243b10aa5034c2544bbfb21d292da9c422aad15 != dcdb5a8ac2daa7bf2b1c6f18cd964d0f406d2ce6192322c2930ac632f2c962ae",
-      "sample_01_encoder: d91c92dabc3fcd94e05920731e0acfb4596e30989e5d8a1906dbcd6aa697b1a5 != 8a6a9e49a38c073b1808de7b62ff295cd372af1399e12cb7d037975fec6963f8",
-      "sample_01_mfcc: 1e24a66c86e777e6882181b832fdd545f511cd2c6e93747a929b94b77a7588c0 != 43b0658ed234fdb01638bcd5ce2e5d8ef4141216650ca622ed839ff2467ddf43",
-      "sample_02_encoder: 092ad2de82d56dc0a737dd8655dab1e32fcdc31da4f02b384e2eae67aa6e5e43 != e1f6bff0d1bfe88a680d69a826ccb1855221e1d8ace873d67679189eca93e116",
-      "sample_02_mfcc: d4bac7237bb83bde50a4cfdf35018105bd888925890ea79cca55d1592e92416c != 8c98d33e2a85e39c3cef4b822571a7b7890e97665698f48330ca605872d8c133",
-      "sample_03_encoder: c2c56f43971060054e0234c82d6551a3a8f2165bb020d1e564e31c37eb01dd9c != ef29708b932b24554ea754872eece24b7412e20ea8d3ef88ced9b6a34a6cc7d9",
-      "sample_03_mfcc: 0bc09b6b4970d261ee0bc0711ebea2098475ed43681f931edbeb307589c5df4e != 9fdb644252b9f5cfccb76da538033de38abaf1d63c2a0816ab7f3d722b7d3822",
-      "sample_04_encoder: 6edf03322ddfd789bb9ec40fa86fbb18a3e3e036fe4fc774ef1e1bf45f85435f != 3bf5f7851fa305bfedb0f1e9c5ddfee1e01e47c758d7727d7a3398304e8062e2",
-      "sample_04_mfcc: 9eaa886c83ef7b98f8c065f72e5a95213db27990f51dd85f37a693b60d89e121 != 7bc86a41062ee0e8c66ed8fef401c4586b98775245bb878275acb151bc4ac354",
-      "sample_05_encoder: ead66dd353c7012b1837db0d14b99f1914e53ca9a3dab20d2a7a26fce61934c4 != 16bf24f4bd5e5b0e056c43507fdb2e7061194d3ea2792d174c1afd9f22200e90",
-      "sample_05_mfcc: bf50f5b5c59c855251236bd0f968bf306b9fad59d9abee024190984746bb6833 != a45db272da20c36c1fa0e841d1f71a79e445fa2516e72b097828f9d12f60e897"
-    ]
+    "errors": [],
+    "hash_kinds": {
+      "file-container": "whole-file SHA-256 (weights, flags, archive, frozen FFN1 npz, WAV members)",
+      "tensor-content": "np.load(file).tobytes() SHA-256 (six real-input mfcc/encoder npy; this is the kind the manifest records)",
+      "note": "the two kinds are never compared with each other; the container hash of the sample .npy files is informational (the manifest has no expectation for it)"
+    }
   },
   "npy_content_consistency": {
     "ok": true,
     "samples": [
       {
         "file": "sample_00_encoder.npy",
-        "max_abs_diff": 4.76837158203125e-07,
+        "max_abs_diff": 0.0,
         "recorded_independent_max_abs_error": 4.76837158203125e-07,
         "ok": true
       },
       {
         "file": "sample_01_encoder.npy",
-        "max_abs_diff": 9.5367431640625e-07,
+        "max_abs_diff": 0.0,
         "recorded_independent_max_abs_error": 9.5367431640625e-07,
         "ok": true
       },
       {
         "file": "sample_02_encoder.npy",
-        "max_abs_diff": 9.5367431640625e-07,
+        "max_abs_diff": 0.0,
         "recorded_independent_max_abs_error": 9.5367431640625e-07,
         "ok": true
       },
       {
         "file": "sample_03_encoder.npy",
-        "max_abs_diff": 9.5367431640625e-07,
+        "max_abs_diff": 0.0,
         "recorded_independent_max_abs_error": 9.5367431640625e-07,
         "ok": true
       },
       {
         "file": "sample_04_encoder.npy",
-        "max_abs_diff": 7.152557373046875e-07,
+        "max_abs_diff": 0.0,
         "recorded_independent_max_abs_error": 7.152557373046875e-07,
         "ok": true
       },
       {
         "file": "sample_05_encoder.npy",
-        "max_abs_diff": 7.152557373046875e-07,
+        "max_abs_diff": 0.0,
         "recorded_independent_max_abs_error": 7.152557373046875e-07,
         "ok": true
       }
@@ -514,9 +539,9 @@
         "rel_diff": 0.1678931033516823
       },
       "s_a": {
-        "validation_sample00": 0.00027124510409477423,
+        "validation_sample00": 0.0002712451040947742,
         "training_sample01": 0.0003246386378862948,
-        "rel_diff": 0.16447066849209044
+        "rel_diff": 0.1644706684920906
       },
       "sx": {
         "validation_sample00": 0.0024374177762223966,
@@ -524,9 +549,9 @@
         "rel_diff": 0.0
       },
       "s_g": {
-        "validation_sample00": 0.0009564960741614592,
-        "training_sample01": 0.0009693081420858894,
-        "rel_diff": 0.01321774507831884
+        "validation_sample00": 0.0009564960741614596,
+        "training_sample01": 0.0009693081420858891,
+        "rel_diff": 0.013217745078318174
       },
       "s_r1": {
         "validation_sample00": 0.0014499347926304155,
@@ -588,7 +613,6 @@
     }
   },
   "violations": [
-    "hash mismatches: sample_00_encoder: 489dc7c28b2816cdb7cfc35e3f98c2dd674112f71d9357f746db57de4a27c058 != a7ffaafdd9866b3711903c67db0f3a17845662bc52356f0d1a82410496a54f61; sample_00_mfcc: a8a85e2878283a0d3cd40f157243b10aa5034c2544bbfb21d292da9c422aad15 != dcdb5a8ac2daa7bf2b1c6f18cd964d0f406d2ce6192322c2930ac632f2c962ae; sample_01_encoder: d91c92dabc3fcd94e05920731e0acfb4596e30989e5d8a1906dbcd6aa697b1a5 != 8a6a9e49a38c073b1808de7b62ff295cd372af1399e12cb7d037975fec6963f8; sample_01_mfcc: 1e24a66c86e777e6882181b832fdd545f511cd2c6e93747a929b94b77a7588c0 != 43b0658ed234fdb01638bcd5ce2e5d8ef4141216650ca622ed839ff2467ddf43; sample_02_encoder: 092ad2de82d56dc0a737dd8655dab1e32fcdc31da4f02b384e2eae67aa6e5e43 != e1f6bff0d1bfe88a680d69a826ccb1855221e1d8ace873d67679189eca93e116; sample_02_mfcc: d4bac7237bb83bde50a4cfdf35018105bd888925890ea79cca55d1592e92416c != 8c98d33e2a85e39c3cef4b822571a7b7890e97665698f48330ca605872d8c133; sample_03_encoder: c2c56f43971060054e0234c82d6551a3a8f2165bb020d1e564e31c37eb01dd9c != ef29708b932b24554ea754872eece24b7412e20ea8d3ef88ced9b6a34a6cc7d9; sample_03_mfcc: 0bc09b6b4970d261ee0bc0711ebea2098475ed43681f931edbeb307589c5df4e != 9fdb644252b9f5cfccb76da538033de38abaf1d63c2a0816ab7f3d722b7d3822; sample_04_encoder: 6edf03322ddfd789bb9ec40fa86fbb18a3e3e036fe4fc774ef1e1bf45f85435f != 3bf5f7851fa305bfedb0f1e9c5ddfee1e01e47c758d7727d7a3398304e8062e2; sample_04_mfcc: 9eaa886c83ef7b98f8c065f72e5a95213db27990f51dd85f37a693b60d89e121 != 7bc86a41062ee0e8c66ed8fef401c4586b98775245bb878275acb151bc4ac354; sample_05_encoder: ead66dd353c7012b1837db0d14b99f1914e53ca9a3dab20d2a7a26fce61934c4 != 16bf24f4bd5e5b0e056c43507fdb2e7061194d3ea2792d174c1afd9f22200e90; sample_05_mfcc: bf50f5b5c59c855251236bd0f968bf306b9fad59d9abee024190984746bb6833 != a45db272da20c36c1fa0e841d1f71a79e445fa2516e72b097828f9d12f60e897",
     "encoder attention static scales are derived from validation sample_00",
     "encoder postnorm static scales/LUT/output scale are derived from validation sample_00",
     "legacy pool quant_samples.npz still contains 20 testing-partition rows that were probed during development (documented contamination)"

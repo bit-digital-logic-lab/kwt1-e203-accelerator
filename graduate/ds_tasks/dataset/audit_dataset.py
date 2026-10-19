@@ -9,9 +9,15 @@ Scope of this worker (independent worktree only, no sub-agents, no writes outsid
      sha1 of the basename with ``_nohash_.*`` stripped, 10% validation / 10%
      testing) and compared with the split labels stored in every cached sample
      pool and in the real-input-chain manifest.
-  B. Hashes are recomputed: the read-only weight pack, ``flags.json``, the
-     dataset archive, the six real-input ``.npy``/``.wav`` files, and the frozen
-     FFN1 parameter pack.
+  B. Hashes are recomputed.  Two *different* kinds of SHA-256 are kept apart:
+     *file-container* hash (the whole ``.npy``/``.npz``/``.json``/``.wav``/
+     ``.tar.gz`` bytes) for the weight pack, ``flags.json``, the archive, the
+     frozen FFN1 pack and the six WAV members; and *tensor-content* hash
+     (``np.load(file).tobytes()``) for the six real-input ``.npy`` files,
+     because that is how the real-input manifest defines ``mfcc_sha256`` /
+     ``encoder_sha256`` (``software/validate_real_input_chain.py``).  A content
+     hash is compared only against a recorded content hash, never against a
+     container hash (and vice versa).
   C. Sample overlap is checked between and inside the pools (path sets and WAV
      content hashes).
   D. Calibration leakage: which partition did each calibration step actually
@@ -73,6 +79,21 @@ def sha256_bytes(data):
     return hashlib.sha256(data).hexdigest()
 
 
+def sha256_tensor_content(array):
+    """SHA-256 of a *tensor payload*: ``sha256(np.ascontiguousarray(array).tobytes())``.
+
+    This is deliberately **not** the hash of the ``.npy`` file bytes.  The real
+    input chain defines the manifest fields ``mfcc_sha256`` / ``encoder_sha256``
+    as ``hashlib.sha256(array.tobytes())`` (``software/validate_real_input_chain.py``
+    lines 93/95).  Hashing the file instead re-hashes the NumPy container header
+    (``\\x93NUMPY`` magic + shape/dtype/version metadata), so a sample re-saved by
+    a different NumPy version hashes differently at the container level while the
+    tensor is bit-identical.  Comparing a container hash against such a recorded
+    content hash is an apples-to-oranges false positive.
+    """
+    return sha256_bytes(np.ascontiguousarray(array).tobytes())
+
+
 def official_split(name):
     """Return (split, percentage_hash) exactly as the specified commit does."""
     base = Path(str(name)).name
@@ -111,12 +132,13 @@ def audit_splits(main):
             paths = d["paths"].astype(str)
         counts = {}
         for p in parts:
-            counts[p] = counts.get(p, 0) + 1
+            key = str(p)                      # keep JSON/log keys plain str
+            counts[key] = counts.get(key, 0) + 1
         bad = []
         synth = {}
         for path, stored in zip(paths, parts):
             if path.startswith("_silence_"):
-                synth[stored] = synth.get(stored, 0) + 1
+                synth[str(stored)] = synth.get(str(stored), 0) + 1
                 continue
             recomputed, _ = official_split(path)
             if recomputed != stored:
@@ -151,22 +173,57 @@ def audit_hashes(main, manifest, check_archive):
     out = {"ok": True, "items": {}, "errors": []}
 
     def record(name, path, expected):
+        """File-container hash (whole file bytes); the manifest records this kind
+        for weights/flags/frozen packs."""
         actual = None
         if Path(path).exists():
             actual = sha256_file(path)
         ok = expected is None or actual == expected
         out["items"][name] = {"path": str(path), "expected": expected,
+                              "hash_kind": "file-container (whole-file bytes)",
                               "actual": actual, "ok": bool(ok)}
         if not ok:
             out["ok"] = False
             out["errors"].append(f"{name}: {actual} != {expected}")
 
+    def record_tensor(name, path, expected_content):
+        """Tensor-content hash; the manifest records this kind for the real
+        ``mfcc``/``encoder`` ``.npy`` samples."""
+        item = {"path": str(path), "expected": expected_content,
+                "hash_kind": "tensor-content (np.load(file).tobytes())",
+                "content_sha256": None, "container_sha256": None,
+                "shape": None, "dtype": None}
+        if Path(path).exists():
+            array = np.load(path, allow_pickle=False)
+            item["content_sha256"] = sha256_tensor_content(array)
+            item["container_sha256"] = sha256_file(path)
+            item["shape"] = list(array.shape)
+            item["dtype"] = str(array.dtype)
+        ok = expected_content is None or item["content_sha256"] == expected_content
+        item["ok"] = bool(ok)
+        out["items"][name] = item
+        if not ok:
+            out["ok"] = False
+            out["errors"].append(
+                f"{name}: tensor content {item['content_sha256']} != {expected_content}")
+
     record("weights", ROOT / "software/weights/kwt1_fp32.npz", manifest["weights_sha256"])
     record("flags", main / "资料/ARM_KWT-1_237e4097/models_data_v2_12_labels/kwt1/flags.json",
            manifest["flags_sha256"])
+    # The manifest compares content hashes here, so compare content hashes; the
+    # container (.npy file) hash is recorded alongside for the record only.
     for i, s in enumerate(manifest["samples"]):
-        record(f"sample_{i:02d}_encoder", DATA / s["encoder_file"], s["encoder_sha256"])
-        record(f"sample_{i:02d}_mfcc", DATA / s["mfcc_file"], s["mfcc_sha256"])
+        record_tensor(f"sample_{i:02d}_encoder", DATA / s["encoder_file"],
+                      s["encoder_sha256"])
+        record_tensor(f"sample_{i:02d}_mfcc", DATA / s["mfcc_file"],
+                      s["mfcc_sha256"])
+    out["hash_kinds"] = {
+        "file-container": "whole-file SHA-256 (weights, flags, archive, frozen FFN1 npz, WAV members)",
+        "tensor-content": "np.load(file).tobytes() SHA-256 (six real-input mfcc/encoder npy; "
+                          "this is the kind the manifest records)",
+        "note": "the two kinds are never compared with each other; the container hash of the "
+                "sample .npy files is informational (the manifest has no expectation for it)",
+    }
 
     frozen = json.loads((ROOT / "software/results/ffn1_a12w10_static_sym.json").read_text())
     record("ffn1_frozen_npz", FROZEN_FFN1, frozen["parameter_sha256"])
@@ -501,6 +558,16 @@ def main():
     print(f"  ok={report['hashes']['ok']} items={len(report['hashes']['items'])}")
     for e in report["hashes"]["errors"]:
         print(f"  ERROR {e}")
+    matched = 0
+    total = 0
+    for i, s in enumerate(manifest["samples"]):
+        for kind, fkey in (("mfcc", "mfcc_file"), ("encoder", "encoder_file")):
+            item = report["hashes"]["items"][f"sample_{i:02d}_{kind}"]
+            total += 1
+            matched += int(item["ok"])
+            print(f"  {s[fkey]}: tensor_content={str(item['content_sha256'])[:16]} "
+                  f"file_container={str(item['container_sha256'])[:16]} ok={item['ok']}")
+    print(f"  tensor-content matches: {matched}/{total} (container hashes informational only)")
     print("== npy content consistency (independent projection) ==")
     print(f"  ok={report['npy_content_consistency']['ok']}")
     for s in report["npy_content_consistency"]["samples"]:
