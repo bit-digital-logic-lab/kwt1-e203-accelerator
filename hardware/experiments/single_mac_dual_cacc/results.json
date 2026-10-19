@@ -1,0 +1,369 @@
+{
+  "meta": {
+    "schema": "kwt-single-mac-dual-cacc/1",
+    "description": "ONE 16-lane multiplier array + TWO 16x16 INT32 CACC pages",
+    "new_rtl": "hardware/experiments/single_mac_dual_cacc/rtl/kwt_single_mac_dual_cacc.sv",
+    "new_tb": "hardware/experiments/single_mac_dual_cacc/tb/tb_kwt_single_mac_task.sv",
+    "unit_tb": "hardware/experiments/single_mac_dual_cacc/tb/tb_kwt_single_mac_unit.sv",
+    "preserved_rtl": [
+      "hardware/rtl/pulse_array/kwt_row_broadcast_tile.sv (unmodified)",
+      "hardware/rtl/pulse_array/kwt_tile_output_stage.sv (unmodified)"
+    ],
+    "comparison_only": [
+      "hardware/architecture/tb/tb_kwt_row_broadcast_staged_task.sv (old one-core baseline)",
+      "hardware/experiments/streaming_mac/tb/tb_kwt_streaming_task.sv (old two-core dual)",
+      "hardware/experiments/single_mac_dual_cacc/area/kwt_two_core_compare_wrapper.sv (2x old core)"
+    ],
+    "rows": 16,
+    "clock_hz": 150000000,
+    "bus_model": "one 16-bit word/cycle load; output accepted every 2 cycles (2 slots/result)",
+    "scope": "RTL functional/task-level simulation; NOT E203, NOT 150 MHz STA, NOT synthesised area"
+  },
+  "commands": [
+    {
+      "cmd": "verilator --binary --timing --assert --top-module tb_kwt_single_mac_unit /home/yang/kwt-worktrees/ds-p027-singlemac/hardware/experiments/single_mac_dual_cacc/rtl/kwt_single_mac_dual_cacc.sv /home/yang/kwt-worktrees/ds-p027-singlemac/hardware/experiments/single_mac_dual_cacc/tb/tb_kwt_single_mac_unit.sv",
+      "exit": 0
+    },
+    {
+      "cmd": "/tmp/opencode/kwt-single-mac-eb8o10co/unit/obj/Vtb_kwt_single_mac_unit",
+      "exit": 0
+    },
+    {
+      "cmd": "verilator ... -GROWS=16 /home/yang/kwt-worktrees/ds-p027-singlemac/hardware/experiments/single_mac_dual_cacc/rtl/kwt_single_mac_dual_cacc.sv /home/yang/kwt-worktrees/ds-p027-singlemac/hardware/rtl/pulse_array/kwt_tile_output_stage.sv /home/yang/kwt-worktrees/ds-p027-singlemac/hardware/experiments/single_mac_dual_cacc/tb/tb_kwt_single_mac_task.sv",
+      "exit": 0
+    },
+    {
+      "cmd": "verilator ... -GROWS=16 /home/yang/kwt-worktrees/ds-p027-singlemac/hardware/rtl/pulse_array/kwt_row_broadcast_tile.sv /home/yang/kwt-worktrees/ds-p027-singlemac/hardware/rtl/pulse_array/kwt_tile_output_stage.sv /home/yang/kwt-worktrees/ds-p027-singlemac/hardware/architecture/tb/tb_kwt_row_broadcast_staged_task.sv",
+      "exit": 0
+    },
+    {
+      "cmd": "verilator ... -GROWS=16 /home/yang/kwt-worktrees/ds-p027-singlemac/hardware/rtl/pulse_array/kwt_row_broadcast_tile.sv /home/yang/kwt-worktrees/ds-p027-singlemac/hardware/rtl/pulse_array/kwt_tile_output_stage.sv /home/yang/kwt-worktrees/ds-p027-singlemac/hardware/experiments/streaming_mac/tb/tb_kwt_streaming_task.sv",
+      "exit": 0
+    }
+  ],
+  "cases": [
+    {
+      "name": "tiny",
+      "m": 3,
+      "k": 4,
+      "n": 5,
+      "tiles": 1,
+      "pure_mac_compute_cycles": 20,
+      "bytes": {
+        "shared_read_bytes": 144,
+        "a_words": 12,
+        "w_words": 20,
+        "bias_slots": 10,
+        "out_slots": 30
+      },
+      "new_single_mac": {
+        "cycles": 463,
+        "initial_load_cycles": 86,
+        "compute_cycles": 85,
+        "drain_cycles": 290,
+        "stall_cycles": 0,
+        "feed_stall_cycles": 0,
+        "dump_not_ready_cycles": 0,
+        "a_load_words": 12,
+        "w_load_words": 20,
+        "bias_load_words": 10,
+        "out_write_words": 30,
+        "a_local_reads": 12,
+        "w_local_reads": 64,
+        "checked_outputs": 15,
+        "checked_padding": 0,
+        "overlapped_output_words": 0,
+        "overlapped_captures": 0,
+        "shared_bytes": 144,
+        "valid_outputs": 15
+      },
+      "old_one_core_baseline": {
+        "cycles": 462,
+        "initial_load_cycles": 86,
+        "compute_cycles": 85,
+        "drain_cycles": 259,
+        "a_load_words": 12,
+        "w_load_words": 20,
+        "bias_load_words": 10,
+        "out_write_words": 30,
+        "a_local_reads": 12,
+        "w_local_reads": 64,
+        "checked_outputs": 15,
+        "checked_padding": 0,
+        "overlapped_output_words": 0,
+        "shared_bytes": 144,
+        "valid_outputs": 15
+      },
+      "old_two_core_dual": {
+        "cycles": 463,
+        "initial_load_cycles": 86,
+        "compute_cycles": 85,
+        "drain_cycles": 290,
+        "stall_cycles": 0,
+        "a_load_words": 12,
+        "w_load_words": 20,
+        "bias_load_words": 10,
+        "out_write_words": 30,
+        "a_local_reads": 12,
+        "w_local_reads": 64,
+        "checked_outputs": 15,
+        "checked_padding": 0,
+        "overlapped_output_words": 0,
+        "overlapped_captures": 0,
+        "shared_bytes": 144,
+        "valid_outputs": 15
+      },
+      "delta": {
+        "new_vs_baseline_saved": -1,
+        "new_vs_baseline_speedup": 0.9978,
+        "new_vs_two_core_saved": 0,
+        "new_max_of_old_cores_equiv": "1 core (16 muls) vs 2 cores (32 muls)",
+        "new_overlapped_captures": 0,
+        "new_drain_cycles": 290
+      }
+    },
+    {
+      "name": "ragged",
+      "m": 10,
+      "k": 7,
+      "n": 19,
+      "tiles": 2,
+      "pure_mac_compute_cycles": 133,
+      "bytes": {
+        "shared_read_bytes": 1242,
+        "a_words": 70,
+        "w_words": 133,
+        "bias_slots": 38,
+        "out_slots": 380
+      },
+      "new_single_mac": {
+        "cycles": 1261,
+        "initial_load_cycles": 220,
+        "compute_cycles": 280,
+        "drain_cycles": 756,
+        "stall_cycles": 436,
+        "feed_stall_cycles": 0,
+        "dump_not_ready_cycles": 0,
+        "a_load_words": 70,
+        "w_load_words": 133,
+        "bias_load_words": 38,
+        "out_write_words": 380,
+        "a_local_reads": 140,
+        "w_local_reads": 224,
+        "checked_outputs": 190,
+        "checked_padding": 0,
+        "overlapped_output_words": 0,
+        "overlapped_captures": 1,
+        "shared_bytes": 1242,
+        "valid_outputs": 190
+      },
+      "old_one_core_baseline": {
+        "cycles": 1262,
+        "initial_load_cycles": 220,
+        "compute_cycles": 280,
+        "drain_cycles": 697,
+        "a_load_words": 70,
+        "w_load_words": 133,
+        "bias_load_words": 38,
+        "out_write_words": 380,
+        "a_local_reads": 140,
+        "w_local_reads": 224,
+        "checked_outputs": 190,
+        "checked_padding": 0,
+        "overlapped_output_words": 59,
+        "shared_bytes": 1242,
+        "valid_outputs": 190
+      },
+      "old_two_core_dual": {
+        "cycles": 1261,
+        "initial_load_cycles": 220,
+        "compute_cycles": 280,
+        "drain_cycles": 756,
+        "stall_cycles": 436,
+        "a_load_words": 70,
+        "w_load_words": 133,
+        "bias_load_words": 38,
+        "out_write_words": 380,
+        "a_local_reads": 140,
+        "w_local_reads": 224,
+        "checked_outputs": 190,
+        "checked_padding": 0,
+        "overlapped_output_words": 0,
+        "overlapped_captures": 1,
+        "shared_bytes": 1242,
+        "valid_outputs": 190
+      },
+      "delta": {
+        "new_vs_baseline_saved": 1,
+        "new_vs_baseline_speedup": 1.0008,
+        "new_vs_two_core_saved": 0,
+        "new_max_of_old_cores_equiv": "1 core (16 muls) vs 2 cores (32 muls)",
+        "new_overlapped_captures": 1,
+        "new_drain_cycles": 756
+      }
+    },
+    {
+      "name": "full",
+      "m": 99,
+      "k": 64,
+      "n": 256,
+      "tiles": 112,
+      "pure_mac_compute_cycles": 114688,
+      "bytes": {
+        "shared_read_bytes": 147840,
+        "a_words": 6336,
+        "w_words": 16384,
+        "bias_slots": 512,
+        "out_slots": 50688
+      },
+      "new_single_mac": {
+        "cycles": 125603,
+        "initial_load_cycles": 7872,
+        "compute_cycles": 117040,
+        "drain_cycles": 356,
+        "stall_cycles": 0,
+        "feed_stall_cycles": 0,
+        "dump_not_ready_cycles": 0,
+        "a_load_words": 6336,
+        "w_load_words": 16384,
+        "bias_load_words": 512,
+        "out_write_words": 50688,
+        "a_local_reads": 101376,
+        "w_local_reads": 114688,
+        "checked_outputs": 25344,
+        "checked_padding": 0,
+        "overlapped_output_words": 25296,
+        "overlapped_captures": 111,
+        "shared_bytes": 147840,
+        "valid_outputs": 25344
+      },
+      "old_one_core_baseline": {
+        "cycles": 154240,
+        "initial_load_cycles": 7872,
+        "compute_cycles": 117040,
+        "drain_cycles": 29008,
+        "a_load_words": 6336,
+        "w_load_words": 16384,
+        "bias_load_words": 512,
+        "out_write_words": 50688,
+        "a_local_reads": 101376,
+        "w_local_reads": 114688,
+        "checked_outputs": 25344,
+        "checked_padding": 0,
+        "overlapped_output_words": 24297,
+        "shared_bytes": 147840,
+        "valid_outputs": 25344
+      },
+      "old_two_core_dual": {
+        "cycles": 125603,
+        "initial_load_cycles": 7872,
+        "compute_cycles": 117040,
+        "drain_cycles": 356,
+        "stall_cycles": 0,
+        "a_load_words": 6336,
+        "w_load_words": 16384,
+        "bias_load_words": 512,
+        "out_write_words": 50688,
+        "a_local_reads": 101376,
+        "w_local_reads": 114688,
+        "checked_outputs": 25344,
+        "checked_padding": 0,
+        "overlapped_output_words": 25296,
+        "overlapped_captures": 111,
+        "shared_bytes": 147840,
+        "valid_outputs": 25344
+      },
+      "delta": {
+        "new_vs_baseline_saved": 28637,
+        "new_vs_baseline_speedup": 1.228,
+        "new_vs_two_core_saved": 0,
+        "new_max_of_old_cores_equiv": "1 core (16 muls) vs 2 cores (32 muls)",
+        "new_overlapped_captures": 111,
+        "new_drain_cycles": 356
+      }
+    }
+  ],
+  "checks": [
+    {
+      "case": "tiny",
+      "new_int32_exact": true,
+      "new_access_counts_exact": true,
+      "old_baseline_int32_exact": true,
+      "old_two_core_int32_exact": true,
+      "new_outputs": 15
+    },
+    {
+      "case": "ragged",
+      "new_int32_exact": true,
+      "new_access_counts_exact": true,
+      "old_baseline_int32_exact": true,
+      "old_two_core_int32_exact": true,
+      "new_outputs": 190
+    },
+    {
+      "case": "full",
+      "new_int32_exact": true,
+      "new_access_counts_exact": true,
+      "old_baseline_int32_exact": true,
+      "old_two_core_int32_exact": true,
+      "new_outputs": 25344
+    }
+  ],
+  "unit": {
+    "name": "tb_kwt_single_mac_unit",
+    "status": "PASS"
+  },
+  "multiplier_counts": {
+    "method": "yosys read_verilog -sv; chparam -set ROWS 16; hierarchy -top; proc; opt_expr; opt_clean; stat -> count of $mul cells",
+    "new_single_mac_dual_cacc_ROWS16": 16,
+    "old_one_core_kwt_row_broadcast_tile_ROWS16": 16,
+    "old_two_core_wrapper_ROWS16": 32,
+    "interpretation": "The new engine has the SAME number of multipliers as ONE old core and HALF of the old two-core dual harness."
+  },
+  "backpressure": [
+    {
+      "case": "tiny",
+      "backpressure_period": 4,
+      "new_cycles": 493,
+      "feed_stall_cycles": 0,
+      "stall_cycles": 0,
+      "int32_exact": true
+    },
+    {
+      "case": "ragged",
+      "backpressure_period": 3,
+      "new_cycles": 1450,
+      "feed_stall_cycles": 0,
+      "stall_cycles": 597,
+      "int32_exact": true
+    }
+  ],
+  "cycle_model": {
+    "label": "MODEL ONLY - arithmetic lower bound, not a measured number",
+    "ideal_pure_mac_one_layer_cycles_16rows": 114688,
+    "rtl_new_full_cycles": 125603,
+    "rtl_old_two_core_full_cycles": 125603,
+    "rtl_old_one_core_full_cycles": 154240,
+    "new_above_pure_mac_pct": 9.517,
+    "note": "The new one-MAC-array engine reproduces the old two-core dual schedule cycles; that is a functional schedule result, not a timing-closure or area result."
+  },
+  "macro_port_table": {
+    "budget": "16-bit x 128/1024/4096 single/dual-port macros only; no extra DDR",
+    "cacc_two_pages_16x16x32": {
+      "bytes": 2048,
+      "if_register_mapped": "2 x 256 x 32 = 4096 flops + 512 valid bits (as this experiment)",
+      "if_macro_mapped": "row-banked sketch: 2 pages x 16 rows x 2 width slices = 64 x 16b x 128 minimum-size macros, heavily underfilled; exact mapping unproven",
+      "ports": "the active page performs 16 independent row-accumulator updates each cycle, each requiring old-sum read and new-sum write or forwarding; the inactive page supplies one dump read. One 1R1W macro per whole page is insufficient."
+    },
+    "bias_group": {
+      "size": "N=256 INT32 = 1024 B",
+      "note": "bias is read at export only and added AFTER the CACC read; it never enters the multiplier feed",
+      "macros": "2 x 16b x 1024 (overallocated), registers, or a slice of an existing bank; 16b x 256 is not an allowed macro size"
+    },
+    "result_buffer": {
+      "size": "16x16 INT32 = 1024 B (kwt_tile_output_stage, unchanged)",
+      "macros": "2 x 16b x 1024 (32-bit width-cascade) with 1W capture + 1R drain"
+    },
+    "clock_area_evidence_limit": "This experiment reports elaborated $mul counts, simulated cycles and byte/bit capacity for macro mapping. Bank/port arbitration, 150 MHz timing closure and synthesised area/power are NOT measured or claimed here."
+  }
+}
