@@ -1,0 +1,404 @@
+%Warning-WIDTHTRUNC: /tmp/opencode/r2_scale_contract/rtl_check/rtl/attn_single_head.sv:115:31: Bit extraction of array[63:0] requires 6 bit index, not 7 bits.
+                                                                                             : ... note: In instance 'attn_single_head'
+  115 |             2'd0:    wval = wq[pd][po];
+      |                               ^
+                     ... For warning description see https://verilator.org/warn/WIDTHTRUNC?v=5.047
+                     ... Use "/* verilator lint_off WIDTHTRUNC */" and lint_on around source to disable this message.
+%Warning-WIDTHTRUNC: /tmp/opencode/r2_scale_contract/rtl_check/rtl/attn_single_head.sv:115:35: Bit extraction of array[63:0] requires 6 bit index, not 7 bits.
+                                                                                             : ... note: In instance 'attn_single_head'
+  115 |             2'd0:    wval = wq[pd][po];
+      |                                   ^
+%Warning-WIDTHTRUNC: /tmp/opencode/r2_scale_contract/rtl_check/rtl/attn_single_head.sv:116:31: Bit extraction of array[63:0] requires 6 bit index, not 7 bits.
+                                                                                             : ... note: In instance 'attn_single_head'
+  116 |             2'd1:    wval = wk[pd][po];
+      |                               ^
+%Warning-WIDTHTRUNC: /tmp/opencode/r2_scale_contract/rtl_check/rtl/attn_single_head.sv:116:35: Bit extraction of array[63:0] requires 6 bit index, not 7 bits.
+                                                                                             : ... note: In instance 'attn_single_head'
+  116 |             2'd1:    wval = wk[pd][po];
+      |                                   ^
+%Warning-WIDTHTRUNC: /tmp/opencode/r2_scale_contract/rtl_check/rtl/attn_single_head.sv:117:31: Bit extraction of array[63:0] requires 6 bit index, not 7 bits.
+                                                                                             : ... note: In instance 'attn_single_head'
+  117 |             default: wval = wv[pd][po];
+      |                               ^
+%Warning-WIDTHTRUNC: /tmp/opencode/r2_scale_contract/rtl_check/rtl/attn_single_head.sv:117:35: Bit extraction of array[63:0] requires 6 bit index, not 7 bits.
+                                                                                             : ... note: In instance 'attn_single_head'
+  117 |             default: wval = wv[pd][po];
+      |                                   ^
+%Warning-WIDTHTRUNC: /tmp/opencode/r2_scale_contract/rtl_check/rtl/attn_single_head.sv:128:36: Bit extraction of array[63:0] requires 6 bit index, not 7 bits.
+                                                                                             : ... note: In instance 'attn_single_head'
+  128 |                 3'd0: x_mem[ld_row][ld_col] <= ld_data[15:0];
+      |                                    ^
+%Warning-WIDTHTRUNC: /tmp/opencode/r2_scale_contract/rtl_check/rtl/attn_single_head.sv:129:25: Bit extraction of array[63:0] requires 6 bit index, not 7 bits.
+                                                                                             : ... note: In instance 'attn_single_head'
+  129 |                 3'd1: wq[ld_row][ld_col]    <= ld_data[15:0];
+      |                         ^
+%Warning-WIDTHTRUNC: /tmp/opencode/r2_scale_contract/rtl_check/rtl/attn_single_head.sv:129:33: Bit extraction of array[63:0] requires 6 bit index, not 7 bits.
+                                                                                             : ... note: In instance 'attn_single_head'
+  129 |                 3'd1: wq[ld_row][ld_col]    <= ld_data[15:0];
+      |                                 ^
+%Warning-WIDTHTRUNC: /tmp/opencode/r2_scale_contract/rtl_check/rtl/attn_single_head.sv:130:25: Bit extraction of array[63:0] requires 6 bit index, not 7 bits.
+                                                                                             : ... note: In instance 'attn_single_head'
+  130 |                 3'd2: wk[ld_row][ld_col]    <= ld_data[15:0];
+      |                         ^
+%Warning-WIDTHTRUNC: /tmp/opencode/r2_scale_contract/rtl_check/rtl/attn_single_head.sv:130:33: Bit extraction of array[63:0] requires 6 bit index, not 7 bits.
+                                                                                             : ... note: In instance 'attn_single_head'
+  130 |                 3'd2: wk[ld_row][ld_col]    <= ld_data[15:0];
+      |                                 ^
+%Warning-WIDTHTRUNC: /tmp/opencode/r2_scale_contract/rtl_check/rtl/attn_single_head.sv:131:25: Bit extraction of array[63:0] requires 6 bit index, not 7 bits.
+                                                                                             : ... note: In instance 'attn_single_head'
+  131 |                 3'd3: wv[ld_row][ld_col]    <= ld_data[15:0];
+      |                         ^
+%Warning-WIDTHTRUNC: /tmp/opencode/r2_scale_contract/rtl_check/rtl/attn_single_head.sv:131:33: Bit extraction of array[63:0] requires 6 bit index, not 7 bits.
+                                                                                             : ... note: In instance 'attn_single_head'
+  131 |                 3'd3: wv[ld_row][ld_col]    <= ld_data[15:0];
+      |                                 ^
+%Warning-WIDTHTRUNC: /tmp/opencode/r2_scale_contract/rtl_check/rtl/attn_single_head.sv:132:25: Bit extraction of array[63:0] requires 6 bit index, not 7 bits.
+                                                                                             : ... note: In instance 'attn_single_head'
+  132 |                 3'd4: wo[ld_row][ld_col]    <= ld_data[15:0];
+      |                         ^
+%Warning-WIDTHTRUNC: /tmp/opencode/r2_scale_contract/rtl_check/rtl/attn_single_head.sv:132:33: Bit extraction of array[63:0] requires 6 bit index, not 7 bits.
+                                                                                             : ... note: In instance 'attn_single_head'
+  132 |                 3'd4: wo[ld_row][ld_col]    <= ld_data[15:0];
+      |                                 ^
+%Warning-WIDTHTRUNC: /tmp/opencode/r2_scale_contract/rtl_check/rtl/attn_single_head.sv:133:29: Bit extraction of array[63:0] requires 6 bit index, not 7 bits.
+                                                                                             : ... note: In instance 'attn_single_head'
+  133 |                 3'd5: bias_m[ld_col]        <= ld_data;
+      |                             ^
+%Warning-WIDTHTRUNC: /tmp/opencode/r2_scale_contract/rtl_check/rtl/attn_single_head.sv:134:30: Bit extraction of array[63:0] requires 6 bit index, not 7 bits.
+                                                                                             : ... note: In instance 'attn_single_head'
+  134 |                 3'd6: exp_lut[ld_row]       <= ld_data[15:0];
+      |                              ^
+%Warning-WIDTHTRUNC: /tmp/opencode/r2_scale_contract/rtl_check/rtl/attn_single_head.sv:144:47: Bit extraction of array[63:0] requires 6 bit index, not 7 bits.
+                                                                                             : ... note: In instance 'attn_single_head'
+  144 |             3'd0: rd_data = {{16{x_mem[rd_row][rd_col][15]}}, x_mem[rd_row][rd_col]};
+      |                                               ^
+%Warning-WIDTHTRUNC: /tmp/opencode/r2_scale_contract/rtl_check/rtl/attn_single_head.sv:144:76: Bit extraction of array[63:0] requires 6 bit index, not 7 bits.
+                                                                                             : ... note: In instance 'attn_single_head'
+  144 |             3'd0: rd_data = {{16{x_mem[rd_row][rd_col][15]}}, x_mem[rd_row][rd_col]};
+      |                                                                            ^
+%Warning-WIDTHTRUNC: /tmp/opencode/r2_scale_contract/rtl_check/rtl/attn_single_head.sv:145:47: Bit extraction of array[63:0] requires 6 bit index, not 7 bits.
+                                                                                             : ... note: In instance 'attn_single_head'
+  145 |             3'd1: rd_data = {{16{q_mem[rd_row][rd_col][15]}}, q_mem[rd_row][rd_col]};
+      |                                               ^
+%Warning-WIDTHTRUNC: /tmp/opencode/r2_scale_contract/rtl_check/rtl/attn_single_head.sv:145:76: Bit extraction of array[63:0] requires 6 bit index, not 7 bits.
+                                                                                             : ... note: In instance 'attn_single_head'
+  145 |             3'd1: rd_data = {{16{q_mem[rd_row][rd_col][15]}}, q_mem[rd_row][rd_col]};
+      |                                                                            ^
+%Warning-WIDTHTRUNC: /tmp/opencode/r2_scale_contract/rtl_check/rtl/attn_single_head.sv:146:47: Bit extraction of array[63:0] requires 6 bit index, not 7 bits.
+                                                                                             : ... note: In instance 'attn_single_head'
+  146 |             3'd2: rd_data = {{16{k_mem[rd_row][rd_col][15]}}, k_mem[rd_row][rd_col]};
+      |                                               ^
+%Warning-WIDTHTRUNC: /tmp/opencode/r2_scale_contract/rtl_check/rtl/attn_single_head.sv:146:76: Bit extraction of array[63:0] requires 6 bit index, not 7 bits.
+                                                                                             : ... note: In instance 'attn_single_head'
+  146 |             3'd2: rd_data = {{16{k_mem[rd_row][rd_col][15]}}, k_mem[rd_row][rd_col]};
+      |                                                                            ^
+%Warning-WIDTHTRUNC: /tmp/opencode/r2_scale_contract/rtl_check/rtl/attn_single_head.sv:147:47: Bit extraction of array[63:0] requires 6 bit index, not 7 bits.
+                                                                                             : ... note: In instance 'attn_single_head'
+  147 |             3'd3: rd_data = {{16{v_mem[rd_row][rd_col][15]}}, v_mem[rd_row][rd_col]};
+      |                                               ^
+%Warning-WIDTHTRUNC: /tmp/opencode/r2_scale_contract/rtl_check/rtl/attn_single_head.sv:147:76: Bit extraction of array[63:0] requires 6 bit index, not 7 bits.
+                                                                                             : ... note: In instance 'attn_single_head'
+  147 |             3'd3: rd_data = {{16{v_mem[rd_row][rd_col][15]}}, v_mem[rd_row][rd_col]};
+      |                                                                            ^
+%Warning-WIDTHTRUNC: /tmp/opencode/r2_scale_contract/rtl_check/rtl/attn_single_head.sv:149:47: Bit extraction of array[63:0] requires 6 bit index, not 7 bits.
+                                                                                             : ... note: In instance 'attn_single_head'
+  149 |             3'd5: rd_data = {{16{c_mem[rd_row][rd_col][15]}}, c_mem[rd_row][rd_col]};
+      |                                               ^
+%Warning-WIDTHTRUNC: /tmp/opencode/r2_scale_contract/rtl_check/rtl/attn_single_head.sv:149:76: Bit extraction of array[63:0] requires 6 bit index, not 7 bits.
+                                                                                             : ... note: In instance 'attn_single_head'
+  149 |             3'd5: rd_data = {{16{c_mem[rd_row][rd_col][15]}}, c_mem[rd_row][rd_col]};
+      |                                                                            ^
+%Warning-WIDTHTRUNC: /tmp/opencode/r2_scale_contract/rtl_check/rtl/attn_single_head.sv:150:47: Bit extraction of array[63:0] requires 6 bit index, not 7 bits.
+                                                                                             : ... note: In instance 'attn_single_head'
+  150 |             3'd6: rd_data = {{16{o_mem[rd_row][rd_col][15]}}, o_mem[rd_row][rd_col]};
+      |                                               ^
+%Warning-WIDTHTRUNC: /tmp/opencode/r2_scale_contract/rtl_check/rtl/attn_single_head.sv:150:76: Bit extraction of array[63:0] requires 6 bit index, not 7 bits.
+                                                                                             : ... note: In instance 'attn_single_head'
+  150 |             3'd6: rd_data = {{16{o_mem[rd_row][rd_col][15]}}, o_mem[rd_row][rd_col]};
+      |                                                                            ^
+%Warning-WIDTHTRUNC: /tmp/opencode/r2_scale_contract/rtl_check/rtl/attn_single_head.sv:151:35: Bit extraction of array[63:0] requires 6 bit index, not 7 bits.
+                                                                                             : ... note: In instance 'attn_single_head'
+  151 |             3'd7: rd_data = bias_m[rd_row];
+      |                                   ^
+%Warning-WIDTHTRUNC: /tmp/opencode/r2_scale_contract/rtl_check/rtl/attn_single_head.sv:159:19: Operator ASSIGNDLY expects 5 bits on the Assign RHS, but Assign RHS's VARREF 'P_IDLE' generates 32 bits.
+                                                                                             : ... note: In instance 'attn_single_head'
+  159 |             phase <= P_IDLE;
+      |                   ^~
+%Warning-WIDTHTRUNC: /tmp/opencode/r2_scale_contract/rtl_check/rtl/attn_single_head.sv:172:31: Operator ASSIGNDLY expects 5 bits on the Assign RHS, but Assign RHS's VARREF 'P_PJ_INIT' generates 32 bits.
+                                                                                             : ... note: In instance 'attn_single_head'
+  172 |                         phase <= P_PJ_INIT;
+      |                               ^~
+%Warning-WIDTHTRUNC: /tmp/opencode/r2_scale_contract/rtl_check/rtl/attn_single_head.sv:179:27: Operator ASSIGNDLY expects 5 bits on the Assign RHS, but Assign RHS's VARREF 'P_PJ_MAC' generates 32 bits.
+                                                                                             : ... note: In instance 'attn_single_head'
+  179 |                     phase <= P_PJ_MAC;
+      |                           ^~
+%Warning-WIDTHTRUNC: /tmp/opencode/r2_scale_contract/rtl_check/rtl/attn_single_head.sv:182:43: Bit extraction of array[63:0] requires 6 bit index, not 7 bits.
+                                                                                             : ... note: In instance 'attn_single_head'
+  182 |                     acc <= acc + x_mem[pi][pd] * wval;
+      |                                           ^
+%Warning-WIDTHTRUNC: /tmp/opencode/r2_scale_contract/rtl_check/rtl/attn_single_head.sv:183:46: Operator ASSIGNDLY expects 5 bits on the Assign RHS, but Assign RHS's VARREF 'P_PJ_WR' generates 32 bits.
+                                                                                             : ... note: In instance 'attn_single_head'
+  183 |                     if (pd == ATT_D-1) phase <= P_PJ_WR;
+      |                                              ^~
+%Warning-WIDTHEXPAND: /tmp/opencode/r2_scale_contract/rtl_check/rtl/attn_single_head.sv:183:28: Operator EQ expects 32 bits on the LHS, but LHS's VARREF 'pd' generates 7 bits.
+                                                                                              : ... note: In instance 'attn_single_head'
+  183 |                     if (pd == ATT_D-1) phase <= P_PJ_WR;
+      |                            ^~
+                      ... For warning description see https://verilator.org/warn/WIDTHEXPAND?v=5.047
+                      ... Use "/* verilator lint_off WIDTHEXPAND */" and lint_on around source to disable this message.
+%Warning-WIDTHTRUNC: /tmp/opencode/r2_scale_contract/rtl_check/rtl/attn_single_head.sv:188:40: Bit extraction of array[63:0] requires 6 bit index, not 7 bits.
+                                                                                             : ... note: In instance 'attn_single_head'
+  188 |                         2'd0: q_mem[pi][po] <= clip16(rq(acc, RQ));
+      |                                        ^
+%Warning-WIDTHTRUNC: /tmp/opencode/r2_scale_contract/rtl_check/rtl/attn_single_head.sv:189:40: Bit extraction of array[63:0] requires 6 bit index, not 7 bits.
+                                                                                             : ... note: In instance 'attn_single_head'
+  189 |                         2'd1: k_mem[pi][po] <= clip16(rq(acc, RK));
+      |                                        ^
+%Warning-WIDTHTRUNC: /tmp/opencode/r2_scale_contract/rtl_check/rtl/attn_single_head.sv:190:43: Bit extraction of array[63:0] requires 6 bit index, not 7 bits.
+                                                                                             : ... note: In instance 'attn_single_head'
+  190 |                         default: v_mem[pi][po] <= clip16(rq(acc, RV));
+      |                                           ^
+%Warning-WIDTHTRUNC: /tmp/opencode/r2_scale_contract/rtl_check/rtl/attn_single_head.sv:200:39: Operator ASSIGNDLY expects 5 bits on the Assign RHS, but Assign RHS's VARREF 'P_SC_INIT' generates 32 bits.
+                                                                                             : ... note: In instance 'attn_single_head'
+  200 |                                 phase <= P_SC_INIT;
+      |                                       ^~
+%Warning-WIDTHTRUNC: /tmp/opencode/r2_scale_contract/rtl_check/rtl/attn_single_head.sv:203:39: Operator ASSIGNDLY expects 5 bits on the Assign RHS, but Assign RHS's VARREF 'P_PJ_MAC' generates 32 bits.
+                                                                                             : ... note: In instance 'attn_single_head'
+  203 |                                 phase <= P_PJ_MAC;
+      |                                       ^~
+%Warning-WIDTHTRUNC: /tmp/opencode/r2_scale_contract/rtl_check/rtl/attn_single_head.sv:207:35: Operator ASSIGNDLY expects 5 bits on the Assign RHS, but Assign RHS's VARREF 'P_PJ_MAC' generates 32 bits.
+                                                                                             : ... note: In instance 'attn_single_head'
+  207 |                             phase <= P_PJ_MAC;
+      |                                   ^~
+%Warning-WIDTHEXPAND: /tmp/opencode/r2_scale_contract/rtl_check/rtl/attn_single_head.sv:196:32: Operator EQ expects 32 bits on the LHS, but LHS's VARREF 'pi' generates 7 bits.
+                                                                                              : ... note: In instance 'attn_single_head'
+  196 |                         if (pi == ATT_T-1) begin
+      |                                ^~
+%Warning-WIDTHTRUNC: /tmp/opencode/r2_scale_contract/rtl_check/rtl/attn_single_head.sv:211:31: Operator ASSIGNDLY expects 5 bits on the Assign RHS, but Assign RHS's VARREF 'P_PJ_MAC' generates 32 bits.
+                                                                                             : ... note: In instance 'attn_single_head'
+  211 |                         phase <= P_PJ_MAC;
+      |                               ^~
+%Warning-WIDTHEXPAND: /tmp/opencode/r2_scale_contract/rtl_check/rtl/attn_single_head.sv:194:28: Operator EQ expects 32 bits on the LHS, but LHS's VARREF 'po' generates 7 bits.
+                                                                                              : ... note: In instance 'attn_single_head'
+  194 |                     if (po == ATT_D-1) begin
+      |                            ^~
+%Warning-WIDTHTRUNC: /tmp/opencode/r2_scale_contract/rtl_check/rtl/attn_single_head.sv:218:27: Operator ASSIGNDLY expects 5 bits on the Assign RHS, but Assign RHS's VARREF 'P_SC_MAC' generates 32 bits.
+                                                                                             : ... note: In instance 'attn_single_head'
+  218 |                     phase <= P_SC_MAC;
+      |                           ^~
+%Warning-WIDTHTRUNC: /tmp/opencode/r2_scale_contract/rtl_check/rtl/attn_single_head.sv:221:42: Bit extraction of array[63:0] requires 6 bit index, not 7 bits.
+                                                                                             : ... note: In instance 'attn_single_head'
+  221 |                     acc <= acc + q_mem[i][pd] * k_mem[j][pd];
+      |                                          ^
+%Warning-WIDTHTRUNC: /tmp/opencode/r2_scale_contract/rtl_check/rtl/attn_single_head.sv:221:57: Bit extraction of array[63:0] requires 6 bit index, not 7 bits.
+                                                                                             : ... note: In instance 'attn_single_head'
+  221 |                     acc <= acc + q_mem[i][pd] * k_mem[j][pd];
+      |                                                         ^
+%Warning-WIDTHTRUNC: /tmp/opencode/r2_scale_contract/rtl_check/rtl/attn_single_head.sv:222:46: Operator ASSIGNDLY expects 5 bits on the Assign RHS, but Assign RHS's VARREF 'P_SC_WR' generates 32 bits.
+                                                                                             : ... note: In instance 'attn_single_head'
+  222 |                     if (pd == ATT_D-1) phase <= P_SC_WR;
+      |                                              ^~
+%Warning-WIDTHEXPAND: /tmp/opencode/r2_scale_contract/rtl_check/rtl/attn_single_head.sv:222:28: Operator EQ expects 32 bits on the LHS, but LHS's VARREF 'pd' generates 7 bits.
+                                                                                              : ... note: In instance 'attn_single_head'
+  222 |                     if (pd == ATT_D-1) phase <= P_SC_WR;
+      |                            ^~
+%Warning-WIDTHTRUNC: /tmp/opencode/r2_scale_contract/rtl_check/rtl/attn_single_head.sv:230:31: Operator ASSIGNDLY expects 5 bits on the Assign RHS, but Assign RHS's VARREF 'P_SMAX_INIT' generates 32 bits.
+                                                                                             : ... note: In instance 'attn_single_head'
+  230 |                         phase <= P_SMAX_INIT;
+      |                               ^~
+%Warning-WIDTHTRUNC: /tmp/opencode/r2_scale_contract/rtl_check/rtl/attn_single_head.sv:233:31: Operator ASSIGNDLY expects 5 bits on the Assign RHS, but Assign RHS's VARREF 'P_SC_MAC' generates 32 bits.
+                                                                                             : ... note: In instance 'attn_single_head'
+  233 |                         phase <= P_SC_MAC;
+      |                               ^~
+%Warning-WIDTHEXPAND: /tmp/opencode/r2_scale_contract/rtl_check/rtl/attn_single_head.sv:229:27: Operator EQ expects 32 bits on the LHS, but LHS's VARREF 'j' generates 7 bits.
+                                                                                              : ... note: In instance 'attn_single_head'
+  229 |                     if (j == ATT_T-1) begin
+      |                           ^~
+%Warning-WIDTHTRUNC: /tmp/opencode/r2_scale_contract/rtl_check/rtl/attn_single_head.sv:241:27: Operator ASSIGNDLY expects 5 bits on the Assign RHS, but Assign RHS's VARREF 'P_SMAX_L' generates 32 bits.
+                                                                                             : ... note: In instance 'attn_single_head'
+  241 |                     phase <= P_SMAX_L;
+      |                           ^~
+%Warning-WIDTHTRUNC: /tmp/opencode/r2_scale_contract/rtl_check/rtl/attn_single_head.sv:248:31: Operator ASSIGNDLY expects 5 bits on the Assign RHS, but Assign RHS's VARREF 'P_SEXP' generates 32 bits.
+                                                                                             : ... note: In instance 'attn_single_head'
+  248 |                         phase <= P_SEXP;
+      |                               ^~
+%Warning-WIDTHEXPAND: /tmp/opencode/r2_scale_contract/rtl_check/rtl/attn_single_head.sv:245:27: Operator EQ expects 32 bits on the LHS, but LHS's VARREF 'j' generates 7 bits.
+                                                                                              : ... note: In instance 'attn_single_head'
+  245 |                     if (j == ATT_T-1) begin
+      |                           ^~
+%Warning-WIDTHTRUNC: /tmp/opencode/r2_scale_contract/rtl_check/rtl/attn_single_head.sv:260:27: Operator ASSIGNDLY expects 5 bits on the Assign RHS, but Assign RHS's VARREF 'P_SEXP_2' generates 32 bits.
+                                                                                             : ... note: In instance 'attn_single_head'
+  260 |                     phase <= P_SEXP_2;
+      |                           ^~
+%Warning-WIDTHTRUNC: /tmp/opencode/r2_scale_contract/rtl_check/rtl/attn_single_head.sv:267:45: Operator ASSIGNDLY expects 5 bits on the Assign RHS, but Assign RHS's VARREF 'P_SREC' generates 32 bits.
+                                                                                             : ... note: In instance 'attn_single_head'
+  267 |                     if (j == ATT_T-1) phase <= P_SREC;
+      |                                             ^~
+%Warning-WIDTHTRUNC: /tmp/opencode/r2_scale_contract/rtl_check/rtl/attn_single_head.sv:270:31: Operator ASSIGNDLY expects 5 bits on the Assign RHS, but Assign RHS's VARREF 'P_SEXP' generates 32 bits.
+                                                                                             : ... note: In instance 'attn_single_head'
+  270 |                         phase <= P_SEXP;
+      |                               ^~
+%Warning-WIDTHEXPAND: /tmp/opencode/r2_scale_contract/rtl_check/rtl/attn_single_head.sv:267:27: Operator EQ expects 32 bits on the LHS, but LHS's VARREF 'j' generates 7 bits.
+                                                                                              : ... note: In instance 'attn_single_head'
+  267 |                     if (j == ATT_T-1) phase <= P_SREC;
+      |                           ^~
+%Warning-WIDTHTRUNC: /tmp/opencode/r2_scale_contract/rtl_check/rtl/attn_single_head.sv:278:27: Operator ASSIGNDLY expects 5 bits on the Assign RHS, but Assign RHS's VARREF 'P_SW_INIT' generates 32 bits.
+                                                                                             : ... note: In instance 'attn_single_head'
+  278 |                     phase <= P_SW_INIT;
+      |                           ^~
+%Warning-WIDTHTRUNC: /tmp/opencode/r2_scale_contract/rtl_check/rtl/attn_single_head.sv:285:27: Operator ASSIGNDLY expects 5 bits on the Assign RHS, but Assign RHS's VARREF 'P_SW_J' generates 32 bits.
+                                                                                             : ... note: In instance 'attn_single_head'
+  285 |                     phase <= P_SW_J;
+      |                           ^~
+%Warning-WIDTHEXPAND: /tmp/opencode/r2_scale_contract/rtl_check/rtl/attn_single_head.sv:291:36: Operator COND expects 64 bits on the Conditional True, but Conditional True's CONST '16'sh7fff' generates 16 bits.
+                                                                                              : ... note: In instance 'attn_single_head'
+  291 |                                    ? 16'sd32767 : (erow[j] * Rreg) >>> G_SH;
+      |                                    ^
+%Warning-WIDTHTRUNC: /tmp/opencode/r2_scale_contract/rtl_check/rtl/attn_single_head.sv:290:33: Operator ASSIGNDLY expects 16 bits on the Assign RHS, but Assign RHS's COND generates 64 bits.
+                                                                                             : ... note: In instance 'attn_single_head'
+  290 |                     p_mem[i][j] <= (((erow[j] * Rreg) >>> G_SH) > 64'sd32767)
+      |                                 ^~
+%Warning-WIDTHTRUNC: /tmp/opencode/r2_scale_contract/rtl_check/rtl/attn_single_head.sv:293:27: Operator ASSIGNDLY expects 5 bits on the Assign RHS, but Assign RHS's VARREF 'P_SW_D' generates 32 bits.
+                                                                                             : ... note: In instance 'attn_single_head'
+  293 |                     phase <= P_SW_D;
+      |                           ^~
+%Warning-WIDTHTRUNC: /tmp/opencode/r2_scale_contract/rtl_check/rtl/attn_single_head.sv:296:25: Bit extraction of array[63:0] requires 6 bit index, not 7 bits.
+                                                                                             : ... note: In instance 'attn_single_head'
+  296 |                     cacc[pd] <= cacc[pd] + Pcur * v_mem[j][pd];
+      |                         ^
+%Warning-WIDTHTRUNC: /tmp/opencode/r2_scale_contract/rtl_check/rtl/attn_single_head.sv:296:37: Bit extraction of array[63:0] requires 6 bit index, not 7 bits.
+                                                                                             : ... note: In instance 'attn_single_head'
+  296 |                     cacc[pd] <= cacc[pd] + Pcur * v_mem[j][pd];
+      |                                     ^
+%Warning-WIDTHTRUNC: /tmp/opencode/r2_scale_contract/rtl_check/rtl/attn_single_head.sv:296:59: Bit extraction of array[63:0] requires 6 bit index, not 7 bits.
+                                                                                             : ... note: In instance 'attn_single_head'
+  296 |                     cacc[pd] <= cacc[pd] + Pcur * v_mem[j][pd];
+      |                                                           ^
+%Warning-WIDTHTRUNC: /tmp/opencode/r2_scale_contract/rtl_check/rtl/attn_single_head.sv:298:49: Operator ASSIGNDLY expects 5 bits on the Assign RHS, but Assign RHS's VARREF 'P_CTX_INIT' generates 32 bits.
+                                                                                             : ... note: In instance 'attn_single_head'
+  298 |                         if (j == ATT_T-1) phase <= P_CTX_INIT;
+      |                                                 ^~
+%Warning-WIDTHTRUNC: /tmp/opencode/r2_scale_contract/rtl_check/rtl/attn_single_head.sv:301:35: Operator ASSIGNDLY expects 5 bits on the Assign RHS, but Assign RHS's VARREF 'P_SW_J' generates 32 bits.
+                                                                                             : ... note: In instance 'attn_single_head'
+  301 |                             phase <= P_SW_J;
+      |                                   ^~
+%Warning-WIDTHEXPAND: /tmp/opencode/r2_scale_contract/rtl_check/rtl/attn_single_head.sv:298:31: Operator EQ expects 32 bits on the LHS, but LHS's VARREF 'j' generates 7 bits.
+                                                                                              : ... note: In instance 'attn_single_head'
+  298 |                         if (j == ATT_T-1) phase <= P_CTX_INIT;
+      |                               ^~
+%Warning-WIDTHEXPAND: /tmp/opencode/r2_scale_contract/rtl_check/rtl/attn_single_head.sv:297:28: Operator EQ expects 32 bits on the LHS, but LHS's VARREF 'pd' generates 7 bits.
+                                                                                              : ... note: In instance 'attn_single_head'
+  297 |                     if (pd == ATT_D-1) begin
+      |                            ^~
+%Warning-WIDTHTRUNC: /tmp/opencode/r2_scale_contract/rtl_check/rtl/attn_single_head.sv:311:27: Operator ASSIGNDLY expects 5 bits on the Assign RHS, but Assign RHS's VARREF 'P_CTX_WR' generates 32 bits.
+                                                                                             : ... note: In instance 'attn_single_head'
+  311 |                     phase <= P_CTX_WR;
+      |                           ^~
+%Warning-WIDTHTRUNC: /tmp/opencode/r2_scale_contract/rtl_check/rtl/attn_single_head.sv:314:29: Bit extraction of array[63:0] requires 6 bit index, not 7 bits.
+                                                                                             : ... note: In instance 'attn_single_head'
+  314 |                     c_mem[i][pd] <= clip16(rq(cacc[pd], RC));
+      |                             ^
+%Warning-WIDTHTRUNC: /tmp/opencode/r2_scale_contract/rtl_check/rtl/attn_single_head.sv:314:51: Bit extraction of array[63:0] requires 6 bit index, not 7 bits.
+                                                                                             : ... note: In instance 'attn_single_head'
+  314 |                     c_mem[i][pd] <= clip16(rq(cacc[pd], RC));
+      |                                                   ^
+%Warning-WIDTHTRUNC: /tmp/opencode/r2_scale_contract/rtl_check/rtl/attn_single_head.sv:315:46: Operator ASSIGNDLY expects 5 bits on the Assign RHS, but Assign RHS's VARREF 'P_ROW_NEXT' generates 32 bits.
+                                                                                             : ... note: In instance 'attn_single_head'
+  315 |                     if (pd == ATT_D-1) phase <= P_ROW_NEXT;
+      |                                              ^~
+%Warning-WIDTHEXPAND: /tmp/opencode/r2_scale_contract/rtl_check/rtl/attn_single_head.sv:315:28: Operator EQ expects 32 bits on the LHS, but LHS's VARREF 'pd' generates 7 bits.
+                                                                                              : ... note: In instance 'attn_single_head'
+  315 |                     if (pd == ATT_D-1) phase <= P_ROW_NEXT;
+      |                            ^~
+%Warning-WIDTHTRUNC: /tmp/opencode/r2_scale_contract/rtl_check/rtl/attn_single_head.sv:321:31: Operator ASSIGNDLY expects 5 bits on the Assign RHS, but Assign RHS's VARREF 'P_OUT_INIT' generates 32 bits.
+                                                                                             : ... note: In instance 'attn_single_head'
+  321 |                         phase <= P_OUT_INIT;
+      |                               ^~
+%Warning-WIDTHTRUNC: /tmp/opencode/r2_scale_contract/rtl_check/rtl/attn_single_head.sv:327:31: Operator ASSIGNDLY expects 5 bits on the Assign RHS, but Assign RHS's VARREF 'P_SC_INIT' generates 32 bits.
+                                                                                             : ... note: In instance 'attn_single_head'
+  327 |                         phase <= P_SC_INIT;
+      |                               ^~
+%Warning-WIDTHEXPAND: /tmp/opencode/r2_scale_contract/rtl_check/rtl/attn_single_head.sv:320:27: Operator EQ expects 32 bits on the LHS, but LHS's VARREF 'i' generates 7 bits.
+                                                                                              : ... note: In instance 'attn_single_head'
+  320 |                     if (i == ATT_T-1) begin
+      |                           ^~
+%Warning-WIDTHTRUNC: /tmp/opencode/r2_scale_contract/rtl_check/rtl/attn_single_head.sv:335:27: Operator ASSIGNDLY expects 5 bits on the Assign RHS, but Assign RHS's VARREF 'P_OUT_MAC' generates 32 bits.
+                                                                                             : ... note: In instance 'attn_single_head'
+  335 |                     phase <= P_OUT_MAC;
+      |                           ^~
+%Warning-WIDTHTRUNC: /tmp/opencode/r2_scale_contract/rtl_check/rtl/attn_single_head.sv:338:42: Bit extraction of array[63:0] requires 6 bit index, not 7 bits.
+                                                                                             : ... note: In instance 'attn_single_head'
+  338 |                     acc <= acc + c_mem[i][pd] * wo[pd][po];
+      |                                          ^
+%Warning-WIDTHTRUNC: /tmp/opencode/r2_scale_contract/rtl_check/rtl/attn_single_head.sv:338:51: Bit extraction of array[63:0] requires 6 bit index, not 7 bits.
+                                                                                             : ... note: In instance 'attn_single_head'
+  338 |                     acc <= acc + c_mem[i][pd] * wo[pd][po];
+      |                                                   ^
+%Warning-WIDTHTRUNC: /tmp/opencode/r2_scale_contract/rtl_check/rtl/attn_single_head.sv:338:55: Bit extraction of array[63:0] requires 6 bit index, not 7 bits.
+                                                                                             : ... note: In instance 'attn_single_head'
+  338 |                     acc <= acc + c_mem[i][pd] * wo[pd][po];
+      |                                                       ^
+%Warning-WIDTHTRUNC: /tmp/opencode/r2_scale_contract/rtl_check/rtl/attn_single_head.sv:339:46: Operator ASSIGNDLY expects 5 bits on the Assign RHS, but Assign RHS's VARREF 'P_OUT_WR' generates 32 bits.
+                                                                                             : ... note: In instance 'attn_single_head'
+  339 |                     if (pd == ATT_D-1) phase <= P_OUT_WR;
+      |                                              ^~
+%Warning-WIDTHEXPAND: /tmp/opencode/r2_scale_contract/rtl_check/rtl/attn_single_head.sv:339:28: Operator EQ expects 32 bits on the LHS, but LHS's VARREF 'pd' generates 7 bits.
+                                                                                              : ... note: In instance 'attn_single_head'
+  339 |                     if (pd == ATT_D-1) phase <= P_OUT_WR;
+      |                            ^~
+%Warning-WIDTHTRUNC: /tmp/opencode/r2_scale_contract/rtl_check/rtl/attn_single_head.sv:343:29: Bit extraction of array[63:0] requires 6 bit index, not 7 bits.
+                                                                                             : ... note: In instance 'attn_single_head'
+  343 |                     o_mem[i][po] <= clip16(rq(acc, RO));
+      |                             ^
+%Warning-WIDTHTRUNC: /tmp/opencode/r2_scale_contract/rtl_check/rtl/attn_single_head.sv:348:35: Operator ASSIGNDLY expects 5 bits on the Assign RHS, but Assign RHS's VARREF 'P_DONE' generates 32 bits.
+                                                                                             : ... note: In instance 'attn_single_head'
+  348 |                             phase <= P_DONE;
+      |                                   ^~
+%Warning-WIDTHTRUNC: /tmp/opencode/r2_scale_contract/rtl_check/rtl/attn_single_head.sv:352:35: Operator ASSIGNDLY expects 5 bits on the Assign RHS, but Assign RHS's VARREF 'P_OUT_MAC' generates 32 bits.
+                                                                                             : ... note: In instance 'attn_single_head'
+  352 |                             phase <= P_OUT_MAC;
+      |                                   ^~
+%Warning-WIDTHEXPAND: /tmp/opencode/r2_scale_contract/rtl_check/rtl/attn_single_head.sv:347:31: Operator EQ expects 32 bits on the LHS, but LHS's VARREF 'i' generates 7 bits.
+                                                                                              : ... note: In instance 'attn_single_head'
+  347 |                         if (i == ATT_T-1) begin
+      |                               ^~
+%Warning-WIDTHTRUNC: /tmp/opencode/r2_scale_contract/rtl_check/rtl/attn_single_head.sv:356:45: Bit extraction of array[63:0] requires 6 bit index, not 7 bits.
+                                                                                             : ... note: In instance 'attn_single_head'
+  356 |                         acc   <= {{32{bias_m[po+7'd1][31]}}, bias_m[po+7'd1]};
+      |                                             ^
+%Warning-WIDTHTRUNC: /tmp/opencode/r2_scale_contract/rtl_check/rtl/attn_single_head.sv:356:68: Bit extraction of array[63:0] requires 6 bit index, not 7 bits.
+                                                                                             : ... note: In instance 'attn_single_head'
+  356 |                         acc   <= {{32{bias_m[po+7'd1][31]}}, bias_m[po+7'd1]};
+      |                                                                    ^
+%Warning-WIDTHTRUNC: /tmp/opencode/r2_scale_contract/rtl_check/rtl/attn_single_head.sv:357:31: Operator ASSIGNDLY expects 5 bits on the Assign RHS, but Assign RHS's VARREF 'P_OUT_MAC' generates 32 bits.
+                                                                                             : ... note: In instance 'attn_single_head'
+  357 |                         phase <= P_OUT_MAC;
+      |                               ^~
+%Warning-WIDTHEXPAND: /tmp/opencode/r2_scale_contract/rtl_check/rtl/attn_single_head.sv:345:28: Operator EQ expects 32 bits on the LHS, but LHS's VARREF 'po' generates 7 bits.
+                                                                                              : ... note: In instance 'attn_single_head'
+  345 |                     if (po == ATT_D-1) begin
+      |                            ^~
+%Warning-WIDTHTRUNC: /tmp/opencode/r2_scale_contract/rtl_check/rtl/attn_single_head.sv:368:31: Operator ASSIGNDLY expects 5 bits on the Assign RHS, but Assign RHS's VARREF 'P_PJ_INIT' generates 32 bits.
+                                                                                             : ... note: In instance 'attn_single_head'
+  368 |                         phase <= P_PJ_INIT;
+      |                               ^~
+%Warning-WIDTHTRUNC: /tmp/opencode/r2_scale_contract/rtl_check/rtl/attn_single_head.sv:372:32: Operator ASSIGNDLY expects 5 bits on the Assign RHS, but Assign RHS's VARREF 'P_IDLE' generates 32 bits.
+                                                                                             : ... note: In instance 'attn_single_head'
+  372 |                 default: phase <= P_IDLE;
+      |                                ^~
+%Warning-WIDTHEXPAND: /tmp/opencode/r2_scale_contract/rtl_check/rtl/attn_single_head.sv:166:20: Operator CASE expects 32 bits on the Case expression, but Case expression's VARREF 'phase' generates 5 bits.
+                                                                                              : ... note: In instance 'attn_single_head'
+  166 |             unique case (phase)
+      |                    ^~~~
+make: Entering directory '/tmp/opencode/r2_scale_contract/rtl_check/obj_dir'
+g++  -I.  -MMD -I/home/yang/yosys-sta/oss-cad-suite/share/verilator/include -I/home/yang/yosys-sta/oss-cad-suite/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -Os  -c -o tb_attn.o /tmp/opencode/r2_scale_contract/rtl_check/tb_attn.cpp
+g++ -Os  -I.  -MMD -I/home/yang/yosys-sta/oss-cad-suite/share/verilator/include -I/home/yang/yosys-sta/oss-cad-suite/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -c -o verilated.o /home/yang/yosys-sta/oss-cad-suite/share/verilator/include/verilated.cpp
+g++ -Os  -I.  -MMD -I/home/yang/yosys-sta/oss-cad-suite/share/verilator/include -I/home/yang/yosys-sta/oss-cad-suite/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -c -o verilated_threads.o /home/yang/yosys-sta/oss-cad-suite/share/verilator/include/verilated_threads.cpp
+python3 /home/yang/yosys-sta/oss-cad-suite/share/verilator/bin/verilator_includer -DVL_INCLUDE_OPT=include Vattn_single_head.cpp Vattn_single_head___024root__0.cpp Vattn_single_head___024root__Slow.cpp Vattn_single_head___024root__0__Slow.cpp Vattn_single_head___024unit__Slow.cpp Vattn_single_head___024unit__0__Slow.cpp Vattn_single_head__Syms__Slow.cpp > Vattn_single_head__ALL.cpp
+g++ -Os  -I.  -MMD -I/home/yang/yosys-sta/oss-cad-suite/share/verilator/include -I/home/yang/yosys-sta/oss-cad-suite/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -c -o Vattn_single_head__ALL.o Vattn_single_head__ALL.cpp
+g++    tb_attn.o verilated.o verilated_threads.o Vattn_single_head__ALL.a    -pthread -lpthread -latomic   -o tb_attn
+rm Vattn_single_head__ALL.verilator_deplist.tmp
+make: Leaving directory '/tmp/opencode/r2_scale_contract/rtl_check/obj_dir'
+- V e r i l a t i o n   R e p o r t: Verilator 5.047 devel rev v5.046-102-g1e50fefb8 (mod)
+- Verilator: Built from 0.046 MB sources in 3 modules, into 0.139 MB in 7 C++ files needing 0.001 MB
+- Verilator: Walltime 3.532 s (elab=0.005, cvt=0.015, bld=3.505); cpu 0.030 s on 4 threads; allocated 286.238 MB

@@ -1,0 +1,10 @@
+== emit coherent vectors ==
+GEN_EXIT=0
+71640553f7a2b6b59b28be51c1db489de92e429c6e02701b4b7cd5636d408f24  /home/yang/kwt-worktrees/ds-grad-r2_scale_contract/graduate/rtl/encoder/third_party/attn_single_head.sv
+5481a7465be4a59459d981cf40145da1bcae29151d0f1ebb8cbd9df865abf13b  /home/yang/kwt-worktrees/ds-grad-attn_scale/graduate/ds_tasks/attn_scale/tb/tb_attn.cpp
+== verilator build ==
+RTL_BUILD_EXIT=0
+coherent sample0 exit=0    bit-exact total = 41481/41481 mismatches=0   FP32 NRMSE      = 0.19230%  (row0 0.14784%, row98 0.21074%, maxabs 0.00176514)   RESULT: PASS 
+coherent sample1 exit=0    bit-exact total = 41481/41481 mismatches=0   FP32 NRMSE      = 0.24970%  (row0 0.23368%, row98 0.30062%, maxabs 0.00282418)   RESULT: PASS 
+coherent sample2 exit=0    bit-exact total = 41481/41481 mismatches=0   FP32 NRMSE      = 0.21705%  (row0 0.16193%, row98 0.15910%, maxabs 0.003381)   RESULT: PASS 
+RTL_CHECK_EXIT=0

@@ -1,0 +1,76 @@
+==============================================================================
+r2_scale_contract — cross-check attn_scale x postnorm_scale
+==============================================================================
+
+[1] provenance
+    attn calib    : /home/yang/kwt-worktrees/ds-grad-attn_scale/graduate/ds_tasks/attn_scale/attn_calib_train.json
+      sha256=9a535f04b99f0cebce941e88fc0ef8d6fcc9e30f29656d32433dff8d07fa267f  split=training  train=3  val=3
+    postnorm calib: /home/yang/kwt-worktrees/ds-grad-postnorm_scale/graduate/ds_tasks/postnorm_scale/frozen_postnorm_calib.json
+      sha256=3a1cf51b2f00716b0dc6a182d80e6d4cdf5886fa196affad268a47167bbf53fb  split=training  train=240  val=240
+    weights sha    : attn=8f359abf7adbe287…  post=8f359abf7adbe287…  local=8f359abf7adbe287…
+    same checkpoint: True
+
+[2] split overlap (official manifests)
+    npz split: training=240 validation=240
+    attn training wavs ⊂ npz training : True  (['go/0ba018fc_nohash_4.wav', 'no/7e7ca854_nohash_1.wav', 'yes/676f8138_nohash_0.wav'])
+    attn validation wavs ⊂ npz validation : True  (['four/750e3e75_nohash_0.wav', 'no/45692b02_nohash_3.wav', 'yes/ec21c46b_nohash_1.wav'])
+    train/val disjoint in npz : True
+
+[3] encoder-input (X) scale — the SAME tensor feeds attention QKV and
+    the postnorm residual
+    postnorm training set : 240 samples  max|X|=13.7924434  -> s_x      = 0.00673788148
+    attn    training set : 3 samples (subset)  max|X|=4.01513958  -> scale_x = 0.00196147512
+    CONFLICT: scale_x != s_x  (ratio 3.435109x, i.e. 1.780 bits)
+    cross-source X agreement (npz-projected vs real_input_chain npy): max|Δ|=5.77e-06
+
+[4] quantisation boundaries
+    attn  : ACT_BITS=12 but quantize_activation clamps to the int16
+            container ±32767/±32768 -> values |Xi|>2047 are legal
+    post  : CLAMP_A=2047 hard clamp in quantize_stimulus/residual/LN/GELU
+    RTL   : requant o->a saturates at int16 ±32768, not at 2047
+    under the attn 3-sample scale, training samples exceeding A12: 57/240 (58011 element(s) with |Xi|>2047)
+    under the coherent scale 0.00673788: 0/240 training samples exceed A12
+
+[5] RTL constants vs frozen models
+    attn baseline header attn_params.svh: KC=6680 SH_KC=38 (round-1 header: KC=6986 SH_KC=37)
+    frozen attn model KC=6986 SH_KC=37; stale fields vs baseline header: {'KC': [6680, 6986], 'SH_KC': [38, 37]}
+    tb_encoder.sv M_A = 5981
+    postnorm header kwt_postnorm_cfg.svh vs training-frozen model: 1/8 match ['MO1']; stale: {'MA1': [61302, 65960], 'MB1': [12260, 15037], 'MGN': [267644, 129003], 'MC2': [77111, 62159], 'MO2': [546, 467], 'EPS_Q1': [31173, 1462], 'EPS_Q2': [15272, 9924]}
+    naming trap: gen_vectors.py emits meta.sx from cal["scales"]["sx"] (key present in source: True)
+      that key = 0.00243741778 != encoder-input s_x = 0.00673788148; it is the FFN1-pack activation scale 0.00243741778 (equal: True)
+
+[6] conflict proof — naive merge of the two round-1 artefacts
+    The RTL feeds the attention-quantised X into the postnorm residual
+    (kwt_encoder_layer x_buf <- attn rd_sel 0) while MA1 is derived from
+    the postnorm s_x.  With scale_x != s_x the residual x-term is
+    multiplied by s_x/scale_x = 3.4351.
+    sample_00_encoder.npy: mismatched residual r1 NRMSE = 247.188%  (limit 3%)
+    sample_02_encoder.npy: mismatched residual r1 NRMSE = 243.701%  (limit 3%)
+    sample_05_encoder.npy: mismatched residual r1 NRMSE = 245.757%  (limit 3%)
+    worst mismatched r1 NRMSE = 247.188%  -> INCOMPATIBLE
+
+[7] coherent candidate — ONE encoder-input scale on the shared TRAINING split
+    union training max|X| = 13.7924434  ->  s_x_coh = 0.00673788148
+    (attn's 3 training samples are a subset; their max 4.01514 < 13.7924)
+    attention refit on 240 training samples:
+      scale_x=0.00673788148 RQ=5 RK=7 RV=6 RC=15 RO=11 KC=5152 SH_KC=34 scale_o=0.000122972776
+    postnorm scales kept (s_x already 0.00673788148); M_A = round(scale_o/s_a*2^16) = 5247
+    validation (dataset 240 samples + 3 real):
+      coherent hardware chain worst NRMSE = 1.6742%
+      coherent software chain worst NRMSE = 1.6898%
+      mean stage (hw chain) r1=0.3648% g=1.1723% r2=0.8694% y=0.7828%
+      max |X_int|=2047 (<=2047? True)   max |a_int|=2041
+      validation X-quantisation clips at ±2047: 0 element(s)
+    wrote /home/yang/kwt-worktrees/ds-grad-r2_scale_contract/graduate/ds_tasks/r2_scale_contract/candidate/attn_params.svh and /home/yang/kwt-worktrees/ds-grad-r2_scale_contract/graduate/ds_tasks/r2_scale_contract/candidate/coherent_frozen_calib.json
+
+[gate]
+    PASS  both_train_frozen
+    PASS  same_weights
+    PASS  same_official_split
+    PASS  no_val_in_attn_calib
+    PASS  scale_conflict_present
+    PASS  naive_merge_fails
+    PASS  coherent_candidate_ok
+
+SCALE_CONTRACT_PASS  verdict=COMPOSABLE_ON_SHARED_TRAINING_SPLIT
+results=/home/yang/kwt-worktrees/ds-grad-r2_scale_contract/graduate/ds_tasks/r2_scale_contract/results.json
