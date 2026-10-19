@@ -1,0 +1,13 @@
+=== [1] freeze calibration from training split ===
+RECALIBRATE_EXIT=0
+=== [2] L1 validation evaluation + leak audit ===
+RUN_ATTN_SCALE_EXIT=0
+=== [3] L2 attention RTL bit-exact (train-frozen constants) ===
+RTL_CHECK_EXIT=0
+== verilator build ==
+RTL_BUILD_EXIT=0
+sample0 (sample_00_encoder.npy) exit=0    bit-exact total = 41481/41481 mismatches=0   FP32 NRMSE      = 0.16419%  (row0 0.16828%, row98 0.16182%, maxabs 0.00133887)   RESULT: PASS 
+sample1 (sample_02_encoder.npy) exit=0    bit-exact total = 41481/41481 mismatches=0   FP32 NRMSE      = 0.23209%  (row0 0.19973%, row98 0.23612%, maxabs 0.00202144)   RESULT: PASS 
+sample2 (sample_05_encoder.npy) exit=0    bit-exact total = 41481/41481 mismatches=0   FP32 NRMSE      = 0.17484%  (row0 0.17385%, row98 0.18680%, maxabs 0.00255192)   RESULT: PASS 
+RTL_CHECK_EXIT=0
+REPRO_EXIT=0

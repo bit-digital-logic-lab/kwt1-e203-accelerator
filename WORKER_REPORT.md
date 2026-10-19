@@ -1,79 +1,72 @@
-# WORKER_REPORT — codex/kwt-grad-encoder（研究生 5–6 项：单层 PostNorm 编码器组装 + 12 层调度）
+# WORKER_REPORT — attn_scale：用训练划分冻结注意力尺度，独立验证多样本
 
-- 分支 / worktree：`codex/kwt-grad-encoder` @ `/home/yang/kwt-worktrees/grad-encoder`
-- 基线：`main@3d9ae98`（grad-attention `405c876` / grad-nonlinear `10aa202` / grad-golden `c9a4307` 均为终态）
-- 范围：把三项成果**组装**为单层 PostNorm 编码器（注意力 + 两处残差 + 两处 LayerNorm +
-  `64→256→64` 前馈 + GELU），并实现 **12 层参数更新/搬运控制**；冻结 E203 软件边界与分类头
-  软件边界。对应 [`题目/640.jpg 9`](题目/640.jpg%209) 第 5、6 项。
-- 边界：只在本 worktree 内操作；未开子智能体；未改主目录/他人分支；未
-  `merge`/`rebase`/`cherry-pick`/`push`；未改 `hardware/`、`software/` 既有本科核心。
-- 交付契约：根目录 `ACCEPTANCE.json`（编排者 `git archive HEAD` 干净副本独立复跑）。
+- 分支 / worktree：`codex/kwt-ds-grad-attn_scale` @ `/home/yang/kwt-worktrees/ds-grad-attn_scale`
+- 范围：只改 `graduate/encoder/model/attn_int_model.py`，新增 `graduate/ds_tasks/attn_scale/`。
+- 边界：只在本 worktree 操作；未开子智能体；未改其他 worktree；未 `merge`/`rebase`/`push`；
+  未提交大数据/密钥/缓存。数据只读来自官方划分（`software/validation/real_input_chain_20261017`）。
 
-详细边界与来源见 `graduate/encoder/README.md`、`SOFTWARE_BOUNDARY.md`、`PROVENANCE.md`。
+## 1. 结果
 
-## 1. 本次新增/组装的文件
+**问题**：复制自 grad-attention 的注意力整数模型用**当前验证样本**求输入尺度与所有
+`fit_shift`（`sx, RQ/RK/RV/RC/RO, KC/SH_KC, bias`），即“用测试集标定”。
 
-| 文件 | 作用 |
-| --- | --- |
-| `graduate/rtl/encoder/kwt_encoder_layer.sv` | 单层 PostNorm 编码器数据通路（注意力→requant→残差1→LN1→FFN1→GELU→FFN2→残差2→LN2），统一装载端口 |
-| `graduate/rtl/encoder/kwt_ffn1_row.sv` | FFN1 行引擎 `64→256`，INT48 累加，输出 per-channel scale `s_h[c]`（接 postnorm `h`） |
-| `graduate/rtl/encoder/kwt_encoder_layers_ctrl.sv` | 12 层参数更新/层间搬运/分类头边界控制器（纯事务序列，无算术） |
-| `graduate/rtl/encoder/kwt_encoder_top.sv` | layer + ctrl 顶层；E203-like 事务端口 `o_ld_*`/`p_rdata` |
-| `graduate/rtl/encoder/third_party/*` | 只读复制：注意力 RTL（grad-attention）、postnorm FFN/GELU/LN RTL（grad-nonlinear） |
-| `graduate/encoder/model/{attn_int_model,kwt_postnorm_ref}.py` | 只读复制的独立整数参考（仅路径适配） |
-| `graduate/encoder/reference/kwt1_fp32_golden.py` | 只读复制的 FP32 golden（仅路径适配） |
-| `graduate/encoder/model/verify_encoder.py` | 组合独立整数模型 + FP32 误差逐级对照（新增） |
-| `graduate/encoder/vectors/gen_vectors.py` | 生成全部 RTL 激励/参数 hex（新增） |
-| `graduate/encoder/tb/tb_encoder.sv`、`tb/run.sh` | 单层逐级对照 TB + 一键脚本（新增） |
-| `graduate/encoder/tb/tb_layers_smoke.sv`、`tb/run_smoke.sh` | 12 层调度 smoke TB + 一键脚本（新增） |
+**修复**：把模型拆成两相——
+- `calibrate()`（训练划分，无梯度）：从 manifest 读 `split=="training"` 的 `sample_01/03/04`，
+  校验样本数组 SHA-256 与 manifest `encoder_sha256` 一致；冻结
+  `scale_x=1.961475124e-03, RQ/RK/RV=6/7/7, KC=6986, SH_KC=37, RC=14, RO=11,
+  scale_o=3.579879541e-05`，写入 `attn_calib_train.json`（SHA-256 `9a535f04…fa267f`）；
+- `integer_forward()`（验证划分，只读常量）：输入只用冻结 `scale_x` 量化，不再重拟合；
+  softmax 的逐行最大值是算法内运行时操作，非冻结阈值。
+- `load_calibration()` 断言标定来自训练划分、溯源不含验证样本；缺标定文件直接报错。
 
-## 2. 实跑命令与退出码（本次，2026-10-19）
+**多验证样本结果（L1 软件参考，独立实现与模型逐位互校）**
+
+| 验证样本 | 冻结尺度 NRMSE | max_abs | 逐位(driver==model) | 泄漏基线(诊断) |
+| --- | ---: | ---: | :---: | ---: |
+| `sample_00` | 0.1642% | 1.34e-03 | 是 | 0.1589% |
+| `sample_02` | 0.2321% | 2.02e-03 | 是 | 0.2124% |
+| `sample_05` | 0.1748% | 2.55e-03 | 是 | 0.1707% |
+
+三条验证样本全部 **< 3% 门槛**。泄漏基线是“按单条验证样本重标定”（修复前行为）的
+**诊断对照**，不是交付结果；冻结尺度略差正说明未偷看测试集。
+
+**L2 注意力 RTL 逐位**（只读 RTL 副本 + 重新生成的 `attn_params.svh`，Verilator）：
+每条验证样本 `q/k/v/p/c/o` = **41481/41481 逐位一致**，FP32 NRMSE 0.16419%/0.23209%/0.17484%，
+TB 退出码 0。
+
+**泄漏审计（全部 PASS，`run_attn_scale.py` 步骤 [5]）**：标定文件评估前后不变；
+标定声明 training；溯源无验证样本；冻结 `scale_x` 与每条验证样本的自标定尺度均不同；
+独立驱动与模型逐位一致；三条验证 NRMSE<3%。标定重复两次逐位相同；同样本重复评估哈希一致。
+
+**证据层级**：L1 软件参考 = 已证；L2 注意力 RTL 逐位 = 已证（仅注意力、Verilator）；
+E203 = 未证；综合/时序/面积 = 未证；官方 600 条验收 = 未证。
+
+## 2. 复现命令与退出码（本次实跑，2026-10-19）
 
 | 命令（仓库根执行） | 退出码 | 结果 |
 | --- | ---: | --- |
-| `bash graduate/encoder/tb/run.sh` | **0** | `TB_PASS`（`cycles=4,700,560`）+ `VERIFY_PASS`；6 阶段 99 行**全逐位一致** |
-| `bash graduate/encoder/tb/run_smoke.sh` | **0** | `SMOKE_PASS`；`n_start=12 max_layer=11 yrows=1188 n_ld_par=595200 head=1` |
-| `verilator --lint-only … --top-module kwt_encoder_top …` | **0** | 0 error（仅第三方文件 WIDTH 警告） |
+| `bash graduate/ds_tasks/attn_scale/repro.sh` | **0** | RECALIBRATE=0 / RUN=0 / RTL_CHECK=0 |
+| `python3 graduate/encoder/model/attn_int_model.py --recalibrate --no-write-vectors` | **0** | `CALIB_OK split=training samples=3 (validation=3 never used)` |
+| `python3 graduate/ds_tasks/attn_scale/run_attn_scale.py` | **0** | `SCALE_AUDIT_PASS`，6 项审计全 PASS |
+| `bash graduate/ds_tasks/attn_scale/rtl_check.sh` | **0** | 3 样本各 41481/41481，`RESULT: PASS` |
+| `python3 graduate/encoder/vectors/gen_vectors.py` | **0** | 与新冻结常量一致（`GEN_OK M_A=8649`） |
+| `python3 graduate/encoder/model/attn_int_model.py --sample 0/1/2` | **0** | 验证划分样本 00/02/05 |
 
-复现细节：`run.sh` 先生成向量（`gen_vectors.py` = 运行复制的 `attn_int_model.py` +
-`kwt_postnorm_ref.calibrate()`），再 `verilator --binary` 建 `tb_encoder` 并运行，
-最后 `verify_encoder.py` 做逐位 + FP32 校验。`TB_DONE … sat=0/0` 无 X。
+样本数：训练 3（标定）、验证 3（评估）。（`--sample N` 为验证划分下标。）
+日志与退出码：`graduate/ds_tasks/attn_scale/logs/`（`repro_console.log`、
+`run.log`、`rtl_check.log`、`rtl_val_sample0/1/2.log` 等）。
 
-## 3. 样本、层
+## 3. 未证事项
 
-- **样本**：真实验证输入 `software/validation/real_input_chain_20261017/sample_00_encoder.npy`
-  （`X[99,64]`，SHA 与 manifest 一致）。
-- **层**：`enc_layers/0`（第 0 层），尺度与 FFN1 冻结包（`ffn1_a12w10_static_sym.npz`
-  的 `layer01_*`）一致。
-- **单层逐级对照**：99 行全量，6 个阶段（`a,r1,g,f,r2,y`）。
-- **12 层调度 smoke**：12 层顺序执行，逐层重载 49,600 项参数，共 1,188 行输出。
-
-## 4. 数值误差
-
-单层逐级（RTL vs 组合独立整数模型逐位；RTL 反量化 vs 研究生 FP32 golden）：
-
-| 阶段 | 逐位 | FP32 NRMSE | max_abs |
-| --- | --- | ---: | ---: |
-| `a`（注意力，含 requant） | 99×64 exact | 0.1591% | 1.32e-3 |
-| `r1` | 99×64 exact | 0.1082% | 2.89e-3 |
-| `g`（GELU） | 99×256 exact | **1.3987%** | 1.29e-2 |
-| `f`（FFN2） | 99×64 exact | 1.3968% | 1.54e-2 |
-| `r2` | 99×64 exact | 0.7000% | 5.00e-2 |
-| `y`（编码器输出） | 99×64 exact | 0.7289% | 4.23e-2 |
-
-最差阶段 `g` = **1.3987% < 3% 门槛**；`y` = 0.7289%。逐位一致（0 失配）覆盖
-`a`（含注意力 + requant）到 `y` 的整条链。
-
-## 5. 未证事项（不得宣称完整研究生组验收）
-
-1. **无官方 SoC**：未在真实 E203 指令流/System Bus/NICE 上运行；`o_ld_*`/`p_rdata` 为
-   **E203-like** 事务模型（已在 `SOFTWARE_BOUNDARY.md` 逐条标注）。
-2. **仅第 0 层标定**：第 1–11 层尺度/EPS/GELU LUT 未逐层重算；12 层 smoke 只证**调度**，
-   不证 12 层数值。
-3. 无目标 PDK / SRAM 宏 / SDC：未做 150 MHz STA、面积、功耗签核；仅 Verilator 功能仿真
-   （未跑 Icarus 复核）。
-4. FFN2/注意力的大数组与组合读端口仍是行为存储，未映射题目规定 SRAM 宏。
-5. 分类头为**软件**阶段（题目规定），硬件只给 `head_token`/`head_valid`；未做分类头 RTL。
-6. 未测官方 600 条评测集 NRMSE / 准确率；FP32 参考为官方源码语义的 NumPy golden
-   （grad-golden 已与官方 TF 原文 ≤9.3e-6 吻合），本目录不再重跑 TF。
-7. 本报告不声明“12 层整层 E203 通过”或“研究生 5–6 项全部通过”。
+1. **样本量小**：仅 6 条真实 encoder 输入（训练 3 / 验证 3），能证“训练冻结、验证独立”，
+   不代表官方 600 条评测集分布。
+2. **仅第 0 层**：只标定 `enc_layers/0` 注意力，第 1–11 层未重标。
+3. **A12 有效位轻微越界**：冻结尺度下 `sample_05` 有 2/6336 个输入量化值 `|Xi|=2095>2047`，
+   仍在 int16 容器内、无饱和；未重标定。
+4. **跨任务常量未同步（重要）**：全编码器 TB `graduate/encoder/tb/run.sh` 仍用
+   `third_party/attn_params.svh`（旧 KC=6680/SH_KC=38），且 `kwt_postnorm_ref.py` 的输入尺度
+   仍按验证样本 `sample_00` 标定——二者都在本任务允许文件之外，故**未重跑**该脚本；把新注意力
+   尺度接进整链需同步更新第三方常量并让 postnorm 也用同一训练冻结尺度（后续任务）。
+5. **RTL 逐位仅注意力**：整层/12 层 RTL 逐位、E203 集成/总线/NICE、综合与 150 MHz STA、
+   面积/功耗、官方 600 条验收均未证明。
+6. 不得宣称“研究生 4 项注意力验收通过”或“整链 E203 通过”。
