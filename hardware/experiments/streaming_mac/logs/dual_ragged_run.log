@@ -1,0 +1,6 @@
+ARCH_METRICS cycles=1450 initial_load_cycles=220 compute_cycles=280 drain_cycles=945 stall_cycles=597 a_load_words=70 w_load_words=133 bias_load_words=38 out_write_words=380 a_local_reads=140 w_local_reads=224 checked_outputs=190 checked_padding=0 overlapped_output_words=0 overlapped_captures=1
+PASS row-broadcast dual-cacc task M=10 K=7 N=19 gaps=1 bp=3
+- /home/yang/kwt-worktrees/ds-p027-streaming/hardware/experiments/streaming_mac/tb/tb_kwt_streaming_task.sv:346: Verilog $finish
+- S i m u l a t i o n   R e p o r t: Verilator 5.047 devel
+- Verilator: $finish at 15ns; walltime 0.063 s; speed 229.079 ns/s
+- Verilator: cpu 0.063 s on 1 threads; allocated 6 MB

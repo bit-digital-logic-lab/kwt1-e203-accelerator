@@ -1,0 +1,5 @@
+PASS dual-cacc unit: overlap dump+accumulate, reset, back-pressure ordering
+- /home/yang/kwt-worktrees/ds-p027-streaming/hardware/experiments/streaming_mac/tb/tb_kwt_dualacc_unit.sv:227: Verilog $finish
+- S i m u l a t i o n   R e p o r t: Verilator 5.047 devel
+- Verilator: $finish at 3ns; walltime 0.000 s; speed 16.944 us/s
+- Verilator: cpu 0.000 s on 1 threads; allocated 6 MB

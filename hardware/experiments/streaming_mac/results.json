@@ -1,0 +1,466 @@
+{
+  "meta": {
+    "schema": "kwt-streaming-mac/1",
+    "description": "single-CACC staged task (baseline) vs dual-CACC streaming task",
+    "core_rtl": "hardware/rtl/pulse_array/kwt_row_broadcast_tile.sv (unchanged)",
+    "stage_rtl": "hardware/rtl/pulse_array/kwt_tile_output_stage.sv (unchanged)",
+    "baseline_tb": "hardware/architecture/tb/tb_kwt_row_broadcast_staged_task.sv (unchanged)",
+    "dual_tb": "hardware/experiments/streaming_mac/tb/tb_kwt_streaming_task.sv",
+    "rows": 16,
+    "clock_hz": 150000000,
+    "bus_model": "one 16-bit word/cycle load; output accepted every 2 cycles (2 slots/result)",
+    "scope": "RTL functional/task-level simulation; NOT E203, NOT 150 MHz STA"
+  },
+  "commands": [
+    {
+      "unit_build": "verilator --binary --timing --assert --top-module tb_kwt_dualacc_unit /home/yang/kwt-worktrees/ds-p027-streaming/hardware/rtl/pulse_array/kwt_row_broadcast_tile.sv /home/yang/kwt-worktrees/ds-p027-streaming/hardware/experiments/streaming_mac/tb/tb_kwt_dualacc_unit.sv",
+      "exit": 0
+    },
+    {
+      "unit_run": "/tmp/opencode/kwt-streaming-1dv2sfqd/unit/Vtb_kwt_dualacc_unit",
+      "exit": 0
+    },
+    {
+      "baseline_build": "verilator ... -GROWS=16 /home/yang/kwt-worktrees/ds-p027-streaming/hardware/rtl/pulse_array/kwt_row_broadcast_tile.sv /home/yang/kwt-worktrees/ds-p027-streaming/hardware/rtl/pulse_array/kwt_tile_output_stage.sv /home/yang/kwt-worktrees/ds-p027-streaming/hardware/architecture/tb/tb_kwt_row_broadcast_staged_task.sv",
+      "exit": 0
+    },
+    {
+      "dual_build": "verilator ... -GROWS=16 /home/yang/kwt-worktrees/ds-p027-streaming/hardware/rtl/pulse_array/kwt_row_broadcast_tile.sv /home/yang/kwt-worktrees/ds-p027-streaming/hardware/rtl/pulse_array/kwt_tile_output_stage.sv /home/yang/kwt-worktrees/ds-p027-streaming/hardware/experiments/streaming_mac/tb/tb_kwt_streaming_task.sv",
+      "exit": 0
+    },
+    {
+      "event_schedule_model": "/home/yang/kwt-worktrees/ds-p027-streaming/hardware/experiments/streaming_mac/model/event_schedule.py --baseline-rtl 154240 --dual-rtl 125603",
+      "exit": 0
+    }
+  ],
+  "cases": [
+    {
+      "name": "tiny",
+      "m": 3,
+      "k": 4,
+      "n": 5,
+      "tiles": 1,
+      "pure_mac_compute_cycles": 20,
+      "bytes": {
+        "shared_read_bytes": 144,
+        "a_words": 12,
+        "w_words": 20,
+        "bias_slots": 10,
+        "out_slots": 30
+      },
+      "baseline": {
+        "cycles": 462,
+        "initial_load_cycles": 86,
+        "compute_cycles": 85,
+        "drain_cycles": 259,
+        "a_load_words": 12,
+        "w_load_words": 20,
+        "bias_load_words": 10,
+        "out_write_words": 30,
+        "a_local_reads": 12,
+        "w_local_reads": 64,
+        "checked_outputs": 15,
+        "checked_padding": 0,
+        "overlapped_output_words": 0,
+        "shared_bytes": 144,
+        "valid_outputs": 15
+      },
+      "dual": {
+        "cycles": 463,
+        "initial_load_cycles": 86,
+        "compute_cycles": 85,
+        "drain_cycles": 290,
+        "stall_cycles": 0,
+        "a_load_words": 12,
+        "w_load_words": 20,
+        "bias_load_words": 10,
+        "out_write_words": 30,
+        "a_local_reads": 12,
+        "w_local_reads": 64,
+        "checked_outputs": 15,
+        "checked_padding": 0,
+        "overlapped_output_words": 0,
+        "overlapped_captures": 0,
+        "shared_bytes": 144,
+        "valid_outputs": 15
+      },
+      "delta": {
+        "cycles_saved": -1,
+        "speedup": 0.9978,
+        "baseline_drain_pct": 56.06,
+        "dual_overlapped_captures": 0,
+        "dual_stall_cycles": 0
+      }
+    },
+    {
+      "name": "ragged",
+      "m": 10,
+      "k": 7,
+      "n": 19,
+      "tiles": 2,
+      "pure_mac_compute_cycles": 133,
+      "bytes": {
+        "shared_read_bytes": 1242,
+        "a_words": 70,
+        "w_words": 133,
+        "bias_slots": 38,
+        "out_slots": 380
+      },
+      "baseline": {
+        "cycles": 1262,
+        "initial_load_cycles": 220,
+        "compute_cycles": 280,
+        "drain_cycles": 697,
+        "a_load_words": 70,
+        "w_load_words": 133,
+        "bias_load_words": 38,
+        "out_write_words": 380,
+        "a_local_reads": 140,
+        "w_local_reads": 224,
+        "checked_outputs": 190,
+        "checked_padding": 0,
+        "overlapped_output_words": 59,
+        "shared_bytes": 1242,
+        "valid_outputs": 190
+      },
+      "dual": {
+        "cycles": 1261,
+        "initial_load_cycles": 220,
+        "compute_cycles": 280,
+        "drain_cycles": 756,
+        "stall_cycles": 436,
+        "a_load_words": 70,
+        "w_load_words": 133,
+        "bias_load_words": 38,
+        "out_write_words": 380,
+        "a_local_reads": 140,
+        "w_local_reads": 224,
+        "checked_outputs": 190,
+        "checked_padding": 0,
+        "overlapped_output_words": 0,
+        "overlapped_captures": 1,
+        "shared_bytes": 1242,
+        "valid_outputs": 190
+      },
+      "delta": {
+        "cycles_saved": 1,
+        "speedup": 1.0008,
+        "baseline_drain_pct": 55.23,
+        "dual_overlapped_captures": 1,
+        "dual_stall_cycles": 436
+      }
+    },
+    {
+      "name": "twotile",
+      "m": 32,
+      "k": 8,
+      "n": 16,
+      "tiles": 2,
+      "pure_mac_compute_cycles": 256,
+      "bytes": {
+        "shared_read_bytes": 2880,
+        "a_words": 256,
+        "w_words": 128,
+        "bias_slots": 32,
+        "out_slots": 1024
+      },
+      "baseline": {
+        "cycles": 2118,
+        "initial_load_cycles": 416,
+        "compute_cycles": 314,
+        "drain_cycles": 871,
+        "a_load_words": 256,
+        "w_load_words": 128,
+        "bias_load_words": 32,
+        "out_write_words": 1024,
+        "a_local_reads": 256,
+        "w_local_reads": 256,
+        "checked_outputs": 512,
+        "checked_padding": 0,
+        "overlapped_output_words": 60,
+        "shared_bytes": 2880,
+        "valid_outputs": 512
+      },
+      "dual": {
+        "cycles": 2119,
+        "initial_load_cycles": 416,
+        "compute_cycles": 314,
+        "drain_cycles": 1384,
+        "stall_cycles": 612,
+        "a_load_words": 256,
+        "w_load_words": 128,
+        "bias_load_words": 32,
+        "out_write_words": 1024,
+        "a_local_reads": 256,
+        "w_local_reads": 256,
+        "checked_outputs": 512,
+        "checked_padding": 0,
+        "overlapped_output_words": 0,
+        "overlapped_captures": 1,
+        "shared_bytes": 2880,
+        "valid_outputs": 512
+      },
+      "delta": {
+        "cycles_saved": -1,
+        "speedup": 0.9995,
+        "baseline_drain_pct": 41.12,
+        "dual_overlapped_captures": 1,
+        "dual_stall_cycles": 612
+      }
+    },
+    {
+      "name": "overflow",
+      "m": 8,
+      "k": 64,
+      "n": 16,
+      "tiles": 1,
+      "pure_mac_compute_cycles": 1024,
+      "bytes": {
+        "shared_read_bytes": 3648,
+        "a_words": 512,
+        "w_words": 1024,
+        "bias_slots": 32,
+        "out_slots": 256
+      },
+      "baseline": {
+        "cycles": 3192,
+        "initial_load_cycles": 1568,
+        "compute_cycles": 1106,
+        "drain_cycles": 259,
+        "a_load_words": 512,
+        "w_load_words": 1024,
+        "bias_load_words": 32,
+        "out_write_words": 256,
+        "a_local_reads": 512,
+        "w_local_reads": 1024,
+        "checked_outputs": 128,
+        "checked_padding": 0,
+        "overlapped_output_words": 0,
+        "shared_bytes": 3648,
+        "valid_outputs": 128
+      },
+      "dual": {
+        "cycles": 3191,
+        "initial_load_cycles": 1568,
+        "compute_cycles": 1106,
+        "drain_cycles": 515,
+        "stall_cycles": 0,
+        "a_load_words": 512,
+        "w_load_words": 1024,
+        "bias_load_words": 32,
+        "out_write_words": 256,
+        "a_local_reads": 512,
+        "w_local_reads": 1024,
+        "checked_outputs": 128,
+        "checked_padding": 0,
+        "overlapped_output_words": 0,
+        "overlapped_captures": 0,
+        "shared_bytes": 3648,
+        "valid_outputs": 128
+      },
+      "delta": {
+        "cycles_saved": 1,
+        "speedup": 1.0003,
+        "baseline_drain_pct": 8.11,
+        "dual_overlapped_captures": 0,
+        "dual_stall_cycles": 0
+      }
+    },
+    {
+      "name": "full",
+      "m": 99,
+      "k": 64,
+      "n": 256,
+      "tiles": 112,
+      "pure_mac_compute_cycles": 114688,
+      "bytes": {
+        "shared_read_bytes": 147840,
+        "a_words": 6336,
+        "w_words": 16384,
+        "bias_slots": 512,
+        "out_slots": 50688
+      },
+      "baseline": {
+        "cycles": 154240,
+        "initial_load_cycles": 7872,
+        "compute_cycles": 117040,
+        "drain_cycles": 29008,
+        "a_load_words": 6336,
+        "w_load_words": 16384,
+        "bias_load_words": 512,
+        "out_write_words": 50688,
+        "a_local_reads": 101376,
+        "w_local_reads": 114688,
+        "checked_outputs": 25344,
+        "checked_padding": 0,
+        "overlapped_output_words": 24297,
+        "shared_bytes": 147840,
+        "valid_outputs": 25344
+      },
+      "dual": {
+        "cycles": 125603,
+        "initial_load_cycles": 7872,
+        "compute_cycles": 117040,
+        "drain_cycles": 356,
+        "stall_cycles": 0,
+        "a_load_words": 6336,
+        "w_load_words": 16384,
+        "bias_load_words": 512,
+        "out_write_words": 50688,
+        "a_local_reads": 101376,
+        "w_local_reads": 114688,
+        "checked_outputs": 25344,
+        "checked_padding": 0,
+        "overlapped_output_words": 25296,
+        "overlapped_captures": 111,
+        "shared_bytes": 147840,
+        "valid_outputs": 25344
+      },
+      "delta": {
+        "cycles_saved": 28637,
+        "speedup": 1.228,
+        "baseline_drain_pct": 18.81,
+        "dual_overlapped_captures": 111,
+        "dual_stall_cycles": 0
+      }
+    }
+  ],
+  "checks": [
+    {
+      "case": "tiny",
+      "baseline_int32_exact": true,
+      "dual_int32_exact": true,
+      "dual_access_counts_exact": true,
+      "dual_outputs": 15
+    },
+    {
+      "case": "ragged",
+      "baseline_int32_exact": true,
+      "dual_int32_exact": true,
+      "dual_access_counts_exact": true,
+      "dual_outputs": 190
+    },
+    {
+      "case": "twotile",
+      "baseline_int32_exact": true,
+      "dual_int32_exact": true,
+      "dual_access_counts_exact": true,
+      "dual_outputs": 512
+    },
+    {
+      "case": "overflow",
+      "baseline_int32_exact": true,
+      "dual_int32_exact": true,
+      "dual_access_counts_exact": true,
+      "dual_outputs": 128
+    },
+    {
+      "case": "full",
+      "baseline_int32_exact": true,
+      "dual_int32_exact": true,
+      "dual_access_counts_exact": true,
+      "dual_outputs": 25344
+    }
+  ],
+  "model": {
+    "label": "MODEL-ONLY (software event schedule) - NOT RTL, NOT measured",
+    "assumption": "12 identical FFN1 layers run back-to-back; per-layer stage cycle counts are the RTL-measured full-case counts; no inter-layer E203/bus overhead is added (set to 0).",
+    "layers": 12,
+    "rtl_measured_one_layer": {
+      "baseline": 154240,
+      "dual": 125603
+    },
+    "modeled_12_layer_total_cycles": {
+      "baseline": 1850880,
+      "dual": 1507236
+    },
+    "modeled_12_layer_ms_at_150mhz": {
+      "baseline": 12.3392,
+      "dual": 10.0482
+    },
+    "modeled_speedup": 1.228,
+    "ideal_pure_mac_one_layer_cycles_16rows": 114688,
+    "event_schedule": {
+      "label": "MODEL-ONLY event schedule; NOT RTL, NOT measured",
+      "genuine_prediction": "dual-CACC one-layer cycles are predicted by the model (compute calibrated only from the baseline RTL)",
+      "calibrated_from": {
+        "baseline_rtl_one_layer_cycles": 154240
+      },
+      "rtl_reference": {
+        "baseline": 154240,
+        "dual": 125603
+      },
+      "tiles": 112,
+      "initial_load_words": 7872,
+      "per_tile_compute_calibrated": 1050.0,
+      "per_tile_capture": 256,
+      "one_layer": {
+        "baseline_model": 154240.0,
+        "dual_model": 125824.0,
+        "baseline_rtl": 154240,
+        "dual_rtl": 125603,
+        "baseline_fit_pct": 0.0,
+        "dual_prediction_error_pct": 0.176
+      },
+      "twelve_layers": {
+        "assumption": "12 identical FFN1 layers back-to-back, each charging the same per-layer load; inter-layer E203/bus overhead = 0 (not modelled, not proven).",
+        "baseline_model_cycles": 1850880.0,
+        "dual_model_cycles": 1509888.0,
+        "speedup": 1.2258,
+        "baseline_model_ms_at_150mhz": 12.3392,
+        "dual_model_ms_at_150mhz": 10.0659
+      },
+      "not_proven": [
+        "E203 command/reprogram latency",
+        "shared-bus arbitration",
+        "target SRAM macro ports/latency",
+        "150 MHz timing closure",
+        "12-layer quantised numerics"
+      ]
+    }
+  },
+  "unit": {
+    "dualacc": "PASS"
+  },
+  "backpressure": [
+    {
+      "case": "tiny",
+      "backpressure_period": 4,
+      "dual_cycles": 493,
+      "stall_cycles": 0,
+      "int32_exact": true
+    },
+    {
+      "case": "ragged",
+      "backpressure_period": 3,
+      "dual_cycles": 1450,
+      "stall_cycles": 597,
+      "int32_exact": true
+    }
+  ],
+  "macro_port_table": {
+    "budget": "16-bit x 128/1024/4096 single/dual-port macros only; no extra DDR",
+    "a_resident_16bit_99x64": {
+      "bytes": 12672,
+      "needs_4096x16_macros": 2,
+      "ports": "1R compute + 1W load; dual-port or 2 macros"
+    },
+    "w_pingpong_16bit_64x16x2": {
+      "bytes": 4096,
+      "needs_1024x16_macros": 2,
+      "ports": "compute reads active page; DMA writes spare page"
+    },
+    "cacc_dual_16x16x32x2": {
+      "bytes": 2048,
+      "note": "regs or 16-bit macros x2 per 32-bit word; 2 pages",
+      "sram_macros_if_macro_mapped": 4,
+      "ports": "1R dump page + 1W accumulate page per row"
+    },
+    "output_stage_256x32": {
+      "bytes": 1024,
+      "sram_macros_if_macro_mapped": 2,
+      "ports": "1W capture + 1R drain"
+    },
+    "note": "macro counts are capacity-based; 32-bit words require 2 x 16-bit macros or width-cascading. Port/bank arbitration and 150 MHz STA are NOT proven here."
+  }
+}

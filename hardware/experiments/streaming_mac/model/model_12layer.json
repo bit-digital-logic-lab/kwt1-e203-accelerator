@@ -1,0 +1,38 @@
+{
+  "label": "MODEL-ONLY event schedule; NOT RTL, NOT measured",
+  "genuine_prediction": "dual-CACC one-layer cycles are predicted by the model (compute calibrated only from the baseline RTL)",
+  "calibrated_from": {
+    "baseline_rtl_one_layer_cycles": 154240
+  },
+  "rtl_reference": {
+    "baseline": 154240,
+    "dual": 125603
+  },
+  "tiles": 112,
+  "initial_load_words": 7872,
+  "per_tile_compute_calibrated": 1050.0,
+  "per_tile_capture": 256,
+  "one_layer": {
+    "baseline_model": 154240.0,
+    "dual_model": 125824.0,
+    "baseline_rtl": 154240,
+    "dual_rtl": 125603,
+    "baseline_fit_pct": 0.0,
+    "dual_prediction_error_pct": 0.176
+  },
+  "twelve_layers": {
+    "assumption": "12 identical FFN1 layers back-to-back, each charging the same per-layer load; inter-layer E203/bus overhead = 0 (not modelled, not proven).",
+    "baseline_model_cycles": 1850880.0,
+    "dual_model_cycles": 1509888.0,
+    "speedup": 1.2258,
+    "baseline_model_ms_at_150mhz": 12.3392,
+    "dual_model_ms_at_150mhz": 10.0659
+  },
+  "not_proven": [
+    "E203 command/reprogram latency",
+    "shared-bus arbitration",
+    "target SRAM macro ports/latency",
+    "150 MHz timing closure",
+    "12-layer quantised numerics"
+  ]
+}
