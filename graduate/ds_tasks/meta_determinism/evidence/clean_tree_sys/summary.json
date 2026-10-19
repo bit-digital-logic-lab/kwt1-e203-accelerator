@@ -1,0 +1,43 @@
+{
+  "head": "3deec02c3b2f468ac51e4c31ee180db018ddfd55",
+  "generated_at": "2026-10-19T02:21:33.881280+00:00",
+  "exit_codes": [
+    0,
+    0
+  ],
+  "commands_ok": true,
+  "artifacts": [
+    {
+      "path": "graduate/encoder/tb/build/y.hex",
+      "declared_sha256": "7620a3470ce5d5910c185f86f7704a88a9ef9eb67d21de476709dd859c62b0be",
+      "actual_sha256": "7620a3470ce5d5910c185f86f7704a88a9ef9eb67d21de476709dd859c62b0be",
+      "ok": true
+    },
+    {
+      "path": "graduate/encoder/tb/build/r1.hex",
+      "declared_sha256": "87b3fcdb64149bb24e4f5ea5c0a7e3c18aeb287084c3ae5d5afc4f9536473d60",
+      "actual_sha256": "87b3fcdb64149bb24e4f5ea5c0a7e3c18aeb287084c3ae5d5afc4f9536473d60",
+      "ok": true
+    },
+    {
+      "path": "graduate/encoder/tb/build/g.hex",
+      "declared_sha256": "ef8e15863a8a65f211b724c8762d3ef7dee58856c9066bb9aaba0c8ade058737",
+      "actual_sha256": "ef8e15863a8a65f211b724c8762d3ef7dee58856c9066bb9aaba0c8ade058737",
+      "ok": true
+    },
+    {
+      "path": "graduate/encoder/tb/build/verify.log",
+      "declared_sha256": "7fa33efbad31073841365a9d738c5648d55e4e1bca3179e5fe671f9f9c2339a8",
+      "actual_sha256": "7fa33efbad31073841365a9d738c5648d55e4e1bca3179e5fe671f9f9c2339a8",
+      "ok": true
+    },
+    {
+      "path": "graduate/encoder/vectors/meta.json",
+      "declared_sha256": "d63fc090ba420763d133a5206270c53a91c0bf5e4865202135768699fb2a2b34",
+      "actual_sha256": "d63fc090ba420763d133a5206270c53a91c0bf5e4865202135768699fb2a2b34",
+      "ok": true
+    }
+  ],
+  "artifacts_ok": true,
+  "all_ok": true
+}

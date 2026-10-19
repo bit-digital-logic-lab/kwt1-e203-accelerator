@@ -1,79 +1,75 @@
-# WORKER_REPORT — codex/kwt-grad-encoder（研究生 5–6 项：单层 PostNorm 编码器组装 + 12 层调度）
+# WORKER_REPORT — meta_determinism（修复 grad-encoder `meta.json` 哈希不可复现）
 
-- 分支 / worktree：`codex/kwt-grad-encoder` @ `/home/yang/kwt-worktrees/grad-encoder`
-- 基线：`main@3d9ae98`（grad-attention `405c876` / grad-nonlinear `10aa202` / grad-golden `c9a4307` 均为终态）
-- 范围：把三项成果**组装**为单层 PostNorm 编码器（注意力 + 两处残差 + 两处 LayerNorm +
-  `64→256→64` 前馈 + GELU），并实现 **12 层参数更新/搬运控制**；冻结 E203 软件边界与分类头
-  软件边界。对应 [`题目/640.jpg 9`](题目/640.jpg%209) 第 5、6 项。
-- 边界：只在本 worktree 内操作；未开子智能体；未改主目录/他人分支；未
-  `merge`/`rebase`/`cherry-pick`/`push`；未改 `hardware/`、`software/` 既有本科核心。
-- 交付契约：根目录 `ACCEPTANCE.json`（编排者 `git archive HEAD` 干净副本独立复跑）。
+- 分支 / worktree：`codex/kwt-ds-grad-meta_determinism` @
+  `/home/yang/kwt-worktrees/ds-grad-meta_determinism`
+- 范围：只改 `graduate/encoder/vectors/gen_vectors.py`、`ACCEPTANCE.json`、
+  `graduate/ds_tasks/meta_determinism/`。未开子智能体、未改他人 worktree、
+  未 merge/rebase/push。
+- 详细根因、证据层级与脚本见 `graduate/ds_tasks/meta_determinism/README.md`。
+  （原 `grad-encoder` 报告已被本任务报告取代，内容保存在 Git 历史
+  `5136ca1` 及其 `graduate/encoder/README.md`、`PROVENANCE.md` 中。）
 
-详细边界与来源见 `graduate/encoder/README.md`、`SOFTWARE_BOUNDARY.md`、`PROVENANCE.md`。
+## 1. 结果
 
-## 1. 本次新增/组装的文件
+编排者 `verify_worker.py` 的干净树复跑里，`grad-encoder` 两条命令退出码均为
+0，但 5 个声明产物中 `meta.json` 摘要不符（declared `124e5d35…` vs actual
+`03c02015…`），整体 `verified_ok=false`。
 
-| 文件 | 作用 |
-| --- | --- |
-| `graduate/rtl/encoder/kwt_encoder_layer.sv` | 单层 PostNorm 编码器数据通路（注意力→requant→残差1→LN1→FFN1→GELU→FFN2→残差2→LN2），统一装载端口 |
-| `graduate/rtl/encoder/kwt_ffn1_row.sv` | FFN1 行引擎 `64→256`，INT48 累加，输出 per-channel scale `s_h[c]`（接 postnorm `h`） |
-| `graduate/rtl/encoder/kwt_encoder_layers_ctrl.sv` | 12 层参数更新/层间搬运/分类头边界控制器（纯事务序列，无算术） |
-| `graduate/rtl/encoder/kwt_encoder_top.sv` | layer + ctrl 顶层；E203-like 事务端口 `o_ld_*`/`p_rdata` |
-| `graduate/rtl/encoder/third_party/*` | 只读复制：注意力 RTL（grad-attention）、postnorm FFN/GELU/LN RTL（grad-nonlinear） |
-| `graduate/encoder/model/{attn_int_model,kwt_postnorm_ref}.py` | 只读复制的独立整数参考（仅路径适配） |
-| `graduate/encoder/reference/kwt1_fp32_golden.py` | 只读复制的 FP32 golden（仅路径适配） |
-| `graduate/encoder/model/verify_encoder.py` | 组合独立整数模型 + FP32 误差逐级对照（新增） |
-| `graduate/encoder/vectors/gen_vectors.py` | 生成全部 RTL 激励/参数 hex（新增） |
-| `graduate/encoder/tb/tb_encoder.sv`、`tb/run.sh` | 单层逐级对照 TB + 一键脚本（新增） |
-| `graduate/encoder/tb/tb_layers_smoke.sv`、`tb/run_smoke.sh` | 12 层调度 smoke TB + 一键脚本（新增） |
+**根因（同机复现，非推测）**：`gen_vectors.py` 把 FP64 诊断量（注意力 NRMSE、
+从 BLAS 输出张量取的量化尺度）原样写入 `meta.json`。它们的最后若干 ULP 依赖
+BLAS 实现/线程数，同一份代码在不同解释器下产生不同字节：
 
-## 2. 实跑命令与退出码（本次，2026-10-19）
+- `/usr/bin/python3`（numpy 1.21.5, netlib BLAS）→ `124e5d35…`（即声明的值）
+- 项目 `.venv`（numpy 2.x, scipy-openblas）→ `03c02015…`（即 verify 实际值）
 
-| 命令（仓库根执行） | 退出码 | 结果 |
+**修复**：`gen_vectors.py` 新增 `canon_float()`，写 `meta.json` 前把每个诊断
+浮点四舍五入到 9 位有效数字。整数域（`T/D/HID/M_A/Q_A/layer`）和喂给 RTL 的
+系数（hex、`M_A`）不变。修复后两种解释器得到同一摘要：
+
+```
+meta.json sha256 = d63fc090ba420763d133a5206270c53a91c0bf5e4865202135768699fb2a2b34
+```
+
+`ACCEPTANCE.json` 只更新了 `meta.json` 摘要；`y.hex`/`r1.hex`/`g.hex`/
+`verify.log` 四个摘要不变。
+
+**干净树独立复跑**（照 `verify_worker.py`：`git archive HEAD` → 一次性导出 →
+逐条执行 → 重算产物摘要）：在 `/usr/bin/python3` 与项目 `.venv` 两种解释器下
+均 `ACCEPTANCE_REPRO_OK`，命令退出码 `0 0`，5/5 产物摘要匹配。RTL 仍 6 阶段
+99 行逐位一致（`TB_PASS`/`VERIFY_PASS`，最差阶段 GELU NRMSE 1.3987% < 3%）。
+
+证据层级：软件参考（独立整数模型）与 RTL 逐位已覆盖；E203/NICE/总线、
+综合/STA/面积/功耗、官方 600 条评测**均未覆盖**；真正的官方验收由编排者
+`verify_worker` 裁定，本任务只复刻其流程。
+
+## 2. 复现命令与退出码
+
+| 命令 | 退出码 | 结果 |
 | --- | ---: | --- |
-| `bash graduate/encoder/tb/run.sh` | **0** | `TB_PASS`（`cycles=4,700,560`）+ `VERIFY_PASS`；6 阶段 99 行**全逐位一致** |
-| `bash graduate/encoder/tb/run_smoke.sh` | **0** | `SMOKE_PASS`；`n_start=12 max_layer=11 yrows=1188 n_ld_par=595200 head=1` |
-| `verilator --lint-only … --top-module kwt_encoder_top …` | **0** | 0 error（仅第三方文件 WIDTH 警告） |
+| `bash graduate/ds_tasks/meta_determinism/repro_acceptance.sh --out /tmp/opencode/repro-sys` | **0** | `ACCEPTANCE_REPRO_OK`；命令 `0 0`；5/5 摘要匹配（`/usr/bin/python3`） |
+| `bash graduate/ds_tasks/meta_determinism/repro_acceptance.sh --python /home/yang/miniconda3/bin/python3 --out /tmp/opencode/repro-venv` | **0** | `ACCEPTANCE_REPRO_OK`；命令 `0 0`；5/5 摘要匹配（项目 `.venv`） |
+| `bash graduate/ds_tasks/meta_determinism/demo_baseline_nondeterminism.sh` | **0** | `BASELINE_NONDETERMINISM_REPRODUCED`；旧代码 sys=`124e5d35…` / venv=`03c02015…` |
 
-复现细节：`run.sh` 先生成向量（`gen_vectors.py` = 运行复制的 `attn_int_model.py` +
-`kwt_postnorm_ref.calibrate()`），再 `verilator --binary` 建 `tb_encoder` 并运行，
-最后 `verify_encoder.py` 做逐位 + FP32 校验。`TB_DONE … sat=0/0` 无 X。
+产物摘要（干净树，两次一致）：
 
-## 3. 样本、层
+| 产物 | sha256 |
+| --- | --- |
+| `tb/build/y.hex` | `7620a3470ce5d5910c185f86f7704a88a9ef9eb67d21de476709dd859c62b0be` |
+| `tb/build/r1.hex` | `87b3fcdb64149bb24e4f5ea5c0a7e3c18aeb287084c3ae5d5afc4f9536473d60` |
+| `tb/build/g.hex` | `ef8e15863a8a65f211b724c8762d3ef7dee58856c9066bb9aaba0c8ade058737` |
+| `tb/build/verify.log` | `7fa33efbad31073841365a9d738c5648d55e4e1bca3179e5fe671f9f9c2339a8` |
+| `vectors/meta.json` | `d63fc090ba420763d133a5206270c53a91c0bf5e4865202135768699fb2a2b34` |
 
-- **样本**：真实验证输入 `software/validation/real_input_chain_20261017/sample_00_encoder.npy`
-  （`X[99,64]`，SHA 与 manifest 一致）。
-- **层**：`enc_layers/0`（第 0 层），尺度与 FFN1 冻结包（`ffn1_a12w10_static_sym.npz`
-  的 `layer01_*`）一致。
-- **单层逐级对照**：99 行全量，6 个阶段（`a,r1,g,f,r2,y`）。
-- **12 层调度 smoke**：12 层顺序执行，逐层重载 49,600 项参数，共 1,188 行输出。
+原始日志/摘要/基线对照在 `graduate/ds_tasks/meta_determinism/evidence/`。
 
-## 4. 数值误差
+## 3. 未证事项
 
-单层逐级（RTL vs 组合独立整数模型逐位；RTL 反量化 vs 研究生 FP32 golden）：
-
-| 阶段 | 逐位 | FP32 NRMSE | max_abs |
-| --- | --- | ---: | ---: |
-| `a`（注意力，含 requant） | 99×64 exact | 0.1591% | 1.32e-3 |
-| `r1` | 99×64 exact | 0.1082% | 2.89e-3 |
-| `g`（GELU） | 99×256 exact | **1.3987%** | 1.29e-2 |
-| `f`（FFN2） | 99×64 exact | 1.3968% | 1.54e-2 |
-| `r2` | 99×64 exact | 0.7000% | 5.00e-2 |
-| `y`（编码器输出） | 99×64 exact | 0.7289% | 4.23e-2 |
-
-最差阶段 `g` = **1.3987% < 3% 门槛**；`y` = 0.7289%。逐位一致（0 失配）覆盖
-`a`（含注意力 + requant）到 `y` 的整条链。
-
-## 5. 未证事项（不得宣称完整研究生组验收）
-
-1. **无官方 SoC**：未在真实 E203 指令流/System Bus/NICE 上运行；`o_ld_*`/`p_rdata` 为
-   **E203-like** 事务模型（已在 `SOFTWARE_BOUNDARY.md` 逐条标注）。
-2. **仅第 0 层标定**：第 1–11 层尺度/EPS/GELU LUT 未逐层重算；12 层 smoke 只证**调度**，
-   不证 12 层数值。
-3. 无目标 PDK / SRAM 宏 / SDC：未做 150 MHz STA、面积、功耗签核；仅 Verilator 功能仿真
-   （未跑 Icarus 复核）。
-4. FFN2/注意力的大数组与组合读端口仍是行为存储，未映射题目规定 SRAM 宏。
-5. 分类头为**软件**阶段（题目规定），硬件只给 `head_token`/`head_valid`；未做分类头 RTL。
-6. 未测官方 600 条评测集 NRMSE / 准确率；FP32 参考为官方源码语义的 NumPy golden
-   （grad-golden 已与官方 TF 原文 ≤9.3e-6 吻合），本目录不再重跑 TF。
-7. 本报告不声明“12 层整层 E203 通过”或“研究生 5–6 项全部通过”。
+1. 只证明 5 个声明产物在两种解释器/干净树下摘要一致，**不证明 RTL 数值或 12 层
+   数值正确性**（属 `encoder_12numeric` 等任务）。
+2. 9 位有效数字消除的是观测到的约 4e-15 相对 ULP 噪声，留 ~10⁶ 倍余量；非形式化
+   证明，若未来 BLAS 产生更大偏差理论上仍可能改写第 9 位。
+3. `meta.json` 尺度仍取自验证样本 `sample_00_encoder.npy`（**既有**泄漏，属
+   `attn_scale`/`postnorm_scale` 任务）；本任务未新增标定、未用验证样本求任何阈值。
+4. `verify.log` 摘要稳定依赖其只打印 4 位小数百分数/3 位有效数字，提高打印精度需
+   同样规范化。
+5. 未做 E203/NICE/总线真实接口、综合/STA/面积/功耗签核、官方 600 条评测。

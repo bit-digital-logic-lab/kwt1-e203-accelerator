@@ -1,0 +1,18 @@
+# export HEAD (3deec02c3b2f468ac51e4c31ee180db018ddfd55) -> /tmp/opencode/repro-venv/clean-tree-VkxMC6
+# python3 -> /tmp/opencode/repro-venv/clean-tree-VkxMC6/.interp/python3
+
+$ (cd /tmp/opencode/repro-venv/clean-tree-VkxMC6 && bash graduate/encoder/tb/run.sh)
+# exit=0 (log: /tmp/opencode/repro-venv/cmd1.log)
+
+$ (cd /tmp/opencode/repro-venv/clean-tree-VkxMC6 && bash graduate/encoder/tb/run_smoke.sh)
+# exit=0 (log: /tmp/opencode/repro-venv/cmd2.log)
+
+# artifact digests (computed in the clean export)
+OK   graduate/encoder/tb/build/y.hex
+OK   graduate/encoder/tb/build/r1.hex
+OK   graduate/encoder/tb/build/g.hex
+OK   graduate/encoder/tb/build/verify.log
+OK   graduate/encoder/vectors/meta.json
+
+# exit codes: 0 0
+# ACCEPTANCE_REPRO_OK
