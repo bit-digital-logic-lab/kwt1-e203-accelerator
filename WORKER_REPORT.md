@@ -1,79 +1,36 @@
-# WORKER_REPORT — codex/kwt-grad-encoder（研究生 5–6 项：单层 PostNorm 编码器组装 + 12 层调度）
+# WORKER_REPORT — codex/kwt-ds-grad-dataset（研究生任务：数据集核查）
 
-- 分支 / worktree：`codex/kwt-grad-encoder` @ `/home/yang/kwt-worktrees/grad-encoder`
-- 基线：`main@3d9ae98`（grad-attention `405c876` / grad-nonlinear `10aa202` / grad-golden `c9a4307` 均为终态）
-- 范围：把三项成果**组装**为单层 PostNorm 编码器（注意力 + 两处残差 + 两处 LayerNorm +
-  `64→256→64` 前馈 + GELU），并实现 **12 层参数更新/搬运控制**；冻结 E203 软件边界与分类头
-  软件边界。对应 [`题目/640.jpg 9`](题目/640.jpg%209) 第 5、6 项。
-- 边界：只在本 worktree 内操作；未开子智能体；未改主目录/他人分支；未
-  `merge`/`rebase`/`cherry-pick`/`push`；未改 `hardware/`、`software/` 既有本科核心。
-- 交付契约：根目录 `ACCEPTANCE.json`（编排者 `git archive HEAD` 干净副本独立复跑）。
+- 分支 / worktree：`codex/kwt-ds-grad-dataset` @ `/home/yang/kwt-worktrees/ds-grad-dataset`
+- 范围：核查研究生任务的**训练/验证划分、哈希、样本重叠、现有校准泄漏**；产物只写 `graduate/ds_tasks/dataset/`，另写本报告。
+- 边界：只读使用主工程 `/home/yang/Desktop/ic设计竞赛` 的 gitignored 数据；未开子智能体；未改其它 worktree/`main`/`hardware/`；未 `merge`/`rebase`/`push`；未提交大数据/密钥/缓存。
+- 详细报告：[`graduate/ds_tasks/dataset/REPORT.md`](graduate/ds_tasks/dataset/REPORT.md)；机器结果 [`logs/audit.json`](graduate/ds_tasks/dataset/logs/audit.json)。
+- 注：本 worktree 基线继承的 grad-encoder 版 `WORKER_REPORT.md` 已保存在 git 历史（`5136ca1`）。
 
-详细边界与来源见 `graduate/encoder/README.md`、`SOFTWARE_BOUNDARY.md`、`PROVENANCE.md`。
+## 1. 结果
 
-## 1. 本次新增/组装的文件
+- **划分（通过）**：按官方 `which_set`（SHA1 去 `_nohash_`，10%/10%）重算 5 个缓存（200/240/480/960 条及 40 条 legacy）与 6 条真实样本，真实 WAV 标签 **0 处不一致**；合成静音按划分生成，单独统计。
+- **哈希（1 类不一致）**：权重 `8f359abf…`、`flags.json`、A12W10 参数包 `a77f60fb…`、归档 2,428,923,189 字节/105,878 成员/105,835 WAV 及其 6 条真实 WAV **全部一致**；**6 条 `sample_0X_{mfcc,encoder}.npy` 的 SHA-256 与 manifest 记录不符**，但独立 40→64 投影误差 `4.77e-07…9.54e-07` 与 manifest 自记 `encoder_independent_max_abs_error` 逐条相等 → 内容一致、哈希记录过期。
+- **重叠（通过）**：各缓存 train/val/test 路径两两 0 重叠；跨缓存 0 重叠；真实样本特征张量 0 重复。
+- **校准泄漏（发现 2 处）**：① 单层编码器 `gen_vectors.py` 硬编码**验证划分** `sample_00`，`attn_int_model.py`/`kwt_postnorm_ref.calibrate()` 据此求静态尺度——换用训练 `sample_01` 后注意力 `scale_x/scale_o`、PostNorm `s_x/s_a/s_r1` 变化约 **16.5%–16.8%**，`eps_q1` 差 9597、`KC` 差 1856（RTL 激励尺度随样本变化，违反“验证划分仅评估”）；② legacy `quant_samples.npz` 仍含 **20 条测试划分**样本，`results/README.md` 自述开发中被看过（已知污染）。FFN1 量化链（A12W10/blackbox）**干净**：`validation_used_for_calibration=False`、训练/验证 240/240 不相交、选中倍率全为 `(1.0,1.0)`、`s_x/sx` 与样本无关。
+- **判定**：脚本 `VERDICT FAIL (rule violations)`，退出码 **1**（检出 4 条违规，非故障）。证据层级：全部为**软件参考（CPU NumPy）**；RTL 逐位仅引用 grad-encoder 且继承泄漏；E203/综合/官方验收**未证**。
 
-| 文件 | 作用 |
-| --- | --- |
-| `graduate/rtl/encoder/kwt_encoder_layer.sv` | 单层 PostNorm 编码器数据通路（注意力→requant→残差1→LN1→FFN1→GELU→FFN2→残差2→LN2），统一装载端口 |
-| `graduate/rtl/encoder/kwt_ffn1_row.sv` | FFN1 行引擎 `64→256`，INT48 累加，输出 per-channel scale `s_h[c]`（接 postnorm `h`） |
-| `graduate/rtl/encoder/kwt_encoder_layers_ctrl.sv` | 12 层参数更新/层间搬运/分类头边界控制器（纯事务序列，无算术） |
-| `graduate/rtl/encoder/kwt_encoder_top.sv` | layer + ctrl 顶层；E203-like 事务端口 `o_ld_*`/`p_rdata` |
-| `graduate/rtl/encoder/third_party/*` | 只读复制：注意力 RTL（grad-attention）、postnorm FFN/GELU/LN RTL（grad-nonlinear） |
-| `graduate/encoder/model/{attn_int_model,kwt_postnorm_ref}.py` | 只读复制的独立整数参考（仅路径适配） |
-| `graduate/encoder/reference/kwt1_fp32_golden.py` | 只读复制的 FP32 golden（仅路径适配） |
-| `graduate/encoder/model/verify_encoder.py` | 组合独立整数模型 + FP32 误差逐级对照（新增） |
-| `graduate/encoder/vectors/gen_vectors.py` | 生成全部 RTL 激励/参数 hex（新增） |
-| `graduate/encoder/tb/tb_encoder.sv`、`tb/run.sh` | 单层逐级对照 TB + 一键脚本（新增） |
-| `graduate/encoder/tb/tb_layers_smoke.sv`、`tb/run_smoke.sh` | 12 层调度 smoke TB + 一键脚本（新增） |
+## 2. 复现命令与退出码
 
-## 2. 实跑命令与退出码（本次，2026-10-19）
+仓库根 `/home/yang/kwt-worktrees/ds-grad-dataset`：
 
-| 命令（仓库根执行） | 退出码 | 结果 |
+| 命令 | 退出码 | 结果 |
 | --- | ---: | --- |
-| `bash graduate/encoder/tb/run.sh` | **0** | `TB_PASS`（`cycles=4,700,560`）+ `VERIFY_PASS`；6 阶段 99 行**全逐位一致** |
-| `bash graduate/encoder/tb/run_smoke.sh` | **0** | `SMOKE_PASS`；`n_start=12 max_layer=11 yrows=1188 n_ld_par=595200 head=1` |
-| `verilator --lint-only … --top-module kwt_encoder_top …` | **0** | 0 error（仅第三方文件 WIDTH 警告） |
+| `OPENBLAS_NUM_THREADS=4 OMP_NUM_THREADS=4 python3 graduate/ds_tasks/dataset/audit_dataset.py > graduate/ds_tasks/dataset/logs/audit.log 2>&1` | **1** | 全量核查（含 2.3 GB 归档）：4 条违规 |
+| `OPENBLAS_NUM_THREADS=4 OMP_NUM_THREADS=4 python3 graduate/ds_tasks/dataset/audit_dataset.py --skip-archive > graduate/ds_tasks/dataset/logs/audit_quick.log 2>&1` | **1** | 快速核查（跳过归档）：同上，不含归档 SHA-256 |
 
-复现细节：`run.sh` 先生成向量（`gen_vectors.py` = 运行复制的 `attn_int_model.py` +
-`kwt_postnorm_ref.calibrate()`），再 `verilator --binary` 建 `tb_encoder` 并运行，
-最后 `verify_encoder.py` 做逐位 + FP32 校验。`TB_DONE … sat=0/0` 无 X。
+日志与退出码落盘：`logs/audit.log`、`logs/audit_quick.log`、`logs/audit_exit.txt`、`logs/audit.json`（样本数、每条哈希、逐层尺度对照）。退出码语义：0 全通过 / 1 规则违规 / 2 基础设施错误。
 
-## 3. 样本、层
+## 3. 未证事项
 
-- **样本**：真实验证输入 `software/validation/real_input_chain_20261017/sample_00_encoder.npy`
-  （`X[99,64]`，SHA 与 manifest 一致）。
-- **层**：`enc_layers/0`（第 0 层），尺度与 FFN1 冻结包（`ffn1_a12w10_static_sym.npz`
-  的 `layer01_*`）一致。
-- **单层逐级对照**：99 行全量，6 个阶段（`a,r1,g,f,r2,y`）。
-- **12 层调度 smoke**：12 层顺序执行，逐层重载 49,600 项参数，共 1,188 行输出。
-
-## 4. 数值误差
-
-单层逐级（RTL vs 组合独立整数模型逐位；RTL 反量化 vs 研究生 FP32 golden）：
-
-| 阶段 | 逐位 | FP32 NRMSE | max_abs |
-| --- | --- | ---: | ---: |
-| `a`（注意力，含 requant） | 99×64 exact | 0.1591% | 1.32e-3 |
-| `r1` | 99×64 exact | 0.1082% | 2.89e-3 |
-| `g`（GELU） | 99×256 exact | **1.3987%** | 1.29e-2 |
-| `f`（FFN2） | 99×64 exact | 1.3968% | 1.54e-2 |
-| `r2` | 99×64 exact | 0.7000% | 5.00e-2 |
-| `y`（编码器输出） | 99×64 exact | 0.7289% | 4.23e-2 |
-
-最差阶段 `g` = **1.3987% < 3% 门槛**；`y` = 0.7289%。逐位一致（0 失配）覆盖
-`a`（含注意力 + requant）到 `y` 的整条链。
-
-## 5. 未证事项（不得宣称完整研究生组验收）
-
-1. **无官方 SoC**：未在真实 E203 指令流/System Bus/NICE 上运行；`o_ld_*`/`p_rdata` 为
-   **E203-like** 事务模型（已在 `SOFTWARE_BOUNDARY.md` 逐条标注）。
-2. **仅第 0 层标定**：第 1–11 层尺度/EPS/GELU LUT 未逐层重算；12 层 smoke 只证**调度**，
-   不证 12 层数值。
-3. 无目标 PDK / SRAM 宏 / SDC：未做 150 MHz STA、面积、功耗签核；仅 Verilator 功能仿真
-   （未跑 Icarus 复核）。
-4. FFN2/注意力的大数组与组合读端口仍是行为存储，未映射题目规定 SRAM 宏。
-5. 分类头为**软件**阶段（题目规定），硬件只给 `head_token`/`head_valid`；未做分类头 RTL。
-6. 未测官方 600 条评测集 NRMSE / 准确率；FP32 参考为官方源码语义的 NumPy golden
-   （grad-golden 已与官方 TF 原文 ≤9.3e-6 吻合），本目录不再重跑 TF。
-7. 本报告不声明“12 层整层 E203 通过”或“研究生 5–6 项全部通过”。
+1. 只做数据来源/划分/重叠/泄漏审计（软件参考层级），**不证明** RTL 逐位、E203 SoC、综合、官方 600 条验收。
+2. 6 条 `.npy` 哈希不符的**根因未定**（仅排除张量损坏），需工程侧确认是重存序列化还是内容再生。
+3. 无法在本目录验证 60 条真实音频的**说话人身份**是否与训练集分离，只复现官方文件名哈希规则。
+4. `_silence_` 合成静音是否与组委会官方静音流程完全一致未证。
+5. 未比对 Speech Commands V2 归档的官方发布 SHA-256（题目未给期望值）。
+6. 第 1–11 层标定未核查（现有 RTL 只标定第 0 层）。
+7. 修复建议（重定标用训练样本、修正 manifest 哈希、隔离 testing 行）仅为建议，本任务未改编码器文件。

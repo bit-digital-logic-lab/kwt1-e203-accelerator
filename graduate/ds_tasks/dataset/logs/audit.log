@@ -1,0 +1,51 @@
+== split labels ==
+  quant_samples.npz: total=40 counts={'training': 20, 'testing': 20} mismatches=0 silence={}
+  quant_samples_10.npz: total=200 counts={'training': 100, 'validation': 100} mismatches=0 silence={}
+  quant_samples_12labels_10.npz: total=240 counts={'training': 120, 'validation': 120} mismatches=0 silence={'training': 10, 'validation': 10}
+  quant_samples_12labels_20.npz: total=480 counts={'training': 240, 'validation': 240} mismatches=0 silence={'training': 20, 'validation': 20}
+  quant_samples_12labels_40.npz: total=960 counts={'training': 480, 'validation': 480} mismatches=0 silence={'training': 40, 'validation': 40}
+  manifest samples: 6 mismatches=0
+== hashes ==
+  ok=False items=23
+  ERROR sample_00_encoder: 489dc7c28b2816cdb7cfc35e3f98c2dd674112f71d9357f746db57de4a27c058 != a7ffaafdd9866b3711903c67db0f3a17845662bc52356f0d1a82410496a54f61
+  ERROR sample_00_mfcc: a8a85e2878283a0d3cd40f157243b10aa5034c2544bbfb21d292da9c422aad15 != dcdb5a8ac2daa7bf2b1c6f18cd964d0f406d2ce6192322c2930ac632f2c962ae
+  ERROR sample_01_encoder: d91c92dabc3fcd94e05920731e0acfb4596e30989e5d8a1906dbcd6aa697b1a5 != 8a6a9e49a38c073b1808de7b62ff295cd372af1399e12cb7d037975fec6963f8
+  ERROR sample_01_mfcc: 1e24a66c86e777e6882181b832fdd545f511cd2c6e93747a929b94b77a7588c0 != 43b0658ed234fdb01638bcd5ce2e5d8ef4141216650ca622ed839ff2467ddf43
+  ERROR sample_02_encoder: 092ad2de82d56dc0a737dd8655dab1e32fcdc31da4f02b384e2eae67aa6e5e43 != e1f6bff0d1bfe88a680d69a826ccb1855221e1d8ace873d67679189eca93e116
+  ERROR sample_02_mfcc: d4bac7237bb83bde50a4cfdf35018105bd888925890ea79cca55d1592e92416c != 8c98d33e2a85e39c3cef4b822571a7b7890e97665698f48330ca605872d8c133
+  ERROR sample_03_encoder: c2c56f43971060054e0234c82d6551a3a8f2165bb020d1e564e31c37eb01dd9c != ef29708b932b24554ea754872eece24b7412e20ea8d3ef88ced9b6a34a6cc7d9
+  ERROR sample_03_mfcc: 0bc09b6b4970d261ee0bc0711ebea2098475ed43681f931edbeb307589c5df4e != 9fdb644252b9f5cfccb76da538033de38abaf1d63c2a0816ab7f3d722b7d3822
+  ERROR sample_04_encoder: 6edf03322ddfd789bb9ec40fa86fbb18a3e3e036fe4fc774ef1e1bf45f85435f != 3bf5f7851fa305bfedb0f1e9c5ddfee1e01e47c758d7727d7a3398304e8062e2
+  ERROR sample_04_mfcc: 9eaa886c83ef7b98f8c065f72e5a95213db27990f51dd85f37a693b60d89e121 != 7bc86a41062ee0e8c66ed8fef401c4586b98775245bb878275acb151bc4ac354
+  ERROR sample_05_encoder: ead66dd353c7012b1837db0d14b99f1914e53ca9a3dab20d2a7a26fce61934c4 != 16bf24f4bd5e5b0e056c43507fdb2e7061194d3ea2792d174c1afd9f22200e90
+  ERROR sample_05_mfcc: bf50f5b5c59c855251236bd0f968bf306b9fad59d9abee024190984746bb6833 != a45db272da20c36c1fa0e841d1f71a79e445fa2516e72b097828f9d12f60e897
+== npy content consistency (independent projection) ==
+  ok=True
+  sample_00_encoder.npy: max_abs_diff=4.768e-07 recorded=4.768e-07 ok=True
+  sample_01_encoder.npy: max_abs_diff=9.537e-07 recorded=9.537e-07 ok=True
+  sample_02_encoder.npy: max_abs_diff=9.537e-07 recorded=9.537e-07 ok=True
+  sample_03_encoder.npy: max_abs_diff=9.537e-07 recorded=9.537e-07 ok=True
+  sample_04_encoder.npy: max_abs_diff=7.153e-07 recorded=7.153e-07 ok=True
+  sample_05_encoder.npy: max_abs_diff=7.153e-07 recorded=7.153e-07 ok=True
+== overlap ==
+  ok=True errors=[]
+== calibration ==
+  attn_hardcoded_sample00 = True
+  postnorm_hardcoded_sample00 = True
+  ffn1_validation_used_for_calibration = False
+  blackbox_training = 240
+  blackbox_validation = 240
+  blackbox_disjoint = True
+  blackbox_selected_factors = [(1.0, 1.0), (1.0, 1.0), (1.0, 1.0), (1.0, 1.0), (1.0, 1.0), (1.0, 1.0), (1.0, 1.0), (1.0, 1.0), (1.0, 1.0), (1.0, 1.0), (1.0, 1.0), (1.0, 1.0)]
+  attention_scales_depend_on_sample = True
+  postnorm_scales_depend_on_sample = True
+  results_readme_admits_test_probe = True
+  legacy_pool_quant_samples_testing_rows = 20
+  attention scale_x sample00=1.356254e-03 sample01=1.629903e-03 rel=1.6789e-01
+  attention scale_o sample00=2.475293e-05 sample01=2.974730e-05 rel=1.6789e-01
+VERDICT FAIL (rule violations)
+  VIOLATION hash mismatches: sample_00_encoder: 489dc7c28b2816cdb7cfc35e3f98c2dd674112f71d9357f746db57de4a27c058 != a7ffaafdd9866b3711903c67db0f3a17845662bc52356f0d1a82410496a54f61; sample_00_mfcc: a8a85e2878283a0d3cd40f157243b10aa5034c2544bbfb21d292da9c422aad15 != dcdb5a8ac2daa7bf2b1c6f18cd964d0f406d2ce6192322c2930ac632f2c962ae; sample_01_encoder: d91c92dabc3fcd94e05920731e0acfb4596e30989e5d8a1906dbcd6aa697b1a5 != 8a6a9e49a38c073b1808de7b62ff295cd372af1399e12cb7d037975fec6963f8; sample_01_mfcc: 1e24a66c86e777e6882181b832fdd545f511cd2c6e93747a929b94b77a7588c0 != 43b0658ed234fdb01638bcd5ce2e5d8ef4141216650ca622ed839ff2467ddf43; sample_02_encoder: 092ad2de82d56dc0a737dd8655dab1e32fcdc31da4f02b384e2eae67aa6e5e43 != e1f6bff0d1bfe88a680d69a826ccb1855221e1d8ace873d67679189eca93e116; sample_02_mfcc: d4bac7237bb83bde50a4cfdf35018105bd888925890ea79cca55d1592e92416c != 8c98d33e2a85e39c3cef4b822571a7b7890e97665698f48330ca605872d8c133; sample_03_encoder: c2c56f43971060054e0234c82d6551a3a8f2165bb020d1e564e31c37eb01dd9c != ef29708b932b24554ea754872eece24b7412e20ea8d3ef88ced9b6a34a6cc7d9; sample_03_mfcc: 0bc09b6b4970d261ee0bc0711ebea2098475ed43681f931edbeb307589c5df4e != 9fdb644252b9f5cfccb76da538033de38abaf1d63c2a0816ab7f3d722b7d3822; sample_04_encoder: 6edf03322ddfd789bb9ec40fa86fbb18a3e3e036fe4fc774ef1e1bf45f85435f != 3bf5f7851fa305bfedb0f1e9c5ddfee1e01e47c758d7727d7a3398304e8062e2; sample_04_mfcc: 9eaa886c83ef7b98f8c065f72e5a95213db27990f51dd85f37a693b60d89e121 != 7bc86a41062ee0e8c66ed8fef401c4586b98775245bb878275acb151bc4ac354; sample_05_encoder: ead66dd353c7012b1837db0d14b99f1914e53ca9a3dab20d2a7a26fce61934c4 != 16bf24f4bd5e5b0e056c43507fdb2e7061194d3ea2792d174c1afd9f22200e90; sample_05_mfcc: bf50f5b5c59c855251236bd0f968bf306b9fad59d9abee024190984746bb6833 != a45db272da20c36c1fa0e841d1f71a79e445fa2516e72b097828f9d12f60e897
+  VIOLATION encoder attention static scales are derived from validation sample_00
+  VIOLATION encoder postnorm static scales/LUT/output scale are derived from validation sample_00
+  VIOLATION legacy pool quant_samples.npz still contains 20 testing-partition rows that were probed during development (documented contamination)
+report: /home/yang/kwt-worktrees/ds-grad-dataset/graduate/ds_tasks/dataset/logs/audit.json
