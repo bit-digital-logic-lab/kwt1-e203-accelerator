@@ -1,0 +1,137 @@
+{
+  "scope": "72,990,720 raw DUT values vs saved golden; independent bigint oracle12,288 outputs; independent RMS on all FP32 raw references",
+  "source": "/home/yang/kwt-worktrees/ds-r5-gates/graduate/ds_tasks/r4_rtl/vectors/main",
+  "layers": [
+    {
+      "layer": 0,
+      "elements": 6082560,
+      "mismatch_raw_vs_saved_golden": 0,
+      "bigint_spot_mismatches": 0,
+      "nrmse": 0.0003863138462455499,
+      "nrmse_percent": 0.038631384624554996,
+      "old_floor_nrmse": 0.00038631384624555,
+      "old_vs_correct_abs": 5.421010862427522e-20
+    },
+    {
+      "layer": 1,
+      "elements": 6082560,
+      "mismatch_raw_vs_saved_golden": 0,
+      "bigint_spot_mismatches": 0,
+      "nrmse": 0.0004665306197054045,
+      "nrmse_percent": 0.04665306197054045,
+      "old_floor_nrmse": 0.0004665306197054045,
+      "old_vs_correct_abs": 0.0
+    },
+    {
+      "layer": 2,
+      "elements": 6082560,
+      "mismatch_raw_vs_saved_golden": 0,
+      "bigint_spot_mismatches": 0,
+      "nrmse": 0.0005581165783023318,
+      "nrmse_percent": 0.05581165783023318,
+      "old_floor_nrmse": 0.0005581165783023318,
+      "old_vs_correct_abs": 0.0
+    },
+    {
+      "layer": 3,
+      "elements": 6082560,
+      "mismatch_raw_vs_saved_golden": 0,
+      "bigint_spot_mismatches": 0,
+      "nrmse": 0.0008104029951775188,
+      "nrmse_percent": 0.08104029951775188,
+      "old_floor_nrmse": 0.0008104029951775188,
+      "old_vs_correct_abs": 0.0
+    },
+    {
+      "layer": 4,
+      "elements": 6082560,
+      "mismatch_raw_vs_saved_golden": 0,
+      "bigint_spot_mismatches": 0,
+      "nrmse": 0.0009370849357016327,
+      "nrmse_percent": 0.09370849357016327,
+      "old_floor_nrmse": 0.0009370849357016326,
+      "old_vs_correct_abs": 1.0842021724855044e-19
+    },
+    {
+      "layer": 5,
+      "elements": 6082560,
+      "mismatch_raw_vs_saved_golden": 0,
+      "bigint_spot_mismatches": 0,
+      "nrmse": 0.0008294516567216753,
+      "nrmse_percent": 0.08294516567216753,
+      "old_floor_nrmse": 0.0008294516567216755,
+      "old_vs_correct_abs": 1.0842021724855044e-19
+    },
+    {
+      "layer": 6,
+      "elements": 6082560,
+      "mismatch_raw_vs_saved_golden": 0,
+      "bigint_spot_mismatches": 0,
+      "nrmse": 0.0009064513565805967,
+      "nrmse_percent": 0.09064513565805968,
+      "old_floor_nrmse": 0.0009064513565805967,
+      "old_vs_correct_abs": 0.0
+    },
+    {
+      "layer": 7,
+      "elements": 6082560,
+      "mismatch_raw_vs_saved_golden": 0,
+      "bigint_spot_mismatches": 0,
+      "nrmse": 0.0009040671100927152,
+      "nrmse_percent": 0.09040671100927151,
+      "old_floor_nrmse": 0.000904067110092715,
+      "old_vs_correct_abs": 1.0842021724855044e-19
+    },
+    {
+      "layer": 8,
+      "elements": 6082560,
+      "mismatch_raw_vs_saved_golden": 0,
+      "bigint_spot_mismatches": 0,
+      "nrmse": 0.0009486467069609843,
+      "nrmse_percent": 0.09486467069609843,
+      "old_floor_nrmse": 0.0009486467069609843,
+      "old_vs_correct_abs": 0.0
+    },
+    {
+      "layer": 9,
+      "elements": 6082560,
+      "mismatch_raw_vs_saved_golden": 0,
+      "bigint_spot_mismatches": 0,
+      "nrmse": 0.0010450595118532166,
+      "nrmse_percent": 0.10450595118532166,
+      "old_floor_nrmse": 0.0010450595118532164,
+      "old_vs_correct_abs": 2.168404344971009e-19
+    },
+    {
+      "layer": 10,
+      "elements": 6082560,
+      "mismatch_raw_vs_saved_golden": 0,
+      "bigint_spot_mismatches": 0,
+      "nrmse": 0.0011750352657281789,
+      "nrmse_percent": 0.11750352657281789,
+      "old_floor_nrmse": 0.0011750352657281789,
+      "old_vs_correct_abs": 0.0
+    },
+    {
+      "layer": 11,
+      "elements": 6082560,
+      "mismatch_raw_vs_saved_golden": 0,
+      "bigint_spot_mismatches": 0,
+      "nrmse": 0.0012733787933344688,
+      "nrmse_percent": 0.12733787933344687,
+      "old_floor_nrmse": 0.001273378793334469,
+      "old_vs_correct_abs": 2.168404344971009e-19
+    }
+  ],
+  "total_elements": 72990720,
+  "bigint_outputs": 12288,
+  "mismatches": 0,
+  "bigint_mismatches": 0,
+  "worst_nrmse_percent": 0.12733787933344687,
+  "source_hashes": {
+    "dut": "a126d3ae05b09c02f15213ac7a57462e2dc7d3ffccca58159483a10210e0133a",
+    "gold": "a126d3ae05b09c02f15213ac7a57462e2dc7d3ffccca58159483a10210e0133a",
+    "fp": "6855e7478c24ba15ea9de2ee8800ac318ab53fa0a6b71f9ad6905566e79a5d6e",
+    "inputs": "5a5654f8db75c6dd17ee01fffd37050eeb89e569534ba74378dbc932aab16b45"
+  }
+}

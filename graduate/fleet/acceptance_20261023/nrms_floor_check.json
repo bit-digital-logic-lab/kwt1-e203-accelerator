@@ -1,0 +1,42 @@
+{
+  "commit": "25868b271a99f2ee083898056bcda69d37b9b7d0",
+  "checks": [
+    {
+      "elements": 1,
+      "error": 1e-07,
+      "got": 0.0009999999999999998,
+      "expected": 10.0,
+      "pass_worker": true,
+      "pass_correct": false,
+      "formula_matches": false
+    },
+    {
+      "elements": 2,
+      "error": 1e-07,
+      "got": 0.0014142135623730948,
+      "expected": 10.0,
+      "pass_worker": true,
+      "pass_correct": false,
+      "formula_matches": false
+    },
+    {
+      "elements": 64,
+      "error": 1e-07,
+      "got": 0.007999999999999998,
+      "expected": 9.999999999999998,
+      "pass_worker": false,
+      "pass_correct": false,
+      "formula_matches": false
+    },
+    {
+      "elements": 2,
+      "error": 1.0,
+      "got": 14142.13562373095,
+      "expected": 100000000.0,
+      "pass_worker": false,
+      "pass_correct": false,
+      "formula_matches": false
+    }
+  ],
+  "verdict": "FAIL: RMS floor applied to unnormalised squared sum"
+}

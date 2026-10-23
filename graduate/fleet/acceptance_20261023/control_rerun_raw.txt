@@ -1,0 +1,7 @@
+HEAVY_SLOT=0 argv=['bash', '/tmp/kwt-primary-accept-g2a5nmrt/control/graduate/ds_tasks/r5_control/run.sh']
+R5 CONTROL PASS
+  full load-start -> final writeback: 139004 cycles (stall 142920)
+  FFN1-only worst NRMSE: 0.0920% (target 0.27%)
+  accumulator: measured 30 bits, chosen 48; int32_truncation=False
+  Yosys: exit=0 memories=28 reg_cells=602 reg_bits=26444 latches=0
+  results: /tmp/kwt-primary-accept-g2a5nmrt/control/graduate/ds_tasks/r5_control/results.json

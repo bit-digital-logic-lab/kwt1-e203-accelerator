@@ -1,0 +1,542 @@
+{
+  "source_commit": "63a17a6ff0b0d535d60a2b91296bfa821fedaa22",
+  "command": [
+    "python3",
+    "/home/yang/Desktop/ic\u8bbe\u8ba1\u7ade\u8d5b/graduate/fleet/r6_20261023/heavy.py",
+    "--",
+    "bash",
+    "/tmp/kwt-primary-accept-g2a5nmrt/control/graduate/ds_tasks/r5_control/run.sh"
+  ],
+  "exit": 0,
+  "clean_archive": "/tmp/kwt-primary-accept-g2a5nmrt/control",
+  "read_only_external": [
+    "software/weights",
+    "p027 frozen pack"
+  ],
+  "scope": "R5 16-multiplier serialized FFN1 control only; not target8x8/8x16 optimized result",
+  "state": "PASS",
+  "checks": [
+    {
+      "name": "tool:verilator",
+      "ok": true,
+      "detail": "Verilator 5.047 devel rev v5.046-102-g1e50fefb8 (mod)"
+    },
+    {
+      "name": "tool:yosys",
+      "ok": true,
+      "detail": "Yosys 0.63+97 (git sha1 1111a401f, clang++ 18.1.8 -fPIC -O3)"
+    },
+    {
+      "name": "frozen_pack:A16W12",
+      "ok": true,
+      "detail": "name=A16W12 w1=12 ln1=16 config_sha=6b273d895c716dcb"
+    },
+    {
+      "name": "vectors:provenance",
+      "ok": true,
+      "detail": "act_sha=4c95575337e8ccf3 npz_sha=0a605ee346d058e0 validation_index=0 calib_calls=0"
+    },
+    {
+      "name": "golden:bigint_12_layers",
+      "ok": true,
+      "detail": "12 layers x 99 x 256 exact Python-int FFN1 outputs"
+    },
+    {
+      "name": "build:verilator",
+      "ok": true,
+      "detail": "exit=0"
+    },
+    {
+      "name": "run:full_load_l0",
+      "ok": true,
+      "detail": "exit=0"
+    },
+    {
+      "name": "compare:full_load_l0:task0",
+      "ok": true,
+      "detail": "exit=0 expected=0 mismatch=0"
+    },
+    {
+      "name": "out_last_once:full_load_l0",
+      "ok": true,
+      "detail": "counts={0: 1}"
+    },
+    {
+      "name": "run:full_load_l0_stall",
+      "ok": true,
+      "detail": "exit=0"
+    },
+    {
+      "name": "compare:full_load_l0_stall:task0",
+      "ok": true,
+      "detail": "exit=0 expected=0 mismatch=0"
+    },
+    {
+      "name": "out_last_once:full_load_l0_stall",
+      "ok": true,
+      "detail": "counts={0: 1}"
+    },
+    {
+      "name": "run:two_consecutive_pingpong",
+      "ok": true,
+      "detail": "exit=0"
+    },
+    {
+      "name": "compare:two_consecutive_pingpong:task0",
+      "ok": true,
+      "detail": "exit=0 expected=0 mismatch=0"
+    },
+    {
+      "name": "compare:two_consecutive_pingpong:task1",
+      "ok": true,
+      "detail": "exit=0 expected=0 mismatch=0"
+    },
+    {
+      "name": "out_last_once:two_consecutive_pingpong",
+      "ok": true,
+      "detail": "counts={0: 1, 1: 1}"
+    },
+    {
+      "name": "run:reset_midtask_then_clean",
+      "ok": true,
+      "detail": "exit=0"
+    },
+    {
+      "name": "compare:reset_midtask_then_clean:task1",
+      "ok": true,
+      "detail": "exit=0 expected=0 mismatch=0"
+    },
+    {
+      "name": "out_last_once:reset_midtask_then_clean",
+      "ok": true,
+      "detail": "counts={1: 1}"
+    },
+    {
+      "name": "run:last3rows_19",
+      "ok": true,
+      "detail": "exit=0"
+    },
+    {
+      "name": "compare:last3rows_19:task0",
+      "ok": true,
+      "detail": "exit=0 expected=0 mismatch=0"
+    },
+    {
+      "name": "out_last_once:last3rows_19",
+      "ok": true,
+      "detail": "counts={0: 1}"
+    },
+    {
+      "name": "run:twelve_reloads",
+      "ok": true,
+      "detail": "exit=0"
+    },
+    {
+      "name": "compare:twelve_reloads:task0",
+      "ok": true,
+      "detail": "exit=0 expected=0 mismatch=0"
+    },
+    {
+      "name": "compare:twelve_reloads:task1",
+      "ok": true,
+      "detail": "exit=0 expected=0 mismatch=0"
+    },
+    {
+      "name": "compare:twelve_reloads:task2",
+      "ok": true,
+      "detail": "exit=0 expected=0 mismatch=0"
+    },
+    {
+      "name": "compare:twelve_reloads:task3",
+      "ok": true,
+      "detail": "exit=0 expected=0 mismatch=0"
+    },
+    {
+      "name": "compare:twelve_reloads:task4",
+      "ok": true,
+      "detail": "exit=0 expected=0 mismatch=0"
+    },
+    {
+      "name": "compare:twelve_reloads:task5",
+      "ok": true,
+      "detail": "exit=0 expected=0 mismatch=0"
+    },
+    {
+      "name": "compare:twelve_reloads:task6",
+      "ok": true,
+      "detail": "exit=0 expected=0 mismatch=0"
+    },
+    {
+      "name": "compare:twelve_reloads:task7",
+      "ok": true,
+      "detail": "exit=0 expected=0 mismatch=0"
+    },
+    {
+      "name": "compare:twelve_reloads:task8",
+      "ok": true,
+      "detail": "exit=0 expected=0 mismatch=0"
+    },
+    {
+      "name": "compare:twelve_reloads:task9",
+      "ok": true,
+      "detail": "exit=0 expected=0 mismatch=0"
+    },
+    {
+      "name": "compare:twelve_reloads:task10",
+      "ok": true,
+      "detail": "exit=0 expected=0 mismatch=0"
+    },
+    {
+      "name": "compare:twelve_reloads:task11",
+      "ok": true,
+      "detail": "exit=0 expected=0 mismatch=0"
+    },
+    {
+      "name": "out_last_once:twelve_reloads",
+      "ok": true,
+      "detail": "counts={0: 1, 1: 1, 2: 1, 3: 1, 4: 1, 5: 1, 6: 1, 7: 1, 8: 1, 9: 1, 10: 1, 11: 1}"
+    },
+    {
+      "name": "run:fault_weight_coeff",
+      "ok": true,
+      "detail": "exit=0"
+    },
+    {
+      "name": "compare:fault_weight_coeff:task0",
+      "ok": true,
+      "detail": "exit=1 expected=1 mismatch=99"
+    },
+    {
+      "name": "out_last_once:fault_weight_coeff",
+      "ok": true,
+      "detail": "counts={0: 1}"
+    },
+    {
+      "name": "run:fault_output_golden",
+      "ok": true,
+      "detail": "exit=0"
+    },
+    {
+      "name": "compare:fault_output_golden:task0",
+      "ok": true,
+      "detail": "exit=1 expected=1 mismatch=1"
+    },
+    {
+      "name": "out_last_once:fault_output_golden",
+      "ok": true,
+      "detail": "counts={0: 1}"
+    },
+    {
+      "name": "precision:FFN1_nrmse<=0.27pct",
+      "ok": true,
+      "detail": "worst layer 11 = 0.0920%"
+    },
+    {
+      "name": "cycles:full_load_measured",
+      "ok": true,
+      "detail": "load_start->final=139004"
+    },
+    {
+      "name": "synthesis:yosys_check",
+      "ok": true,
+      "detail": "exit=0 mem=28 reg_cells=602 latches=0"
+    },
+    {
+      "name": "fault:weight_detected",
+      "ok": true,
+      "detail": "comparator exit=1"
+    },
+    {
+      "name": "fault:output_detected",
+      "ok": true,
+      "detail": "comparator exit=1"
+    }
+  ],
+  "required_measurement": {
+    "config": "frozen A16W12 FFN1 layer 0: A int16 99x64, W int12 64x256, int48 bias",
+    "definition": "cycles from the first accepted host transaction for the task (MARK 0) to the last out_valid&&out_ready with out_last",
+    "no_stall_cycles": 139004,
+    "no_stall_start_to_final_cycles": 115511,
+    "stall_cycles": 142920,
+    "stall_start_to_final_cycles": 115511,
+    "stall_config": "host write gap 1/7, result stall 1/3, same parameters",
+    "outputs_per_task": 25344,
+    "dut_busy_cycles_no_stall": 115512,
+    "dut_busy_cycles_stall": 115512,
+    "twelve_task_total_cycles": 1487857
+  },
+  "fault_injection": {
+    "weight_coefficient": {
+      "injected": "DUT W[0,0] += 1, golden unchanged",
+      "comparator_exit": 1,
+      "detected": true
+    },
+    "output_golden": {
+      "injected": "golden[0,0] ^= 1, RTL unchanged",
+      "comparator_exit": 1,
+      "detected": true
+    }
+  },
+  "precision": {
+    "scope": "FFN1 linear output (99x256 per layer), one frozen validation sample, 12 layers",
+    "reference": "FP32 ln1 @ FP32 W1 + FP32 b1 from the checkpoint-consistent golden",
+    "dequant": "exact integer RTL/golden output x frozen per-column sh1",
+    "per_layer": [
+      {
+        "layer": 0,
+        "nrmse": 0.00030680505320625895,
+        "nrmse_pct": 0.030680505320625894,
+        "max_abs_error": 0.002019558060990717,
+        "fp32_rms": 0.6411074128102655
+      },
+      {
+        "layer": 1,
+        "nrmse": 0.000446872930774439,
+        "nrmse_pct": 0.0446872930774439,
+        "max_abs_error": 0.00203631741732635,
+        "fp32_rms": 0.5908687750287388
+      },
+      {
+        "layer": 2,
+        "nrmse": 0.00046360804259768884,
+        "nrmse_pct": 0.046360804259768885,
+        "max_abs_error": 0.0019162972792627075,
+        "fp32_rms": 0.545774751194344
+      },
+      {
+        "layer": 3,
+        "nrmse": 0.0005373300919210218,
+        "nrmse_pct": 0.05373300919210218,
+        "max_abs_error": 0.0026050403677686518,
+        "fp32_rms": 0.5287308230769365
+      },
+      {
+        "layer": 4,
+        "nrmse": 0.0006352526236667473,
+        "nrmse_pct": 0.06352526236667473,
+        "max_abs_error": 0.002901634801645958,
+        "fp32_rms": 0.4515458082155468
+      },
+      {
+        "layer": 5,
+        "nrmse": 0.0006852389966648738,
+        "nrmse_pct": 0.06852389966648738,
+        "max_abs_error": 0.003412033070719467,
+        "fp32_rms": 0.40851599936538047
+      },
+      {
+        "layer": 6,
+        "nrmse": 0.0006954578541910105,
+        "nrmse_pct": 0.06954578541910104,
+        "max_abs_error": 0.003644573980336241,
+        "fp32_rms": 0.3868952631671851
+      },
+      {
+        "layer": 7,
+        "nrmse": 0.0007603031869479822,
+        "nrmse_pct": 0.07603031869479822,
+        "max_abs_error": 0.0033221978605744162,
+        "fp32_rms": 0.4152429363200662
+      },
+      {
+        "layer": 8,
+        "nrmse": 0.0008066804063339647,
+        "nrmse_pct": 0.08066804063339647,
+        "max_abs_error": 0.003526805240251951,
+        "fp32_rms": 0.40928675343980975
+      },
+      {
+        "layer": 9,
+        "nrmse": 0.0009005877824956175,
+        "nrmse_pct": 0.09005877824956175,
+        "max_abs_error": 0.004147670247774515,
+        "fp32_rms": 0.4992221835035522
+      },
+      {
+        "layer": 10,
+        "nrmse": 0.0009193230259926221,
+        "nrmse_pct": 0.09193230259926222,
+        "max_abs_error": 0.004610470955165424,
+        "fp32_rms": 0.6249014019444825
+      },
+      {
+        "layer": 11,
+        "nrmse": 0.0009199554418625477,
+        "nrmse_pct": 0.09199554418625477,
+        "max_abs_error": 0.004480617952231314,
+        "fp32_rms": 0.8559796005474649
+      }
+    ],
+    "worst_layer": 11,
+    "worst_nrmse": 0.0009199554418625477,
+    "worst_nrmse_pct": 0.09199554418625477,
+    "target_pct": 0.27,
+    "official_threshold_pct": 3.0,
+    "target_met": true,
+    "note": "Local precision target is met on FFN1 only. This is not the official 600-sample 12-layer pooled y metric; the official 3% threshold is separate."
+  },
+  "synthesis": {
+    "memories": 28,
+    "register_cells": 602,
+    "register_bits": 26444,
+    "latches": 0,
+    "latch_assertions_passed": true,
+    "total_cells": 60519,
+    "mul_32": 151,
+    "mux_cells": 33817,
+    "register_file_replaced_memories": [
+      "Warning: Replacing memory \\cfg_words with list of registers. See /tmp/kwt-primary-accept-g2a5nmrt/control/hardware/experiments/r5_control/rtl/r5_ffn1_top.sv:707",
+      "Warning: Replacing memory \\bias_we_slice with list of registers. See /tmp/kwt-primary-accept-g2a5nmrt/control/hardware/experiments/r5_control/rtl/r5_ffn1_top.sv:376",
+      "Warning: Replacing memory \\w_count with list of registers. See /tmp/kwt-primary-accept-g2a5nmrt/control/hardware/experiments/r5_control/rtl/r5_ffn1_top.sv:271",
+      "Warning: Replacing memory \\psum_mem with list of registers. See /tmp/kwt-primary-accept-g2a5nmrt/control/hardware/experiments/r5_control/rtl/r5_mac_cacc.sv:128",
+      "Warning: Replacing memory \\prod_q with list of registers. See /tmp/kwt-primary-accept-g2a5nmrt/control/hardware/experiments/r5_control/rtl/r5_mac_cacc.sv:104",
+      "Warning: Replacing memory \\psum_mem with list of registers. See /tmp/kwt-primary-accept-g2a5nmrt/control/hardware/experiments/r5_control/rtl/r5_mac_cacc.sv:128",
+      "Warning: Replacing memory \\prod_q with list of registers. See /tmp/kwt-primary-accept-g2a5nmrt/control/hardware/experiments/r5_control/rtl/r5_mac_cacc.sv:104",
+      "Warning: Replacing memory \\bias_q with list of registers. See /tmp/kwt-primary-accept-g2a5nmrt/control/hardware/experiments/r5_control/rtl/r5_ffn1_top.sv:387",
+      "Warning: Replacing memory \\w_q with list of registers. See /tmp/kwt-primary-accept-g2a5nmrt/control/hardware/experiments/r5_control/rtl/r5_ffn1_top.sv:346",
+      "Warning: Replacing memory \\a_q with list of registers. See /tmp/kwt-primary-accept-g2a5nmrt/control/hardware/experiments/r5_control/rtl/r5_ffn1_top.sv:314",
+      "Warning: Replacing memory \\cfg_words with list of registers. See /tmp/kwt-primary-accept-g2a5nmrt/control/hardware/experiments/r5_control/rtl/r5_ffn1_top.sv:707",
+      "Warning: Replacing memory \\bias_we_slice with list of registers. See /tmp/kwt-primary-accept-g2a5nmrt/control/hardware/experiments/r5_control/rtl/r5_ffn1_top.sv:376",
+      "Warning: Replacing memory \\w_count with list of registers. See /tmp/kwt-primary-accept-g2a5nmrt/control/hardware/experiments/r5_control/rtl/r5_ffn1_top.sv:271"
+    ],
+    "warning_count": 13,
+    "stat_counts": {
+      "$paramod$dfd5400b09cec52bcbea1bb8f7ea02ea0404bcd1\\r5_mac_cacc": 1,
+      "$add_10": 3,
+      "$add_13": 1,
+      "$add_15": 1,
+      "$add_2": 1,
+      "$add_3": 2,
+      "$add_32": 166,
+      "$add_48": 17,
+      "$add_7": 4,
+      "$add_8": 2,
+      "$adff_1": 12,
+      "$adff_10": 3,
+      "$adff_13": 1,
+      "$adff_15": 2,
+      "$adff_16": 4,
+      "$adff_2": 5,
+      "$adff_3": 4,
+      "$adff_32": 18,
+      "$adff_4": 3,
+      "$adff_48": 2,
+      "$adff_512": 1,
+      "$adff_7": 4,
+      "$adff_8": 2,
+      "$adff_9": 1,
+      "$and_2": 2,
+      "$and_512": 16,
+      "$dff_16": 28,
+      "$dff_48": 512,
+      "$eq_1": 4,
+      "$eq_10": 1,
+      "$eq_2": 36,
+      "$eq_20": 1,
+      "$eq_3": 63,
+      "$eq_4": 15,
+      "$eq_5": 1,
+      "$eq_7": 1,
+      "$eq_9": 25041,
+      "$ge_13": 1,
+      "$ge_20": 4,
+      "$ge_32": 9,
+      "$ge_7": 3,
+      "$gt_3": 1,
+      "$gt_32": 2,
+      "$le_7": 1,
+      "$logic_and_1": 177,
+      "$logic_not_1": 25,
+      "$logic_not_2": 10,
+      "$logic_not_3": 7,
+      "$logic_not_4": 1,
+      "$logic_not_9": 49,
+      "$logic_or_1": 37,
+      "$lt_20": 5,
+      "$lt_3": 1,
+      "$lt_32": 3,
+      "$lt_7": 2,
+      "$mem_v2": 28,
+      "$mul_32": 151,
+      "$mux_1": 37,
+      "$mux_10": 89,
+      "$mux_12": 32,
+      "$mux_13": 2,
+      "$mux_15": 11,
+      "$mux_16": 207,
+      "$mux_2": 21,
+      "$mux_256": 2,
+      "$mux_3": 17,
+      "$mux_32": 20,
+      "$mux_4": 3,
+      "$mux_48": 33321,
+      "$mux_5": 6,
+      "$mux_512": 16,
+      "$mux_7": 20,
+      "$mux_8": 11,
+      "$mux_9": 2,
+      "$ne_2": 1,
+      "$ne_3": 4,
+      "$ne_32": 1,
+      "$neg_2": 4,
+      "$neg_33": 32,
+      "$not_1": 12,
+      "$not_2": 2,
+      "$not_512": 16,
+      "$or_2": 2,
+      "$or_512": 16,
+      "$pmux_10_3": 2,
+      "$pmux_15_2": 3,
+      "$pmux_16_8": 1,
+      "$pmux_1_2": 3,
+      "$pmux_1_4": 1,
+      "$pmux_2_2": 1,
+      "$pmux_2_4": 1,
+      "$pmux_3_4": 1,
+      "$pmux_3_5": 1,
+      "$pmux_48_512": 17,
+      "$pmux_7_2": 1,
+      "$pmux_8_2": 1,
+      "$reduce_bool_3": 1,
+      "$shift_2": 4,
+      "$shift_512": 32,
+      "$shiftx_2": 21,
+      "$shiftx_512": 17,
+      "$shl_16": 1,
+      "$sub_16": 1,
+      "$sub_3": 1,
+      "$sub_32": 2,
+      "$sub_7": 1,
+      "$sub_9": 1
+    },
+    "ran": true,
+    "exit": 0,
+    "ok": true,
+    "flow": "read_verilog -sv; hierarchy -check; proc; opt_clean; memory -nomap; check; latch assertions; stat -width",
+    "note": "Memory-preserving RTL synthesis check. `memory -nomap` keeps the explicit SRAM wrappers as $mem_v2; 28 macros expected and observed. Register-file CACC psum/vbits are flops. No PDK/lib mapping.",
+    "sram_macros_expected": 28,
+    "sram_macro_counts": {
+      "A_16x1024": 16,
+      "W_16x4096": 8,
+      "bias_16x1024": 3,
+      "desc_16x128": 1
+    },
+    "sram_bits_structural": 837632,
+    "memory_summary": {
+      "$mem_v2_total": 28,
+      "A_16x1024": 16,
+      "W_16x4096": 8,
+      "bias_16x1024": 3,
+      "desc_16x128": 1
+    },
+    "replacing_note": "Yosys 'Replacing memory' warnings cover the SRAM output/control register arrays (a_q, w_q, bias_q, cfg_words, w_count, bias_we_slice) and the CACC register file (psum_mem, prod_q). The 28 $mem_v2 cells are the actual A/W/bias/descriptor SRAM macros inside the wrappers.",
+    "cacc_storage": "512 x 48-bit psum + 512 valid bits in registers (not an SRAM macro)",
+    "techmap_attempt": {
+      "completed": false,
+      "observed_limit": "exceeded 400 s and ~6.8 GB RSS in an interactive attempt",
+      "reason": "the 512x48 CACC register file is lowered to a wide mux/eq network; no PDK/library mapping is available in this environment"
+    },
+    "source_mac_lanes": 16,
+    "mul32_note": "Yosys RTLIL $mul_32 count is elaborated signed-multiply structure, not the 16-lane MAC array; no PDK mapping was run."
+  }
+}
