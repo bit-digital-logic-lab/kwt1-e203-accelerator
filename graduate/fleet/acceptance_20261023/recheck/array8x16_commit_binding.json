@@ -1,0 +1,12 @@
+{
+  "commit": "534fe5af931cc486e3bf724ae410a9705db9310a",
+  "source_hashes_match": {
+    "hardware/experiments/r6_array8x16/rtl/kwt_product_array_tagged.sv": true,
+    "hardware/experiments/r6_array8x16/rtl/kwt_cacc_cellbank.sv": true,
+    "hardware/experiments/r6_array8x16/rtl/kwt_array8x16_stream_engine.sv": true,
+    "hardware/experiments/r6_array8x16/tb/tb_kwt_array8x16_stream.sv": true
+  },
+  "all_match": true,
+  "verified_outputs": 608256,
+  "scope": "same copied RTL is now committed; bounded32bit model outputs pass, full-range output fails"
+}

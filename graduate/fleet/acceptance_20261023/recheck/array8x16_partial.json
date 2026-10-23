@@ -335,6 +335,6 @@
     "kwt_cacc_cellbank.sv": "7e4d1c97c3c9c5c98ab80973f2d316daff6f8d0f8bb452101e5c0d1732155fe1",
     "kwt_array8x16_stream_engine.sv": "1a4c776ba1ff5bb1a78a3c5bfd1643d105561711c7bbffc2eb611144184adf83"
   },
-  "pending": "64-bit comparison still queued; final worker commit absent at snapshot",
+  "pending": "128/64bit twelve-layer comparisons now complete; use array8x16_preview.json and commit binding. Full-range32bit export blocker remains.",
   "scope": "32bit-export real frozen samples only; full A16W12 range fails, see boundary test"
 }
