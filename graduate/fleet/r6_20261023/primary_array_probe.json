@@ -1,0 +1,70 @@
+[
+  {
+    "rows": 8,
+    "cols": 8,
+    "build_cmd": [
+      "verilator",
+      "--binary",
+      "--timing",
+      "--assert",
+      "-Wno-fatal",
+      "-j",
+      "2",
+      "--top-module",
+      "tb_kwt_pingpong_cacc_engine",
+      "--Mdir",
+      "/tmp/kwt-array8x8-skugf_5z/obj",
+      "/home/yang/Desktop/ic\u8bbe\u8ba1\u7ade\u8d5b/hardware/rtl/pulse_array/kwt_product_array.sv",
+      "/home/yang/Desktop/ic\u8bbe\u8ba1\u7ade\u8d5b/hardware/rtl/pulse_array/kwt_cacc.sv",
+      "/home/yang/Desktop/ic\u8bbe\u8ba1\u7ade\u8d5b/hardware/rtl/sram/kwt_operand_pingpong.sv",
+      "/home/yang/Desktop/ic\u8bbe\u8ba1\u7ade\u8d5b/hardware/rtl/pulse_array/kwt_pingpong_cacc_engine.sv",
+      "/tmp/kwt-array8x8-skugf_5z/tb.sv"
+    ],
+    "build_exit": 0,
+    "run": [
+      "/tmp/kwt-array8x8-skugf_5z/obj/Vtb_kwt_pingpong_cacc_engine"
+    ],
+    "exit": 0,
+    "output": "PROBE cols=8 busy=1836 launches=128 gap_min=10 gap_max=10\nPASS pingpong+CACC: 128 outputs, inactive-page preload, active-page protection, K accumulation, drain\n- /tmp/kwt-array8x8-skugf_5z/tb.sv:176: Verilog $finish\n- S i m u l a t i o n   R e p o r t: Verilator 5.047 devel\n- Verilator: $finish at 27ns; walltime 0.004 s; speed 6.643 us/s\n- Verilator: cpu 0.004 s on 1 threads; allocated 6 MB\n",
+    "source_sha256": {
+      "hardware/rtl/pulse_array/kwt_product_array.sv": "f3f1b91c1bd962c5fbc39dff700135ae7f1d2e1f9198b7a44091ea28c9e78fa3",
+      "hardware/rtl/pulse_array/kwt_cacc.sv": "0febfb08aa977856867bbfb3760830b4292a8138a365194e69a0b088c9ca9da8",
+      "hardware/rtl/sram/kwt_operand_pingpong.sv": "da7bd8b45bba923d589cf065658e3a56ab70867ba5f66a0bcba5ce41db2d3036",
+      "hardware/rtl/pulse_array/kwt_pingpong_cacc_engine.sv": "d9b62436537f0fce5730b939521c39e9a083f766ea2b7e00b84d38495ed930e5"
+    }
+  },
+  {
+    "rows": 8,
+    "cols": 16,
+    "build_cmd": [
+      "verilator",
+      "--binary",
+      "--timing",
+      "--assert",
+      "-Wno-fatal",
+      "-j",
+      "2",
+      "--top-module",
+      "tb_kwt_pingpong_cacc_engine",
+      "--Mdir",
+      "/tmp/kwt-array8x16-pi1wbqpy/obj",
+      "/home/yang/Desktop/ic\u8bbe\u8ba1\u7ade\u8d5b/hardware/rtl/pulse_array/kwt_product_array.sv",
+      "/home/yang/Desktop/ic\u8bbe\u8ba1\u7ade\u8d5b/hardware/rtl/pulse_array/kwt_cacc.sv",
+      "/home/yang/Desktop/ic\u8bbe\u8ba1\u7ade\u8d5b/hardware/rtl/sram/kwt_operand_pingpong.sv",
+      "/home/yang/Desktop/ic\u8bbe\u8ba1\u7ade\u8d5b/hardware/rtl/pulse_array/kwt_pingpong_cacc_engine.sv",
+      "/tmp/kwt-array8x16-pi1wbqpy/tb.sv"
+    ],
+    "build_exit": 0,
+    "run": [
+      "/tmp/kwt-array8x16-pi1wbqpy/obj/Vtb_kwt_pingpong_cacc_engine"
+    ],
+    "exit": 0,
+    "output": "PROBE cols=16 busy=3388 launches=128 gap_min=18 gap_max=18\nPASS pingpong+CACC: 256 outputs, inactive-page preload, active-page protection, K accumulation, drain\n- /tmp/kwt-array8x16-pi1wbqpy/tb.sv:176: Verilog $finish\n- S i m u l a t i o n   R e p o r t: Verilator 5.047 devel\n- Verilator: $finish at 52ns; walltime 0.011 s; speed 4.688 us/s\n- Verilator: cpu 0.011 s on 1 threads; allocated 6 MB\n",
+    "source_sha256": {
+      "hardware/rtl/pulse_array/kwt_product_array.sv": "f3f1b91c1bd962c5fbc39dff700135ae7f1d2e1f9198b7a44091ea28c9e78fa3",
+      "hardware/rtl/pulse_array/kwt_cacc.sv": "0febfb08aa977856867bbfb3760830b4292a8138a365194e69a0b088c9ca9da8",
+      "hardware/rtl/sram/kwt_operand_pingpong.sv": "da7bd8b45bba923d589cf065658e3a56ab70867ba5f66a0bcba5ce41db2d3036",
+      "hardware/rtl/pulse_array/kwt_pingpong_cacc_engine.sv": "d9b62436537f0fce5730b939521c39e9a083f766ea2b7e00b84d38495ed930e5"
+    }
+  }
+]

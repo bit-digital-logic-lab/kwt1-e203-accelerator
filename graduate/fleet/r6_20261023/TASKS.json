@@ -1,0 +1,72 @@
+{
+  "traffic": {
+    "base": "79c8af1",
+    "path": "/home/yang/kwt-worktrees/ds-r6-traffic",
+    "result": "graduate/ds_tasks/r6_traffic/results.json"
+  },
+  "bus64": {
+    "base": "79c8af1",
+    "path": "/home/yang/kwt-worktrees/ds-r6-bus64",
+    "result": "graduate/ds_tasks/r6_bus64/results.json"
+  },
+  "bus128": {
+    "base": "79c8af1",
+    "path": "/home/yang/kwt-worktrees/ds-r6-bus128",
+    "result": "graduate/ds_tasks/r6_bus128/results.json"
+  },
+  "resident_a": {
+    "base": "79c8af1",
+    "path": "/home/yang/kwt-worktrees/ds-r6-resident_a",
+    "result": "graduate/ds_tasks/r6_resident_a/results.json"
+  },
+  "resident_w": {
+    "base": "79c8af1",
+    "path": "/home/yang/kwt-worktrees/ds-r6-resident_w",
+    "result": "graduate/ds_tasks/r6_resident_w/results.json"
+  },
+  "output": {
+    "base": "79c8af1",
+    "path": "/home/yang/kwt-worktrees/ds-r6-output",
+    "result": "graduate/ds_tasks/r6_output/results.json"
+  },
+  "layout": {
+    "base": "79c8af1",
+    "path": "/home/yang/kwt-worktrees/ds-r6-layout",
+    "result": "graduate/ds_tasks/r6_layout/results.json"
+  },
+  "tail": {
+    "base": "79c8af1",
+    "path": "/home/yang/kwt-worktrees/ds-r6-tail",
+    "result": "graduate/ds_tasks/r6_tail/results.json"
+  },
+  "integration": {
+    "base": "79c8af1",
+    "path": "/home/yang/kwt-worktrees/ds-r6-integration",
+    "result": "graduate/ds_tasks/r6_integration/results.json"
+  },
+  "crosscheck": {
+    "base": "79c8af1",
+    "path": "/home/yang/kwt-worktrees/ds-r6-crosscheck",
+    "result": "graduate/ds_tasks/r6_crosscheck/results.json"
+  },
+  "array8x8": {
+    "base": "79c8af1",
+    "path": "/home/yang/kwt-worktrees/ds-r6-array8x8",
+    "result": "graduate/ds_tasks/r6_array8x8/results.json"
+  },
+  "array8x16": {
+    "base": "79c8af1",
+    "path": "/home/yang/kwt-worktrees/ds-r6-array8x16",
+    "result": "graduate/ds_tasks/r6_array8x16/results.json"
+  },
+  "feed8x8": {
+    "base": "79c8af1",
+    "path": "/home/yang/kwt-worktrees/ds-r6-feed8x8",
+    "result": "graduate/ds_tasks/r6_feed8x8/results.json"
+  },
+  "feed8x16": {
+    "base": "79c8af1",
+    "path": "/home/yang/kwt-worktrees/ds-r6-feed8x16",
+    "result": "graduate/ds_tasks/r6_feed8x16/results.json"
+  }
+}

@@ -1,0 +1,6 @@
+logs/
+status/
+__pycache__/
+STATUS.json
+STATUS.tmp
+probe_logs/

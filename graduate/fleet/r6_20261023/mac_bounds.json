@@ -1,0 +1,67 @@
+{
+  "shape": [
+    99,
+    64,
+    256
+  ],
+  "macs": 1622016,
+  "targets": [
+    {
+      "rows": 8,
+      "cols": 8,
+      "physical_multipliers": 64,
+      "ideal_mac_cycles": 25344,
+      "masked_tiles": 416,
+      "tiled_k_cycles": 26624,
+      "row_lane_efficiency": 0.9519230769230769,
+      "local_operand_bytes_per_launch": 32,
+      "current_serial_read_fsm_issue_interval": 10,
+      "perfect_overlap_lowerbound": {
+        "64": 26624,
+        "128": 26624
+      }
+    },
+    {
+      "rows": 8,
+      "cols": 16,
+      "physical_multipliers": 128,
+      "ideal_mac_cycles": 12672,
+      "masked_tiles": 208,
+      "tiled_k_cycles": 13312,
+      "row_lane_efficiency": 0.9519230769230769,
+      "local_operand_bytes_per_launch": 48,
+      "current_serial_read_fsm_issue_interval": 18,
+      "perfect_overlap_lowerbound": {
+        "64": 24944,
+        "128": 13312
+      }
+    }
+  ],
+  "byte_traffic": {
+    "legacy_INT16_INT32": 147840,
+    "frozen_container16_bias64_output48": 199552,
+    "frozen_packed12_bias64_output48": 191360
+  },
+  "bus_beats": {
+    "legacy_INT16_INT32": {
+      "64": 18480,
+      "128": 9240
+    },
+    "frozen_container16_bias64_output48": {
+      "64": 24944,
+      "128": 12472
+    },
+    "frozen_packed12_bias64_output48": {
+      "64": 23920,
+      "128": 11960
+    }
+  },
+  "assumptions": [
+    "FP32 PC frontend/head excluded. Hardware frozen numeric contract must be checked.",
+    "48bit raw output width/bias64 are candidates; actual range and packing need tests.",
+    "Each operand and raw output crosses task bus once; metadata, alignment and protocol overhead excluded.",
+    "No cross-task warm cache or repeated transfers credited as utilization.",
+    "Ideal counts exclude array skew/fill/drain/CACC/writeback; tiled counts include99to104rowmask only.",
+    "Serial-read II is a static FSM count; probe actual cycles independently."
+  ]
+}
