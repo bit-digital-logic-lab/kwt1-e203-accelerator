@@ -1,0 +1,16 @@
+{
+  "commit": "2f9bc34",
+  "command": [
+    "python3",
+    "/tmp/kwt-primary-r5-audit-2gk9jnx_/graduate/ds_tasks/r5_requirements/scripts/audit.py",
+    "--selftest"
+  ],
+  "exit": 0,
+  "scope": "clean archive audit negative-controls only; not whole project acceptance",
+  "external_readonly": [
+    "R4 crosscheck outputs",
+    "R4 encoder outputs",
+    "p027 frozen pack",
+    "480 cache"
+  ]
+}

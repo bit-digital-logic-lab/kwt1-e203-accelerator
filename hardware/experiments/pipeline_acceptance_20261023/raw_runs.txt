@@ -1,0 +1,71 @@
+CASE normal
+MON cycles=121915 beats=114688 useful_macs=1622016 internal_idle=2720 max_internal_gap=80
+ARCH_METRICS cycles=121915 initial_load_cycles=4128 compute_wall_cycles=117432 tail_cycles=355 cacc_stall_cycles=0 load_stall_cycles=56 bias_stall_cycles=0 stage_stall_cycles=0 out_bp_stall_cycles=0 feed_stall_cycles=0 dump_not_ready_cycles=0 dump_beats=28672 a_load_words=6336 w_load_words=16384 w_fetch_words=16384 bias_load_words=512 out_write_words=50688 out_slots=50688 a_local_reads=101376 w_local_reads=114688 checked_outputs=25344 checked_padding=0 overlapped_output_words=25296 overlapped_captures=112 bus_grant_out=50688 bus_grant_bias=512 bus_grant_a=6336 bus_grant_w=16384 bus_idle_cycles=47995 bus_cycles=121915 a_preload_tiles=3 bias_delay=0 out_bp=1 bus_gap=0
+PASS integrated single-MAC + bias task M=99 K=64 N=256 gaps=0 preload=3 bias_delay=0 out_bp=1 bus_gap=0
+- /tmp/kwt-primary-pipeline-r9475pdc/tb_kwt_integrated_task.sv:668: Verilog $finish
+- S i m u l a t i o n   R e p o r t: Verilator 5.047 devel
+- Verilator: $finish at 1us; walltime 0.155 s; speed 7.850 us/s
+- Verilator: cpu 0.155 s on 1 threads; allocated 6 MB
+
+CASE out2
+MON cycles=135671 beats=114688 useful_macs=1622016 internal_idle=15119 max_internal_gap=260
+ARCH_METRICS cycles=135671 initial_load_cycles=4128 compute_wall_cycles=129831 tail_cycles=1712 cacc_stall_cycles=12455 load_stall_cycles=0 bias_stall_cycles=0 stage_stall_cycles=83355 out_bp_stall_cycles=50688 feed_stall_cycles=0 dump_not_ready_cycles=0 dump_beats=28672 a_load_words=6336 w_load_words=16384 w_fetch_words=16384 bias_load_words=512 out_write_words=50688 out_slots=50688 a_local_reads=101376 w_local_reads=114688 checked_outputs=25344 checked_padding=0 overlapped_output_words=25040 overlapped_captures=111 bus_grant_out=50688 bus_grant_bias=512 bus_grant_a=6336 bus_grant_w=16384 bus_idle_cycles=61751 bus_cycles=135671 a_preload_tiles=3 bias_delay=0 out_bp=2 bus_gap=0
+PASS integrated single-MAC + bias task M=99 K=64 N=256 gaps=0 preload=3 bias_delay=0 out_bp=2 bus_gap=0
+- /tmp/kwt-primary-pipeline-r9475pdc/tb_kwt_integrated_task.sv:668: Verilog $finish
+- S i m u l a t i o n   R e p o r t: Verilator 5.047 devel
+- Verilator: $finish at 1us; walltime 0.169 s; speed 8.028 us/s
+- Verilator: cpu 0.169 s on 1 threads; allocated 6 MB
+
+CASE out3
+MON cycles=186136 beats=114688 useful_macs=1622016 internal_idle=64470 max_internal_gap=770
+ARCH_METRICS cycles=186136 initial_load_cycles=4128 compute_wall_cycles=179182 tail_cycles=2826 cacc_stall_cycles=61806 load_stall_cycles=0 bias_stall_cycles=0 stage_stall_cycles=143305 out_bp_stall_cycles=101153 feed_stall_cycles=0 dump_not_ready_cycles=0 dump_beats=28672 a_load_words=6336 w_load_words=16384 w_fetch_words=16384 bias_load_words=512 out_write_words=50688 out_slots=50688 a_local_reads=101376 w_local_reads=114688 checked_outputs=25344 checked_padding=0 overlapped_output_words=24959 overlapped_captures=110 bus_grant_out=50688 bus_grant_bias=512 bus_grant_a=6336 bus_grant_w=16384 bus_idle_cycles=112216 bus_cycles=186136 a_preload_tiles=3 bias_delay=0 out_bp=3 bus_gap=0
+PASS integrated single-MAC + bias task M=99 K=64 N=256 gaps=0 preload=3 bias_delay=0 out_bp=3 bus_gap=0
+- /tmp/kwt-primary-pipeline-r9475pdc/tb_kwt_integrated_task.sv:668: Verilog $finish
+- S i m u l a t i o n   R e p o r t: Verilator 5.047 devel
+- Verilator: $finish at 2us; walltime 0.224 s; speed 8.415 us/s
+- Verilator: cpu 0.221 s on 1 threads; allocated 6 MB
+
+CASE out6
+MON cycles=338197 beats=114688 useful_macs=1622016 internal_idle=213171 max_internal_gap=2306
+ARCH_METRICS cycles=338197 initial_load_cycles=4128 compute_wall_cycles=327883 tail_cycles=6186 cacc_stall_cycles=210507 load_stall_cycles=0 bias_stall_cycles=0 stage_stall_cycles=299440 out_bp_stall_cycles=253214 feed_stall_cycles=0 dump_not_ready_cycles=0 dump_beats=28672 a_load_words=6336 w_load_words=16384 w_fetch_words=16384 bias_load_words=512 out_write_words=50688 out_slots=50688 a_local_reads=101376 w_local_reads=114688 checked_outputs=25344 checked_padding=0 overlapped_output_words=24871 overlapped_captures=110 bus_grant_out=50688 bus_grant_bias=512 bus_grant_a=6336 bus_grant_w=16384 bus_idle_cycles=264277 bus_cycles=338197 a_preload_tiles=3 bias_delay=0 out_bp=6 bus_gap=0
+PASS integrated single-MAC + bias task M=99 K=64 N=256 gaps=0 preload=3 bias_delay=0 out_bp=6 bus_gap=0
+- /tmp/kwt-primary-pipeline-r9475pdc/tb_kwt_integrated_task.sv:668: Verilog $finish
+- S i m u l a t i o n   R e p o r t: Verilator 5.047 devel
+- Verilator: $finish at 3us; walltime 0.295 s; speed 11.481 us/s
+- Verilator: cpu 0.295 s on 1 threads; allocated 6 MB
+
+CASE bus2
+MON cycles=151167 beats=114688 useful_macs=1622016 internal_idle=26489 max_internal_gap=2064
+ARCH_METRICS cycles=151167 initial_load_cycles=8254 compute_wall_cycles=141201 tail_cycles=1712 cacc_stall_cycles=8632 load_stall_cycles=15193 bias_stall_cycles=0 stage_stall_cycles=73065 out_bp_stall_cycles=0 feed_stall_cycles=0 dump_not_ready_cycles=0 dump_beats=28672 a_load_words=6336 w_load_words=16384 w_fetch_words=16384 bias_load_words=512 out_write_words=50688 out_slots=50688 a_local_reads=101376 w_local_reads=114688 checked_outputs=25344 checked_padding=0 overlapped_output_words=25040 overlapped_captures=111 bus_grant_out=50688 bus_grant_bias=512 bus_grant_a=6336 bus_grant_w=16384 bus_idle_cycles=77247 bus_cycles=151167 a_preload_tiles=3 bias_delay=0 out_bp=1 bus_gap=2
+PASS integrated single-MAC + bias task M=99 K=64 N=256 gaps=0 preload=3 bias_delay=0 out_bp=1 bus_gap=2
+- /tmp/kwt-primary-pipeline-r9475pdc/tb_kwt_integrated_task.sv:668: Verilog $finish
+- S i m u l a t i o n   R e p o r t: Verilator 5.047 devel
+- Verilator: $finish at 2us; walltime 0.167 s; speed 9.073 us/s
+- Verilator: cpu 0.167 s on 1 threads; allocated 6 MB
+
+CASE bus7
+MON cycles=123929 beats=114688 useful_macs=1622016 internal_idle=4032 max_internal_gap=1365
+ARCH_METRICS cycles=123929 initial_load_cycles=4815 compute_wall_cycles=118744 tail_cycles=370 cacc_stall_cycles=0 load_stall_cycles=1368 bias_stall_cycles=0 stage_stall_cycles=0 out_bp_stall_cycles=0 feed_stall_cycles=0 dump_not_ready_cycles=0 dump_beats=28672 a_load_words=6336 w_load_words=16384 w_fetch_words=16384 bias_load_words=512 out_write_words=50688 out_slots=50688 a_local_reads=101376 w_local_reads=114688 checked_outputs=25344 checked_padding=0 overlapped_output_words=25296 overlapped_captures=112 bus_grant_out=50688 bus_grant_bias=512 bus_grant_a=6336 bus_grant_w=16384 bus_idle_cycles=50009 bus_cycles=123929 a_preload_tiles=3 bias_delay=0 out_bp=1 bus_gap=7
+PASS integrated single-MAC + bias task M=99 K=64 N=256 gaps=0 preload=3 bias_delay=0 out_bp=1 bus_gap=7
+- /tmp/kwt-primary-pipeline-r9475pdc/tb_kwt_integrated_task.sv:668: Verilog $finish
+- S i m u l a t i o n   R e p o r t: Verilator 5.047 devel
+- Verilator: $finish at 1us; walltime 0.144 s; speed 8.622 us/s
+- Verilator: cpu 0.144 s on 1 threads; allocated 6 MB
+
+CASE pre1
+MON cycles=121915 beats=114688 useful_macs=1622016 internal_idle=4768 max_internal_gap=1024
+ARCH_METRICS cycles=121915 initial_load_cycles=2080 compute_wall_cycles=119480 tail_cycles=355 cacc_stall_cycles=0 load_stall_cycles=2104 bias_stall_cycles=0 stage_stall_cycles=0 out_bp_stall_cycles=0 feed_stall_cycles=0 dump_not_ready_cycles=0 dump_beats=28672 a_load_words=6336 w_load_words=16384 w_fetch_words=16384 bias_load_words=512 out_write_words=50688 out_slots=50688 a_local_reads=101376 w_local_reads=114688 checked_outputs=25344 checked_padding=0 overlapped_output_words=25296 overlapped_captures=112 bus_grant_out=50688 bus_grant_bias=512 bus_grant_a=6336 bus_grant_w=16384 bus_idle_cycles=47995 bus_cycles=121915 a_preload_tiles=1 bias_delay=0 out_bp=1 bus_gap=0
+PASS integrated single-MAC + bias task M=99 K=64 N=256 gaps=0 preload=1 bias_delay=0 out_bp=1 bus_gap=0
+- /tmp/kwt-primary-pipeline-r9475pdc/tb_kwt_integrated_task.sv:668: Verilog $finish
+- S i m u l a t i o n   R e p o r t: Verilator 5.047 devel
+- Verilator: $finish at 1us; walltime 0.147 s; speed 8.319 us/s
+- Verilator: cpu 0.147 s on 1 threads; allocated 6 MB
+
+CASE pre7
+MON cycles=125123 beats=114688 useful_macs=1622016 internal_idle=2664 max_internal_gap=24
+ARCH_METRICS cycles=125123 initial_load_cycles=7392 compute_wall_cycles=117376 tail_cycles=355 cacc_stall_cycles=0 load_stall_cycles=0 bias_stall_cycles=0 stage_stall_cycles=0 out_bp_stall_cycles=0 feed_stall_cycles=0 dump_not_ready_cycles=0 dump_beats=28672 a_load_words=6336 w_load_words=16384 w_fetch_words=16384 bias_load_words=512 out_write_words=50688 out_slots=50688 a_local_reads=101376 w_local_reads=114688 checked_outputs=25344 checked_padding=0 overlapped_output_words=25296 overlapped_captures=112 bus_grant_out=50688 bus_grant_bias=512 bus_grant_a=6336 bus_grant_w=16384 bus_idle_cycles=51203 bus_cycles=125123 a_preload_tiles=7 bias_delay=0 out_bp=1 bus_gap=0
+PASS integrated single-MAC + bias task M=99 K=64 N=256 gaps=0 preload=7 bias_delay=0 out_bp=1 bus_gap=0
+- /tmp/kwt-primary-pipeline-r9475pdc/tb_kwt_integrated_task.sv:668: Verilog $finish
+- S i m u l a t i o n   R e p o r t: Verilator 5.047 devel
+- Verilator: $finish at 1us; walltime 0.145 s; speed 8.654 us/s
+- Verilator: cpu 0.145 s on 1 threads; allocated 6 MB

@@ -1,0 +1,50 @@
+{
+  "checked_at_utc": "2026-10-23T08:59:09.045752+00:00",
+  "queue": {
+    "model": "opencode-go/deepseek-v4.1-flash",
+    "started_at": "2026-10-23T08:16:37.706895+00:00",
+    "finished_at": null,
+    "state": "running",
+    "tasks": {
+      "requirements": {
+        "task": "requirements",
+        "worktree": "/home/yang/kwt-worktrees/ds-r5-requirements",
+        "branch": "codex/kwt-ds-r5-requirements",
+        "start_head": "ebc99853708709d3b685044da6f9a4b3e52b02d7",
+        "started_at": "2026-10-23T08:16:37.772352+00:00",
+        "log": "/home/yang/Desktop/ic\u8bbe\u8ba1\u7ade\u8d5b/graduate/fleet/r5_20261023/logs/requirements.log",
+        "result": "/home/yang/kwt-worktrees/ds-r5-requirements/graduate/ds_tasks/r5_requirements/results.json",
+        "state": "submitted",
+        "finished_at": "2026-10-23T08:41:15.996939+00:00",
+        "exit_code": 0,
+        "head": "2f9bc34bc33e3758db5ab01d72d7e8b7fe22f1ef",
+        "dirty_status": "",
+        "report_exists": false,
+        "results_exists": true,
+        "new_commit": true,
+        "clean": true,
+        "submitted": true
+      },
+      "gates": {
+        "task": "gates",
+        "worktree": "/home/yang/kwt-worktrees/ds-r5-gates",
+        "branch": "codex/kwt-ds-r5-gates",
+        "start_head": "2e24d7cd1564510db9d22b91911d2eafc247fb86",
+        "started_at": "2026-10-23T08:16:37.773774+00:00",
+        "log": "/home/yang/Desktop/ic\u8bbe\u8ba1\u7ade\u8d5b/graduate/fleet/r5_20261023/logs/gates.log",
+        "result": "/home/yang/kwt-worktrees/ds-r5-gates/graduate/ds_tasks/r5_gates/results.json",
+        "state": "running"
+      },
+      "control": {
+        "task": "control",
+        "worktree": "/home/yang/kwt-worktrees/ds-r5-control",
+        "branch": "codex/kwt-ds-r5-control",
+        "start_head": "8490830ef4c0446f41f6a50c7e3185b51a54f0f0",
+        "started_at": "2026-10-23T08:41:16.043197+00:00",
+        "log": "/home/yang/Desktop/ic\u8bbe\u8ba1\u7ade\u8d5b/graduate/fleet/r5_20261023/logs/control.log",
+        "result": "/home/yang/kwt-worktrees/ds-r5-control/graduate/ds_tasks/r5_control/results.json",
+        "state": "running"
+      }
+    }
+  }
+}
