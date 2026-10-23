@@ -1,5 +1,7 @@
 # 主智能体独立校验（2026-10-23）
 
+> 后续复验更新：NRMSE修复现已通过主验收；新8×16候选发现32bit导出全范围截断。最新证据见 [recheck/README.md](recheck/README.md)。
+
 ## 判定
 
 - **R6目标8×8/8×16：待验收**。检查时12个首轮worker全部运行中，均无最终commit/results.json；不能把中途PASS、理论下界或正在修改的RTL当成加速结论。集成与交叉审核尚未开始。具体状态见queue_snapshot.json。

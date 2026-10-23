@@ -1,3 +1,4 @@
 logs/
 __pycache__/
 metric_repair_status.json
+resident_w_resume_status.json

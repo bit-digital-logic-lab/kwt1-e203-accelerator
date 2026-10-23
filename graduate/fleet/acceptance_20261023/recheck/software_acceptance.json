@@ -1,0 +1,21 @@
+{
+  "commit": "005f656d8c",
+  "archive": "/tmp/kwt-recheck-27yw63_f",
+  "argv": [
+    "python3",
+    "/home/yang/Desktop/ic\u8bbe\u8ba1\u7ade\u8d5b/graduate/fleet/r6_20261023/heavy.py",
+    "--",
+    "bash",
+    "/tmp/kwt-recheck-27yw63_f/graduate/ds_tasks/r5_software/run_clean.sh"
+  ],
+  "exit": 0,
+  "dependency_mounts": {
+    "R5_PYTHON": "/home/yang/Desktop/ic\u8bbe\u8ba1\u7ade\u8d5b/software/.venv/bin/python",
+    "R5_DATASET_ARCHIVE": "/home/yang/Desktop/ic\u8bbe\u8ba1\u7ade\u8d5b/\u8d44\u6599/\u6570\u636e\u96c6/speech_commands_v0.02.tar.gz",
+    "R5_CACHE": "/home/yang/Desktop/ic\u8bbe\u8ba1\u7ade\u8d5b/software/.build/quant_samples_12labels_40.npz",
+    "R5_P027_PACK": "/home/yang/kwt-worktrees/ds-p027-precision/graduate/ds_tasks/p027_precision/frozen",
+    "R5_RESULTS": "/home/yang/Desktop/ic\u8bbe\u8ba1\u7ade\u8d5b/graduate/fleet/acceptance_20261023/recheck/software_results.json",
+    "R5_LOG_DIR": "/home/yang/Desktop/ic\u8bbe\u8ba1\u7ade\u8d5b/graduate/fleet/acceptance_20261023/recheck/logs/software"
+  },
+  "results": "/home/yang/Desktop/ic\u8bbe\u8ba1\u7ade\u8d5b/graduate/fleet/acceptance_20261023/recheck/software_results.json"
+}

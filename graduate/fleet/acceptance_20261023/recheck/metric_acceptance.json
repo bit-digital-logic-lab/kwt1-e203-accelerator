@@ -1,0 +1,27 @@
+{
+  "commit": "455f7f2ef3c3f94f8536e1e93e72d087ec38ad7e",
+  "clean_archive": "/tmp/kwt-recheck-bkct9jen",
+  "independent_formula_cases": 29,
+  "counterexample_nrmse": 10.0,
+  "commands": [
+    {
+      "argv": [
+        "python3",
+        "/tmp/kwt-recheck-bkct9jen/graduate/ds_tasks/r5_gates/model/units.py",
+        "--out-json",
+        "/home/yang/Desktop/ic\u8bbe\u8ba1\u7ade\u8d5b/graduate/fleet/acceptance_20261023/recheck/metric_units.json"
+      ],
+      "exit": 0
+    },
+    {
+      "argv": [
+        "python3",
+        "/tmp/kwt-recheck-bkct9jen/graduate/ds_tasks/r5_gates/model/negative_tests.py",
+        "--out-json",
+        "/home/yang/Desktop/ic\u8bbe\u8ba1\u7ade\u8d5b/graduate/fleet/acceptance_20261023/recheck/metric_negative_tests.json"
+      ],
+      "exit": 0
+    }
+  ],
+  "status": "PASS_METRIC_FIX_ONLY"
+}

@@ -1,0 +1,300 @@
+{
+  "task": "r5_gates/negative",
+  "cases": [
+    {
+      "cmd": [
+        "/home/yang/miniconda3/bin/python3",
+        "../r4_rtl/model/compare.py",
+        "--dir",
+        "../r4_rtl/vectors/main",
+        "--rtl",
+        "vectors/negative/missing.bin",
+        "--tag",
+        "neg_missing",
+        "--expect",
+        "exact"
+      ],
+      "cwd": "/tmp/kwt-recheck-bkct9jen/graduate/ds_tasks/r5_gates",
+      "expected_exit": 2,
+      "exit": 2,
+      "kind": "reject",
+      "note": "missing DUT dump must be rejected",
+      "stdout": "",
+      "stderr": "MISSING vectors/negative/missing.bin",
+      "pass": true
+    },
+    {
+      "cmd": [
+        "/home/yang/miniconda3/bin/python3",
+        "../r4_rtl/model/compare.py",
+        "--dir",
+        "../r4_rtl/vectors/main",
+        "--rtl",
+        "vectors/negative/truncated.bin",
+        "--tag",
+        "neg_truncated",
+        "--expect",
+        "exact"
+      ],
+      "cwd": "/tmp/kwt-recheck-bkct9jen/graduate/ds_tasks/r5_gates",
+      "expected_exit": 2,
+      "exit": 2,
+      "kind": "reject",
+      "note": "truncated DUT dump must be rejected",
+      "stdout": "",
+      "stderr": "rtl size 1048576 != 583925760",
+      "pass": true
+    },
+    {
+      "cmd": [
+        "/home/yang/miniconda3/bin/python3",
+        "../r4_rtl/model/compare.py",
+        "--dir",
+        "vectors/negative/small",
+        "--rtl",
+        "vectors/negative/small/dut_wrong.bin",
+        "--tag",
+        "neg_wrong_element",
+        "--expect",
+        "exact"
+      ],
+      "cwd": "/tmp/kwt-recheck-bkct9jen/graduate/ds_tasks/r5_gates",
+      "expected_exit": 3,
+      "exit": 3,
+      "kind": "reject",
+      "note": "one flipped DUT output element must be rejected",
+      "stdout": "CHECK neg_wrong_element rows=2 elements=512 mismatches=1 bit_exact=False max_abs_diff=1 expectation=exact\nFIRST_MISMATCH {\"flat\": 5, \"row\": 0, \"col\": 5, \"golden\": 4294967296, \"rtl\": 4294967297, \"diff\": 1}",
+      "stderr": "",
+      "pass": true
+    },
+    {
+      "cmd": [
+        "/home/yang/miniconda3/bin/python3",
+        "../r4_rtl/model/compare.py",
+        "--dir",
+        "../r4_rtl/vectors/heldout_edge",
+        "--rtl",
+        "../r4_rtl/vectors/fault_w/rtl_out.bin",
+        "--tag",
+        "neg_coeff_fault",
+        "--expect",
+        "exact"
+      ],
+      "cwd": "/tmp/kwt-recheck-bkct9jen/graduate/ds_tasks/r5_gates",
+      "expected_exit": 3,
+      "exit": 3,
+      "kind": "reject",
+      "note": "flipped weight LSB must fail an exactness check",
+      "stdout": "CHECK neg_coeff_fault rows=396 elements=101376 mismatches=98 bit_exact=False max_abs_diff=32768 expectation=exact\nFIRST_MISMATCH {\"flat\": 0, \"row\": 0, \"col\": 0, \"golden\": 4294967296, \"rtl\": 4294934528, \"diff\": -32768}",
+      "stderr": "",
+      "pass": true
+    },
+    {
+      "cmd": [
+        "/home/yang/miniconda3/bin/python3",
+        "../r4_rtl/model/compare.py",
+        "--dir",
+        "../r4_rtl/vectors/heldout_edge",
+        "--rtl",
+        "../r4_rtl/vectors/heldout_edge/rtl_out_faultbit.bin",
+        "--tag",
+        "neg_output_bit",
+        "--expect",
+        "exact"
+      ],
+      "cwd": "/tmp/kwt-recheck-bkct9jen/graduate/ds_tasks/r5_gates",
+      "expected_exit": 3,
+      "exit": 3,
+      "kind": "reject",
+      "note": "one flipped RTL output bit must fail an exactness check",
+      "stdout": "CHECK neg_output_bit rows=396 elements=101376 mismatches=1 bit_exact=False max_abs_diff=1 expectation=exact\nFIRST_MISMATCH {\"flat\": 1000, \"row\": 3, \"col\": 232, \"golden\": 0, \"rtl\": 1, \"diff\": 1}",
+      "stderr": "",
+      "pass": true
+    },
+    {
+      "cmd": [
+        "/home/yang/miniconda3/bin/python3",
+        "model/check_expected.py",
+        "--dir",
+        "vectors/negative/small",
+        "--golden",
+        "vectors/negative/small/golden_mut.bin"
+      ],
+      "cwd": "/tmp/kwt-recheck-bkct9jen/graduate/ds_tasks/r5_gates",
+      "expected_exit": 3,
+      "exit": 3,
+      "kind": "reject",
+      "note": "mutated expected value must be rejected",
+      "stdout": "EXPECTED rows=2 elements=512 mismatches=1 sha256=7d849e388f9430e39fba27b0dea40d4b262c7c6662a139dff2c4eb6af4b986f9\nEXPECTED_FIRST {'row': 0, 'col': 7, 'expected': 4294967296, 'golden': 4294967297}",
+      "stderr": "",
+      "pass": true
+    },
+    {
+      "cmd": [
+        "/home/yang/miniconda3/bin/python3",
+        "model/check_expected.py",
+        "--dir",
+        "vectors/negative/small",
+        "--golden",
+        "vectors/negative/small/golden.bin"
+      ],
+      "cwd": "/tmp/kwt-recheck-bkct9jen/graduate/ds_tasks/r5_gates",
+      "expected_exit": 0,
+      "exit": 0,
+      "kind": "accept",
+      "note": "unmutated expected value must be accepted",
+      "stdout": "EXPECTED rows=2 elements=512 mismatches=0 sha256=57df468f20403068e4aa6befaa51c9adc4ab01f2ac46fdf996dc2631921a986a",
+      "stderr": "",
+      "pass": true
+    },
+    {
+      "cmd": [
+        "/home/yang/miniconda3/bin/python3",
+        "../r4_rtl/model/compare.py",
+        "--dir",
+        "vectors/negative/small",
+        "--rtl",
+        "vectors/negative/small/dut.bin",
+        "--tag",
+        "neg_small_ok",
+        "--expect",
+        "exact"
+      ],
+      "cwd": "/tmp/kwt-recheck-bkct9jen/graduate/ds_tasks/r5_gates",
+      "expected_exit": 0,
+      "exit": 0,
+      "kind": "accept",
+      "note": "unmutated small DUT must be accepted",
+      "stdout": "CHECK neg_small_ok rows=2 elements=512 mismatches=0 bit_exact=True max_abs_diff=0 expectation=exact",
+      "stderr": "",
+      "pass": true
+    },
+    {
+      "cmd": [
+        "/home/yang/miniconda3/bin/python3",
+        "../r4_rtl/model/error.py",
+        "--dir",
+        "../r4_rtl/vectors/main",
+        "--rtl",
+        "/tmp/kwt-recheck-bkct9jen/graduate/ds_tasks/r4_rtl/vectors/main/rtl_out.bin",
+        "--dequant",
+        "div",
+        "--no-fp32-recheck",
+        "--out-json",
+        "vectors/negative/error_wrong_decode.json"
+      ],
+      "cwd": "/tmp/kwt-recheck-bkct9jen/graduate/ds_tasks/r5_gates",
+      "expected_exit": 1,
+      "exit": 1,
+      "kind": "reject",
+      "note": "h/sh dequantisation must fail the local NRMSE target",
+      "stdout": "",
+      "stderr": "  File \"/tmp/kwt-recheck-bkct9jen/graduate/ds_tasks/p027_precision/model/freeze_config.py\", line 28, in <module>\n    import kwt1_fp32_golden as golden                      # noqa: E402\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nModuleNotFoundError: No module named 'kwt1_fp32_golden'",
+      "pass": true
+    },
+    {
+      "cmd": [
+        "/home/yang/miniconda3/bin/python3",
+        "model/verify_summary.py",
+        "--results",
+        "/tmp/kwt-recheck-bkct9jen/graduate/ds_tasks/r5_gates/vectors/negative/results_bad.json"
+      ],
+      "cwd": "/tmp/kwt-recheck-bkct9jen/graduate/ds_tasks/r5_gates",
+      "expected_exit": 1,
+      "exit": 1,
+      "kind": "reject",
+      "note": "overall_pass=false must be rejected",
+      "stdout": "SUMMARY_FAIL problems=['overall_pass is not true', 'state=None != PASS_LOCAL_GATE_ONLY', \"missing keys ['title', 'state', 'generated_utc', 'environment', 'provenance', 'source_sha256', 'commands', 'exits', 'workload', 'integer_check', 'precision', 'directed', 'saturation', 'rounding', 'faults', 'negative_tests', 'units', 'limitations', 'external_blockers']\", \"not all checks true: ['x']\", 'empty title', 'limitations/external_blockers must be explicit and non-empty']",
+      "stderr": "",
+      "pass": true
+    },
+    {
+      "cmd": [
+        "/home/yang/miniconda3/bin/python3",
+        "../r4_rtl/model/compare.py",
+        "--dir",
+        "../r4_rtl/vectors/heldout_edge",
+        "--rtl",
+        "../r4_rtl/vectors/fault_w/rtl_out.bin",
+        "--tag",
+        "neg_coeff_detect",
+        "--expect",
+        "mismatch",
+        "--out-json",
+        "vectors/negative/neg_coeff_detect.json"
+      ],
+      "cwd": "/tmp/kwt-recheck-bkct9jen/graduate/ds_tasks/r5_gates",
+      "expected_exit": 0,
+      "exit": 0,
+      "kind": "accept",
+      "note": "fault detector must report a positive mismatch count",
+      "stdout": "CHECK neg_coeff_detect rows=396 elements=101376 mismatches=98 bit_exact=False max_abs_diff=32768 expectation=mismatch\nFIRST_MISMATCH {\"flat\": 0, \"row\": 0, \"col\": 0, \"golden\": 4294967296, \"rtl\": 4294934528, \"diff\": -32768}\nFAULT_DETECTED neg_coeff_detect mismatches=98",
+      "stderr": "",
+      "pass": true,
+      "mismatches": 98
+    },
+    {
+      "cmd": [
+        "/home/yang/miniconda3/bin/python3",
+        "model/floor_probe.py",
+        "--mode",
+        "corrected",
+        "--n",
+        "2",
+        "--delta",
+        "1e-7"
+      ],
+      "cwd": "/tmp/kwt-recheck-bkct9jen/graduate/ds_tasks/r5_gates",
+      "expected_exit": 0,
+      "exit": 0,
+      "kind": "accept",
+      "note": "wrong-floor counterexample must be rejected by corrected NRMSE",
+      "stdout": "FLOOR_PROBE {\"corrected_den\": 2.0000000000000002e-16, \"corrected_den_floor\": 2.0000000000000002e-16, \"corrected_nrmse\": 9.999999999999998, \"corrected_rejected\": true, \"delta\": 1e-07, \"legacy_false_pass\": true, \"legacy_nrmse\": 0.0014142135623730948, \"local_target\": 0.0027, \"mode\": \"corrected\", \"n\": 2, \"official_threshold\": 0.03}",
+      "stderr": "",
+      "pass": true
+    },
+    {
+      "cmd": [
+        "/home/yang/miniconda3/bin/python3",
+        "model/floor_probe.py",
+        "--mode",
+        "legacy",
+        "--n",
+        "2",
+        "--delta",
+        "1e-7"
+      ],
+      "cwd": "/tmp/kwt-recheck-bkct9jen/graduate/ds_tasks/r5_gates",
+      "expected_exit": 0,
+      "exit": 0,
+      "kind": "accept",
+      "note": "pre-fix sum floor is recorded to false-pass the counterexample",
+      "stdout": "FLOOR_PROBE {\"corrected_den\": 2.0000000000000002e-16, \"corrected_den_floor\": 2.0000000000000002e-16, \"corrected_nrmse\": 9.999999999999998, \"corrected_rejected\": true, \"delta\": 1e-07, \"legacy_false_pass\": true, \"legacy_nrmse\": 0.0014142135623730948, \"local_target\": 0.0027, \"mode\": \"legacy\", \"n\": 2, \"official_threshold\": 0.03}",
+      "stderr": "",
+      "pass": true
+    }
+  ],
+  "small_set": {
+    "dir": "/tmp/kwt-recheck-bkct9jen/graduate/ds_tasks/r5_gates/vectors/negative/small",
+    "rows": 2,
+    "element_dut": 5,
+    "old_dut": 4294967296,
+    "new_dut": 4294967297,
+    "element_gold": 7,
+    "old_gold": 4294967296,
+    "new_gold": 4294967297,
+    "hashes": {
+      "dut.bin": "57df468f20403068e4aa6befaa51c9adc4ab01f2ac46fdf996dc2631921a986a",
+      "dut_wrong.bin": "b91aff5d5590ab2f640110965289ef1c4b51f6c7c64ce49813c9438b7dc3bd88",
+      "golden.bin": "57df468f20403068e4aa6befaa51c9adc4ab01f2ac46fdf996dc2631921a986a",
+      "golden_mut.bin": "7d849e388f9430e39fba27b0dea40d4b262c7c6662a139dff2c4eb6af4b986f9",
+      "inputs.bin": "420eeb526092e573373a16c555dc4704a7eaa622c11721b15ddae0227179e586",
+      "meta.txt": "27b75206b6fdef90211b981b68e0145ca883fd9601c8f806c7fb37ec3169c39a",
+      "params.bin": "0327beeb061772ca863177539335fbed1ebd456ba6b6b6e4785274a1c6d21744"
+    }
+  },
+  "n_cases": 13,
+  "n_reject": 8,
+  "all_pass": true,
+  "note": "Injection cases record real non-zero exits (2 missing/short, 3 mismatch, 1 precision-gate failure).  Positive controls and the --expect mismatch detector path must exit 0 with mismatches>0."
+}

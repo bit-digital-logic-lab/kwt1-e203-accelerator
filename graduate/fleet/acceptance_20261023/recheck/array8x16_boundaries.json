@@ -1,0 +1,38 @@
+[
+  {
+    "case": "coefficient_fault",
+    "command": [
+      "/tmp/kwt-array-preview-s0nq17cd/obj128/Vtb_kwt_array8x16_stream",
+      "+A=/tmp/kwt-array-preview-s0nq17cd/coefficient_fault/a.hex",
+      "+W=/tmp/kwt-array-preview-s0nq17cd/coefficient_fault/w.hex",
+      "+BIAS=/tmp/kwt-array-preview-s0nq17cd/coefficient_fault/bias.hex",
+      "+EXPECTED=/tmp/kwt-array-preview-s0nq17cd/coefficient_fault/exp.hex",
+      "+OUT=/tmp/kwt-array-preview-s0nq17cd/coefficient_fault/out.txt",
+      "+OUT_BP=1"
+    ],
+    "binary_exit": 1,
+    "independent_checker_exit": 1,
+    "mismatches_vs_full_precision_golden": 99,
+    "overflow_flag": 0,
+    "expected_full_precision_value": -20863898,
+    "observed_first": -20880508
+  },
+  {
+    "case": "full_range",
+    "command": [
+      "/tmp/kwt-array-preview-s0nq17cd/obj128/Vtb_kwt_array8x16_stream",
+      "+A=/tmp/kwt-array-preview-s0nq17cd/full_range/a.hex",
+      "+W=/tmp/kwt-array-preview-s0nq17cd/full_range/w.hex",
+      "+BIAS=/tmp/kwt-array-preview-s0nq17cd/full_range/bias.hex",
+      "+EXPECTED=/tmp/kwt-array-preview-s0nq17cd/full_range/exp.hex",
+      "+OUT=/tmp/kwt-array-preview-s0nq17cd/full_range/out.txt",
+      "+OUT_BP=1"
+    ],
+    "binary_exit": 1,
+    "independent_checker_exit": 1,
+    "mismatches_vs_full_precision_golden": 25344,
+    "overflow_flag": 1,
+    "expected_full_precision_value": 4292739136,
+    "observed_first": -2228160
+  }
+]

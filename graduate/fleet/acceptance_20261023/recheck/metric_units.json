@@ -1,0 +1,203 @@
+{
+  "task": "r5_gates/units",
+  "checks": {
+    "dequant_multiply_synthetic": true,
+    "dequant_divide_is_wrong": true,
+    "nrmse_hand_example": true,
+    "nrmse_zero_ref_n1": true,
+    "nrmse_zero_ref_n2": true,
+    "nrmse_zero_ref_n64": true,
+    "nrmse_zero_ref_all_n": true,
+    "nrmse_floor_counterexample_rejected": true,
+    "nrmse_legacy_wrong_floor_false_pass": true,
+    "nrmse_tiny_nonzero_ref_below_floor": true,
+    "nrmse_tiny_nonzero_ref_zero_error": true,
+    "nrmse_tiny_nonzero_ref_above_floor": true,
+    "nrmse_zero_error_all_n": true,
+    "nrmse_scale_invariance_n1_s1": true,
+    "nrmse_scale_invariance_n1_s0.001": true,
+    "nrmse_scale_invariance_n1_s1000": true,
+    "nrmse_scale_invariance_n2_s1": true,
+    "nrmse_scale_invariance_n2_s0.001": true,
+    "nrmse_scale_invariance_n2_s1000": true,
+    "nrmse_scale_invariance_n64_s1": true,
+    "nrmse_scale_invariance_n64_s0.001": true,
+    "nrmse_scale_invariance_n64_s1000": true,
+    "nrmse_scale_invariance_all": true,
+    "nrmse_rejects_shape_mismatch": true,
+    "nrmse_rejects_empty": true,
+    "nrmse_rejects_nan": true,
+    "nrmse_rejects_inf_ref": true,
+    "nrmse_sum_helper_rejects_zero_n": true,
+    "frozen_sh_is_sx_times_sw": true,
+    "frozen_sh_relative_error_small": true,
+    "legal_bound_exact_2p32": true,
+    "legal_bound_fits_48": true,
+    "legal_bound_breaks_int32": true,
+    "oracle_vector_matches_scalar": true,
+    "oracle_legal_worst_is_2p32": true,
+    "requant_half_up": true,
+    "requant_tie_direction": true,
+    "requant_positive_tie": true,
+    "requant_sat_rails": true,
+    "export_clamp_24": true,
+    "dequant_magnitude_sane": true
+  },
+  "values": {
+    "dequant_synthetic": {
+      "h": [
+        1,
+        2,
+        -3,
+        0,
+        7
+      ],
+      "sh": [
+        0.5,
+        0.25,
+        2.0,
+        0.125,
+        4.0
+      ],
+      "mul": [
+        0.5,
+        0.5,
+        -6.0,
+        0.0,
+        28.0
+      ],
+      "div": [
+        2.0,
+        8.0,
+        -1.5,
+        0.0,
+        1.75
+      ]
+    },
+    "nrmse_hand": {
+      "nrmse": 1.0,
+      "sse": 25.0,
+      "den": 25.0,
+      "zero_ref": [
+        {
+          "n": 1,
+          "nrmse": 9.999999999999998,
+          "expected": 10.0,
+          "den": 1.0000000000000001e-16,
+          "den_floor": 1.0000000000000001e-16,
+          "legacy_wrong": 0.0009999999999999998
+        },
+        {
+          "n": 2,
+          "nrmse": 9.999999999999998,
+          "expected": 10.0,
+          "den": 2.0000000000000002e-16,
+          "den_floor": 2.0000000000000002e-16,
+          "legacy_wrong": 0.0014142135623730948
+        },
+        {
+          "n": 64,
+          "nrmse": 9.999999999999998,
+          "expected": 9.999999999999998,
+          "den": 6.400000000000001e-15,
+          "den_floor": 6.400000000000001e-15,
+          "legacy_wrong": 0.007999999999999998
+        }
+      ],
+      "counterexample": {
+        "nrmse": 9.999999999999998,
+        "legacy_wrong": 0.0014142135623730948
+      },
+      "tiny_below_floor": {
+        "nrmse": 9.999999999999999e-05,
+        "expected": 9.999999999999999e-05
+      },
+      "scale_invariance": [
+        {
+          "n": 1,
+          "scale": 1.0,
+          "got": 0.03125,
+          "expected": 0.03125
+        },
+        {
+          "n": 1,
+          "scale": 0.001,
+          "got": 0.03125000000000003,
+          "expected": 0.03125000000000003
+        },
+        {
+          "n": 1,
+          "scale": 1000.0,
+          "got": 0.03125,
+          "expected": 0.03125
+        },
+        {
+          "n": 2,
+          "scale": 1.0,
+          "got": 0.03125,
+          "expected": 0.03125
+        },
+        {
+          "n": 2,
+          "scale": 0.001,
+          "got": 0.03125000000000003,
+          "expected": 0.03125000000000003
+        },
+        {
+          "n": 2,
+          "scale": 1000.0,
+          "got": 0.03125,
+          "expected": 0.03125
+        },
+        {
+          "n": 64,
+          "scale": 1.0,
+          "got": 0.031250000000000035,
+          "expected": 0.031250000000000035
+        },
+        {
+          "n": 64,
+          "scale": 0.001,
+          "got": 0.03125,
+          "expected": 0.03125
+        },
+        {
+          "n": 64,
+          "scale": 1000.0,
+          "got": 0.03124999999999999,
+          "expected": 0.031249999999999993
+        }
+      ]
+    },
+    "frozen_sh_max_rel_error": 0.0,
+    "legal_bound": {
+      "max_abs_product": 67108864,
+      "max_mac": 4294967296,
+      "hex": "0x100000000",
+      "fits_int32": false,
+      "fits_int48": true
+    },
+    "oracle_directed_worst": 4294967296,
+    "requant_boundary": {
+      "M_A": 83698,
+      "half_input": -16384,
+      "got": -20924,
+      "want": -20924,
+      "one_below": -20926,
+      "one_above": -20923,
+      "positive_tie": 16384
+    },
+    "export_clamp_24": [
+      8388607,
+      -8388608,
+      5
+    ],
+    "dequant_magnitude": [
+      0.12316770369057503,
+      -0.12234949255801078
+    ]
+  },
+  "frozen_config_sha256": "6b273d895c716dcbc5a9652596a1756fd80d41e9f79dad60c8052b199d3b148f",
+  "frozen_calib_sha256": "2f7f25b9ec6b2839e49b4a6ef866d0a4b3fd6d7ea0d74e8bf594867b1b8908be",
+  "all_pass": true
+}
