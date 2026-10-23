@@ -1,0 +1,701 @@
+{
+  "scope": "FFN1 99x64 times 64x256, A16/W12 in16bit slots, accumulator40",
+  "spec": {
+    "shared_bytes_assuming_KiB": 524288,
+    "private_byte_cap": null,
+    "total_accelerator_area_limit_mm2": 2.25,
+    "private_max_status": "unknown without specified macro areas and mapped logic area",
+    "capacity_source": "题目/640.jpg 4, page3/14",
+    "area_source": "题目/640.jpg 13, page12/14",
+    "area_constraint": "logic_mm2 + interface_mm2 + sum(count_i * macro_area_i_mm2) <= 2.25",
+    "cold_task": "task data/parameter caches cleared before each official performance task"
+  },
+  "logical_bytes": {
+    "A": 12672,
+    "A_padded104": 13312,
+    "W16": 32768,
+    "W12_packed": 24576,
+    "bias40": 1280,
+    "CACC_two_pages40": 1280
+  },
+  "macro_allocations": {
+    "A_full_8banks": {
+      "logical_bytes": 13312,
+      "allocated_bytes": 14336,
+      "banks": 8,
+      "depth": 832,
+      "width": 16,
+      "macro_counts": {
+        "128": 56,
+        "1024": 0,
+        "4096": 0
+      },
+      "fewest_instances_alternative": {
+        "allocated_bytes": 16384,
+        "macro_counts": {
+          "128": 0,
+          "1024": 8,
+          "4096": 0
+        }
+      },
+      "port_feasibility": "not implied by capacity; must be verified separately"
+    },
+    "W_two_pages_DP_combined": {
+      "logical_bytes": 4096,
+      "allocated_bytes": 4096,
+      "banks": 16,
+      "depth": 128,
+      "width": 16,
+      "macro_counts": {
+        "128": 16,
+        "1024": 0,
+        "4096": 0
+      },
+      "fewest_instances_alternative": {
+        "allocated_bytes": 4096,
+        "macro_counts": {
+          "128": 16,
+          "1024": 0,
+          "4096": 0
+        }
+      },
+      "port_feasibility": "not implied by capacity; must be verified separately"
+    },
+    "W_two_pages_SP_separate": {
+      "logical_bytes": 4096,
+      "allocated_bytes": 8192,
+      "banks": 32,
+      "depth": 64,
+      "width": 16,
+      "macro_counts": {
+        "128": 32,
+        "1024": 0,
+        "4096": 0
+      },
+      "fewest_instances_alternative": {
+        "allocated_bytes": 8192,
+        "macro_counts": {
+          "128": 32,
+          "1024": 0,
+          "4096": 0
+        }
+      },
+      "port_feasibility": "not implied by capacity; must be verified separately"
+    },
+    "W_full_16banks": {
+      "logical_bytes": 32768,
+      "allocated_bytes": 32768,
+      "banks": 16,
+      "depth": 1024,
+      "width": 16,
+      "macro_counts": {
+        "128": 0,
+        "1024": 16,
+        "4096": 0
+      },
+      "fewest_instances_alternative": {
+        "allocated_bytes": 32768,
+        "macro_counts": {
+          "128": 0,
+          "1024": 16,
+          "4096": 0
+        }
+      },
+      "port_feasibility": "not implied by capacity; must be verified separately"
+    },
+    "bias_40bit_256deep": {
+      "logical_bytes": 1280,
+      "allocated_bytes": 1536,
+      "banks": 1,
+      "depth": 256,
+      "width": 40,
+      "macro_counts": {
+        "128": 6,
+        "1024": 0,
+        "4096": 0
+      },
+      "fewest_instances_alternative": {
+        "allocated_bytes": 6144,
+        "macro_counts": {
+          "128": 0,
+          "1024": 3,
+          "4096": 0
+        }
+      },
+      "port_feasibility": "not implied by capacity; must be verified separately"
+    },
+    "FIFO_64bit_8beats": {
+      "logical_bytes": 64,
+      "allocated_bytes": 1024,
+      "banks": 1,
+      "depth": 8,
+      "width": 64,
+      "macro_counts": {
+        "128": 4,
+        "1024": 0,
+        "4096": 0
+      },
+      "fewest_instances_alternative": {
+        "allocated_bytes": 1024,
+        "macro_counts": {
+          "128": 4,
+          "1024": 0,
+          "4096": 0
+        }
+      },
+      "port_feasibility": "not implied by capacity; must be verified separately"
+    },
+    "FIFO_64bit_16beats": {
+      "logical_bytes": 128,
+      "allocated_bytes": 1024,
+      "banks": 1,
+      "depth": 16,
+      "width": 64,
+      "macro_counts": {
+        "128": 4,
+        "1024": 0,
+        "4096": 0
+      },
+      "fewest_instances_alternative": {
+        "allocated_bytes": 1024,
+        "macro_counts": {
+          "128": 4,
+          "1024": 0,
+          "4096": 0
+        }
+      },
+      "port_feasibility": "not implied by capacity; must be verified separately"
+    },
+    "FIFO_64bit_32beats": {
+      "logical_bytes": 256,
+      "allocated_bytes": 1024,
+      "banks": 1,
+      "depth": 32,
+      "width": 64,
+      "macro_counts": {
+        "128": 4,
+        "1024": 0,
+        "4096": 0
+      },
+      "fewest_instances_alternative": {
+        "allocated_bytes": 1024,
+        "macro_counts": {
+          "128": 4,
+          "1024": 0,
+          "4096": 0
+        }
+      },
+      "port_feasibility": "not implied by capacity; must be verified separately"
+    },
+    "FIFO_64bit_64beats": {
+      "logical_bytes": 512,
+      "allocated_bytes": 1024,
+      "banks": 1,
+      "depth": 64,
+      "width": 64,
+      "macro_counts": {
+        "128": 4,
+        "1024": 0,
+        "4096": 0
+      },
+      "fewest_instances_alternative": {
+        "allocated_bytes": 1024,
+        "macro_counts": {
+          "128": 4,
+          "1024": 0,
+          "4096": 0
+        }
+      },
+      "port_feasibility": "not implied by capacity; must be verified separately"
+    },
+    "FIFO_64bit_128beats": {
+      "logical_bytes": 1024,
+      "allocated_bytes": 1024,
+      "banks": 1,
+      "depth": 128,
+      "width": 64,
+      "macro_counts": {
+        "128": 4,
+        "1024": 0,
+        "4096": 0
+      },
+      "fewest_instances_alternative": {
+        "allocated_bytes": 1024,
+        "macro_counts": {
+          "128": 4,
+          "1024": 0,
+          "4096": 0
+        }
+      },
+      "port_feasibility": "not implied by capacity; must be verified separately"
+    },
+    "FIFO_64bit_256beats": {
+      "logical_bytes": 2048,
+      "allocated_bytes": 2048,
+      "banks": 1,
+      "depth": 256,
+      "width": 64,
+      "macro_counts": {
+        "128": 8,
+        "1024": 0,
+        "4096": 0
+      },
+      "fewest_instances_alternative": {
+        "allocated_bytes": 8192,
+        "macro_counts": {
+          "128": 0,
+          "1024": 4,
+          "4096": 0
+        }
+      },
+      "port_feasibility": "not implied by capacity; must be verified separately"
+    },
+    "FIFO_64bit_512beats": {
+      "logical_bytes": 4096,
+      "allocated_bytes": 4096,
+      "banks": 1,
+      "depth": 512,
+      "width": 64,
+      "macro_counts": {
+        "128": 16,
+        "1024": 0,
+        "4096": 0
+      },
+      "fewest_instances_alternative": {
+        "allocated_bytes": 8192,
+        "macro_counts": {
+          "128": 0,
+          "1024": 4,
+          "4096": 0
+        }
+      },
+      "port_feasibility": "not implied by capacity; must be verified separately"
+    },
+    "FIFO_128bit_8beats": {
+      "logical_bytes": 128,
+      "allocated_bytes": 2048,
+      "banks": 1,
+      "depth": 8,
+      "width": 128,
+      "macro_counts": {
+        "128": 8,
+        "1024": 0,
+        "4096": 0
+      },
+      "fewest_instances_alternative": {
+        "allocated_bytes": 2048,
+        "macro_counts": {
+          "128": 8,
+          "1024": 0,
+          "4096": 0
+        }
+      },
+      "port_feasibility": "not implied by capacity; must be verified separately"
+    },
+    "FIFO_128bit_16beats": {
+      "logical_bytes": 256,
+      "allocated_bytes": 2048,
+      "banks": 1,
+      "depth": 16,
+      "width": 128,
+      "macro_counts": {
+        "128": 8,
+        "1024": 0,
+        "4096": 0
+      },
+      "fewest_instances_alternative": {
+        "allocated_bytes": 2048,
+        "macro_counts": {
+          "128": 8,
+          "1024": 0,
+          "4096": 0
+        }
+      },
+      "port_feasibility": "not implied by capacity; must be verified separately"
+    },
+    "FIFO_128bit_32beats": {
+      "logical_bytes": 512,
+      "allocated_bytes": 2048,
+      "banks": 1,
+      "depth": 32,
+      "width": 128,
+      "macro_counts": {
+        "128": 8,
+        "1024": 0,
+        "4096": 0
+      },
+      "fewest_instances_alternative": {
+        "allocated_bytes": 2048,
+        "macro_counts": {
+          "128": 8,
+          "1024": 0,
+          "4096": 0
+        }
+      },
+      "port_feasibility": "not implied by capacity; must be verified separately"
+    },
+    "FIFO_128bit_64beats": {
+      "logical_bytes": 1024,
+      "allocated_bytes": 2048,
+      "banks": 1,
+      "depth": 64,
+      "width": 128,
+      "macro_counts": {
+        "128": 8,
+        "1024": 0,
+        "4096": 0
+      },
+      "fewest_instances_alternative": {
+        "allocated_bytes": 2048,
+        "macro_counts": {
+          "128": 8,
+          "1024": 0,
+          "4096": 0
+        }
+      },
+      "port_feasibility": "not implied by capacity; must be verified separately"
+    },
+    "FIFO_128bit_128beats": {
+      "logical_bytes": 2048,
+      "allocated_bytes": 2048,
+      "banks": 1,
+      "depth": 128,
+      "width": 128,
+      "macro_counts": {
+        "128": 8,
+        "1024": 0,
+        "4096": 0
+      },
+      "fewest_instances_alternative": {
+        "allocated_bytes": 2048,
+        "macro_counts": {
+          "128": 8,
+          "1024": 0,
+          "4096": 0
+        }
+      },
+      "port_feasibility": "not implied by capacity; must be verified separately"
+    },
+    "FIFO_128bit_256beats": {
+      "logical_bytes": 4096,
+      "allocated_bytes": 4096,
+      "banks": 1,
+      "depth": 256,
+      "width": 128,
+      "macro_counts": {
+        "128": 16,
+        "1024": 0,
+        "4096": 0
+      },
+      "fewest_instances_alternative": {
+        "allocated_bytes": 16384,
+        "macro_counts": {
+          "128": 0,
+          "1024": 8,
+          "4096": 0
+        }
+      },
+      "port_feasibility": "not implied by capacity; must be verified separately"
+    },
+    "FIFO_128bit_512beats": {
+      "logical_bytes": 8192,
+      "allocated_bytes": 8192,
+      "banks": 1,
+      "depth": 512,
+      "width": 128,
+      "macro_counts": {
+        "128": 32,
+        "1024": 0,
+        "4096": 0
+      },
+      "fewest_instances_alternative": {
+        "allocated_bytes": 16384,
+        "macro_counts": {
+          "128": 0,
+          "1024": 8,
+          "4096": 0
+        }
+      },
+      "port_feasibility": "not implied by capacity; must be verified separately"
+    },
+    "CACC_naive_cell_per_bank_NOT_recommended": {
+      "logical_bytes": 1280,
+      "allocated_bytes": 98304,
+      "banks": 128,
+      "depth": 2,
+      "width": 40,
+      "macro_counts": {
+        "128": 384,
+        "1024": 0,
+        "4096": 0
+      },
+      "fewest_instances_alternative": {
+        "allocated_bytes": 98304,
+        "macro_counts": {
+          "128": 384,
+          "1024": 0,
+          "4096": 0
+        }
+      },
+      "port_feasibility": "not implied by capacity; must be verified separately"
+    },
+    "CACC_packed_wide_word_lower_capacity_only": {
+      "logical_bytes": 1280,
+      "allocated_bytes": 81920,
+      "banks": 1,
+      "depth": 2,
+      "width": 5120,
+      "macro_counts": {
+        "128": 320,
+        "1024": 0,
+        "4096": 0
+      },
+      "fewest_instances_alternative": {
+        "allocated_bytes": 81920,
+        "macro_counts": {
+          "128": 320,
+          "1024": 0,
+          "4096": 0
+        }
+      },
+      "port_feasibility": "not implied by capacity; must be verified separately"
+    },
+    "A_full_W_pingpong_DP": {
+      "parts": [
+        "A_full_8banks",
+        "W_two_pages_DP_combined",
+        "bias_40bit_256deep",
+        "FIFO_128bit_64beats"
+      ],
+      "allocated_bytes": 22016,
+      "excludes": "CACC registers, tags, control, queues and pipeline registers"
+    },
+    "A_full_W_pingpong_SP": {
+      "parts": [
+        "A_full_8banks",
+        "W_two_pages_SP_separate",
+        "bias_40bit_256deep",
+        "FIFO_128bit_64beats"
+      ],
+      "allocated_bytes": 26112,
+      "excludes": "CACC registers, tags, control, queues and pipeline registers"
+    },
+    "A_full_W_full": {
+      "parts": [
+        "A_full_8banks",
+        "W_full_16banks",
+        "bias_40bit_256deep",
+        "FIFO_128bit_64beats"
+      ],
+      "allocated_bytes": 50688,
+      "excludes": "CACC registers, tags, control, queues and pipeline registers"
+    }
+  },
+  "traffic_bounds": [
+    {
+      "out_bits": 32,
+      "weight_storage_bits": 12,
+      "output_bytes": 101376,
+      "total_payload_bytes": 139904,
+      "bus_bits": 64,
+      "minimum_bus_beats": 17488,
+      "compute_tiled_8x8_cycles": 26624,
+      "compute_tiled_8x16_cycles": 13312,
+      "output32_full_range_legal": false
+    },
+    {
+      "out_bits": 32,
+      "weight_storage_bits": 12,
+      "output_bytes": 101376,
+      "total_payload_bytes": 139904,
+      "bus_bits": 128,
+      "minimum_bus_beats": 8744,
+      "compute_tiled_8x8_cycles": 26624,
+      "compute_tiled_8x16_cycles": 13312,
+      "output32_full_range_legal": false
+    },
+    {
+      "out_bits": 32,
+      "weight_storage_bits": 16,
+      "output_bytes": 101376,
+      "total_payload_bytes": 148096,
+      "bus_bits": 64,
+      "minimum_bus_beats": 18512,
+      "compute_tiled_8x8_cycles": 26624,
+      "compute_tiled_8x16_cycles": 13312,
+      "output32_full_range_legal": false
+    },
+    {
+      "out_bits": 32,
+      "weight_storage_bits": 16,
+      "output_bytes": 101376,
+      "total_payload_bytes": 148096,
+      "bus_bits": 128,
+      "minimum_bus_beats": 9256,
+      "compute_tiled_8x8_cycles": 26624,
+      "compute_tiled_8x16_cycles": 13312,
+      "output32_full_range_legal": false
+    },
+    {
+      "out_bits": 40,
+      "weight_storage_bits": 12,
+      "output_bytes": 126720,
+      "total_payload_bytes": 165248,
+      "bus_bits": 64,
+      "minimum_bus_beats": 20656,
+      "compute_tiled_8x8_cycles": 26624,
+      "compute_tiled_8x16_cycles": 13312,
+      "output32_full_range_legal": true
+    },
+    {
+      "out_bits": 40,
+      "weight_storage_bits": 12,
+      "output_bytes": 126720,
+      "total_payload_bytes": 165248,
+      "bus_bits": 128,
+      "minimum_bus_beats": 10328,
+      "compute_tiled_8x8_cycles": 26624,
+      "compute_tiled_8x16_cycles": 13312,
+      "output32_full_range_legal": true
+    },
+    {
+      "out_bits": 40,
+      "weight_storage_bits": 16,
+      "output_bytes": 126720,
+      "total_payload_bytes": 173440,
+      "bus_bits": 64,
+      "minimum_bus_beats": 21680,
+      "compute_tiled_8x8_cycles": 26624,
+      "compute_tiled_8x16_cycles": 13312,
+      "output32_full_range_legal": true
+    },
+    {
+      "out_bits": 40,
+      "weight_storage_bits": 16,
+      "output_bytes": 126720,
+      "total_payload_bytes": 173440,
+      "bus_bits": 128,
+      "minimum_bus_beats": 10840,
+      "compute_tiled_8x8_cycles": 26624,
+      "compute_tiled_8x16_cycles": 13312,
+      "output32_full_range_legal": true
+    },
+    {
+      "out_bits": 48,
+      "weight_storage_bits": 12,
+      "output_bytes": 152064,
+      "total_payload_bytes": 190592,
+      "bus_bits": 64,
+      "minimum_bus_beats": 23824,
+      "compute_tiled_8x8_cycles": 26624,
+      "compute_tiled_8x16_cycles": 13312,
+      "output32_full_range_legal": true
+    },
+    {
+      "out_bits": 48,
+      "weight_storage_bits": 12,
+      "output_bytes": 152064,
+      "total_payload_bytes": 190592,
+      "bus_bits": 128,
+      "minimum_bus_beats": 11912,
+      "compute_tiled_8x8_cycles": 26624,
+      "compute_tiled_8x16_cycles": 13312,
+      "output32_full_range_legal": true
+    },
+    {
+      "out_bits": 48,
+      "weight_storage_bits": 16,
+      "output_bytes": 152064,
+      "total_payload_bytes": 198784,
+      "bus_bits": 64,
+      "minimum_bus_beats": 24848,
+      "compute_tiled_8x8_cycles": 26624,
+      "compute_tiled_8x16_cycles": 13312,
+      "output32_full_range_legal": true
+    },
+    {
+      "out_bits": 48,
+      "weight_storage_bits": 16,
+      "output_bytes": 152064,
+      "total_payload_bytes": 198784,
+      "bus_bits": 128,
+      "minimum_bus_beats": 12424,
+      "compute_tiled_8x8_cycles": 26624,
+      "compute_tiled_8x16_cycles": 13312,
+      "output32_full_range_legal": true
+    },
+    {
+      "out_bits": 64,
+      "weight_storage_bits": 12,
+      "output_bytes": 202752,
+      "total_payload_bytes": 241280,
+      "bus_bits": 64,
+      "minimum_bus_beats": 30160,
+      "compute_tiled_8x8_cycles": 26624,
+      "compute_tiled_8x16_cycles": 13312,
+      "output32_full_range_legal": true
+    },
+    {
+      "out_bits": 64,
+      "weight_storage_bits": 12,
+      "output_bytes": 202752,
+      "total_payload_bytes": 241280,
+      "bus_bits": 128,
+      "minimum_bus_beats": 15080,
+      "compute_tiled_8x8_cycles": 26624,
+      "compute_tiled_8x16_cycles": 13312,
+      "output32_full_range_legal": true
+    },
+    {
+      "out_bits": 64,
+      "weight_storage_bits": 16,
+      "output_bytes": 202752,
+      "total_payload_bytes": 249472,
+      "bus_bits": 64,
+      "minimum_bus_beats": 31184,
+      "compute_tiled_8x8_cycles": 26624,
+      "compute_tiled_8x16_cycles": 13312,
+      "output32_full_range_legal": true
+    },
+    {
+      "out_bits": 64,
+      "weight_storage_bits": 16,
+      "output_bytes": 202752,
+      "total_payload_bytes": 249472,
+      "bus_bits": 128,
+      "minimum_bus_beats": 15592,
+      "compute_tiled_8x8_cycles": 26624,
+      "compute_tiled_8x16_cycles": 13312,
+      "output32_full_range_legal": true
+    }
+  ],
+  "shared_examples": [
+    {
+      "out_bits": 32,
+      "used_bytes": 148096,
+      "remaining_before_CPU_code_stack_descriptors": 376192
+    },
+    {
+      "out_bits": 40,
+      "used_bytes": 173440,
+      "remaining_before_CPU_code_stack_descriptors": 350848
+    },
+    {
+      "out_bits": 48,
+      "used_bytes": 198784,
+      "remaining_before_CPU_code_stack_descriptors": 325504
+    },
+    {
+      "out_bits": 64,
+      "used_bytes": 249472,
+      "remaining_before_CPU_code_stack_descriptors": 274816
+    }
+  ],
+  "caveats": [
+    "Macro counts minimize allocated bits, then number of instances, not area.",
+    "Single/dual port macros of equal bit capacity can have different areas.",
+    "CACC cell registers belong in mapped logic area; raw bytes are not SRAM area.",
+    "No claim that inferred memories map to the target SRAM macros or meet150MHz.",
+    "Traffic is an optimistic lower bound: no row/tile/beat padding, contention or CPU overhead."
+  ]
+}
