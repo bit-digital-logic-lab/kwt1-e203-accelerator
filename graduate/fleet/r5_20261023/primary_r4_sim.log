@@ -1,0 +1,29 @@
+LAYER_DONE layer=0 sample=0 rows=99 cycles=57197
+CHAIN_LAYER_DONE layer=0
+LAYER_DONE layer=1 sample=0 rows=99 cycles=114128
+CHAIN_LAYER_DONE layer=1
+LAYER_DONE layer=2 sample=0 rows=99 cycles=171059
+CHAIN_LAYER_DONE layer=2
+LAYER_DONE layer=3 sample=0 rows=99 cycles=227990
+CHAIN_LAYER_DONE layer=3
+LAYER_DONE layer=4 sample=0 rows=99 cycles=284921
+CHAIN_LAYER_DONE layer=4
+LAYER_DONE layer=5 sample=0 rows=99 cycles=341852
+CHAIN_LAYER_DONE layer=5
+LAYER_DONE layer=6 sample=0 rows=99 cycles=398783
+CHAIN_LAYER_DONE layer=6
+LAYER_DONE layer=7 sample=0 rows=99 cycles=455714
+CHAIN_LAYER_DONE layer=7
+LAYER_DONE layer=8 sample=0 rows=99 cycles=512645
+CHAIN_LAYER_DONE layer=8
+LAYER_DONE layer=9 sample=0 rows=99 cycles=569576
+CHAIN_LAYER_DONE layer=9
+LAYER_DONE layer=10 sample=0 rows=99 cycles=626507
+CHAIN_LAYER_DONE layer=10
+LAYER_DONE layer=11 sample=0 rows=99 cycles=683438
+CHAIN_LAYER_DONE layer=11
+TB_PASS samples=1 layers=12 cycles=683438
+- /home/yang/kwt-worktrees/ds-r4-encoder/graduate/ds_tasks/r4_encoder/tb/tb_a16w12_chain.sv:247: Verilog $finish
+- S i m u l a t i o n   R e p o r t: Verilator 5.047 devel
+- Verilator: $finish at 7ms; walltime 1.542 s; speed 4.529 ms/s
+- Verilator: cpu 1.509 s on 1 threads; allocated 13 MB

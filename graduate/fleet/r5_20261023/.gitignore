@@ -1,0 +1,6 @@
+__pycache__/
+logs/
+status/
+STATUS.json
+STATUS.tmp
+dispatcher.log

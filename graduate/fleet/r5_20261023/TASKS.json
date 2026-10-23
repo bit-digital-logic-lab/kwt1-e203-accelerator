@@ -1,0 +1,37 @@
+{
+  "requirements": {
+    "base": "ebc9985",
+    "worktree": "/home/yang/kwt-worktrees/ds-r5-requirements",
+    "result": "graduate/ds_tasks/r5_requirements/results.json"
+  },
+  "gates": {
+    "base": "b607561",
+    "worktree": "/home/yang/kwt-worktrees/ds-r5-gates",
+    "result": "graduate/ds_tasks/r5_gates/results.json"
+  },
+  "control": {
+    "base": "8490830",
+    "worktree": "/home/yang/kwt-worktrees/ds-r5-control",
+    "result": "graduate/ds_tasks/r5_control/results.json"
+  },
+  "banks": {
+    "base": "8490830",
+    "worktree": "/home/yang/kwt-worktrees/ds-r5-banks",
+    "result": "graduate/ds_tasks/r5_banks/results.json"
+  },
+  "encoder": {
+    "base": "1b97b0f",
+    "worktree": "/home/yang/kwt-worktrees/ds-r5-encoder",
+    "result": "graduate/ds_tasks/r5_encoder/results.json"
+  },
+  "software": {
+    "base": "ebc9985",
+    "worktree": "/home/yang/kwt-worktrees/ds-r5-software",
+    "result": "graduate/ds_tasks/r5_software/results.json"
+  },
+  "crosscheck": {
+    "base": "ebc9985",
+    "worktree": "/home/yang/kwt-worktrees/ds-r5-crosscheck",
+    "result": "graduate/ds_tasks/r5_crosscheck/results.json"
+  }
+}
